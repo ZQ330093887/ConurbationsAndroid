@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/index_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/coordinator_layout_index"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:elevation="4dp">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabLayout_index"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:minHeight="48dp"
+                    android:background="?attr/colorPrimary"
+                    app:tabTextColor="@color/white"
+                    app:tabIndicatorColor="@color/colorOrangePrimary"
+                    app:tabSelectedTextColor="@color/black"
+                    app:layout_scrollFlags="enterAlways|scroll" />
+
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager_index"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+        </android.support.design.widget.CoordinatorLayout>
+        <View
+            android:id="@+id/index_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:background="#90FFFFFF"
+            android:visibility="gone"/>
+    </FrameLayout>
+    <!--<com.example.zhouqiong.frameworkattributeset.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        fab:fab_addButtonColorNormal="@color/material_indigo_700"
+        fab:fab_addButtonColorPressed="@color/white_pressed"
+        fab:fab_addButtonPlusIconColor="@color/half_black"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp">
+
+        <com.example.zhouqiong.frameworkattributeset.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/phone"
+            fab:fab_colorNormal="@color/result_points"
+            fab:fab_title="来电"
+            fab:fab_colorPressed="@color/white_pressed"/>
+
+        <com.example.zhouqiong.frameworkattributeset.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/viewfinder_laser"
+            android:src="@mipmap/message_info"
+            fab:fab_title="邮件"
+            app:fabSize="normal"
+            android:visibility="gone"
+            fab:fab_colorPressed="@color/white_pressed"/>
+
+    </com.example.zhouqiong.frameworkattributeset.floatingactionbutton.FloatingActionsMenu>-->
+</RelativeLayout>
