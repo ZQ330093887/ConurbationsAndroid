@@ -91,7 +91,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         circleImageView = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.circle_image_view);
         headPhotoBitmap = BitmapFactory.decodeFile(Constants.pathFileName);
-        circleImageView.setImageBitmap(headPhotoBitmap);
+        if (headPhotoBitmap != null){
+            circleImageView.setImageBitmap(headPhotoBitmap);
+        }else {
+            circleImageView.setImageResource(R.mipmap.my_bg);
+        }
 
         //点击头像查看头像（支持缩放功能）
         circleImageView.setOnClickListener(new View.OnClickListener() {
@@ -201,6 +205,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_settings) {
             startActivity(new Intent(MainActivity.this, ContactsActivity.class));
             return true;
+        }else if (id == R.id.action_Image){
+            startActivity(new Intent(MainActivity.this, TelegramGallery.class));
         }
         return super.onOptionsItemSelected(item);
     }

@@ -2,8 +2,50 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/file"
         android:orderInCategory="100"
-        android:title="@string/contacts"
-        app:showAsAction="never" />
+        android:showAsAction="always"
+        android:title="相册">
+        <menu>
+            <item
+                android:id="@+id/action_settings"
+                android:orderInCategory="100"
+                android:title="@string/contacts"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_Image"
+                android:orderInCategory="100"
+                android:title="@string/draw_image"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/edit"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="编辑(E)">
+        <menu>
+            <item
+                android:id="@+id/create1"
+                android:title="新建"></item>
+            <item
+                android:id="@+id/open1"
+                android:title="打开"></item>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/format"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="格式(O)">
+        <menu>
+            <item
+                android:id="@+id/create2"
+                android:title="新建"></item>
+            <item
+                android:id="@+id/open2"
+                android:title="打开"></item>
+        </menu>
+    </item>
+
 </menu>

@@ -40,8 +40,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.test.admin.conurbations.activitys.ItemListActivity" />
         </activity>
+        <activity android:name="com.tangxiaolv.telegramgallery.GalleryActivity" />
         <activity android:name=".activitys.ContactsActivity"/>
         <activity android:name=".activitys.BigAvatarActivity"/>
+        <activity android:name=".activitys.TelegramGallery"/>
+
     </application>
 
 </manifest>
