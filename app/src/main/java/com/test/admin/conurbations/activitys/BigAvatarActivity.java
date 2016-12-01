@@ -10,18 +10,22 @@ import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.photoview.PhotoView;
 import com.test.admin.conurbations.photoview.PhotoViewAttacher;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by zhouqiong on 2016/9/26.
  */
 public class BigAvatarActivity extends AppCompatActivity {
 
-    private PhotoView avatarPhotoView;
+    @Bind(R.id.pv_big_avatar_avatar)
+    PhotoView avatarPhotoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_big_avatar);
-        avatarPhotoView = (PhotoView) findViewById(R.id.pv_big_avatar_avatar);
+        ButterKnife.bind(this);
         Intent intent = getIntent();
         if (intent != null) {
             Bitmap bitmap = intent.getParcelableExtra("photoBundle");

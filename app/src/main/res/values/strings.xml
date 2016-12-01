@@ -21,4 +21,5 @@
     <string name="friends">朋友</string>
     <string name="me">我</string>
     <string name="home">首页</string>
+    <string name="my_center">个人信息</string>
 </resources>

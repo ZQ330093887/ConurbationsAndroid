@@ -2,14 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.test.admin.conurbations">
 
-    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
         android:allowBackup="true"
@@ -41,9 +41,13 @@
                 android:value="com.test.admin.conurbations.activitys.ItemListActivity" />
         </activity>
         <activity android:name="com.tangxiaolv.telegramgallery.GalleryActivity" />
-        <activity android:name=".activitys.ContactsActivity"/>
-        <activity android:name=".activitys.BigAvatarActivity"/>
-        <activity android:name=".activitys.TelegramGallery"/>
+        <activity android:name=".activitys.ContactsActivity" />
+        <activity android:name=".activitys.BigAvatarActivity" />
+        <activity android:name=".activitys.TelegramGalleryActivity" />
+        <activity
+            android:name=".activitys.PersonalInformationActivity"
+            android:label="@string/title_item_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
     </application>
 

@@ -19,6 +19,9 @@ import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.test.admin.conurbations.R;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * An activity representing a single Item detail screen. This
  * activity is only used narrow width devices. On tablet-size devices,
@@ -27,15 +30,19 @@ import com.test.admin.conurbations.R;
  */
 public class ItemDetailActivity extends AppCompatActivity {
 
+    @Bind(R.id.detail_toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +78,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void test(){
+    private void test() {
      /* final Display display = getWindowManager().getDefaultDisplay();
         // Load our little droid guy
         //final Drawable droid = ItemDetailActivity.this.getResources().getDrawable(R.drawable.ic_android_black_24dp, getTheme());
@@ -127,7 +134,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                 super.onTargetClick(view);
                 // .. which evidently starts the sequence we defined earlier
                 //sequence.start();
-                Toast.makeText(ItemDetailActivity.this,"Congratulations! You're educated now!",Toast.LENGTH_LONG).show();
+                Toast.makeText(ItemDetailActivity.this, "Congratulations! You're educated now!", Toast.LENGTH_LONG).show();
             }
         });
     }

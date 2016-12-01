@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by zhouqiong on 2015/1/12.
  */
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder> {
     private List<Integer> datas;
     private Context context;
     private List<Integer> lists;
@@ -73,12 +73,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public int getItemCount() {
         return datas.size();
     }
-}
 
-class MyViewHolder extends RecyclerView.ViewHolder {
-    TextView mTextView;
-    public MyViewHolder(View itemView) {
-        super(itemView);
-        mTextView = (TextView) itemView.findViewById(R.id.item_tv);
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView mTextView;
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            mTextView = (TextView) itemView.findViewById(R.id.item_tv);
+        }
     }
 }

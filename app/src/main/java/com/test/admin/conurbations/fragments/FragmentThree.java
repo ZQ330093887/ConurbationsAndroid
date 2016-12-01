@@ -9,6 +9,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.test.admin.conurbations.R;
@@ -22,6 +23,7 @@ public class FragmentThree extends Fragment {
 
     private Moment.Range range;
     private RecyclerView mRecyclerView;
+    private TextRecyclerViewAdapter viewAdapter;
 
     public void setRange(Moment.Range range) {
         this.range = range;
@@ -38,10 +40,19 @@ public class FragmentThree extends Fragment {
         for (int i = 0; i < 100; i++) {
             datas.add(i);
         }
-        mRecyclerView.setAdapter(new TextRecyclerViewAdapter(getActivity(), datas, range));
+        viewAdapter = new TextRecyclerViewAdapter(getActivity() ,datas , range);
+        viewAdapter.setOnItemClickListener(new TextRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Toast.makeText(getActivity(),"onClick事件您点击了第："+position+"个Item",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(int position) {
+                Toast.makeText(getActivity(),"onLongClick事件您点击了第："+position+"个Item",Toast.LENGTH_SHORT).show();
+            }
+        });
+        mRecyclerView.setAdapter(viewAdapter);
         return view;
-
-
     }
-
 }

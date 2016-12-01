@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.adapter.PersonalInformationAdapter;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.fragments.BaseFragment;
 import com.test.admin.conurbations.fragments.FragmentFriends;
@@ -91,9 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         circleImageView = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.circle_image_view);
         headPhotoBitmap = BitmapFactory.decodeFile(Constants.pathFileName);
-        if (headPhotoBitmap != null){
+        if (headPhotoBitmap != null) {
             circleImageView.setImageBitmap(headPhotoBitmap);
-        }else {
+        } else {
             circleImageView.setImageResource(R.mipmap.my_bg);
         }
 
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 if (headPhotoBitmap != null) {
-                    Intent intent = new Intent(MainActivity.this, BigAvatarActivity.class);
+                    Intent intent = new Intent(MainActivity.this, PersonalInformationActivity.class);
                     intent.putExtra("photoBundle", headPhotoBitmap);
                     startActivity(intent);
                 } else {
@@ -205,8 +206,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_settings) {
             startActivity(new Intent(MainActivity.this, ContactsActivity.class));
             return true;
-        }else if (id == R.id.action_Image){
-            startActivity(new Intent(MainActivity.this, TelegramGallery.class));
+        } else if (id == R.id.action_Image) {
+            startActivity(new Intent(MainActivity.this, TelegramGalleryActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

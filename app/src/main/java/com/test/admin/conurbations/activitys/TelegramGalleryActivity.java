@@ -18,10 +18,19 @@ import com.test.admin.conurbations.R;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by zhouqiong on 2016/9/29.
  */
-public class TelegramGallery extends AppCompatActivity {
+public class TelegramGalleryActivity extends AppCompatActivity {
+    @Bind(R.id.btn)
+    Button btn;
+    @Bind(R.id.btn2)
+    Button btn2;
+    @Bind(R.id.gv)
+    GridView gv;
     private List<String> photos;
     private BaseAdapter adapter;
 
@@ -30,9 +39,8 @@ public class TelegramGallery extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telegram_gallery);
-        Button btn = (Button) findViewById(R.id.btn);
-        Button btn2 = (Button) findViewById(R.id.btn2);
-        GridView gv = (GridView) findViewById(R.id.gv);
+        ButterKnife.bind(this);
+
         gv.setAdapter(adapter = new BaseAdapter() {
             @Override
             public int getCount() {
@@ -54,7 +62,7 @@ public class TelegramGallery extends AppCompatActivity {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                ImageView view = new ImageView(TelegramGallery.this);
+                ImageView view = new ImageView(TelegramGalleryActivity.this);
                 view.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 view.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         256));
@@ -72,14 +80,14 @@ public class TelegramGallery extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GalleryActivity.openActivity(TelegramGallery.this, false, 9, 12);
+                GalleryActivity.openActivity(TelegramGalleryActivity.this, false, 9, 12);
             }
         });
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GalleryActivity.openActivity(TelegramGallery.this, true,9, 12);
+                GalleryActivity.openActivity(TelegramGalleryActivity.this, true, 9, 12);
             }
         });
     }
