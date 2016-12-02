@@ -1,5 +1,8 @@
 package com.test.admin.conurbations.fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,13 +14,20 @@ import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.MyRecyclerViewAdapter;
-import com.test.admin.conurbations.model.Moment;
+import com.test.admin.conurbations.models.VO.Moment;
+import com.test.admin.conurbations.presenter.WelfarePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentOne extends Fragment {
+public class FragmentOne extends BaseFragment {
     private Moment.Range range;
+    WelfarePresenter welfarePresenter;
+
+    @Override
+    public BaseFragment newInstance() {
+        return new FragmentOne();
+    }
 
     public void setRange(Moment.Range range) {
         this.range = range;
@@ -34,7 +44,9 @@ public class FragmentOne extends Fragment {
         for (int i = 0; i < 100; i++) {
             datas.add(i);
         }
-        mRecyclerView.setAdapter(new MyRecyclerViewAdapter(getActivity(), datas , range));
+        mRecyclerView.setAdapter(new MyRecyclerViewAdapter(getActivity(), datas, range));
+        welfarePresenter = new WelfarePresenter();
+        welfarePresenter.getWelfareData();
         return view;
     }
 

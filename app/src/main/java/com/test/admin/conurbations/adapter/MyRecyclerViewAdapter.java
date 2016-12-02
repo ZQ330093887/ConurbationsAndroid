@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.model.Moment;
+import com.test.admin.conurbations.models.VO.Moment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
 import com.test.admin.conurbations.fragments.FragmentThree;
-import com.test.admin.conurbations.model.Moment;
+import com.test.admin.conurbations.models.VO.Moment;
 
 /**
  * Created by waly6 on 2015/10/8.

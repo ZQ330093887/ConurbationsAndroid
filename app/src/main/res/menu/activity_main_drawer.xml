@@ -4,32 +4,40 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:icon="@drawable/ic_menu_xin"
+            android:title="每日精彩" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:icon="@drawable/ic_menu_welfare"
+            android:title="福利" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:icon="@drawable/ic_menu_js"
+            android:title="Android" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="iOS" />
+        <item
+            android:id="@+id/nav_front"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="前端" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:icon="@drawable/ic_menu_resources"
+                android:title="拓展资源" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:icon="@drawable/ic_menu_audio"
+                android:title="休息视频" />
+            <item
+                android:id="@+id/nav_recommend"
+                android:icon="@drawable/ic_menu_recommend"
+                android:title="瞎推荐" />
         </menu>
     </item>
 

@@ -31,7 +31,6 @@ public class FragmentIndex extends BaseFragment {
         super.onAttach(context);
         mContext = context;
     }
-
     @Override
     public BaseFragment newInstance() {
         return new FragmentIndex();

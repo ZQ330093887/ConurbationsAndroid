@@ -1,4 +1,4 @@
-package com.test.admin.conurbations.model;
+package com.test.admin.conurbations.models.VO;
 
 /**
  * Created by zhouqiong on 2016/1/21.

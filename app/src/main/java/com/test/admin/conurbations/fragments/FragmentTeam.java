@@ -22,7 +22,6 @@ public class FragmentTeam extends BaseFragment {
     TabLayout tabLayoutTeam;
     @Bind(R.id.viewpager_team)
     ViewPager viewpagerTeam;
-
     private TeamFragmentPagerAdapter pagerAdapter;
 
     @Override

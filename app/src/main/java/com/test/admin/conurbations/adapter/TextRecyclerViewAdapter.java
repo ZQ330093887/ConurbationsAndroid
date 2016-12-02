@@ -5,11 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.model.Moment;
+import com.test.admin.conurbations.models.VO.Moment;
 
 import java.util.List;
 

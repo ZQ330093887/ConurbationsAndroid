@@ -19,7 +19,7 @@
     <string name="contacts">通讯录</string>
     <string name="draw_image">相册</string>
     <string name="friends">朋友</string>
-    <string name="me">我</string>
-    <string name="home">首页</string>
     <string name="my_center">个人信息</string>
+
+    <string name="network_error">网络错误，请检查您的网络连接是否正常。</string>
 </resources>
