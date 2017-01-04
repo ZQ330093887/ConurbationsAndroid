@@ -113,4 +113,7 @@
     <color name="colorBlueGreyPrimaryDark">#455A64</color>
     <color name="colorBlueGreyAccent">#FF4081</color>
     <color name="colorBlueGreyPrimaryCenter">#27373e</color>
+
+
+    <color name="refresh_progress_3">@color/theme_primary</color>
 </resources>

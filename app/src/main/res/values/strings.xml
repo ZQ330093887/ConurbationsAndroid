@@ -22,4 +22,7 @@
     <string name="my_center">个人信息</string>
 
     <string name="network_error">网络错误，请检查您的网络连接是否正常。</string>
+
+    <string name="load_fail">Load failed, Please slide up to try again</string>
+    <string name="load_no_more">There is nothing more</string>
 </resources>

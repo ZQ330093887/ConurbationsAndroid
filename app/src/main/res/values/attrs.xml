@@ -14,4 +14,9 @@
             <enum name="left" value="1"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="MultiSwipeRefreshLayout">
+        <attr name="foreground"
+            format="reference"/>
+    </declare-styleable>
 </resources>

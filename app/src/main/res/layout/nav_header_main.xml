@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:border_width="2dp"
-        app:border_color="@color/colorLimePrimaryCenter"/>
+        app:border_color="@color/colorLimePrimaryCenter"
+        android:transitionName="translate_view"/>
 
     <TextView
         android:layout_width="match_parent"

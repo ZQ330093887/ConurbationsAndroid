@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.models.VO.Moment;
+import com.test.admin.conurbations.data.entity.Moment;
 
 
 public class FragmentFive extends Fragment {

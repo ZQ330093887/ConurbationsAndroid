@@ -13,7 +13,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -44,6 +44,7 @@
         <activity android:name=".activitys.ContactsActivity" />
         <activity android:name=".activitys.BigAvatarActivity" />
         <activity android:name=".activitys.TelegramGalleryActivity" />
+        <activity android:name=".activitys.ShowImageActivity" />
         <activity
             android:name=".activitys.PersonalInformationActivity"
             android:label="@string/title_item_detail"

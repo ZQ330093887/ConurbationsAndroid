@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +23,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.adapter.PersonalInformationAdapter;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.fragments.BaseFragment;
 import com.test.admin.conurbations.fragments.FragmentFriends;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private CircleImageView circleImageView;
     private Bitmap headPhotoBitmap;
     private Bundle photoBundle;
+    private static final String TRANSLATE_VIEW = "translate_view";
 
 
     @Override
@@ -105,7 +107,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (headPhotoBitmap != null) {
                     Intent intent = new Intent(MainActivity.this, PersonalInformationActivity.class);
                     intent.putExtra("photoBundle", headPhotoBitmap);
-                    startActivity(intent);
+
+                    ActivityCompat.startActivity(MainActivity.this, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, circleImageView, TRANSLATE_VIEW).toBundle());
                 } else {
                     PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);
                 }

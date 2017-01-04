@@ -9,7 +9,7 @@
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_welfare"
-            android:title="福利" />
+            android:title="welfare" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_js"
@@ -21,7 +21,7 @@
         <item
             android:id="@+id/nav_front"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="前端" />
+            android:title="head" />
     </group>
 
     <item android:title="Communicate">
@@ -29,11 +29,11 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_resources"
-                android:title="拓展资源" />
+                android:title="resource" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_audio"
-                android:title="休息视频" />
+                android:title="video" />
             <item
                 android:id="@+id/nav_recommend"
                 android:icon="@drawable/ic_menu_recommend"

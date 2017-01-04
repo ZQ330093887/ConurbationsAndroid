@@ -5,8 +5,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
-import com.test.admin.conurbations.fragments.FragmentOne;
-import com.test.admin.conurbations.models.VO.Moment;
+import com.test.admin.conurbations.fragments.FragmentFive;
+import com.test.admin.conurbations.fragments.FragmentFour;
+import com.test.admin.conurbations.fragments.Two;
+import com.test.admin.conurbations.fragments.WelfareFragment;
+import com.test.admin.conurbations.fragments.Three;
+import com.test.admin.conurbations.data.entity.Moment;
 
 /**
  * Created by waly6 on 2015/10/8.
@@ -19,17 +23,16 @@ public class IndexFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public IndexFragmentPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
-
-        fragments[0] = new FragmentOne();
-        ((FragmentOne) fragments[0]).setRange(Moment.Range.ONE);
-        fragments[1] = new FragmentOne();
-        ((FragmentOne) fragments[1]).setRange(Moment.Range.TWO);
-        fragments[2] = new FragmentOne();
-        ((FragmentOne) fragments[2]).setRange(Moment.Range.THREE);
-        fragments[3] = new FragmentOne();
-        ((FragmentOne) fragments[3]).setRange(Moment.Range.FOUR);
-        fragments[4] = new FragmentOne();
-        ((FragmentOne) fragments[4]).setRange(Moment.Range.FIVE);
+        fragments[0] = new Three();
+        ((Three) fragments[0]).setRange(Moment.Range.THREE);
+        fragments[1] = new Two();
+        ((Two) fragments[1]).setRange(Moment.Range.TWO);
+        fragments[2] = new WelfareFragment();
+        ((WelfareFragment) fragments[2]).setRange(Moment.Range.ONE);
+        fragments[3] = new FragmentFour();
+        ((FragmentFour) fragments[3]).setRange(Moment.Range.FOUR);
+        fragments[4] = new FragmentFive();
+        ((FragmentFive) fragments[4]).setRange(Moment.Range.FIVE);
     }
 
     @Override
