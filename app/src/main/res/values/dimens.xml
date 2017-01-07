@@ -10,4 +10,24 @@
     <dimen name="app_bar_height">300dp</dimen>
     <dimen name="item_width">200dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="recycler_item_padding">16dp</dimen>
+
+    <dimen name="text_size_header_title">18sp</dimen>
+    <dimen name="text_size_title">15sp</dimen>
+    <dimen name="text_size_summary">12sp</dimen>
+    <dimen name="item_title">14sp</dimen>
+
+    <dimen name="padding_gank_header">12dp</dimen>
+    <dimen name="padding_gank_title">6dp</dimen>
+
+    <dimen name="about_title_padding_top">10dp</dimen>
+    <dimen name="about_title_padding_bottom">5dp</dimen>
+    <dimen name="about_content_vertical_padding">5dp</dimen>
+    <dimen name="developer_item_height">36dp</dimen>
+    <dimen name="developer_item_icon_width">18dp</dimen>
+    <dimen name="developer_item_icon_margin_right">5dp</dimen>
 </resources>

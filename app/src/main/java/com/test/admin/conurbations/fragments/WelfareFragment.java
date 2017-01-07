@@ -1,6 +1,7 @@
 package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import com.test.admin.conurbations.adapter.WelfareListAdapter;
 import com.test.admin.conurbations.data.entity.Moment;
 import com.test.admin.conurbations.data.response.GankData;
 import com.test.admin.conurbations.presenter.WelfarePresenter;
+import com.test.admin.conurbations.widget.ILayoutManager;
+import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
 public class WelfareFragment extends BaseListFragment implements IWelfareList {
@@ -58,5 +61,10 @@ public class WelfareFragment extends BaseListFragment implements IWelfareList {
     @Override
     protected void refreshList(int page) {
         presenter.getWelfareData(page);
+    }
+
+    @Override
+    protected ILayoutManager getLayoutManager() {
+        return new MyStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
     }
 }

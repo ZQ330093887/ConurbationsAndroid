@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private CircleImageView circleImageView;
     private Bitmap headPhotoBitmap;
     private Bundle photoBundle;
-    private static final String TRANSLATE_VIEW = "translate_view";
+    public static final String TRANSLATE_VIEW = "translate_view";
 
 
     @Override
@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (headPhotoBitmap != null) {
                     Intent intent = new Intent(MainActivity.this, PersonalInformationActivity.class);
                     intent.putExtra("photoBundle", headPhotoBitmap);
-
                     ActivityCompat.startActivity(MainActivity.this, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, circleImageView, TRANSLATE_VIEW).toBundle());
                 } else {
                     PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);
@@ -147,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //用TabItemBuilder构建一个导航按钮
         TabItemBuilder tabItemBuilder = new TabItemBuilder(this).create()
                 .setDefaultIcon(android.R.drawable.ic_menu_send)
-                .setText("信息")
+                .setText("干货")
                 .setSelectedColor(Constants.testColors[0])
                 .setTag("A")
                 .build();

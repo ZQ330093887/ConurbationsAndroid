@@ -40,4 +40,5 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

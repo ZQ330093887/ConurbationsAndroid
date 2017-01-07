@@ -3,6 +3,7 @@ package com.test.admin.conurbations.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ public class FragmentIndex extends BaseFragment {
     TabLayout tabLayoutIndex;
     @Bind(R.id.viewpager_index)
     ViewPager viewpagerIndex;
+    @Bind(R.id.appbar)
+    AppBarLayout mAppBarLayout;
     IndexFragmentPagerAdapter indexFragmentPagerAdapter;
 
     @Override
@@ -28,6 +31,7 @@ public class FragmentIndex extends BaseFragment {
         super.onAttach(context);
         mContext = context;
     }
+
     @Override
     public BaseFragment newInstance() {
         return new FragmentIndex();

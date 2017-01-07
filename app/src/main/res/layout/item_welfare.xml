@@ -9,6 +9,5 @@
     <com.test.admin.conurbations.utils.RatioImageView
         android:id="@+id/item_welfare_photo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:transitionName="transition_morph_view" />
+        android:layout_height="wrap_content" />
 </android.support.v7.widget.CardView>

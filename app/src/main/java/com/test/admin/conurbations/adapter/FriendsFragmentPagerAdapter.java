@@ -5,8 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
-import com.test.admin.conurbations.fragments.Two;
 import com.test.admin.conurbations.data.entity.Moment;
+import com.test.admin.conurbations.fragments.FragmentFour;
 
 /**
  * Created by waly6 on 2015/10/8.
@@ -20,16 +20,16 @@ public class FriendsFragmentPagerAdapter extends FragmentPagerAdapter {
     public FriendsFragmentPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
 
-        fragments[0] = new Two();
-        ((Two) fragments[0]).setRange(Moment.Range.ONE);
-        fragments[1] = new Two();
-        ((Two) fragments[1]).setRange(Moment.Range.TWO);
-        fragments[2] = new Two();
-        ((Two) fragments[2]).setRange(Moment.Range.THREE);
-        fragments[3] = new Two();
-        ((Two) fragments[3]).setRange(Moment.Range.FOUR);
-        fragments[4] = new Two();
-        ((Two) fragments[4]).setRange(Moment.Range.FIVE);
+        fragments[0] = new FragmentFour();
+        ((FragmentFour) fragments[0]).setRange(Moment.Range.ONE);
+        fragments[1] = new FragmentFour();
+        ((FragmentFour) fragments[1]).setRange(Moment.Range.TWO);
+        fragments[2] = new FragmentFour();
+        ((FragmentFour) fragments[2]).setRange(Moment.Range.THREE);
+        fragments[3] = new FragmentFour();
+        ((FragmentFour) fragments[3]).setRange(Moment.Range.FOUR);
+        fragments[4] = new FragmentFour();
+        ((FragmentFour) fragments[4]).setRange(Moment.Range.FIVE);
     }
 
     @Override

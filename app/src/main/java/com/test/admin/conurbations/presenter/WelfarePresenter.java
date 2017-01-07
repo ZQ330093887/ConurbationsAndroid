@@ -9,7 +9,7 @@ import com.test.admin.conurbations.retrofit.ApiCallback;
 import com.test.admin.conurbations.retrofit.AppClient;
 
 /**
- * Created by waly6 on 2015/11/18.
+ * Created by zhouqiong on 2016/11/18.
  */
 public class WelfarePresenter extends BasePresenter {
 
@@ -25,7 +25,8 @@ public class WelfarePresenter extends BasePresenter {
 
     public void getWelfareData(final int pager) {
 
-        addSubscription(AppClient.retrofit().create(GankService.class).getGank(GankType.WELFARE, getPageCount(), pager),
+        addSubscription(AppClient.retrofit().create(GankService.class)
+                .getGank(GankType.WELFARE, getPageCount(), pager),
                 new ApiCallback<GankData>() {
                     @Override
                     public void onSuccess(GankData model) {
@@ -33,15 +34,9 @@ public class WelfarePresenter extends BasePresenter {
                     }
 
                     @Override
-                    public void onFailure(String msg) {
-
-                    }
-
-
+                    public void onFailure(String msg) {}
                     @Override
-                    public void onFinish() {
-
-                    }
+                    public void onFinish() {}
 
                 });
 

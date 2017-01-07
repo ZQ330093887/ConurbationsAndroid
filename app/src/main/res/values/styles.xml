@@ -20,7 +20,7 @@
     <style name="TitleTextAppearance"
         parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/fab_margin</item>
-        <item name="android:textColor">@color/colorTealAccent</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
     <style name="RecyclerViewStyle">
@@ -29,6 +29,25 @@
         <item name="android:overScrollMode">never</item>
         <item name="android:fadingEdge">none</item>
         <item name="android:scrollbars">none</item>
+    </style>
+
+    <style name="HeaderTitleTextAppearance"
+        parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_header_title</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="SummaryTextAppearance"
+        parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_summary</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="MyToolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
     </style>
 
 </resources>

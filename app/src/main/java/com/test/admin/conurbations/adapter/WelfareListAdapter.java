@@ -1,7 +1,9 @@
 package com.test.admin.conurbations.adapter;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,19 +22,12 @@ public class WelfareListAdapter extends BaseListAdapter<GanHuoDataBean> {
 
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final GanHuoDataBean item) {
-        RatioImageView imageView = vh.getView(R.id.item_welfare_photo);
+        final RatioImageView imageView = vh.getView(R.id.item_welfare_photo);
         imageView.setRatio(0.618f);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(view.getContext(), ShowImageActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("position", item.getUrl());
-                if (bundle != null) {
-                    intent.putExtras(bundle);
-                    view.getContext().startActivity(intent);
-                }
+                startPictureActivity(view, item);
             }
         });
         Glide.with(imageView.getContext())
@@ -41,6 +36,19 @@ public class WelfareListAdapter extends BaseListAdapter<GanHuoDataBean> {
                 .placeholder(R.color.white)
                 .crossFade()
                 .into(imageView);
+    }
+
+
+    private void startPictureActivity(View transitView, GanHuoDataBean item) {
+        Intent intent = ShowImageActivity.newIntent(transitView.getContext(), item.getUrl());
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                (Activity) transitView.getContext(), transitView, ShowImageActivity.TRANSIT_PIC);
+        try {
+            ActivityCompat.startActivity((Activity) transitView.getContext(), intent, optionsCompat.toBundle());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            transitView.getContext().startActivity(intent);
+        }
     }
 
     @Override

@@ -104,7 +104,7 @@ public class Contact {
                 contactPhoto = BitmapFactory.decodeStream(input);
             } else {
                 //没有头像或者获取失败给默认头像
-                contactPhoto = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
+                contactPhoto = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_logo);
             }
             Contact info = new Contact(phoneIndex, phoneName, phoneNumber, contactPhoto);
             //Log.i("number:"+phoneIndex,phoneName+":"+phoneNumber);

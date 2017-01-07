@@ -30,7 +30,7 @@ public class ImageUtil {
         if (FileUtil.isEmpty(url)) {
             return;
         }
-        imageView.setImageResource(R.mipmap.ic_launcher);
+        imageView.setImageResource(R.color.white);
         imageView.setTag(url);
         ImageDownloader.instance().loadDrawable(url, new ImageCallback(imageView) {
             @Override

@@ -1,10 +1,13 @@
 package com.test.admin.conurbations.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.test.admin.conurbations.R;
 
@@ -17,7 +20,10 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     protected static final int VIEW_TYPE_LOAD_MORE_FOOTER = 100;
     protected boolean isLoadMoreFooterShown;
-    protected List<T> list;
+    public List<T> list;
+    protected int mLastPosition = -1;
+    private static final int DELAY = 138;
+
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_LOAD_MORE_FOOTER) {
@@ -38,7 +44,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
             T item = list.get(position);
             bindDataToItemView(holder, item);
         }
-
+        //showItemAnim(holder.itemView,position);
     }
 
     protected abstract void bindDataToItemView(final BaseViewHolder vh, final T item);
@@ -69,6 +75,10 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         if (isLoadMoreFooterShown && position == getItemCount() - 1) {
             return VIEW_TYPE_LOAD_MORE_FOOTER;
         }
+        return getDataViewType(position);
+    }
+
+    protected int getDataViewType(int position) {
         return 0;
     }
 
@@ -87,9 +97,34 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
             notifyItemRemoved(getItemCount());
         }
     }
+
     private class LoadMoreFooterViewHolder extends BaseViewHolder {
         public LoadMoreFooterViewHolder(View view) {
             super(view);
+        }
+    }
+
+    //每个item添加一个动画
+    public void showItemAnim(final View view, final int position) {
+        final Context context = view.getContext();
+        if (position > mLastPosition) {
+            view.setAlpha(0);
+            view.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation animation = AnimationUtils.loadAnimation(context,
+                            R.anim.slide_in_right);
+                    animation.setAnimationListener(new Animation.AnimationListener() {
+                        @Override public void onAnimationStart(Animation animation) {
+                            view.setAlpha(1);
+                        }
+                        @Override public void onAnimationEnd(Animation animation) {}
+                        @Override public void onAnimationRepeat(Animation animation) {}
+                    });
+                    view.startAnimation(animation);
+                }
+            },DELAY * position);
+            mLastPosition = position;
         }
     }
 }

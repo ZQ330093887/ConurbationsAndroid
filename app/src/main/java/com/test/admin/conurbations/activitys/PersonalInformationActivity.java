@@ -72,8 +72,8 @@ public class PersonalInformationActivity extends AppCompatActivity {
             circleImageView.setImageBitmap(bitmap);
             mPhotoImageView.setImageBitmap(bitmap);
         } else {
-            circleImageView.setBackgroundResource(R.mipmap.ic_launcher);
-            mPhotoImageView.setBackgroundResource(R.mipmap.ic_launcher);
+            circleImageView.setBackgroundResource(R.color.white);
+            mPhotoImageView.setBackgroundResource(R.color.white);
         }
 
         ActionBar actionBar = getSupportActionBar();

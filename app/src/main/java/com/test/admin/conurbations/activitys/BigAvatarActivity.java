@@ -31,7 +31,7 @@ public class BigAvatarActivity extends AppCompatActivity {
             Bitmap bitmap = intent.getParcelableExtra("photoBundle");
             avatarPhotoView.setImageBitmap(bitmap);
         } else {
-            avatarPhotoView.setBackgroundResource(R.mipmap.ic_launcher);
+            avatarPhotoView.setBackgroundResource(R.color.white);
         }
         avatarPhotoView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
