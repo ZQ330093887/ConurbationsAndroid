@@ -6,4 +6,5 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:textIsSelectable="true"
+    android:textSize="16sp"
     tools:context="com.test.admin.conurbations.activitys.ItemDetailFragment" />

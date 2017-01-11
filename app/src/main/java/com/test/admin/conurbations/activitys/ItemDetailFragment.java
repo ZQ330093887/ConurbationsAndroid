@@ -1,16 +1,26 @@
 package com.test.admin.conurbations.activitys;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.dummy.DummyContent;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -20,25 +30,51 @@ import com.test.admin.conurbations.dummy.DummyContent;
  */
 public class ItemDetailFragment extends Fragment {
 
-    public static final String ARG_ITEM_ID = "item_id";
-
-    private DummyContent.DummyItem mItem;
+    public static final String ITEM_URL = "url";
+    public static final String ITEM_TITLE_ID = "item_title_id";
+    public static final String ITEM_TITLE = "item_title";
+    String detailContext;
+    private static String text;
+    private TextView textContext;
 
     public ItemDetailFragment() {
     }
+
+    private Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0x123456) {
+                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/jianshi_default.otf");
+                textContext.setTypeface(tf);
+                textContext.setText(detailContext);
+                text = detailContext;
+            }
+        }
+    };
+
+   public static String getItemContext(){
+       if (!TextUtils.isEmpty(text)){
+           return text;
+       }
+       return "暂无数据可复制";
+   }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
+        if (getArguments().containsKey(ITEM_URL)) {
+            show(getArguments().getString(ITEM_URL));
+            String title = getArguments().getString(ITEM_TITLE);
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/jianshi_default.otf");
+                appBarLayout.setCollapsedTitleTypeface(tf);
+                appBarLayout.setTitle(title);
             }
         }
     }
@@ -47,11 +83,38 @@ public class ItemDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.item_detail, container, false);
-
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.details);
-        }
-
+        textContext = ((TextView) rootView.findViewById(R.id.item_detail));
         return rootView;
+    }
+
+    private void show(final String url) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    try {
+                        Document doc = Jsoup.connect(url).get();
+                        StringBuilder sbContent = new StringBuilder();
+                        Elements elements = doc.select("div.PostContent > p");
+                        for (int i = 0; i < elements.size(); i++) {
+                            Element ele = elements.get(i);
+                            sbContent.append(ele.ownText() + "\n\n");
+                        }
+                        detailContext = sbContent.toString();
+
+                        Looper.prepare();
+                        Message msg = Message.obtain();
+                        msg.what = 0x123456;
+                        mHandler.sendMessage(msg);
+                        Looper.loop();
+
+                    } catch (Exception e) {
+                        Log.i("mytag", e.toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }

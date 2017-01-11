@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -31,7 +30,7 @@
         <activity
             android:name=".activitys.ItemListActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.ItemDetailActivity"
             android:label="@string/title_item_detail"
@@ -47,15 +46,15 @@
         <activity android:name=".activitys.TelegramGalleryActivity" />
         <activity android:name=".activitys.ShowImageActivity" />
         <activity
+            android:name=".activitys.ItemListItemActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activitys.PersonalInformationActivity"
             android:label="@string/title_item_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.WebviewActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

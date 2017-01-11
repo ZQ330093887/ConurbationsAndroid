@@ -41,7 +41,7 @@ public class TodayNewsFragment extends BaseListFragment<List<GankItem>> implemen
             mDataList.clear();
         }
         if (items.size() == 0) {
-            presenter.getTodayData(Year, Month, Day - 1);
+            presenter.getTodayData(Year, Month, Day--);
             recycler.enableLoadMore(false);
         } else {
             recycler.enableLoadMore(false);
