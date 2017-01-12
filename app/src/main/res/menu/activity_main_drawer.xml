@@ -33,7 +33,7 @@
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_audio"
-                android:title="video" />
+                android:title="用户反馈" />
             <item
                 android:id="@+id/nav_recommend"
                 android:icon="@drawable/ic_menu_recommend"

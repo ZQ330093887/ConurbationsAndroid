@@ -1,6 +1,5 @@
 package com.test.admin.conurbations.activitys;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,13 +12,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.adapter.SimpleItemListRecyclerViewAdapter;
 import com.test.admin.conurbations.model.BookBean;
 
 import org.jsoup.Jsoup;
@@ -39,9 +35,7 @@ public class ItemListItemActivity extends AppCompatActivity {
     @Bind(R.id.item_list)
     RecyclerView recyclerView;
     List<BookBean> list = new ArrayList<>();
-    SimpleItemRecyclerViewAdapter viewAdapter;
-
-    private boolean mTwoPane;
+    SimpleItemListRecyclerViewAdapter viewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +54,7 @@ public class ItemListItemActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        if (findViewById(R.id.item_detail_container) != null) {
-            mTwoPane = true;
-        }
-
-        viewAdapter = new SimpleItemRecyclerViewAdapter(list);
+        viewAdapter = new SimpleItemListRecyclerViewAdapter();
         recyclerView.setAdapter(viewAdapter);
     }
 
@@ -74,6 +64,7 @@ public class ItemListItemActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1) {
+                viewAdapter.setList(list);
                 viewAdapter.notifyDataSetChanged();
             }
         }
@@ -122,60 +113,4 @@ public class ItemListItemActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
-
-        private final List<BookBean> mValues;
-
-        public SimpleItemRecyclerViewAdapter(List<BookBean> list) {
-            mValues = list;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_content, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final ViewHolder holder, final int position) {
-            holder.mContentView.setText((position + 1) + ".  " + mValues.get(position).getTitle());
-            holder.mContentView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mTwoPane) {
-                        Bundle arguments = new Bundle();
-                        arguments.putString(ItemDetailFragment.ITEM_URL, mValues.get(position).getUrl());
-                        arguments.putString(ItemDetailFragment.ITEM_TITLE, mValues.get(position).getTitle());
-                        ItemDetailFragment fragment = new ItemDetailFragment();
-                        fragment.setArguments(arguments);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.item_detail_container, fragment)
-                                .commit();
-                    } else {
-                        Context context = v.getContext();
-                        Intent intent = new Intent(context, ItemDetailActivity.class);
-                        intent.putExtra(ItemDetailFragment.ITEM_URL, mValues.get(position).getUrl());
-                        intent.putExtra(ItemDetailFragment.ITEM_TITLE, mValues.get(position).getTitle());
-                        context.startActivity(intent);
-                    }
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return mValues != null ? mValues.size() : 0;
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView mContentView;
-
-            public ViewHolder(View view) {
-                super(view);
-                mContentView = (TextView) view.findViewById(R.id.content);
-            }
-        }
-    }
-
 }

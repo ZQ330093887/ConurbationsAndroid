@@ -115,15 +115,22 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
                     Animation animation = AnimationUtils.loadAnimation(context,
                             R.anim.slide_in_right);
                     animation.setAnimationListener(new Animation.AnimationListener() {
-                        @Override public void onAnimationStart(Animation animation) {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
                             view.setAlpha(1);
                         }
-                        @Override public void onAnimationEnd(Animation animation) {}
-                        @Override public void onAnimationRepeat(Animation animation) {}
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                        }
                     });
                     view.startAnimation(animation);
                 }
-            },DELAY * position);
+            }, DELAY * position);
             mLastPosition = position;
         }
     }
