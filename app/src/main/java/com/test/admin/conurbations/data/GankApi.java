@@ -20,15 +20,5 @@ package com.test.admin.conurbations.data;
  * @version 1.0
  */
 public interface GankApi {
-
     String BASE_URL = "http://gank.io/api/";
-
-    // The published date history
-    String DATE_HISTORY = "day/history";
-
-    String Query_BASE_URL = "http://gank.io/api/search/query";
-
-    // The category gank data, such as, http://gank.io/api/data/Android/10/1
-    // The gank data of one day, such as, http://gank.io/api/day/年/月/日
-
 }

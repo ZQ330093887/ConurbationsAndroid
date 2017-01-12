@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.test.admin.conurbations.activitys.IWelfareList;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.GanHuoListAdapter;
-import com.test.admin.conurbations.data.entity.Moment;
 import com.test.admin.conurbations.data.response.GankData;
 import com.test.admin.conurbations.presenter.GanHuoListPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
@@ -17,11 +16,11 @@ import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
 public class GanHuoListFragment extends BaseListFragment implements IWelfareList {
-    private Moment.Type range;
+    private String range;
     protected GanHuoListAdapter adapter;
     protected GanHuoListPresenter presenter;
 
-    public void setRange(Moment.Type range) {
+    public void setRange(String range) {
         this.range = range;
     }
 

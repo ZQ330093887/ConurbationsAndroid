@@ -2,8 +2,6 @@ package com.test.admin.conurbations.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -11,20 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.adapter.IndexFragmentPagerAdapter;
+import com.test.admin.conurbations.adapter.SouGouImageFragmentPagerAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class FragmentIndex extends BaseFragment {
-    private Context mContext;
+/**
+ * Created by zhouqiong on 2015/9/23.
+ */
+public class FragmentSGImage extends BaseFragment {
+
     @Bind(R.id.tabLayout_index)
     TabLayout tabLayoutIndex;
     @Bind(R.id.viewpager_index)
     ViewPager viewpagerIndex;
-    @Bind(R.id.appbar)
-    AppBarLayout mAppBarLayout;
-    IndexFragmentPagerAdapter indexFragmentPagerAdapter;
+    private Context mContext;
+    private SouGouImageFragmentPagerAdapter souGouImageFragmentPagerAdapter;
 
     @Override
     public void onAttach(Context context) {
@@ -32,22 +32,19 @@ public class FragmentIndex extends BaseFragment {
         mContext = context;
     }
 
-    @Override
     public BaseFragment newInstance() {
-        return new FragmentIndex();
+        return new FragmentSGImage();
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View viewRoot = inflater.inflate(R.layout.index_fragment, container, false);
         int content = getArguments().getInt("content");
         ButterKnife.bind(this, viewRoot);
         mContext.getResources();
-        indexFragmentPagerAdapter = new IndexFragmentPagerAdapter(mContext, getChildFragmentManager());
-        tabLayoutIndex.setTabsFromPagerAdapter(indexFragmentPagerAdapter);
-        viewpagerIndex.setAdapter(indexFragmentPagerAdapter);
+        souGouImageFragmentPagerAdapter = new SouGouImageFragmentPagerAdapter(mContext,getChildFragmentManager());
+        tabLayoutIndex.setTabsFromPagerAdapter(souGouImageFragmentPagerAdapter);
+        viewpagerIndex.setAdapter(souGouImageFragmentPagerAdapter);
         viewpagerIndex.setOffscreenPageLimit(5);
         tabLayoutIndex.setupWithViewPager(viewpagerIndex);
         tabLayoutIndex.setBackgroundColor(content);

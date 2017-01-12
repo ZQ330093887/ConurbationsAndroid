@@ -24,11 +24,11 @@ public class ContentFragmentPagerAdapter extends FragmentPagerAdapter {
         fragments[0] = new WelfareFragment();
         ((WelfareFragment) fragments[0]).setRange(Moment.Range.ONE);
         fragments[1] = new FragmentFour();
-        ((FragmentFour) fragments[1]).setRange(Moment.Range.TWO);
+        ((FragmentFour) fragments[1]).setRange(Moment.SGImgType.每日一笑);
         fragments[2] = new FragmentFour();
-        ((FragmentFour) fragments[2]).setRange(Moment.Range.THREE);
+        ((FragmentFour) fragments[2]).setRange(Moment.SGImgType.每日一笑);
         fragments[3] = new FragmentFour();
-        ((FragmentFour) fragments[3]).setRange(Moment.Range.FOUR);
+        ((FragmentFour) fragments[3]).setRange(Moment.SGImgType.每日一笑);
     }
 
     @Override

@@ -25,7 +25,7 @@ import android.view.View;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.fragments.BaseFragment;
-import com.test.admin.conurbations.fragments.FragmentFriends;
+import com.test.admin.conurbations.fragments.FragmentSGImage;
 import com.test.admin.conurbations.fragments.FragmentHelp;
 import com.test.admin.conurbations.fragments.FragmentIndex;
 import com.test.admin.conurbations.fragments.FragmentTeam;
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mFragments = new ArrayList<>();
 
         mFragments.add(createFragment(new FragmentIndex(), Constants.testColors[0]));
-        mFragments.add(createFragment(new FragmentFriends(), Constants.testColors[1]));
+        mFragments.add(createFragment(new FragmentSGImage(), Constants.testColors[1]));
         mFragments.add(createFragment(new FragmentTeam(), Constants.testColors[2]));
         mFragments.add(createFragment(new FragmentHelp(), Constants.testColors[3]));
 
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //构建导航栏,得到Controller进行后续控制
         controller = pagerBottomTabLayout.builder()
                 .addTabItem(tabItemBuilder)
-                .addTabItem(android.R.drawable.ic_menu_compass, "位置", Constants.testColors[1])
+                .addTabItem(android.R.drawable.ic_menu_compass, "美图", Constants.testColors[1])
                 .addTabItem(android.R.drawable.ic_menu_search, "搜索", Constants.testColors[2])
                 .addTabItem(android.R.drawable.ic_menu_help, "帮助", Constants.testColors[3])
                 .setMode(TabLayoutMode.HIDE_TEXT)

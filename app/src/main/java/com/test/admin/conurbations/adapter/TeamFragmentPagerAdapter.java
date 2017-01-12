@@ -20,9 +20,9 @@ public class TeamFragmentPagerAdapter extends FragmentPagerAdapter {
         super(fragmentManager);
 
         fragments[0] = new FragmentFour();
-        ((FragmentFour) fragments[0]).setRange(Moment.Range.ONE);
+        ((FragmentFour) fragments[0]).setRange(Moment.SGImgType.每日一笑);
         fragments[1] = new FragmentFour();
-        ((FragmentFour) fragments[1]).setRange(Moment.Range.TWO);
+        ((FragmentFour) fragments[1]).setRange(Moment.SGImgType.每日一笑);
     }
 
     @Override

@@ -1,29 +1,42 @@
 package com.test.admin.conurbations.adapter;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
+import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.data.entity.Moment;
 import com.test.admin.conurbations.fragments.GanHuoListFragment;
 import com.test.admin.conurbations.fragments.TodayNewsFragment;
 import com.test.admin.conurbations.fragments.WelfareFragment;
 
 /**
- * Created by waly6 on 2015/10/8.
+ * Created by zhouqiong on 2017/1/8.
  */
 public class IndexFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private String[] titles = new String[]{"最新", "ALL", "App", "福利", "Android", "iOS", "前端", "瞎推荐", "拓展资源", "休息视频"};
+    private String[] titles;
+    private Fragment[] fragments;
+    //private String[] titles = new String[]{"最新", "ALL", "App", "福利", "Android", "iOS", "前端", "瞎推荐", "拓展资源", "休息视频"};
 
-    private Fragment[] fragments = new Fragment[10];
+    //private Fragment[] fragments = new Fragment[10];
 
-    public IndexFragmentPagerAdapter(FragmentManager fragmentManager) {
+    public IndexFragmentPagerAdapter(Context context, FragmentManager fragmentManager) {
         super(fragmentManager);
+
+        titles = context.getResources().getStringArray(R.array.index_tab);
+        fragments = new Fragment[titles.length];
         fragments[0] = new TodayNewsFragment();
         ((TodayNewsFragment) fragments[0]).setRange(Moment.Range.THREE);
-        fragments[1] = new GanHuoListFragment();
+        fragments[1] = new WelfareFragment();
+        ((WelfareFragment) fragments[1]).setRange(Moment.Range.ONE);
+        for (int i = 2; i < titles.length; i++) {
+            fragments[i] = new GanHuoListFragment();
+            ((GanHuoListFragment) fragments[i]).setRange(titles[i]);
+        }
+       /* fragments[1] = new GanHuoListFragment();
         ((GanHuoListFragment) fragments[1]).setRange(Moment.Type.all);
         fragments[2] = new GanHuoListFragment();
         ((GanHuoListFragment) fragments[2]).setRange(Moment.Type.App);
@@ -40,7 +53,7 @@ public class IndexFragmentPagerAdapter extends FragmentPagerAdapter {
         fragments[8] = new GanHuoListFragment();
         ((GanHuoListFragment) fragments[8]).setRange(Moment.Type.拓展资源);
         fragments[9] = new GanHuoListFragment();
-        ((GanHuoListFragment) fragments[9]).setRange(Moment.Type.休息视频);
+        ((GanHuoListFragment) fragments[9]).setRange(Moment.Type.休息视频);*/
     }
 
     @Override

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.test.admin.conurbations.activitys.ISouGouImageList;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.SouGouImgListAdapter;
-import com.test.admin.conurbations.data.entity.Moment;
 import com.test.admin.conurbations.model.NetImage;
 import com.test.admin.conurbations.presenter.DayAndDayImagePresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
@@ -18,11 +17,10 @@ import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
 
-public class FragmentFour extends BaseListFragment implements ISouGouImageList {
+public class SouGouImageFragment extends BaseListFragment implements ISouGouImageList {
 
-    private Moment.SGImgType range;
-
-    public void setRange(Moment.SGImgType range) {
+    private String range;
+    public void setRange(String range) {
         this.range = range;
     }
 
@@ -59,7 +57,7 @@ public class FragmentFour extends BaseListFragment implements ISouGouImageList {
 
     @Override
     protected void refreshList(int page) {
-        //dayImagePresenter.getWelfareData(range, page);
+        dayImagePresenter.getWelfareData(range, page);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.test.admin.conurbations.presenter;
 
 import com.test.admin.conurbations.activitys.IWelfareList;
-import com.test.admin.conurbations.data.entity.Moment;
 import com.test.admin.conurbations.data.response.GankData;
 import com.test.admin.conurbations.data.response.GankService;
 import com.test.admin.conurbations.retrofit.ApiCallback;
@@ -19,10 +18,10 @@ public class GanHuoListPresenter extends BasePresenter {
         this.welfareList = welfareList;
     }
 
-    public void getWelfareData(final Moment.Type type, final int pager) {
+    public void getWelfareData(final String type, final int pager) {
 
         addSubscription(AppClient.retrofit().create(GankService.class)
-                .getGanHuo(String.valueOf(type), pager),
+                        .getGanHuo(type, pager),
                 new ApiCallback<GankData>() {
                     @Override
                     public void onSuccess(GankData model) {
