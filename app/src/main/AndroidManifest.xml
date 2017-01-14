@@ -49,6 +49,9 @@
             android:name=".activitys.ItemListItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activitys.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activitys.PersonalInformationActivity"
             android:label="@string/title_item_detail"
             android:theme="@style/AppTheme.NoActionBar" />

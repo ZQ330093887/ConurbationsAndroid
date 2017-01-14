@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
 import com.test.admin.conurbations.data.entity.Moment;
-import com.test.admin.conurbations.fragments.FragmentFour;
+import com.test.admin.conurbations.fragments.DayAndDayPrettyPicturesFragment;
 import com.test.admin.conurbations.fragments.WelfareFragment;
 
 /**
@@ -23,12 +23,12 @@ public class ContentFragmentPagerAdapter extends FragmentPagerAdapter {
 
         fragments[0] = new WelfareFragment();
         ((WelfareFragment) fragments[0]).setRange(Moment.Range.ONE);
-        fragments[1] = new FragmentFour();
-        ((FragmentFour) fragments[1]).setRange(Moment.SGImgType.每日一笑);
-        fragments[2] = new FragmentFour();
-        ((FragmentFour) fragments[2]).setRange(Moment.SGImgType.每日一笑);
-        fragments[3] = new FragmentFour();
-        ((FragmentFour) fragments[3]).setRange(Moment.SGImgType.每日一笑);
+        fragments[1] = new DayAndDayPrettyPicturesFragment();
+        ((DayAndDayPrettyPicturesFragment) fragments[1]).setRange(Moment.SGImgType.每日一笑);
+        fragments[2] = new DayAndDayPrettyPicturesFragment();
+        ((DayAndDayPrettyPicturesFragment) fragments[2]).setRange(Moment.SGImgType.每日一笑);
+        fragments[3] = new DayAndDayPrettyPicturesFragment();
+        ((DayAndDayPrettyPicturesFragment) fragments[3]).setRange(Moment.SGImgType.每日一笑);
     }
 
     @Override

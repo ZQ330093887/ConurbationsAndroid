@@ -20,7 +20,7 @@ import java.util.List;
 
 public abstract class BaseListFragment<T> extends Fragment implements PullRecycler.OnRecyclerRefreshListener {
 
-    PullRecycler recycler;
+    public PullRecycler recycler;
     private int page = 1;
     protected List<T> mDataList;
     public int action;

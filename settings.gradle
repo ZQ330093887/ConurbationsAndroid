@@ -1,1 +1,1 @@
-include ':app', ':pagerBottomTabStrip', ':TapTargetView', ':telegramgallery', ':feedbacksdk'
+include ':app', ':pagerBottomTabStrip', ':TapTargetView', ':telegramgallery', ':feedbacksdk', ':FlycoLabelView_Lib'

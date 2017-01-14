@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="sougou_tab">
+        <item>天天美图</item>
         <item>热门推荐</item>
         <item>每日一笑</item>
         <item>手机壁纸</item>

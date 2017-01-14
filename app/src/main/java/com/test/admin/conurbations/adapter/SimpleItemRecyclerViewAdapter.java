@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.activitys.ItemDetailFragment;
+import com.test.admin.conurbations.fragments.ItemDetailFragment;
 import com.test.admin.conurbations.activitys.ItemListItemActivity;
 import com.test.admin.conurbations.model.BookBean;
 

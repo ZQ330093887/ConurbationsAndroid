@@ -1,4 +1,4 @@
-package com.test.admin.conurbations.activitys;
+package com.test.admin.conurbations.fragments;
 
 import android.app.Activity;
 import android.graphics.Typeface;
@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.activitys.ItemDetailActivity;
+import com.test.admin.conurbations.activitys.ItemListActivity;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -36,9 +38,6 @@ public class ItemDetailFragment extends Fragment {
     String detailContext;
     private static String text;
     private TextView textContext;
-
-    public ItemDetailFragment() {
-    }
 
     private Handler mHandler = new Handler() {
 

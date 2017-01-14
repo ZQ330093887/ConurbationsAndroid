@@ -82,6 +82,10 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         return 0;
     }
 
+    public T getItem(int position) {
+        return list.get(position);
+    }
+
     protected abstract BaseViewHolder onCreateNormalViewHolder(ViewGroup parent, int viewType);
 
     protected BaseViewHolder onCreateLoadMoreFooterViewHolder(ViewGroup parent) {

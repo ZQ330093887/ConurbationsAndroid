@@ -1,6 +1,7 @@
 package com.test.admin.conurbations.data.response;
 
 import com.test.admin.conurbations.model.NetImage;
+import com.test.admin.conurbations.model.NetImage360;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -38,5 +39,21 @@ public interface GankService {
             @Query("reqFrom") String result,
             @Query("query") String word,
             @Query("start") int page);
+
+
+    /**
+     * http://wallpaper.apc.360.cn/index.php?c=WallPaperAloneRelease&a=getAppsByRecommWithTopic&order=create_time&start=0&count=20
+     */
+
+    @GET("http://wallpaper.apc.360.cn/index.php?c=WallPaperAloneRelease&a=getAppsByRecommWithTopic&order=create_time&start=20")
+    Observable<NetImage360> get360ImageList(@Query("count") int count);
+
+
+    /**
+     * http://wallpaper.apc.360.cn/index.php?c=WallPaperAndroid&a=getAppsByCategory&cid=11&start=0&count=99
+     **/
+
+    @GET("http://wallpaper.apc.360.cn/index.php?c=WallPaperAndroid&a=getAppsByCategory&start=0&count=99")
+    Observable<NetImage360> get360ImageItemList(@Query("cid") String cid);
 
 }

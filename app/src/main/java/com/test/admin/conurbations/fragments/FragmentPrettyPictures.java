@@ -2,6 +2,8 @@ package com.test.admin.conurbations.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -13,16 +15,21 @@ import com.test.admin.conurbations.adapter.SouGouImageFragmentPagerAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by zhouqiong on 2015/9/23.
  */
-public class FragmentSGImage extends BaseFragment {
+public class FragmentPrettyPictures extends BaseFragment {
 
     @Bind(R.id.tabLayout_index)
     TabLayout tabLayoutIndex;
     @Bind(R.id.viewpager_index)
     ViewPager viewpagerIndex;
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
+    @Bind(R.id.appbar)
+    AppBarLayout appBarLayout;
     private Context mContext;
     private SouGouImageFragmentPagerAdapter souGouImageFragmentPagerAdapter;
 
@@ -33,7 +40,7 @@ public class FragmentSGImage extends BaseFragment {
     }
 
     public BaseFragment newInstance() {
-        return new FragmentSGImage();
+        return new FragmentPrettyPictures();
     }
 
     @Override
@@ -41,14 +48,33 @@ public class FragmentSGImage extends BaseFragment {
         View viewRoot = inflater.inflate(R.layout.index_fragment, container, false);
         int content = getArguments().getInt("content");
         ButterKnife.bind(this, viewRoot);
+        initAppBarSetting();
         mContext.getResources();
-        souGouImageFragmentPagerAdapter = new SouGouImageFragmentPagerAdapter(mContext,getChildFragmentManager());
+        souGouImageFragmentPagerAdapter = new SouGouImageFragmentPagerAdapter(mContext, getChildFragmentManager());
         tabLayoutIndex.setTabsFromPagerAdapter(souGouImageFragmentPagerAdapter);
         viewpagerIndex.setAdapter(souGouImageFragmentPagerAdapter);
         viewpagerIndex.setOffscreenPageLimit(5);
         tabLayoutIndex.setupWithViewPager(viewpagerIndex);
         tabLayoutIndex.setBackgroundColor(content);
         return viewRoot;
+    }
+
+    public void initAppBarSetting() {
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+                if (i != 0) {
+                    fab.hide();
+                } else {
+                    fab.show();
+                }
+            }
+        });
+    }
+
+    @OnClick(R.id.fab)
+    public void clickFab(View view) {
+        ((SouGouImageFragment) souGouImageFragmentPagerAdapter.getFragment(viewpagerIndex.getCurrentItem())).getRecyclerView().setSelection(0);
     }
 
     @Override

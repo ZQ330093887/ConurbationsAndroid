@@ -97,6 +97,10 @@ public class DateUtils {
         return mDate;
     }
 
+    public static String format(long time) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(time);
+    }
+
 
     /**
      * 以友好的方式显示时间

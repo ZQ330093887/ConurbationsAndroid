@@ -27,7 +27,7 @@ import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.fragments.BaseFragment;
-import com.test.admin.conurbations.fragments.FragmentSGImage;
+import com.test.admin.conurbations.fragments.FragmentPrettyPictures;
 import com.test.admin.conurbations.fragments.FragmentHelp;
 import com.test.admin.conurbations.fragments.FragmentIndex;
 import com.test.admin.conurbations.fragments.FragmentTeam;
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mFragments = new ArrayList<>();
 
         mFragments.add(createFragment(new FragmentIndex(), Constants.testColors[0]));
-        mFragments.add(createFragment(new FragmentSGImage(), Constants.testColors[1]));
+        mFragments.add(createFragment(new FragmentPrettyPictures(), Constants.testColors[1]));
         mFragments.add(createFragment(new FragmentTeam(), Constants.testColors[2]));
         mFragments.add(createFragment(new FragmentHelp(), Constants.testColors[3]));
 

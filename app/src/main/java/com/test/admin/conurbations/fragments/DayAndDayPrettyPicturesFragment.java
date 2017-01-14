@@ -7,29 +7,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.test.admin.conurbations.activitys.ISouGouImageList;
+import com.test.admin.conurbations.activitys.IDayAndDayPrettyPictureView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
-import com.test.admin.conurbations.adapter.SouGouImgListAdapter;
-import com.test.admin.conurbations.model.NetImage;
-import com.test.admin.conurbations.presenter.DayAndDayImagePresenter;
+import com.test.admin.conurbations.adapter.DayAndDayPrettyPictureAdapter;
+import com.test.admin.conurbations.data.entity.Moment;
+import com.test.admin.conurbations.model.NetImage360;
+import com.test.admin.conurbations.presenter.DayAndDayPrettyPicturesPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
+public class DayAndDayPrettyPicturesFragment extends BaseListFragment implements IDayAndDayPrettyPictureView {
 
-public class SouGouImageFragment extends BaseListFragment implements ISouGouImageList {
+    private Moment.SGImgType range;
 
-    private String range;
-    public void setRange(String range) {
+    public void setRange(Moment.SGImgType range) {
         this.range = range;
     }
 
-    protected DayAndDayImagePresenter dayImagePresenter;
-    protected SouGouImgListAdapter souGouImgListAdapter;
-
-    public PullRecycler getRecyclerView() {
-        return recycler;
-    }
+    protected DayAndDayPrettyPicturesPresenter dayAndDayPrettyPicturesPresenter;
+    protected DayAndDayPrettyPictureAdapter dayAndDayPrettyPictureAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,17 +36,17 @@ public class SouGouImageFragment extends BaseListFragment implements ISouGouImag
     }
 
     @Override
-    public void setSouGouImage(NetImage souGouImage) {
+    public void setDayPrettyPicture(NetImage360 netImage) {
         if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
             mDataList.clear();
         }
-        if (souGouImage.items == null || souGouImage.items.size() == 0) {
+        if (netImage.data == null && netImage.data.size() == 0) {
             recycler.enableLoadMore(false);
         } else {
-            recycler.enableLoadMore(true);
-            mDataList.addAll(souGouImage.items);
-            souGouImgListAdapter.setList(mDataList);
-            souGouImgListAdapter.notifyDataSetChanged();
+            recycler.enableLoadMore(false);
+            mDataList.addAll(netImage.data);
+            dayAndDayPrettyPictureAdapter.setList(mDataList);
+            dayAndDayPrettyPictureAdapter.notifyDataSetChanged();
         }
         recycler.onRefreshCompleted();
     }
@@ -61,17 +58,17 @@ public class SouGouImageFragment extends BaseListFragment implements ISouGouImag
 
     @Override
     protected void refreshList(int page) {
-        dayImagePresenter.getWelfareData(range, page);
+        dayAndDayPrettyPicturesPresenter.getWelfareData();
     }
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        souGouImgListAdapter = new SouGouImgListAdapter();
-        return souGouImgListAdapter;
+        dayAndDayPrettyPictureAdapter = new DayAndDayPrettyPictureAdapter();
+        return dayAndDayPrettyPictureAdapter;
     }
 
     @Override
     protected void setUpPresenter() {
-        dayImagePresenter = new DayAndDayImagePresenter(this);
+        dayAndDayPrettyPicturesPresenter = new DayAndDayPrettyPicturesPresenter(this);
     }
 }

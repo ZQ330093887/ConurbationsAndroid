@@ -11,47 +11,46 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.ShowImageActivity;
-import com.test.admin.conurbations.model.SosoSearcher;
+import com.test.admin.conurbations.model.TSZImageBean;
 import com.test.admin.conurbations.utils.RatioImageView;
 
 /**
- * Created by zhouqiong on 2017/1/5.
+ * Created by wenhuaijun on 2016/2/7 0007.
  */
-
-public class SouGouImgListAdapter extends BaseListAdapter<SosoSearcher> {
-
+public class SearchAdapter extends BaseListAdapter<TSZImageBean> {
     @Override
-    protected void bindDataToItemView(final BaseViewHolder holder, final SosoSearcher item) {
-        final RatioImageView imageView = holder.getView(R.id.item_sougou_photo);
-        imageView.setRatio(0.618f);
+    protected void bindDataToItemView(BaseViewHolder vh, final TSZImageBean item) {
+        final RatioImageView imageView = vh.getView(R.id.item_sougou_photo);
+        imageView.setRatio(0.918f);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startPictureActivity(view, item);
+            public void onClick(View v) {
+                startPictureActivity(v,item);
             }
         });
         Glide.with(imageView.getContext())
-                .load(item.getPic_url())
+                .load(item.getUrl())
                 .centerCrop()
                 .placeholder(R.color.white)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
+
     }
 
     @Override
     protected BaseViewHolder onCreateNormalViewHolder(ViewGroup parent, int viewType) {
-        return new SampleViewHolder((ViewGroup) inflateItemView(parent, R.layout.item_sg_img));
+        return new SearchHolder(inflateItemView(parent, R.layout.item_sg_img));
     }
 
-    class SampleViewHolder extends BaseViewHolder {
-        public SampleViewHolder(ViewGroup parent) {
-            super(parent);
+    class SearchHolder extends BaseViewHolder {
+        public SearchHolder(View itemView) {
+            super(itemView);
         }
     }
 
-    private void startPictureActivity(View transitView, SosoSearcher item) {
-        Intent intent = ShowImageActivity.newIntent(transitView.getContext(), item.getPic_url());
+    private void startPictureActivity(View transitView, TSZImageBean item) {
+        Intent intent = ShowImageActivity.newIntent(transitView.getContext(), item.getUrl());
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 (Activity) transitView.getContext(), transitView, ShowImageActivity.TRANSIT_PIC);
         try {

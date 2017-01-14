@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.SimpleItemListRecyclerViewAdapter;
+import com.test.admin.conurbations.fragments.ItemDetailFragment;
 import com.test.admin.conurbations.model.BookBean;
 
 import org.jsoup.Jsoup;

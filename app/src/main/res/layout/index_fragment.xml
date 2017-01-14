@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/index_fragment"
@@ -19,20 +19,20 @@
                 android:id="@+id/appbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:elevation="4dp">
+                android:elevation="4dp"
+                android:orientation="vertical">
 
                 <android.support.design.widget.TabLayout
                     android:id="@+id/tabLayout_index"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:minHeight="48dp"
                     android:background="?attr/colorPrimary"
-                    app:tabTextColor="@color/white"
+                    android:minHeight="48dp"
+                    app:layout_scrollFlags="enterAlways|scroll"
                     app:tabIndicatorColor="@color/colorOrangePrimary"
-                    app:tabSelectedTextColor="@color/black"
                     app:tabMode="scrollable"
-                    app:layout_scrollFlags="enterAlways|scroll" />
+                    app:tabSelectedTextColor="@color/black"
+                    app:tabTextColor="@color/white" />
 
             </android.support.design.widget.AppBarLayout>
 
@@ -40,17 +40,28 @@
                 android:id="@+id/viewpager_index"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         </android.support.design.widget.CoordinatorLayout>
+
         <View
             android:id="@+id/index_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="true"
             android:background="#90FFFFFF"
-            android:visibility="gone"/>
+            android:clickable="true"
+            android:visibility="gone" />
     </FrameLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|right"
+        android:src="@mipmap/ic_top" />
     <!--<com.example.zhouqiong.frameworkattributeset.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions"
         android:layout_width="wrap_content"

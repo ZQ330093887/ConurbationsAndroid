@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.fragments.ItemDetailFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,7 +39,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CopyToClipboard(view.getContext(),ItemDetailFragment.getItemContext());
+                CopyToClipboard(view.getContext(), ItemDetailFragment.getItemContext());
             }
         });
 
