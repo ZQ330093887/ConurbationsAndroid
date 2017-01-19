@@ -12,7 +12,7 @@ import android.util.Log;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.SimpleItemRecyclerViewAdapter;
-import com.test.admin.conurbations.model.BookBean;
+import com.test.admin.conurbations.model.BooksBean;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,7 +31,7 @@ public class ItemListActivity extends AppCompatActivity {
     Toolbar toolbar;
     @Bind(R.id.item_list)
     RecyclerView recyclerView;
-    List<BookBean> list = new ArrayList<>();
+    List<BooksBean> list = new ArrayList<>();
     SimpleItemRecyclerViewAdapter viewAdapter;
 
     private Handler mHandler = new Handler() {
@@ -74,12 +74,12 @@ public class ItemListActivity extends AppCompatActivity {
                         Document divContions = Jsoup.parse(divs.toString());
                         Elements element = divContions.getElementsByTag("li");
                         for (Element links : element) {
-                            BookBean bookBean = new BookBean();
+                            BooksBean booksBean = new BooksBean();
                             String title = links.getElementsByTag("a").text();
                             String url = links.select("a").attr("href");
-                            bookBean.setTitle(title);
-                            bookBean.setUrl(url);
-                            list.add(bookBean);
+                            booksBean.setTitle(title);
+                            booksBean.setUrl(url);
+                            list.add(booksBean);
                         }
                         Looper.prepare();
                         Message msg = Message.obtain();

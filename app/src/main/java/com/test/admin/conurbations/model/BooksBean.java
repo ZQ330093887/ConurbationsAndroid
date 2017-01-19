@@ -4,7 +4,7 @@ package com.test.admin.conurbations.model;
  * Created by zhouqiong on 2017/1/9.
  */
 
-public class BookBean {
+public class BooksBean {
     public String title;
     public String url;
 

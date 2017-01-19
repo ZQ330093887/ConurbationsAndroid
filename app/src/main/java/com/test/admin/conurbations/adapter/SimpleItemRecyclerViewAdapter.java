@@ -8,16 +8,16 @@ import android.view.ViewGroup;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.fragments.ItemDetailFragment;
 import com.test.admin.conurbations.activitys.ItemListItemActivity;
-import com.test.admin.conurbations.model.BookBean;
+import com.test.admin.conurbations.model.BooksBean;
 
 /**
  * Created by zhouqiong on 2017/1/12.
  */
 
-public class SimpleItemRecyclerViewAdapter extends BaseListAdapter<BookBean> {
+public class SimpleItemRecyclerViewAdapter extends BaseListAdapter<BooksBean> {
 
     @Override
-    protected void bindDataToItemView(BaseViewHolder holder, final BookBean item) {
+    protected void bindDataToItemView(BaseViewHolder holder, final BooksBean item) {
         holder.setText(R.id.content,  "*  " + item.getTitle());
         holder.setOnClickListener(R.id.content, new View.OnClickListener() {
             @Override

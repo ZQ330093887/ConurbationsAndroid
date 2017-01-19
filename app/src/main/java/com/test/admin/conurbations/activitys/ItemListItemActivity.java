@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.SimpleItemListRecyclerViewAdapter;
 import com.test.admin.conurbations.fragments.ItemDetailFragment;
-import com.test.admin.conurbations.model.BookBean;
+import com.test.admin.conurbations.model.BooksBean;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,13 +35,13 @@ public class ItemListItemActivity extends AppCompatActivity {
     Toolbar toolbar;
     @Bind(R.id.item_list)
     RecyclerView recyclerView;
-    List<BookBean> list = new ArrayList<>();
+    List<BooksBean> list = new ArrayList<>();
     SimpleItemListRecyclerViewAdapter viewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_activity_item_list);
+        setContentView(R.layout.item_activity_item_lists);
         ButterKnife.bind(this);
         String url = getIntent().getStringExtra(ItemDetailFragment.ITEM_TITLE_ID);
         if (!TextUtils.isEmpty(url)) {
@@ -83,12 +83,12 @@ public class ItemListItemActivity extends AppCompatActivity {
                         Elements element = divcontions.getElementsByTag("h3");
 
                         for (Element links : element) {
-                            BookBean bookBean = new BookBean();
+                            BooksBean booksBean = new BooksBean();
                             String title = links.getElementsByTag("a").get(0).text();
                             String url = links.select("a").attr("href");
-                            bookBean.setTitle(title);
-                            bookBean.setUrl(url);
-                            list.add(bookBean);
+                            booksBean.setTitle(title);
+                            booksBean.setUrl(url);
+                            list.add(booksBean);
                         }
                         Looper.prepare();
                         Message msg = Message.obtain();
