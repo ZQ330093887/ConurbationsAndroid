@@ -2,7 +2,7 @@ package com.test.admin.conurbations.fragments;
 
 
 import android.os.Bundle;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,7 @@ import com.test.admin.conurbations.data.entity.Moment;
 import com.test.admin.conurbations.model.NetImage360;
 import com.test.admin.conurbations.presenter.DayAndDayPrettyPicturesPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
-import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
+import com.test.admin.conurbations.widget.MyGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
 public class DayAndDayPrettyPicturesFragment extends BaseListFragment implements IDayAndDayPrettyPictureView {
@@ -53,7 +53,7 @@ public class DayAndDayPrettyPicturesFragment extends BaseListFragment implements
 
     @Override
     protected ILayoutManager getLayoutManager() {
-        return new MyStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        return new MyGridLayoutManager(getContext(),2,  GridLayoutManager.VERTICAL, false);
     }
 
     @Override
