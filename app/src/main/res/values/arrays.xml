@@ -33,4 +33,20 @@
         <item>拓展资源</item>
         <item>休息视频</item>
     </string-array>
+
+    <array name="url">
+        <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic1xjab4j30ci08cjrv.jpg</item>
+        <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg</item>
+        <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic259ohaj30ci08c74r.jpg</item>
+        <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic2b16zuj30ci08cwf4.jpg</item>
+        <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic2e7vsaj30ci08cglz.jpg</item>
+    </array>
+
+    <array name="title">
+        <item>51巅峰钜惠</item>
+        <item>十大星级品牌联盟，全场2折起</item>
+        <item>生命不是要超越别人，而是要超越自己。</item>
+        <item>己所不欲，勿施于人。——孔子</item>
+        <item>嗨购5折不要停</item>
+    </array>
 </resources>
