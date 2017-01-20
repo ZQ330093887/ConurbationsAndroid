@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by zhouqiong on 2015/9/23.
+ * Created by zhouqiong on 2016/9/23.
  */
 public class FragmentPrettyPictures extends BaseFragment {
 
@@ -45,7 +45,7 @@ public class FragmentPrettyPictures extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View viewRoot = inflater.inflate(R.layout.index_fragment, container, false);
+        View viewRoot = inflater.inflate(R.layout.pretty_pictures_fragment, container, false);
         int content = getArguments().getInt("content");
         ButterKnife.bind(this, viewRoot);
         initAppBarSetting();
@@ -74,7 +74,7 @@ public class FragmentPrettyPictures extends BaseFragment {
 
     @OnClick(R.id.fab)
     public void clickFab(View view) {
-        ((SouGouImageFragment) souGouImageFragmentPagerAdapter.getFragment(viewpagerIndex.getCurrentItem())).getRecyclerView().setSelection(0);
+        ((BaseListFragment) souGouImageFragmentPagerAdapter.getFragment(viewpagerIndex.getCurrentItem())).getRecyclerView().setSelection(0);
     }
 
     @Override

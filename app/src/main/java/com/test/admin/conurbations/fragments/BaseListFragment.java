@@ -54,6 +54,10 @@ public abstract class BaseListFragment<T> extends Fragment implements PullRecycl
         refreshList(page++);
     }
 
+    public PullRecycler getRecyclerView() {
+        return recycler;
+    }
+
     protected abstract ILayoutManager getLayoutManager();
 
     protected abstract void refreshList(int page);

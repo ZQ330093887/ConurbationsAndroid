@@ -24,7 +24,7 @@ import com.youth.banner.listener.OnBannerClickListener;
 import com.youth.banner.transformer.AccordionTransformer;
 
 /**
- * Created by wenhuaijun on 2016/2/7 0007.
+ * Created by zhouqiong on 2017/1/7
  */
 public class DayAndDayPrettyPictureAdapter extends BaseListAdapter<TSZImageBean> implements OnBannerClickListener {
 
@@ -45,7 +45,7 @@ public class DayAndDayPrettyPictureAdapter extends BaseListAdapter<TSZImageBean>
                     .start();
         }
 
-        if (vh instanceof NormalViewHolder){
+        if (vh instanceof NormalViewHolder) {
             NormalViewHolder normalViewHolder = (NormalViewHolder) vh;
             final RatioImageView imageView = normalViewHolder.getView(R.id.recomend_img1);
             final LabelView labelView = normalViewHolder.getView(R.id.label_view1);
@@ -88,6 +88,7 @@ public class DayAndDayPrettyPictureAdapter extends BaseListAdapter<TSZImageBean>
 
     public class CategoryHeaderViewHolder extends BaseViewHolder {
         Banner banner;
+
         public CategoryHeaderViewHolder(View view) {
             super(view);
             banner = (Banner) view.findViewById(R.id.banner);
@@ -95,15 +96,12 @@ public class DayAndDayPrettyPictureAdapter extends BaseListAdapter<TSZImageBean>
     }
 
     @Override
-    public void OnBannerClick(int position) {}
+    public void OnBannerClick(int position) {
+    }
 
     public class NormalViewHolder extends BaseViewHolder {
-
-
-
         public NormalViewHolder(View view) {
             super(view);
-
         }
     }
 
@@ -112,13 +110,13 @@ public class DayAndDayPrettyPictureAdapter extends BaseListAdapter<TSZImageBean>
         super.onAttachedToRecyclerView(recyclerView);
 
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
-        if(manager instanceof GridLayoutManager) {
+        if (manager instanceof GridLayoutManager) {
             final GridLayoutManager gridManager = ((GridLayoutManager) manager);
             gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
                     int type = getItemViewType(position);
-                    switch (type){
+                    switch (type) {
                         case VIEW_TYPE_HEAD:
                             return gridManager.getSpanCount();
                         default:
