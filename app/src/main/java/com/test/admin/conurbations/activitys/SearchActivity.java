@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.fragments.SearchFragment;
 
@@ -48,7 +49,8 @@ public class SearchActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         collapsingToolbarLayout.setTitle(getIntent().getStringExtra(SearchFragment.CLASS_TITLE));
-        imageView.setImageResource(getBgImg());
+
+        Picasso.with(this).load(getBgImg()).into(imageView);
         if (savedInstanceState == null) {
             Bundle arguments = new Bundle();
             arguments.putString(SearchFragment.CLASS_ID, getIntent().getStringExtra(SearchFragment.CLASS_ID));

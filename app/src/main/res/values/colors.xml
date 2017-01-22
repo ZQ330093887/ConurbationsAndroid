@@ -32,6 +32,7 @@
     <!--basic color-->
     <color name="white">#ffffff</color>
     <color name="black">#040404</color>
+    <color name="colorLoadingBg">#666666</color>
     <color name="colorTextIcon">#ffffff</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondText">#727272</color>
