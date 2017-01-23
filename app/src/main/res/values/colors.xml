@@ -117,4 +117,9 @@
 
 
     <color name="refresh_progress_3">@color/theme_primary</color>
+
+    <color name="textColorFirst_Day">#DD000000</color>
+    <color name="textColorSecond_Day">#89000000</color>
+    <color name="textColorThird_Day">#42000000</color>
+    <color name="color_read">#9E9E9E</color>
 </resources>

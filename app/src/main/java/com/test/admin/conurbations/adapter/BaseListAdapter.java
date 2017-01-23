@@ -45,6 +45,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
             bindDataToItemView(holder, item);
         }
         //showItemAnim(holder.itemView,position);
+        startAnimator(holder.itemView,position);
     }
 
     protected abstract void bindDataToItemView(final BaseViewHolder vh, final T item);
@@ -59,6 +60,10 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     public void setList(List<T> list) {
         this.list = list;
+    }
+
+    public List<T> getList() {
+        return list;
     }
 
     @Override
@@ -135,6 +140,13 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
                     view.startAnimation(animation);
                 }
             }, DELAY * position);
+            mLastPosition = position;
+        }
+    }
+
+    private void startAnimator(View view, int position) {
+        if (position > mLastPosition) {
+            view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.item_bottom_in));
             mLastPosition = position;
         }
     }

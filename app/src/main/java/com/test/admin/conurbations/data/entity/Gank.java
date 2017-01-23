@@ -37,7 +37,7 @@ import java.util.Objects;
  * @author Johnny Shieh
  * @version 1.0
  */
-public class Gank {
+public class  Gank {
 
     public String _id;
     public Date createdAt;

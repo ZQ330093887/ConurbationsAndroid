@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 
 
 public final class PrefUtils {
+    private static final String PRE_NIGHT = "night";
     private PrefUtils() {
     }
 
@@ -64,5 +65,14 @@ public final class PrefUtils {
     public static void remove(Context context, String key) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         prefs.edit().remove(key).apply();
+    }
+
+    public static void setNight(Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putBoolean(PRE_NIGHT, true).commit();
+    }
+    public static boolean isNight(Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(PRE_NIGHT, false);
     }
 }

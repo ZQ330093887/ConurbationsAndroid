@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:lv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_item"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginLeft="@dimen/about_title_padding_top"
+    android:layout_marginRight="@dimen/about_title_padding_top"
+    android:layout_marginTop="@dimen/about_title_padding_top"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="2dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <com.test.admin.conurbations.utils.RatioImageView
+                android:id="@+id/iv_news"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/about_title_padding_top"
+                android:layout_toRightOf="@id/iv_news"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="3"
+                android:padding="3dp"
+                android:textSize="18sp"
+                tools:text="新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题,不忘初心,方得始终." />
+        </RelativeLayout>
+
+        <com.flyco.labelview.LabelView
+            android:id="@+id/labelView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            lv:lv_background_color="#455A64"
+            lv:lv_fill_triangle="true"
+            lv:lv_gravity="BOTTOM_RIGHT"
+            lv:lv_text="NEW"
+            lv:lv_text_all_caps="false"
+            lv:lv_text_size="8sp" />
+
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

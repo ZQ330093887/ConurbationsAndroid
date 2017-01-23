@@ -1,7 +1,6 @@
 package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +17,17 @@ import java.util.List;
  * Created by zhouqiong on 2017/1/3.
  */
 
-public abstract class BaseListFragment<T> extends Fragment implements PullRecycler.OnRecyclerRefreshListener {
+public abstract class BaseListFragment<T> extends BaseFragment implements PullRecycler.OnRecyclerRefreshListener {
 
     public PullRecycler recycler;
     private int page = 1;
     protected List<T> mDataList;
     public int action;
+
+    @Override
+    public BaseFragment newInstance() {
+        return null;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
