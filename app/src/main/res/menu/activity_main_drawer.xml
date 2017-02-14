@@ -27,9 +27,9 @@
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_resources"
-                android:title="resource" />
+                android:title="关于" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_audio"

@@ -17,6 +17,7 @@ import com.test.admin.conurbations.fragments.NewsDetailFragment;
 import com.test.admin.conurbations.model.News;
 import com.test.admin.conurbations.utils.DateUtils;
 import com.test.admin.conurbations.utils.RatioImageView;
+import com.test.admin.conurbations.widget.SolidApplication;
 
 /**
  * Created by zhouqiong on 2017/1/12.
@@ -41,6 +42,7 @@ public class FragmentNewsRecyclerViewAdapter extends BaseListAdapter<News> {
         final RatioImageView imageView = vh.getView(R.id.iv_news);
         final LabelView labelView = vh.getView(R.id.labelView);
         imageView.setRatio(0.618f);
+        vh.setTypeface(R.id.tv_title, SolidApplication.songTi);
         vh.setText(R.id.tv_title, item.getTitle());
         if (!item.isRead()) {
             vh.setTextColor(R.id.tv_title, ContextCompat.getColor(mContext, R.color.textColorFirst_Day));

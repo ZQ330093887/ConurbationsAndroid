@@ -1,6 +1,7 @@
 package com.test.admin.conurbations.widget;
 
 import android.app.Application;
+import android.graphics.Typeface;
 import android.os.Environment;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
@@ -22,6 +23,7 @@ public class SolidApplication extends Application {
     private static SolidApplication mInstance;
     public static List<?> images=new ArrayList<>();
     public static List<String> titles=new ArrayList<>();
+    public static Typeface songTi; // 宋体
 
     @Override
     public void onCreate() {
@@ -36,6 +38,8 @@ public class SolidApplication extends Application {
         images = new ArrayList(list);
         List list1 = Arrays.asList(tips);
         titles= new ArrayList(list1);
+
+        songTi = Typeface.createFromAsset(getAssets(), "SongTi.TTF");
     }
 
     public static SolidApplication getInstance() {

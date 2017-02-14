@@ -45,7 +45,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
             bindDataToItemView(holder, item);
         }
         //showItemAnim(holder.itemView,position);
-        startAnimator(holder.itemView,position);
+        //startAnimator(holder.itemView,position);
     }
 
     protected abstract void bindDataToItemView(final BaseViewHolder vh, final T item);

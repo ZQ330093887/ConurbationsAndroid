@@ -26,6 +26,7 @@ import com.test.admin.conurbations.data.response.GankItem;
 import com.test.admin.conurbations.data.response.GankNormalItem;
 import com.test.admin.conurbations.utils.RatioImageView;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
+import com.test.admin.conurbations.widget.SolidApplication;
 
 import java.util.List;
 
@@ -90,6 +91,7 @@ public class TodayListAdapter extends BaseListAdapter<List<GankItem>> {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if (holder instanceof CategoryHeaderViewHolder) {
                 CategoryHeaderViewHolder headerHolder = (CategoryHeaderViewHolder) holder;
+                headerHolder.title.setTypeface(SolidApplication.songTi);
                 headerHolder.title.setText(((GankHeaderItem) mItems.get(position)).name);
                 showItemAnim(headerHolder.title, position);
                 return;

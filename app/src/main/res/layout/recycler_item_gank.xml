@@ -36,7 +36,7 @@
         style="@style/TitleTextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/padding_gank_title"
-        android:paddingTop="@dimen/padding_gank_title" />
+        android:paddingBottom="@dimen/context_margin"
+        android:paddingTop="@dimen/context_margin" />
 
 </LinearLayout>

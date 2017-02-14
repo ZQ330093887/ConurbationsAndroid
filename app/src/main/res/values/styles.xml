@@ -19,7 +19,7 @@
 
     <style name="TitleTextAppearance"
         parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/fab_margin</item>
+        <item name="android:textSize">@dimen/item_title</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 

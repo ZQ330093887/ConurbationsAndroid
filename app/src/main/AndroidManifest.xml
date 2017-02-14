@@ -57,9 +57,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.WebviewActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activitys.NewsDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activitys.NewsDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activitys.AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

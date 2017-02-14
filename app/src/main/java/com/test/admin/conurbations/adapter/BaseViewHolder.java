@@ -1,5 +1,6 @@
 package com.test.admin.conurbations.adapter;
 
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
@@ -33,6 +34,12 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
     public BaseViewHolder setText(int id, String string) {
         TextView textView = getView(id);
         textView.setText(string);
+        return this;
+    }
+
+    public BaseViewHolder setTypeface(int id,Typeface tf){
+        TextView textView = getView(id);
+        textView.setTypeface(tf);
         return this;
     }
 

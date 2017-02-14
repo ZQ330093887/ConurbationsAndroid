@@ -23,10 +23,25 @@
 
     <string name="network_error">网络错误，请检查您的网络连接是否正常。</string>
 
+    <string name="about_app_name_with_introduce">干货集中营 - 享受开发的乐趣</string>
+
     <string name="share" translatable="false">分享</string>
     <string name="open_in_browser" translatable="false">浏览器打开</string>
     <string name="share_page" translatable="false">「%1$s%2$1s (分享自 @Gank) </string>
 
     <string name="load_fail">Load failed, Please slide up to try again</string>
     <string name="load_no_more">There is nothing more</string>
+
+
+    <string name="about_introduce">「干货集中营」- 给您最纯粹的开发体验。\n\n开源是必须的，软件采用RxJava + RxAndroid + Retrofit + OkHttp + MVP框架实现，喜欢的朋友请Star，欢迎一起学习讨论。\n\n你的支持将是我最大的动力与褒奖！</string>
+    <string name="about_menu_action_share">分享</string>
+    <string name="about_developers">关于我</string>
+    <string name="about_open_source_lis">感谢开源</string>
+    <string name="about_open_source_special">特别感谢</string>
+    <string name="about_introduce_and_help">介绍与帮助</string>
+    <string name="about_open_source_libraries_list">com.squareup.retrofit2:retrofit:2.0.0-beta4\ncom.squareup.okhttp3:okhttp:3.2.0\nio.reactivex:rxandroid:1.1.0\nio.reactivex:rxjava:1.1.0\ncom.facebook.stetho:stetho:1.3.1\ncom.jakewharton:butterknife:7.0.1\ncom.github.bumptech.glide:glide:3.7.0\ncom.yalantis:phoenix:1.2.3\norg.jsoup:jsoup:1.8.3</string>
+    <string name="about_function">实现的功能</string>
+    <string name="about_function_list">* 干货集中营所有api接口数据\n* 爬虫获取搜狗壁纸\n* 爬虫获取360壁纸\n* 爬虫获取知乎文章\n* 爬虫获取励志网文章\n* 阿里百川用户反馈\n* 强大的图片处理\n* 框架的封装\n* 分享功能\n* RecycleView和ViewPager的结合使用</string>
+    <string name="about">关于</string>
+    <string name="about_version">1.0</string>
 </resources>
