@@ -1,6 +1,7 @@
 package com.test.admin.conurbations.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
@@ -9,6 +10,7 @@ import android.util.Log;
 
 import com.test.admin.conurbations.config.AES;
 import com.test.admin.conurbations.config.Constants;
+import com.test.admin.conurbations.widget.SolidApplication;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -120,6 +122,30 @@ public class FileUtil {
         }
 
         return dir.delete();
+    }
+
+    public static String getSDPath(){
+        File sdDir;
+        boolean sdCardExist = Environment.getExternalStorageState()
+                .equals(android.os.Environment.MEDIA_MOUNTED); //判断sd卡是否存在
+        if (sdCardExist)
+        {
+            sdDir = Environment.getExternalStorageDirectory();//获取跟目录
+        }else {
+            sdDir =  SolidApplication.getInstance().getFilesDir();
+        }
+        return sdDir.toString();
+    }
+
+    //分享图片
+    public  static void  startShareImg(String path,Context context){
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("image/*");
+        File file = new File(path);
+        Uri uri = Uri.fromFile(file);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(Intent.createChooser(shareIntent, "请选择"));
     }
 
     public static boolean isEmpty(String string) {

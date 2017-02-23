@@ -15,10 +15,19 @@ package com.test.admin.conurbations.data;
  * limitations under the License.
  */
 
+import com.test.admin.conurbations.utils.FileUtil;
+
 /**
  * @author Johnny Shieh
  * @version 1.0
  */
 public interface GankApi {
     String BASE_URL = "http://gank.io/api/";
+
+    String imgPath= FileUtil.getSDPath()+"/MyPictures";
+
+    class status {
+        public static final int success = 200;
+        public static final int error = -1;
+    }
 }

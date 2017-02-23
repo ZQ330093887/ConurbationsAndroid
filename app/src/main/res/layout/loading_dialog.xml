@@ -1,13 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dialog_view"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_layout"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center">
-    <ImageView
-        android:id="@+id/img"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:minWidth="164dp"
+    android:minHeight="164dp"
+    android:background="@drawable/dialog_bg"
+    android:visibility="visible">
+
+    <com.tt.whorlviewlibrary.WhorlView
+        android:id="@+id/whorl"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        app:whorlview_circle_colors="#F14336_#ffffff_#5677fc_#F44336_#4CAF50"
+        app:whorlview_circle_speed="270"
+        app:whorlview_parallax="fast"
+        app:whorlview_strokeWidth="6"
+        app:whorlview_sweepAngle="90">
+    </com.tt.whorlviewlibrary.WhorlView>
+
+    <TextView
+        android:id="@+id/des_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/loading" />
+        android:text="loading"
+        android:padding="5dp"
+        android:textSize="16sp"
+        android:textColor="#6a6a6a"
+        android:visibility="visible"/>
 </LinearLayout>
