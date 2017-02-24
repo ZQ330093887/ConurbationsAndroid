@@ -1,11 +1,9 @@
 package com.test.admin.conurbations.presenter;
 
 
-import android.util.Log;
-
 import com.test.admin.conurbations.activitys.ISearchView;
 import com.test.admin.conurbations.data.response.GankService;
-import com.test.admin.conurbations.model.NetImage360;
+import com.test.admin.conurbations.model.NetImage;
 import com.test.admin.conurbations.retrofit.ApiCallback;
 import com.test.admin.conurbations.retrofit.AppClient;
 
@@ -14,24 +12,24 @@ import com.test.admin.conurbations.retrofit.AppClient;
  */
 public class SearchPresenter extends BasePresenter {
 
-    private ISearchView searchView;
+    private ISearchView iSearchView;
 
-    public SearchPresenter(ISearchView iTestList) {
-        this.searchView = iTestList;
+    public SearchPresenter(ISearchView iSearchView) {
+        this.iSearchView = iSearchView;
     }
 
-    public void getSearchInfo(String cid) {
+    public void getSearchQueryInfo(String mSearchQuery, int pages) {
         addSubscription(AppClient.retrofit().create(GankService.class)
-                        .get360ImageItemList(cid),
-                new ApiCallback<NetImage360>() {
+                        .getImageList("ajax", "result", mSearchQuery, pages * 24),
+                new ApiCallback<NetImage>() {
+
                     @Override
-                    public void onSuccess(NetImage360 model) {
-                        searchView.setSearchData(model);
+                    public void onSuccess(NetImage model) {
+                        iSearchView.setSearchData(model);
                     }
 
                     @Override
                     public void onFailure(String msg) {
-                        Log.d("msd", msg);
                     }
 
                     @Override

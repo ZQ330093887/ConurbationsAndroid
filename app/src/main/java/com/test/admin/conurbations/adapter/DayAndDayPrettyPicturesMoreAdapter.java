@@ -11,15 +11,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.ShowImageActivity;
-import com.test.admin.conurbations.model.SosoSearcher;
+import com.test.admin.conurbations.model.TSZImageBean;
 import com.test.admin.conurbations.utils.RatioImageView;
 
 /**
  * Created by wenhuaijun on 2016/2/7 0007.
  */
-public class SearchAdapter extends BaseListAdapter<SosoSearcher> {
+public class DayAndDayPrettyPicturesMoreAdapter extends BaseListAdapter<TSZImageBean> {
     @Override
-    protected void bindDataToItemView(BaseViewHolder vh, final SosoSearcher item) {
+    protected void bindDataToItemView(BaseViewHolder vh, final TSZImageBean item) {
         final RatioImageView imageView = vh.getView(R.id.item_sougou_photo);
         imageView.setRatio(0.918f);
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -29,7 +29,7 @@ public class SearchAdapter extends BaseListAdapter<SosoSearcher> {
             }
         });
         Glide.with(imageView.getContext())
-                .load(item.getPic_url())
+                .load(item.getUrl())
                 .centerCrop()
                 .placeholder(R.color.white)
                 .crossFade()
@@ -49,8 +49,8 @@ public class SearchAdapter extends BaseListAdapter<SosoSearcher> {
         }
     }
 
-    private void startPictureActivity(View transitView, SosoSearcher item) {
-        Intent intent = ShowImageActivity.newIntent(transitView.getContext(), item.getPic_url());
+    private void startPictureActivity(View transitView, TSZImageBean item) {
+        Intent intent = ShowImageActivity.newIntent(transitView.getContext(), item.getUrl());
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 (Activity) transitView.getContext(), transitView, ShowImageActivity.TRANSIT_PIC);
         try {

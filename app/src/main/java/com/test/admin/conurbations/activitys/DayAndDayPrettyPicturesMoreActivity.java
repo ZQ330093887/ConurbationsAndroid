@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.fragments.SearchFragment;
+import com.test.admin.conurbations.fragments.DayAndDayPrettyPicturesMoreFragment;
 
 import java.util.Random;
 
@@ -24,7 +24,7 @@ import butterknife.OnClick;
  * Created by wenhuaijun on 2015/11/3 0003.
  */
 
-public class SearchActivity extends AppCompatActivity {
+public class DayAndDayPrettyPicturesMoreActivity extends AppCompatActivity {
     @Bind(R.id.search_toolbar)
     Toolbar toolbar;
     @Bind(R.id.bg_img)
@@ -35,12 +35,12 @@ public class SearchActivity extends AppCompatActivity {
     AppBarLayout appBarLayout;
     @Bind(R.id.search_fab)
     FloatingActionButton fab;
-    SearchFragment fragment;
+    DayAndDayPrettyPicturesMoreFragment fragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_day_and_day_ppm);
         ButterKnife.bind(this);
         initAppBarSetting();
         setSupportActionBar(toolbar);
@@ -48,14 +48,13 @@ public class SearchActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        String mSearchQuery = getIntent().getStringExtra(SearchFragment.CLASS_SEARCH);
-        collapsingToolbarLayout.setTitle(mSearchQuery);
+        collapsingToolbarLayout.setTitle(getIntent().getStringExtra(DayAndDayPrettyPicturesMoreFragment.CLASS_TITLE));
 
         Picasso.with(this).load(getBgImg()).into(imageView);
         if (savedInstanceState == null) {
             Bundle arguments = new Bundle();
-            arguments.putString(SearchFragment.CLASS_SEARCH, mSearchQuery);
-            fragment = new SearchFragment();
+            arguments.putString(DayAndDayPrettyPicturesMoreFragment.CLASS_ID, getIntent().getStringExtra(DayAndDayPrettyPicturesMoreFragment.CLASS_ID));
+            fragment = new DayAndDayPrettyPicturesMoreFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.search_container, fragment)

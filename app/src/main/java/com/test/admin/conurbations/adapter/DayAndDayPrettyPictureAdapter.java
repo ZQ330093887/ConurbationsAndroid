@@ -12,8 +12,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.flyco.labelview.LabelView;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.activitys.SearchActivity;
-import com.test.admin.conurbations.fragments.SearchFragment;
+import com.test.admin.conurbations.activitys.DayAndDayPrettyPicturesMoreActivity;
+import com.test.admin.conurbations.fragments.DayAndDayPrettyPicturesMoreFragment;
 import com.test.admin.conurbations.model.TSZImageBean;
 import com.test.admin.conurbations.utils.RatioImageView;
 import com.test.admin.conurbations.widget.GlideImageLoader;
@@ -55,9 +55,9 @@ public class DayAndDayPrettyPictureAdapter extends BaseListAdapter<TSZImageBean>
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
-                    Intent intent = new Intent(context, SearchActivity.class);
-                    intent.putExtra(SearchFragment.CLASS_ID, item.getClass_id());
-                    intent.putExtra(SearchFragment.CLASS_TITLE, title);
+                    Intent intent = new Intent(context, DayAndDayPrettyPicturesMoreActivity.class);
+                    intent.putExtra(DayAndDayPrettyPicturesMoreFragment.CLASS_ID, item.getClass_id());
+                    intent.putExtra(DayAndDayPrettyPicturesMoreFragment.CLASS_TITLE, title);
                     context.startActivity(intent);
                 }
             });

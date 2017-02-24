@@ -122,4 +122,7 @@
     <color name="textColorSecond_Day">#89000000</color>
     <color name="textColorThird_Day">#42000000</color>
     <color name="color_read">#9E9E9E</color>
+
+    <color name="gray_50">#88888888</color>
+    <color name="white_ish">#fffefefe</color>
 </resources>

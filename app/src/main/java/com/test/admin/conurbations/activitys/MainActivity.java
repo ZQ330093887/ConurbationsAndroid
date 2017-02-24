@@ -27,13 +27,15 @@ import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.fragments.BaseFragment;
-import com.test.admin.conurbations.fragments.FragmentPrettyPictures;
 import com.test.admin.conurbations.fragments.FragmentHelp;
 import com.test.admin.conurbations.fragments.FragmentIndex;
+import com.test.admin.conurbations.fragments.FragmentPrettyPictures;
 import com.test.admin.conurbations.fragments.FragmentTeam;
+import com.test.admin.conurbations.fragments.SearchFragment;
 import com.test.admin.conurbations.utils.PhotoCameralUtil;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
 import com.test.admin.conurbations.views.CircleImageView;
+import com.test.admin.conurbations.views.MaterialSearchView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Bitmap headPhotoBitmap;
     private Bundle photoBundle;
     public static final String TRANSLATE_VIEW = "translate_view";
+    private MaterialSearchView searchView;
 
 
     @Override
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         //初始化左边侧滑栏上部分（头像部分）
+        searchView = (MaterialSearchView) findViewById(R.id.search_view);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
@@ -123,9 +127,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }else if (searchView.isOpen()){
+            searchView.closeSearch();
+        }else {
             super.onBackPressed();
         }
+
     }
 
     private void initFragment() {
@@ -201,6 +208,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+
+
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                intent.putExtra(SearchFragment.CLASS_SEARCH, query);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        searchView.adjustTintAlpha(0.8f);
         return true;
     }
 
@@ -213,6 +237,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         } else if (id == R.id.action_Image) {
             startActivity(new Intent(MainActivity.this, TelegramGalleryActivity.class));
+        }else if (id ==R.id.action_search){
+            searchView.openSearch();
         }
         return super.onOptionsItemSelected(item);
     }

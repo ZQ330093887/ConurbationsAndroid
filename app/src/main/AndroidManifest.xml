@@ -21,7 +21,8 @@
         <activity
             android:name=".activitys.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,7 +51,7 @@
             android:name=".activitys.ItemListItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activitys.SearchActivity"
+            android:name=".activitys.DayAndDayPrettyPicturesMoreActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.PersonalInformationActivity"
@@ -64,6 +65,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activitys.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

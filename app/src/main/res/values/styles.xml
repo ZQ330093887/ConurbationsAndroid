@@ -17,8 +17,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="TitleTextAppearance"
-        parent="TextAppearance.AppCompat">
+    <style name="TitleTextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/item_title</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
@@ -31,8 +30,7 @@
         <item name="android:scrollbars">none</item>
     </style>
 
-    <style name="HeaderTitleTextAppearance"
-        parent="TextAppearance.AppCompat">
+    <style name="HeaderTitleTextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_size_header_title</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
@@ -40,8 +38,7 @@
         <item name="android:ellipsize">end</item>
     </style>
 
-    <style name="SummaryTextAppearance"
-        parent="TextAppearance.AppCompat">
+    <style name="SummaryTextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_size_summary</item>
         <item name="android:textColor">@android:color/darker_gray</item>
     </style>
@@ -72,6 +69,20 @@
 
     <style name="CollapsingToolbarTitleStyle.About" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+    <style name="MaterialSearchViewStyle">
+        <item name="searchBackground">@color/white_ish</item>
+        <item name="searchVoiceIcon">@drawable/ic_action_voice_search</item>
+        <item name="searchCloseIcon">@drawable/ic_action_navigation_close</item>
+        <item name="searchBackIcon">@drawable/ic_action_navigation_arrow_back</item>
+        <item name="searchSuggestionBackground">@color/gray_50</item>
+        <item name="searchBarHeight">?attr/actionBarSize</item>
+        <item name="voiceHintPrompt">@string/search</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/gray_50</item>
+        <item name="android:hint">@string/search_hint</item>
+        <item name="android:inputType">textCapWords</item>
     </style>
 
 </resources>
