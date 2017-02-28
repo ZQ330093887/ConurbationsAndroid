@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,12 +18,12 @@ import com.test.admin.conurbations.R;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by zhouqiong on 2016/9/29.
  */
-public class TelegramGalleryActivity extends AppCompatActivity {
+public class TelegramGalleryActivity extends BaseActivity {
     @Bind(R.id.btn)
     Button btn;
     @Bind(R.id.btn2)
@@ -34,12 +33,13 @@ public class TelegramGalleryActivity extends AppCompatActivity {
     private List<String> photos;
     private BaseAdapter adapter;
 
-    @SuppressWarnings("all")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_telegram_gallery);
-        ButterKnife.bind(this);
+    protected int setLayoutResourceID() {
+        return R.layout.activity_telegram_gallery;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
 
         gv.setAdapter(adapter = new BaseAdapter() {
             @Override
@@ -75,21 +75,11 @@ public class TelegramGalleryActivity extends AppCompatActivity {
                 return view;
             }
         });
+    }
 
-        assert btn != null;
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GalleryActivity.openActivity(TelegramGalleryActivity.this, false, 9, 12);
-            }
-        });
+    @Override
+    protected void initPresenter() {
 
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GalleryActivity.openActivity(TelegramGalleryActivity.this, true, 9, 12);
-            }
-        });
     }
 
     @SuppressWarnings("all")
@@ -98,6 +88,16 @@ public class TelegramGalleryActivity extends AppCompatActivity {
         if (12 == requestCode && resultCode == Activity.RESULT_OK) {
             photos = (List<String>) data.getSerializableExtra(GalleryActivity.PHOTOS);
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    @OnClick({R.id.btn, R.id.btn2})
+    void onClick(View view) {
+        int id = view.getId();
+        if (id == R.id.btn){
+            GalleryActivity.openActivity(TelegramGalleryActivity.this, false, 9, 12);
+        }else if (id == R.id.btn2){
+            GalleryActivity.openActivity(TelegramGalleryActivity.this, true, 9, 12);
         }
     }
 }

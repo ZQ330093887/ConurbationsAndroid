@@ -1,14 +1,12 @@
 package com.test.admin.conurbations.activitys;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -20,6 +18,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.utils.FileUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,10 +26,7 @@ import butterknife.ButterKnife;
 /**
  * Created by zhouqiong on 2017/1/4.
  */
-public class WebviewActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-
-    private static final String EXTRA_URL = "URL";
-    private static final String EXTRA_TITLE = "TITLE";
+public class WebviewActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.toolbar)
     Toolbar vToolbar;
@@ -49,15 +45,15 @@ public class WebviewActivity extends AppCompatActivity implements SwipeRefreshLa
         activity.startActivity(intent);
     }
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webview);
 
-        ButterKnife.bind(this);
-        setSupportActionBar(vToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    protected int setLayoutResourceID() {
+        return R.layout.activity_webview;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+        initToolbar(vToolbar, "", "");
         vRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent);
         setUpWebView();
 
@@ -67,6 +63,11 @@ public class WebviewActivity extends AppCompatActivity implements SwipeRefreshLa
         }
         setTitle(mTitle);
         vWebView.loadUrl(mUrl);
+    }
+
+    @Override
+    protected void initPresenter() {
+
     }
 
     @Override
@@ -118,15 +119,6 @@ public class WebviewActivity extends AppCompatActivity implements SwipeRefreshLa
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && vWebView.canGoBack()) {
-            vWebView.goBack();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_webview, menu);
         return true;
@@ -142,7 +134,7 @@ public class WebviewActivity extends AppCompatActivity implements SwipeRefreshLa
                 }
                 break;
             case R.id.action_share:
-                sharePage();
+                FileUtil.sharePage(vWebView, getContext());
                 return true;
             case R.id.action_open_in_browser:
                 openInBrowser();
@@ -153,14 +145,6 @@ public class WebviewActivity extends AppCompatActivity implements SwipeRefreshLa
         return super.onOptionsItemSelected(item);
     }
 
-    private void sharePage() {
-        String title = vWebView.getTitle();
-        String url = vWebView.getUrl();
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_page, title, url));
-        intent.setType("text/plain");
-        startActivity(Intent.createChooser(intent, getString(R.string.share)));
-    }
 
     private void openInBrowser() {
         Intent intent = new Intent(Intent.ACTION_VIEW);

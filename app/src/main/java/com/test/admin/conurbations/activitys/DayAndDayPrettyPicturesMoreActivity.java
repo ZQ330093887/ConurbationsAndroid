@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,14 +15,13 @@ import com.test.admin.conurbations.fragments.DayAndDayPrettyPicturesMoreFragment
 import java.util.Random;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * Created by wenhuaijun on 2015/11/3 0003.
  */
 
-public class DayAndDayPrettyPicturesMoreActivity extends AppCompatActivity {
+public class DayAndDayPrettyPicturesMoreActivity extends BaseActivity {
     @Bind(R.id.search_toolbar)
     Toolbar toolbar;
     @Bind(R.id.bg_img)
@@ -37,21 +34,21 @@ public class DayAndDayPrettyPicturesMoreActivity extends AppCompatActivity {
     FloatingActionButton fab;
     DayAndDayPrettyPicturesMoreFragment fragment;
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_day_and_day_ppm);
-        ButterKnife.bind(this);
+    protected int setLayoutResourceID() {
+        return R.layout.activity_day_and_day_ppm;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+        initToolbar(toolbar,"","");
         initAppBarSetting();
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+
         collapsingToolbarLayout.setTitle(getIntent().getStringExtra(DayAndDayPrettyPicturesMoreFragment.CLASS_TITLE));
 
         Picasso.with(this).load(getBgImg()).into(imageView);
-        if (savedInstanceState == null) {
+        if (bundle == null) {
             Bundle arguments = new Bundle();
             arguments.putString(DayAndDayPrettyPicturesMoreFragment.CLASS_ID, getIntent().getStringExtra(DayAndDayPrettyPicturesMoreFragment.CLASS_ID));
             fragment = new DayAndDayPrettyPicturesMoreFragment();
@@ -60,6 +57,11 @@ public class DayAndDayPrettyPicturesMoreActivity extends AppCompatActivity {
                     .add(R.id.search_container, fragment)
                     .commit();
         }
+    }
+
+    @Override
+    protected void initPresenter() {
+
     }
 
     public void initAppBarSetting() {

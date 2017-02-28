@@ -4,18 +4,14 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.test.admin.conurbations.R;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
-public class AboutActivity extends AppCompatActivity {
+public class AboutActivity extends BaseActivity {
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
     @Bind(R.id.collapsing_toolbar)
@@ -24,31 +20,20 @@ public class AboutActivity extends AppCompatActivity {
     TextView mTvVersion;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
-        ButterKnife.bind(this);
-        initView();
+    protected int setLayoutResourceID() {
+        return R.layout.activity_about;
     }
 
-    private void initView() {
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+    @Override
+    protected void initData(Bundle bundle) {
+        initToolbar(mToolbar, "", "");
         mCollapsingToolbar.setTitle(getString(R.string.about));
         mTvVersion.setText(getVersion());
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+    protected void initPresenter() {
+
     }
 
     private String getVersion() {

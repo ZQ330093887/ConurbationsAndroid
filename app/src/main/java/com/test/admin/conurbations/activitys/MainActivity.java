@@ -16,7 +16,6 @@ import android.support.v4.util.ArrayMap;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -42,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.Bind;
 import me.majiajie.pagerbottomtabstrip.Controller;
 import me.majiajie.pagerbottomtabstrip.PagerBottomTabLayout;
 import me.majiajie.pagerbottomtabstrip.TabItemBuilder;
@@ -49,95 +49,60 @@ import me.majiajie.pagerbottomtabstrip.TabLayoutMode;
 import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectListener;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
+        View.OnClickListener {
+
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
+    @Bind(R.id.nav_view)
+    NavigationView navigationView;
+    @Bind(R.id.tab)
+    PagerBottomTabLayout pagerBottomTabLayout;
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @Bind(R.id.search_view)
+    MaterialSearchView searchView;
 
     private Controller controller;
     private List<Fragment> mFragments;
-    private Toolbar toolbar;
-    private NavigationView navigationView;
     private CircleImageView circleImageView;
     private Bitmap headPhotoBitmap;
     private Bundle photoBundle;
-    public static final String TRANSLATE_VIEW = "translate_view";
-    private MaterialSearchView searchView;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(getResources().getString(R.string.app_name));
-        toolbar.setSubtitle(getResources().getString(R.string.guard_msg));
-        setSupportActionBar(toolbar);
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+    protected int setLayoutResourceID() {
+        return R.layout.activity_main;
+    }
 
-        //初始化主Activity
-        initFragment();
-        BottomTabTest();
+    @Override
+    protected void initData(Bundle bundle) {
+        initToolbar(mToolbar, getResources().getString(R.string.app_name), getResources().getString(R.string.guard_msg));
+        //初始化底部导航
+        initMainBottomTab();
+        //初始化主Activity(底部导航对应的Fragment)
+        initAddFragment();
         //初始化左边侧滑栏
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        initLeftDrawerToggleMenu();
+    }
 
-        //初始化左边侧滑栏上部分（头像部分）
-        searchView = (MaterialSearchView) findViewById(R.id.search_view);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);//调用选择头像的Dialog
-            }
-        });
-        circleImageView = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.circle_image_view);
-        headPhotoBitmap = BitmapFactory.decodeFile(Constants.pathFileName);
-        if (headPhotoBitmap != null) {
-            circleImageView.setImageBitmap(headPhotoBitmap);
-        } else {
-            circleImageView.setImageResource(R.mipmap.my_bg);
-        }
-
-        //点击头像查看头像（支持缩放功能）
-        circleImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (headPhotoBitmap != null) {
-                    Intent intent = new Intent(MainActivity.this, PersonalInformationActivity.class);
-                    intent.putExtra("photoBundle", headPhotoBitmap);
-                    ActivityCompat.startActivity(MainActivity.this, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, circleImageView, TRANSLATE_VIEW).toBundle());
-                } else {
-                    PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);
-                }
-            }
-        });
+    @Override
+    protected void initPresenter() {
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else if (searchView.isOpen()){
+        } else if (searchView.isOpen()) {
             searchView.closeSearch();
-        }else {
+        } else {
             super.onBackPressed();
         }
-
     }
 
-    private void initFragment() {
+    private void initAddFragment() {
         mFragments = new ArrayList<>();
-
         mFragments.add(createFragment(new FragmentIndex(), Constants.testColors[0]));
         mFragments.add(createFragment(new FragmentPrettyPictures(), Constants.testColors[1]));
         mFragments.add(createFragment(new FragmentTeam(), Constants.testColors[2]));
@@ -149,10 +114,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.commit();
     }
 
+    private void initLeftDrawerToggleMenu() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
-    private void BottomTabTest() {
-        PagerBottomTabLayout pagerBottomTabLayout = (PagerBottomTabLayout) findViewById(R.id.tab);
+        //初始化左边侧滑栏上部分（头像部分）
+        circleImageView = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.circle_image_view);
 
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getHeaderView(0).setOnClickListener(this);
+        circleImageView.setOnClickListener(this);
+        searchView.setOnQueryTextListener(queryTextListener);
+        searchView.adjustTintAlpha(0.8f);
+
+        //处理换头像等逻辑
+        headPhotoBitmap = BitmapFactory.decodeFile(Constants.pathFileName);
+        if (headPhotoBitmap != null) {
+            circleImageView.setImageBitmap(headPhotoBitmap);
+        } else {
+            circleImageView.setImageResource(R.mipmap.my_bg);
+        }
+    }
+
+
+    private void initMainBottomTab() {
         //用TabItemBuilder构建一个导航按钮
         TabItemBuilder tabItemBuilder = new TabItemBuilder(this).create()
                 .setDefaultIcon(android.R.drawable.ic_menu_send)
@@ -174,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
       /*  controller.setMessageNumber("A",2);
         controller.setDisplayOval(0,true);*/
-        controller.addTabItemClickListener(listener);
+        controller.addTabItemClickListener(tabItemSelectListener);
     }
 
     private Fragment createFragment(BaseFragment baseFragment, int content) {
@@ -185,46 +172,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return fragment;
     }
 
-    OnTabItemSelectListener listener = new OnTabItemSelectListener() {
-        @Override
-        public void onSelected(int index, Object tag) {
-            Log.i("asd", "onSelected:" + index + "   TAG: " + tag.toString());
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            toolbar.setBackgroundColor(Constants.toolBarColors[index]);
-            navigationView.setBackgroundColor(Constants.testColors[index]);
-            navigationView.getHeaderView(0).setBackgroundColor(Constants.toolBarColors[index]);
-            //transaction.setCustomAnimations(R.anim.push_up_in,R.anim.push_up_out);
-            transaction.replace(R.id.frameLayout_content_main, mFragments.get(index));
-            transaction.commit();
-        }
-
-        @Override
-        public void onRepeatClick(int index, Object tag) {
-            Log.i("asd", "onRepeatClick:" + index + "   TAG: " + tag.toString());
-        }
-    };
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-
-
-        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                intent.putExtra(SearchFragment.CLASS_SEARCH, query);
-                startActivity(intent);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-        searchView.adjustTintAlpha(0.8f);
         return true;
     }
 
@@ -237,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         } else if (id == R.id.action_Image) {
             startActivity(new Intent(MainActivity.this, TelegramGalleryActivity.class));
-        }else if (id ==R.id.action_search){
+        } else if (id == R.id.action_search) {
             searchView.openSearch();
         }
         return super.onOptionsItemSelected(item);
@@ -266,10 +216,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    OnTabItemSelectListener tabItemSelectListener = new OnTabItemSelectListener() {
+        @Override
+        public void onSelected(int index, Object tag) {
+            Log.i("asd", "onSelected:" + index + "   TAG: " + tag.toString());
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            mToolbar.setBackgroundColor(Constants.toolBarColors[index]);
+            navigationView.setBackgroundColor(Constants.testColors[index]);
+            navigationView.getHeaderView(0).setBackgroundColor(Constants.toolBarColors[index]);
+            //transaction.setCustomAnimations(R.anim.push_up_in,R.anim.push_up_out);
+            transaction.replace(R.id.frameLayout_content_main, mFragments.get(index));
+            transaction.commit();
+        }
+
+        @Override
+        public void onRepeatClick(int index, Object tag) {
+            Log.i("asd", "onRepeatClick:" + index + "   TAG: " + tag.toString());
+        }
+    };
+
+    MaterialSearchView.OnQueryTextListener queryTextListener = new MaterialSearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+            intent.putExtra(SearchFragment.CLASS_SEARCH, query);
+            startActivity(intent);
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            return false;
+        }
+    };
 
     public void customFeedbackStyle() {
         Map<String, String> map = new ArrayMap<String, String>();
@@ -315,6 +299,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             headPhotoBitmap = photoBundle.getParcelable("data");
             circleImageView.setImageBitmap(headPhotoBitmap);
             ImageUtil.saveBitmap(headPhotoBitmap, Constants.pathFileName);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        {
+            if (id == R.id.nav_view) {
+                PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);//调用选择头像的Dialog
+            } else if (id == R.id.circle_image_view) {
+                if (headPhotoBitmap != null) {
+                    Intent intent = new Intent(MainActivity.this, PersonalInformationActivity.class);
+                    intent.putExtra("photoBundle", headPhotoBitmap);
+                    ActivityCompat.startActivity(MainActivity.this, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, circleImageView, TRANSLATE_VIEW).toBundle());
+                } else {
+                    PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);
+                }
+            }
         }
     }
 }

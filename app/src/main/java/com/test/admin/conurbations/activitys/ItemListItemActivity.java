@@ -1,18 +1,13 @@
 package com.test.admin.conurbations.activitys;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MenuItem;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.SimpleItemListRecyclerViewAdapter;
@@ -28,9 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
-public class ItemListItemActivity extends AppCompatActivity {
+public class ItemListItemActivity extends BaseActivity {
     @Bind(R.id.item_toolbar)
     Toolbar toolbar;
     @Bind(R.id.item_list)
@@ -38,25 +32,27 @@ public class ItemListItemActivity extends AppCompatActivity {
     List<BooksBean> list = new ArrayList<>();
     SimpleItemListRecyclerViewAdapter viewAdapter;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_activity_item_lists);
-        ButterKnife.bind(this);
+    protected int setLayoutResourceID() {
+        return R.layout.item_activity_item_lists;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+        initToolbar(toolbar, getIntent().getStringExtra("item_title"), "");
+
         String url = getIntent().getStringExtra(ItemDetailFragment.ITEM_TITLE_ID);
         if (!TextUtils.isEmpty(url)) {
             show(url);
         }
 
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(getIntent().getStringExtra("item_title"));
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
         viewAdapter = new SimpleItemListRecyclerViewAdapter();
         recyclerView.setAdapter(viewAdapter);
+    }
+
+    @Override
+    protected void initPresenter() {
     }
 
     private Handler mHandler = new Handler() {
@@ -103,15 +99,5 @@ public class ItemListItemActivity extends AppCompatActivity {
                 }
             }
         }).start();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

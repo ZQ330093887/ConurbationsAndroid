@@ -7,7 +7,9 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.webkit.WebView;
 
+import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.config.AES;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.widget.SolidApplication;
@@ -146,6 +148,15 @@ public class FileUtil {
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(Intent.createChooser(shareIntent, "请选择"));
+    }
+
+    public static void sharePage(WebView vWebView,Context context) {
+        String title = vWebView.getTitle();
+        String url = vWebView.getUrl();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.share_page, title, url));
+        intent.setType("text/plain");
+        context.startActivity(Intent.createChooser(intent, context.getString(R.string.share)));
     }
 
     public static boolean isEmpty(String string) {

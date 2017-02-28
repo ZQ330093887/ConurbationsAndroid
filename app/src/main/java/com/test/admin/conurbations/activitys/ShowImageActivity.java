@@ -2,11 +2,9 @@ package com.test.admin.conurbations.activitys;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,54 +15,49 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.photoview.PhotoView;
 import com.test.admin.conurbations.photoview.PhotoViewAttacher;
 import com.test.admin.conurbations.utils.DialogUtils;
-import com.test.admin.conurbations.utils.SaveBitmapUtils;
-import com.test.admin.conurbations.utils.ToastUtils;
-import com.test.admin.conurbations.utils.WrapperUtils;
 import com.tt.whorlviewlibrary.WhorlView;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
-import com.yalantis.contextmenu.lib.MenuObject;
 import com.yalantis.contextmenu.lib.MenuParams;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by zhouqiong on 2016/9/26.
  */
-public class ShowImageActivity extends AppCompatActivity implements OnMenuItemClickListener {
+public class ShowImageActivity extends BaseActivity implements OnMenuItemClickListener {
 
+    @Bind(R.id.toolbar_big_show_image)
+    Toolbar toolbar;
     @Bind(R.id.pv_big_avatar_avatar)
     PhotoView avatarPhotoView;
+    @Bind(R.id.lly_progress_bar)
+    LinearLayout linearLayout;
+    @Bind(R.id.whorl)
+    WhorlView whorlView;
     public static final String EXTRA_IMAGE_URL = "image_url";
     public static final String TRANSIT_PIC = "picture";
     private String mImageUrl;
     private ContextMenuDialogFragment mMenuDialogFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_big_avatar);
-        ButterKnife.bind(this);
+    protected int setLayoutResourceID() {
+        return R.layout.activity_big_avatar;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+        initToolbar(toolbar, "美图", "");
         parseIntent();
         initMenuFragment();
         ViewCompat.setTransitionName(avatarPhotoView, TRANSIT_PIC);
         //ImageUtil.loadImage(mImageUrl, avatarPhotoView);
         //Picasso.with(this).load(mImageUrl).into(avatarPhotoView);
-
-        final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.lly_progress_bar);
-        final WhorlView whorlView = (WhorlView) findViewById(R.id.whorl);
-        whorlView.start();
 
         Glide.with(this)
                 .load(mImageUrl)
@@ -72,6 +65,7 @@ public class ShowImageActivity extends AppCompatActivity implements OnMenuItemCl
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
                         whorlView.stop();
+                        linearLayout.setVisibility(View.GONE);
                         Toast.makeText(getApplicationContext(), "资源加载异常", Toast.LENGTH_SHORT).show();
                         return false;
                     }
@@ -107,8 +101,13 @@ public class ShowImageActivity extends AppCompatActivity implements OnMenuItemCl
         });
     }
 
+    @Override
+    protected void initPresenter() {
+    }
+
     private void parseIntent() {
         mImageUrl = getIntent().getStringExtra(EXTRA_IMAGE_URL);
+        whorlView.start();
     }
 
     public static Intent newIntent(Context context, String url) {
@@ -143,32 +142,6 @@ public class ShowImageActivity extends AppCompatActivity implements OnMenuItemCl
         mMenuDialogFragment.setItemClickListener(this);
     }
 
-    private List<MenuObject> getMenuObjects() {
-        List<MenuObject> menuObjects = new ArrayList<>();
-
-        MenuObject close = new MenuObject();
-        close.setResource(R.mipmap.more_ic_close);
-
-        MenuObject addFr = new MenuObject("下载图片");
-        addFr.setResource(R.mipmap.more_ic_download);
-        MenuObject addShare = new MenuObject("分享图片");
-        addShare.setResource(R.mipmap.more_ic_share);
-        MenuObject addSave = new MenuObject("收藏图片");
-        addSave.setResource(R.mipmap.more_ic_collection);
-        MenuObject block = new MenuObject("设为桌面背景");
-        block.setResource(R.mipmap.more_ic_backage);
-        MenuObject block2 = new MenuObject("设为锁屏背景");
-        block2.setResource(R.mipmap.more_ic_loakclose);
-
-        menuObjects.add(close);
-        menuObjects.add(addFr);
-        menuObjects.add(addShare);
-        menuObjects.add(addSave);
-        menuObjects.add(block);
-        menuObjects.add(block2);
-        return menuObjects;
-    }
-
     @Override
     public void onBackPressed() {
         if (mMenuDialogFragment != null && mMenuDialogFragment.isAdded()) {
@@ -184,33 +157,5 @@ public class ShowImageActivity extends AppCompatActivity implements OnMenuItemCl
             DialogUtils.showProgressDialog(ShowImageActivity.this);
         }
         downloadBitmap(ShowImageActivity.this, mImageUrl, position);
-    }
-
-
-    public void downloadBitmap(final Context context, String url, final int state) {
-        Glide.with(context).load(url).asBitmap().into(new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
-                if (state == 1) {
-                    //保存图片
-                    SaveBitmapUtils.getSaveBitmapObservable(bitmap).subscribe(SaveBitmapUtils.saveSubscriber);
-                } else if (state == 2) {
-                    //分享图片
-                    SaveBitmapUtils.getSaveBitmapObservable(bitmap).subscribe(SaveBitmapUtils.getShareSubscriber(ShowImageActivity.this));
-                } else if (state == 4) {
-                    //设置桌面壁纸
-                    WrapperUtils.getSetWallWrapperObservable(bitmap, context).subscribe(WrapperUtils.callbackSubscriber);
-                } else if (state == 5) {
-                    //设置锁屏壁纸
-                    WrapperUtils.getSetLockWrapperObservable(bitmap, context).subscribe(WrapperUtils.callbackSubscriber);
-                }
-            }
-
-            @Override
-            public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                ToastUtils.getInstance().showToast("操作失败！");
-                DialogUtils.hideProgressDialog();
-            }
-        });
     }
 }

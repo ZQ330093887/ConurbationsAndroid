@@ -12,4 +12,8 @@ public class CommonUtil {
             throw new RuntimeException("Invalid access, not in UI thread");
         }
     }
+
+    public static void exit() {
+        System.exit(0);
+    }
 }

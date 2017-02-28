@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,9 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
-public class ItemListActivity extends AppCompatActivity {
+public class ItemListActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -46,21 +43,21 @@ public class ItemListActivity extends AppCompatActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_list);
+    protected int setLayoutResourceID() {
+        return R.layout.activity_item_list;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+        initToolbar(toolbar, "", "");
         show();
-        ButterKnife.bind(this);
-
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
         viewAdapter = new SimpleItemRecyclerViewAdapter();
         recyclerView.setAdapter(viewAdapter);
+    }
+
+    @Override
+    protected void initPresenter() {
+
     }
 
     private void show() {
