@@ -1,8 +1,11 @@
 package com.test.admin.conurbations.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.flyco.labelview.LabelView;
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.activitys.BaseActivity;
 import com.test.admin.conurbations.activitys.NewsDetailActivity;
 import com.test.admin.conurbations.fragments.NewsDetailFragment;
 import com.test.admin.conurbations.model.News;
@@ -27,7 +31,7 @@ public class FragmentNewsRecyclerViewAdapter extends BaseListAdapter<News> {
 
     private String date;
     private Context mContext;
-
+    private RatioImageView imageView;
     public void setDate(String date) {
         this.date = date;
     }
@@ -39,7 +43,7 @@ public class FragmentNewsRecyclerViewAdapter extends BaseListAdapter<News> {
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, News item) {
 
-        final RatioImageView imageView = vh.getView(R.id.iv_news);
+        imageView = vh.getView(R.id.iv_news);
         final LabelView labelView = vh.getView(R.id.labelView);
         imageView.setRatio(0.618f);
         vh.setTypeface(R.id.tv_title, SolidApplication.songTi);
@@ -73,7 +77,7 @@ public class FragmentNewsRecyclerViewAdapter extends BaseListAdapter<News> {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, NewsDetailActivity.class);
                 intent.putExtra(NewsDetailFragment.KEY_NEWS, news.getId());
-                context.startActivity(intent);
+                ActivityCompat.startActivity((Activity) context, intent, ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, imageView, BaseActivity.TRANSLATE_WEB_VIEW).toBundle());
             }
         };
     }

@@ -40,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     private static final String TAG = "BaseActivity";
 
     public static final String TRANSLATE_VIEW = "translate_view";
+    public static final String TRANSLATE_WEB_VIEW = "translate_web_view";
     public static final String EXTRA_URL = "URL";
     public static final String EXTRA_TITLE = "TITLE";
 

@@ -3,6 +3,7 @@ package com.test.admin.conurbations.activitys;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.test.admin.conurbations.R;
@@ -18,6 +19,8 @@ public class BigAvatarActivity extends BaseActivity {
 
     @Bind(R.id.pv_big_avatar_avatar)
     PhotoView avatarPhotoView;
+    @Bind(R.id.toolbar_big_show_image)
+    Toolbar toolbar;
 
 
     @Override
@@ -27,6 +30,7 @@ public class BigAvatarActivity extends BaseActivity {
 
     @Override
     protected void initData(Bundle bundle) {
+        initToolbar(toolbar, getString(R.string.app_name), "");
         Intent intent = getIntent();
         if (intent != null) {
             Bitmap bitmap = intent.getParcelableExtra("photoBundle");

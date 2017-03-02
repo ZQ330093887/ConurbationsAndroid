@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,9 +18,12 @@ import com.test.admin.conurbations.activitys.INewsDetaliListView;
 import com.test.admin.conurbations.model.NewsDetail;
 import com.test.admin.conurbations.presenter.NewsDetailListPresenter;
 import com.test.admin.conurbations.utils.HtmlUtil;
+import com.test.admin.conurbations.utils.RatioImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static com.test.admin.conurbations.R.id.toolbar;
 
 /**
  * Created by laucherish on 16/3/17.
@@ -29,12 +31,12 @@ import butterknife.ButterKnife;
 public class NewsDetailFragment extends Fragment implements INewsDetaliListView {
 
     @Bind(R.id.iv_header)
-    ImageView mIvHeader;
+    RatioImageView mIvHeader;
     @Bind(R.id.tv_title)
     TextView mTvTitle;
     @Bind(R.id.tv_source)
     TextView mTvSource;
-    @Bind(R.id.toolbar)
+    @Bind(toolbar)
     Toolbar mToolbar;
     @Bind(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -53,6 +55,7 @@ public class NewsDetailFragment extends Fragment implements INewsDetaliListView 
         if (newsDetail == null) {
             mTvLoadEmpty.setVisibility(View.VISIBLE);
         } else {
+            mIvHeader.setRatio(0.918f);
             Glide.with(getActivity())
                     .load(newsDetail.getImage())
                     .into(mIvHeader);
@@ -91,6 +94,12 @@ public class NewsDetailFragment extends Fragment implements INewsDetaliListView 
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
         mCollapsingToolbarLayout.setTitleEnabled(true);
     }
 

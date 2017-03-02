@@ -36,8 +36,10 @@
 
         <activity android:name="com.tangxiaolv.telegramgallery.GalleryActivity" />
         <activity android:name=".activitys.ContactsActivity" />
-        <activity android:name=".activitys.BigAvatarActivity" />
         <activity android:name=".activitys.TelegramGalleryActivity" />
+        <activity
+            android:name=".activitys.BigAvatarActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.ItemDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -10,7 +10,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:transitionName="translate_web_view">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
@@ -31,12 +32,10 @@
                 app:layout_collapseParallaxMultiplier="0.8"
                 app:layout_scrollFlags="scroll|snap|enterAlways|enterAlwaysCollapsed">
 
-                <ImageView
+                <com.test.admin.conurbations.utils.RatioImageView
                     android:id="@+id/iv_header"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@null"
-                    android:scaleType="centerCrop" />
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/tv_title"

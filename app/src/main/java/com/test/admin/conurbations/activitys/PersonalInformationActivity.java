@@ -37,6 +37,8 @@ public class PersonalInformationActivity extends BaseActivity {
     CollapsingToolbarLayout mToolbarLayout;
     @Bind(R.id.app_bar)
     AppBarLayout mAppBarLayout;
+    @Bind(R.id.iv_person_info_hand)
+    ImageView mHandBackgroudView;
     @Bind(R.id.title_photo_img)
     ImageView mPhotoImageView;
     @Bind(R.id.title_info)
@@ -63,9 +65,11 @@ public class PersonalInformationActivity extends BaseActivity {
             bitmap = intent.getParcelableExtra("photoBundle");
             circleImageView.setImageBitmap(bitmap);
             mPhotoImageView.setImageBitmap(bitmap);
+            mHandBackgroudView.setImageBitmap(bitmap);
         } else {
             circleImageView.setBackgroundResource(R.color.white);
             mPhotoImageView.setBackgroundResource(R.color.white);
+            mHandBackgroudView.setBackgroundResource(R.color.white);
         }
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -76,7 +80,8 @@ public class PersonalInformationActivity extends BaseActivity {
     }
 
     @Override
-    protected void initPresenter() {}
+    protected void initPresenter() {
+    }
 
     AppBarStateChangeListener mStateChangeListener = new AppBarStateChangeListener() {
         @Override
