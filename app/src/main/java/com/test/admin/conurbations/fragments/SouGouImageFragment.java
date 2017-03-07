@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.test.admin.conurbations.activitys.ISouGouImageList;
+import com.test.admin.conurbations.activitys.ISouGouImageView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.SouGouImgListAdapter;
 import com.test.admin.conurbations.model.NetImage;
@@ -17,7 +17,7 @@ import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
 
-public class SouGouImageFragment extends BaseListFragment implements ISouGouImageList {
+public class SouGouImageFragment extends BaseListFragment implements ISouGouImageView {
 
     private String range;
     public void setRange(String range) {

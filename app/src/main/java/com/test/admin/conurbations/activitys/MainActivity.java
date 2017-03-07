@@ -152,7 +152,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         controller = pagerBottomTabLayout.builder()
                 .addTabItem(tabItemBuilder)
                 .addTabItem(android.R.drawable.ic_menu_compass, "美图", Constants.testColors[1])
-                .addTabItem(android.R.drawable.ic_menu_search, "搜索", Constants.testColors[2])
+                .addTabItem(android.R.drawable.ic_menu_crop, "新闻", Constants.testColors[2])
                 .addTabItem(android.R.drawable.ic_menu_help, "帮助", Constants.testColors[3])
                 .setMode(TabLayoutMode.HIDE_TEXT)
                 .setMode(TabLayoutMode.CHANGE_BACKGROUND_COLOR)

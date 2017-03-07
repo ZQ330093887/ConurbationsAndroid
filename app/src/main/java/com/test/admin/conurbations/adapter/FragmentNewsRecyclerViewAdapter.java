@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class FragmentNewsRecyclerViewAdapter extends BaseListAdapter<News> {
     private String date;
     private Context mContext;
     private RatioImageView imageView;
+
     public void setDate(String date) {
         this.date = date;
     }
@@ -77,7 +79,10 @@ public class FragmentNewsRecyclerViewAdapter extends BaseListAdapter<News> {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, NewsDetailActivity.class);
                 intent.putExtra(NewsDetailFragment.KEY_NEWS, news.getId());
-                ActivityCompat.startActivity((Activity) context, intent, ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, imageView, BaseActivity.TRANSLATE_WEB_VIEW).toBundle());
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context
+                        , new Pair<View, String>(imageView, BaseActivity.TRANSLATE_WEB_VIEW_BG_IMG)
+                        , new Pair<View, String>(holder.getView(R.id.tv_title), BaseActivity.TRANSLATE_WEB_VIEW_TITLE));
+                ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
             }
         };
     }

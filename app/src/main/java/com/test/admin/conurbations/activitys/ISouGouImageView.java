@@ -6,6 +6,6 @@ import com.test.admin.conurbations.model.NetImage;
  * Created by zhouqiong on 2017/1/12.
  */
 
-public interface ISouGouImageList {
+public interface ISouGouImageView {
     void setSouGouImage(NetImage souGouImage);
 }

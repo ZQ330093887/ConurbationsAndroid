@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.test.admin.conurbations.activitys.INewList;
+import com.test.admin.conurbations.activitys.INewListView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.FragmentNewsRecyclerViewAdapter;
 import com.test.admin.conurbations.model.NewsList;
@@ -18,7 +18,7 @@ import com.test.admin.conurbations.widget.PullRecycler;
 /**
  * Created by zhouqiong on 2015/9/23.
  */
-public class FragmentTeam extends BaseListFragment implements INewList {
+public class FragmentTeam extends BaseListFragment implements INewListView {
 
     protected FragmentNewsRecyclerViewAdapter newsRecyclerViewAdapter;
     protected FragmentTeamPresenter fragmentTeamPresenter;

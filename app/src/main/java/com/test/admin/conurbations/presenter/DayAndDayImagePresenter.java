@@ -1,7 +1,7 @@
 package com.test.admin.conurbations.presenter;
 
 
-import com.test.admin.conurbations.activitys.ISouGouImageList;
+import com.test.admin.conurbations.activitys.ISouGouImageView;
 import com.test.admin.conurbations.data.response.GankService;
 import com.test.admin.conurbations.model.NetImage;
 import com.test.admin.conurbations.retrofit.ApiCallback;
@@ -12,9 +12,9 @@ import com.test.admin.conurbations.retrofit.AppClient;
  */
 public class DayAndDayImagePresenter extends BasePresenter {
 
-    private ISouGouImageList souGouImageList;
+    private ISouGouImageView souGouImageList;
 
-    public DayAndDayImagePresenter(ISouGouImageList souGouImageList) {
+    public DayAndDayImagePresenter(ISouGouImageView souGouImageList) {
         this.souGouImageList = souGouImageList;
     }
 

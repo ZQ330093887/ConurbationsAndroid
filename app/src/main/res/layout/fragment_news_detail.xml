@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:transitionName="translate_web_view">
+        android:transitionName="translate_web_view_bg_img">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
@@ -46,6 +46,7 @@
                     android:padding="@dimen/developer_item_icon_width"
                     android:textColor="@android:color/white"
                     android:textSize="22sp"
+                    android:transitionName="translate_web_view_title"
                     tools:text="哈哈哈哈哈" />
 
                 <TextView

@@ -52,6 +52,7 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
 
     @Override
     protected void initData(Bundle bundle) {
+        whorlView.start();
         initToolbar(toolbar, "美图", "");
         parseIntent();
         initMenuFragment();
@@ -74,6 +75,7 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         whorlView.stop();
                         linearLayout.setVisibility(View.GONE);
+                        avatarPhotoView.setVisibility(View.VISIBLE);
                         return false;
                     }
                 })
@@ -107,7 +109,6 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
 
     private void parseIntent() {
         mImageUrl = getIntent().getStringExtra(EXTRA_IMAGE_URL);
-        whorlView.start();
     }
 
     public static Intent newIntent(Context context, String url) {
@@ -115,7 +116,6 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
         intent.putExtra(ShowImageActivity.EXTRA_IMAGE_URL, url);
         return intent;
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
