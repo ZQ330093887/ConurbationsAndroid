@@ -19,10 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activitys.MainActivity"
+            android:name=".activitys.SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustNothing">
+            android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,6 +39,10 @@
         <activity
             android:name=".activitys.BigAvatarActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activitys.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".activitys.ItemDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />

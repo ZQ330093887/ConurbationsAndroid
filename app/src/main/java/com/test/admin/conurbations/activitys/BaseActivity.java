@@ -28,8 +28,13 @@ import com.yalantis.contextmenu.lib.MenuObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.ButterKnife;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by zhouqiong on 2017/2/27.
@@ -172,6 +177,24 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
             startActivity(intent);
             finish();
         }
+    }
+
+
+    @Override
+    public void startActivityAndFinishWithOutObservable(final Class<?> cls) {
+        final Intent intent = new Intent();
+        intent.setClass(this, cls);
+        Observable.timer(1000, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+                        startActivity(intent);
+                        overridePendingTransition(0, android.R.anim.fade_out);
+                        finish();
+                    }
+                });
     }
 
     @Override

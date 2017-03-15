@@ -34,6 +34,39 @@
         <item>休息视频</item>
     </string-array>
 
+    <string-array name="news_info_tab">
+        <item>知乎</item>
+        <item>推荐</item>
+        <item>游戏</item>
+        <item>电影</item>
+
+        <item>设计</item>
+        <item>公司</item>
+        <item>财经</item>
+        <item>音乐</item>
+        <item>体育</item>
+        <item>动漫</item>
+        <item>网络</item>
+        <item>论坛</item>
+        <item>心理学</item>
+    </string-array>
+
+    <string-array name="news_info_tab_id">
+        <item>5YyX5Lqs</item>
+        <item>12</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>13</item>
+    </string-array>
+
     <array name="url">
         <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic1xjab4j30ci08cjrv.jpg</item>
         <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg</item>
