@@ -23,10 +23,10 @@ public class FragmentTeam extends BaseListFragment implements INewListView {
     protected FragmentNewsRecyclerViewAdapter newsRecyclerViewAdapter;
     protected FragmentTeamPresenter fragmentTeamPresenter;
     protected String ordDate;
+    private String range;
 
-    @Override
-    public BaseFragment newInstance() {
-        return new FragmentTeam();
+    public void setRange(String range) {
+        this.range = range;
     }
 
 

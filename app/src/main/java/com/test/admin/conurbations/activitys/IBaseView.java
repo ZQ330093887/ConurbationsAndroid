@@ -26,6 +26,8 @@ public interface IBaseView {
 
     void startActivityAndFinish(Class<?> cls, Bundle bundle);
 
+    void startActivityAndFinishWithOutObservable(Class<?> cls);
+
     void startActivityForResultWithoutTransition(Class<?> cls);
 
     void startActivityForResultWithoutTransition(Class<?> cls, int requestCode);

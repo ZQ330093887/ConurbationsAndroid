@@ -60,8 +60,6 @@ public interface GankService {
     Observable<NetImage360> get360ImageItemList(@Query("cid") String cid);
 
 
-
-
     @Headers("Cache-Control: public, max-age=60")
     @GET("http://news-at.zhihu.com/api/4/stories/latest")
     Observable<NewsList> getLatestNews();
@@ -73,5 +71,12 @@ public interface GankService {
     @Headers("Cache-Control: public, max-age=" + 60 * 60 * 24 * 7)
     @GET("http://news-at.zhihu.com/api/4/story/{id}")
     Observable<NewsDetail> getNewsDetail(@Path("id") int id);
+
+    /**
+     * 获取主题日报内容列表
+     * @param themeId 主题日报id
+     */
+    @GET("http://news-at.zhihu.com/api/4/theme/{themeId}")
+    Observable<NewsList> getThemeContentList(@Path("themeId") String themeId);
 
 }

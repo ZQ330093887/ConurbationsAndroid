@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/news_summary_card_view"
+    android:id="@+id/news_info_card"
+    app:cardElevation="2dp">
+
+    <TextView
+        android:id="@+id/news_summary_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="@dimen/item_margin"
+        android:layout_marginRight="@dimen/item_margin"
+        android:layout_marginTop="@dimen/item_margin"
+        android:singleLine="true"
+        android:textSize="@dimen/text_size_title"
+        tools:text="武汉孕妇临盆被洪水围困 消防营救" />
+
+
+</android.support.v7.widget.CardView>

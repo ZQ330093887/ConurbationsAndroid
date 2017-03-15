@@ -28,8 +28,8 @@ import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.fragments.BaseFragment;
 import com.test.admin.conurbations.fragments.FragmentHelp;
 import com.test.admin.conurbations.fragments.FragmentIndex;
+import com.test.admin.conurbations.fragments.FragmentNewsInformation;
 import com.test.admin.conurbations.fragments.FragmentPrettyPictures;
-import com.test.admin.conurbations.fragments.FragmentTeam;
 import com.test.admin.conurbations.fragments.SearchFragment;
 import com.test.admin.conurbations.utils.PhotoCameralUtil;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mFragments = new ArrayList<>();
         mFragments.add(createFragment(new FragmentIndex(), Constants.testColors[0]));
         mFragments.add(createFragment(new FragmentPrettyPictures(), Constants.testColors[1]));
-        mFragments.add(createFragment(new FragmentTeam(), Constants.testColors[2]));
+        mFragments.add(createFragment(new FragmentNewsInformation(), Constants.testColors[2]));
         mFragments.add(createFragment(new FragmentHelp(), Constants.testColors[3]));
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -305,17 +305,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        {
-            if (id == R.id.nav_view) {
-                PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);//调用选择头像的Dialog
-            } else if (id == R.id.circle_image_view) {
-                if (headPhotoBitmap != null) {
-                    Intent intent = new Intent(MainActivity.this, PersonalInformationActivity.class);
-                    intent.putExtra("photoBundle", headPhotoBitmap);
-                    ActivityCompat.startActivity(MainActivity.this, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, circleImageView, TRANSLATE_VIEW).toBundle());
-                } else {
-                    PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);
-                }
+        if (id == R.id.nav_view) {
+            PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);//调用选择头像的Dialog
+        } else if (id == R.id.circle_image_view) {
+            if (headPhotoBitmap != null) {
+                Intent intent = new Intent(MainActivity.this, PersonalInformationActivity.class);
+                intent.putExtra("photoBundle", headPhotoBitmap);
+                ActivityCompat.startActivity(MainActivity.this, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, circleImageView, TRANSLATE_VIEW).toBundle());
+            } else {
+                PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);
             }
         }
     }

@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/fragment_news_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/coordinator_layout_info_news"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appbar_info_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:orientation="vertical">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabLayout_info_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="?attr/colorPrimary"
+                    android:minHeight="48dp"
+                    app:layout_scrollFlags="enterAlways|scroll"
+                    app:tabIndicatorColor="@color/colorOrangePrimary"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="@color/black"
+                    app:tabTextColor="@color/white" />
+
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager_info_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        </android.support.design.widget.CoordinatorLayout>
+
+        <View
+            android:id="@+id/info_news_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#90FFFFFF"
+            android:clickable="true"
+            android:visibility="gone" />
+    </FrameLayout>
+</RelativeLayout>
