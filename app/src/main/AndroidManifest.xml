@@ -59,6 +59,9 @@
             android:name=".activitys.PersonalInformationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activitys.WonderfulFictionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activitys.WebviewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

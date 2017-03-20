@@ -44,7 +44,7 @@ public class WelfareListAdapter extends BaseListAdapter<GanHuoDataBean> {
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 (Activity) transitView.getContext(), transitView, ShowImageActivity.TRANSIT_PIC);
         try {
-            ActivityCompat.startActivity((Activity) transitView.getContext(), intent, optionsCompat.toBundle());
+            ActivityCompat.startActivity(transitView.getContext(), intent, optionsCompat.toBundle());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             transitView.getContext().startActivity(intent);

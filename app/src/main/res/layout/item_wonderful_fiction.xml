@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:lv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            card_view:cardCornerRadius="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.test.admin.conurbations.utils.RatioImageView
+                        android:id="@+id/recomend_img"
+                        android:layout_width="100dp"
+                        android:layout_height="120dp"
+                        android:padding="3dp" />
+
+                    <com.flyco.labelview.LabelView
+                        android:id="@+id/label_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        lv:lv_text="言情"
+                        lv:lv_text_size="10sp" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/recommend_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:text="总裁大人，花样多"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="15dp">
+
+                            <TextView
+                                android:id="@+id/item_fiction_type"
+                                android:layout_width="80dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/shape_yellow"
+                                android:gravity="center"
+                                android:text="结完"
+                                android:textColor="@color/colorOrangePrimaryDark"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/item_fiction_script"
+                                android:layout_width="60dp"
+                                android:layout_height="20dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/shape_green"
+                                android:gravity="center"
+                                android:text="言情"
+                                android:textColor="@color/colorIndigoAccent"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/recommend_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical|bottom"
+                            android:text="“求求你，不要……”订婚前夕，她在洗手间被陌生人吃干抹净，醒来竟发现他是未婚夫小叔！小叔大人花样百出，邀她日久生"
+                            android:textColor="@color/colorLoadingBg"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                    <com.flyco.labelview.LabelView
+                        android:id="@+id/wonderful_fiction_scriptNumber_labv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        lv:lv_background_color="@color/colorLightGreenPrimary"
+                        lv:lv_fill_triangle="true"
+                        lv:lv_gravity="BOTTOM_RIGHT"
+                        lv:lv_text="韵锦澄"
+                        lv:lv_text_all_caps="false"
+                        lv:lv_text_size="8sp" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</LinearLayout>

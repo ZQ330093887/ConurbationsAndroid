@@ -4,41 +4,24 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_item_detail">Item Detail</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="news_button">进入</string>
     <string name="activity_home">首页</string>
-    <string name="activity_second_home">比赛</string>
-    <string name="activity_third_home">视频</string>
-    <string name="activity_four_home">圈子</string>
-    <string name="activity_five_home">我的</string>
-    <string name="drawer_open">打开</string>
-    <string name="drawer_close">关闭</string>
 
     <string name="contacts">通讯录</string>
     <string name="draw_image">相册</string>
-    <string name="friends">朋友</string>
-    <string name="my_center">个人信息</string>
     <string name="splash_slogan">Go through the every bit of life</string>
-
-    <string name="network_error">网络错误，请检查您的网络连接是否正常。</string>
 
     <string name="about_app_name_with_introduce">干货集中营 - 享受开发的乐趣</string>
     <!-- 共享过度动画 -->
-    <string name="transition_photos">transition_animation_news_photos</string>
 
     <string name="share" translatable="false">分享</string>
     <string name="open_in_browser" translatable="false">浏览器打开</string>
     <string name="share_page" translatable="false">「%1$s%2$1s (分享自 @Gank) </string>
-    <string name="set_wallpaper" translatable="false">设置为壁纸</string>
 
     <string name="load_fail">Load failed, Please slide up to try again</string>
-    <string name="load_no_more">There is nothing more</string>
 
 
     <string name="about_introduce">「干货集中营」- 给您最纯粹的开发体验。\n\n开源是必须的，软件采用RxJava + RxAndroid + Retrofit + OkHttp + MVP框架实现，喜欢的朋友请Star，欢迎一起学习讨论。\n\n你的支持将是我最大的动力与褒奖！</string>
-    <string name="about_menu_action_share">分享</string>
     <string name="splash_copyright">Copyright &#169; 2017 iDaily All Rights Reserved\nPowered by Eric Jin</string>
     <string name="about_developers">关于我</string>
     <string name="about_open_source_lis">感谢开源</string>
@@ -52,8 +35,6 @@
     <string name="search_hint">Search&#8230;</string>
     <string name="about_version">V 1.0.0</string>
     <string name="cd_up_button">Up navigation button</string>
-    <string name="cd_voice_search">Voice search</string>
     <string name="cd_clear_button">Clear field</string>
-    <string name="cd_suggestion_icon">List item icon</string>
     <string name="hint_prompt">Speak an item name or a number</string>
 </resources>

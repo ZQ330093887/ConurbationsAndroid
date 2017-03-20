@@ -183,10 +183,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            startActivity(new Intent(MainActivity.this, ContactsActivity.class));
+            startActivity(ContactsActivity.class);
             return true;
         } else if (id == R.id.action_Image) {
-            startActivity(new Intent(MainActivity.this, TelegramGalleryActivity.class));
+            startActivity(TelegramGalleryActivity.class);
         } else if (id == R.id.action_search) {
             searchView.openSearch();
         }
@@ -200,15 +200,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_camera) {
-            startActivity(new Intent(MainActivity.this, ItemListActivity.class));
-        } else if (id == R.id.nav_gallery) {
-
+            startActivity(ItemListActivity.class);
+        } else if (id == R.id.nav_fiction) {
+            startActivity(WonderfulFictionActivity.class);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_about) {
-            startActivity(new Intent(MainActivity.this, AboutActivity.class));
+            startActivity(AboutActivity.class);
         } else if (id == R.id.nav_send) {
             customFeedbackStyle();
             FeedbackAPI.openFeedbackActivity(this);

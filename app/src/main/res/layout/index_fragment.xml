@@ -4,13 +4,11 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/index_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true">
 
         <android.support.design.widget.CoordinatorLayout
-            android:id="@+id/coordinator_layout_index"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|enterAlways">
@@ -45,7 +43,6 @@
         </android.support.design.widget.CoordinatorLayout>
 
         <View
-            android:id="@+id/index_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#90FFFFFF"

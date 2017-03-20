@@ -5,7 +5,6 @@
 
 
     <com.test.admin.conurbations.widget.LoadingIndicatorView
-        android:id="@+id/loading_indicator"
         android:layout_width="27dp"
         android:layout_height="27dp"
         android:layout_gravity="center" />

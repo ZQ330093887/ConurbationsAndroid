@@ -31,7 +31,6 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/splash_slogan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/splash_app_name"
@@ -52,7 +51,6 @@
         android:padding="@dimen/developer_item_height">
 
         <TextView
-            android:id="@+id/splash_version_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -61,7 +59,6 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/splash_copyright"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/about_title_padding_top"

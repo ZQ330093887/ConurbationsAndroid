@@ -8,7 +8,6 @@
         android:title="@string/abc_search_hint"
         app:showAsAction="always" />
     <item
-        android:id="@+id/file"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="相册">
@@ -26,31 +25,21 @@
         </menu>
     </item>
     <item
-        android:id="@+id/edit"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="编辑(E)">
         <menu>
-            <item
-                android:id="@+id/create1"
-                android:title="新建"></item>
-            <item
-                android:id="@+id/open1"
-                android:title="打开"></item>
+            <item android:title="新建"></item>
+            <item android:title="打开"></item>
         </menu>
     </item>
     <item
-        android:id="@+id/format"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="格式(O)">
         <menu>
-            <item
-                android:id="@+id/create2"
-                android:title="新建"></item>
-            <item
-                android:id="@+id/open2"
-                android:title="打开"></item>
+            <item android:title="新建"></item>
+            <item android:title="打开"></item>
         </menu>
     </item>
 

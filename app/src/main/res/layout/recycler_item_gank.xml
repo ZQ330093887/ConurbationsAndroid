@@ -24,7 +24,6 @@
     android:paddingStart="@dimen/recycler_item_padding">
 
     <ImageView
-        android:id="@+id/align_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
