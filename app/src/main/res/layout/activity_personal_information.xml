@@ -7,15 +7,15 @@
     tools:ignore="MergeRootFrame">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/abl_personal_information_head"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="@dimen/dimens_300_dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:transitionName="translate_view">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+            android:id="@+id/ctl_personal_information_head"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -24,7 +24,7 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
-                android:id="@+id/iv_person_info_hand"
+                android:id="@+id/iv_personal_information_hand"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -33,30 +33,30 @@
                 app:layout_collapseParallaxMultiplier="0.7" />
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/personal_info_toolbar"
+                android:id="@+id/toolbar_personal_information_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                 <TextView
-                    android:id="@+id/title_info"
+                    android:id="@+id/tv_personal_information_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/dimens_20_sp" />
 
                 <com.test.admin.conurbations.views.CircleImageView
-                    android:id="@+id/title_photo_img"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:id="@+id/civ_personal_information_title_photo"
+                    android:layout_width="@dimen/dimens_45_dp"
+                    android:layout_height="@dimen/dimens_45_dp"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="@dimen/dimens_10_dp"
                     android:src="@mipmap/my_bg"
                     android:visibility="gone"
                     app:border_color="@color/colorLimePrimaryCenter"
-                    app:border_width="2dp" />
+                    app:border_width="@dimen/dimens_2_dp" />
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -74,7 +74,7 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/personal_info_recycler_view"
+                android:id="@+id/rv_personal_information_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -84,33 +84,33 @@
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_personal_information_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/dimens_16_dp"
         android:src="@mipmap/small_photo"
-        app:elevation="0dp"
-        app:borderWidth="0dp"
+        app:elevation="@dimen/dimens_0_dp"
+        app:borderWidth="@dimen/dimens_0_dp"
         android:layout_centerInParent="true"
         app:fabSize="mini"
         app:backgroundTint="@color/colorLimePrimaryCenter"
-        app:pressedTranslationZ="16dp"
-        app:layout_anchor="@id/app_bar"
+        app:pressedTranslationZ="@dimen/dimens_16_dp"
+        app:layout_anchor="@id/abl_personal_information_head"
         app:layout_anchorGravity="bottom|right|end" />
 
 
     <com.test.admin.conurbations.views.CircleImageView
-        android:id="@+id/fab_img"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_margin="16dp"
+        android:id="@+id/civ_personal_information_img"
+        android:layout_width="@dimen/dimens_80_dp"
+        android:layout_height="@dimen/dimens_80_dp"
+        android:layout_margin="@dimen/dimens_16_dp"
         android:src="@mipmap/small_photo"
-        app:elevation="0dp"
+        app:elevation="@dimen/dimens_0_dp"
         app:border_color="@color/colorLimePrimaryCenter"
-        app:border_width="2dp"
+        app:border_width="@dimen/dimens_2_dp"
         android:layout_centerInParent="true"
         app:fabSize="mini"
-        app:layout_anchor="@id/app_bar"
+        app:layout_anchor="@id/abl_personal_information_head"
         app:layout_anchorGravity="bottom|right|end" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -11,9 +11,9 @@
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+            android:id="@+id/ctb_about_head"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="@dimen/dimens_256_dp"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:contentScrim="?attr/colorPrimary"
@@ -22,35 +22,35 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="256dp"
+                android:layout_height="@dimen/dimens_256_dp"
                 android:background="?attr/colorPrimary"
                 android:fitsSystemWindows="true"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_width="@dimen/dimens_96_dp"
+                    android:layout_height="@dimen/dimens_96_dp"
+                    android:layout_marginTop="@dimen/dimens_24_dp"
                     android:src="@mipmap/ic_logo" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/dimens_8_dp"
                     android:gravity="center"
                     android:text="@string/about_app_name_with_introduce"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/dimens_18_sp" />
 
                 <TextView
-                    android:id="@+id/tv_version"
+                    android:id="@+id/tv_about_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="1.0"
+                    android:layout_marginTop="@dimen/dimens_8_dp"
+                    android:text="@string/about_version"
                     android:textColor="@android:color/white"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/dimens_14_sp" />
             </LinearLayout>
 
             <include layout="@layout/include_toolbar" />
@@ -68,19 +68,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="@dimen/dimens_8_dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/about_introduce_and_help"
                 android:textColor="@color/black"
-                android:textSize="@dimen/ali_feedback_common_text_size" />
+                android:textSize="@dimen/dimens_15_sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp">
+                android:padding="@dimen/dimens_8_dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -89,81 +89,81 @@
                     android:text="@string/about_introduce"
                     android:textColor="@color/colorSecondText"
                     android:textIsSelectable="true"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/dimens_14_sp" />
 
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/dimens_12_dp"
                 android:background="@color/divider" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/dimens_12_dp"
                 android:text="@string/about_developers"
                 android:textColor="@color/black"
-                android:textSize="@dimen/ali_feedback_common_text_size" />
+                android:textSize="@dimen/dimens_14_sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp">
+                android:padding="@dimen/dimens_12_dp">
 
                 <TextView
-                    android:id="@+id/tv_avator_blog"
+                    android:id="@+id/tv_about_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/dimens_8_dp"
                     android:text="开发者:"
                     android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tv_avator_blog"
-                    android:layout_toRightOf="@id/tv_avator_blog"
+                    android:layout_alignTop="@id/tv_about_author"
+                    android:layout_toRightOf="@id/tv_about_author"
                     android:autoLink="web"
                     android:text="@string/guard_msg"
                     android:textColor="@color/colorSecondText" />
 
                 <TextView
-                    android:id="@+id/tv_avator_github"
+                    android:id="@+id/tv_about_github"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/tv_avator_blog"
-                    android:layout_below="@id/tv_avator_blog"
+                    android:layout_alignLeft="@id/tv_about_author"
+                    android:layout_below="@id/tv_about_author"
                     android:text="GitHub: "
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="@dimen/dimens_15_dp"
                     android:textColor="@color/black" />
 
                 <TextView
-                    android:id="@+id/tv_avator_github_content"
+                    android:id="@+id/tv_about_github_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tv_avator_github"
-                    android:layout_toRightOf="@id/tv_avator_github"
+                    android:layout_alignTop="@id/tv_about_github"
+                    android:layout_toRightOf="@id/tv_about_github"
                     android:autoLink="web"
                     android:text="https://github.com/ZQ330093887/ConurbationsAndroid"
                     android:textColor="@color/colorSecondText" />
 
                 <TextView
-                    android:id="@+id/tv_avator_jianshu"
+                    android:id="@+id/tv_about_jianshu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/tv_avator_blog"
-                    android:layout_below="@id/tv_avator_github_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_alignLeft="@id/tv_about_author"
+                    android:layout_below="@id/tv_about_github_content"
+                    android:layout_marginTop="@dimen/dimens_15_dp"
                     android:text="简  书: "
                     android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tv_avator_jianshu"
-                    android:layout_toRightOf="@id/tv_avator_jianshu"
+                    android:layout_alignTop="@id/tv_about_jianshu"
+                    android:layout_toRightOf="@id/tv_about_jianshu"
                     android:autoLink="web"
                     android:text="http://www.jianshu.com/u/9681f3bbb8c2"
                     android:textColor="@color/colorSecondText" />
@@ -173,28 +173,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/dimens_12_dp"
                 android:background="@color/divider" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/dimens_12_dp"
                 android:text="@string/about_function"
                 android:textColor="@color/black"
-                android:textSize="@dimen/ali_feedback_common_text_size" />
+                android:textSize="@dimen/dimens_15_sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp">
+                android:padding="@dimen/dimens_8_dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/about_function_list"
                     android:textColor="@color/colorSecondText"
-                    android:textSize="@dimen/item_title"
+                    android:textSize="@dimen/dimens_14_sp"
                     tools:ignore="HardcodedText" />
 
             </RelativeLayout>
@@ -202,29 +202,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/dimens_12_dp"
                 android:background="@color/divider"
                 android:orientation="vertical"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/dimens_12_dp"
                 android:text="@string/about_open_source_special"
                 android:textColor="@color/black"
-                android:textSize="@dimen/item_title" />
+                android:textSize="@dimen/dimens_14_sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp">
+                android:padding="@dimen/dimens_8_dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="干货集中营"
                     android:textColor="@color/colorRedPrimaryDark"
-                    android:textSize="@dimen/item_title"
+                    android:textSize="@dimen/dimens_14_sp"
                     tools:ignore="HardcodedText" />
 
             </RelativeLayout>
@@ -232,22 +232,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/dimens_12_dp"
                 android:text="@string/about_open_source_lis"
                 android:textColor="@color/black"
-                android:textSize="@dimen/item_title" />
+                android:textSize="@dimen/dimens_14_sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp">
+                android:padding="@dimen/dimens_8_dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/about_open_source_libraries_list"
                     android:textColor="@color/colorSecondText"
-                    android:textSize="@dimen/item_title"
+                    android:textSize="@dimen/dimens_14_sp"
                     tools:ignore="HardcodedText" />
 
             </RelativeLayout>

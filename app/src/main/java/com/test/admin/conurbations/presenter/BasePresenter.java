@@ -1,6 +1,6 @@
 package com.test.admin.conurbations.presenter;
 
-import com.test.admin.conurbations.data.response.GankService;
+import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.retrofit.AppClient;
 
 import rx.Observable;

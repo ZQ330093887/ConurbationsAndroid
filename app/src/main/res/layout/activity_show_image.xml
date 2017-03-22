@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/abl_show_image_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_show_image_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="@dimen/dimens_4_dp"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="childActivity" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/lly_show_image_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <com.tt.whorlviewlibrary.WhorlView
+            android:id="@+id/wv_show_image_progress_bar"
+            android:layout_width="@dimen/dimens_1_dp"
+            android:layout_height="@dimen/dimens_1_dp"
+            android:layout_marginTop="@dimen/dimens_12_dp"
+            app:whorlview_circle_colors="#F14336_#ffffff_#5677fc_#F44336_#4CAF50"
+            app:whorlview_circle_speed="270"
+            app:whorlview_parallax="fast"
+            app:whorlview_strokeWidth="6"
+            app:whorlview_sweepAngle="90" />
+    </LinearLayout>
+
+
+    <com.test.admin.conurbations.photoview.PhotoView
+        android:id="@+id/pv_show_image_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/abl_show_image_head"
+        android:visibility="gone"/>
+</RelativeLayout>

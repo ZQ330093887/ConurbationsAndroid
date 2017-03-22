@@ -3,7 +3,6 @@ package com.test.admin.conurbations.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -15,15 +14,15 @@ import com.test.admin.conurbations.adapter.IndexFragmentPagerAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
+/**
+ * Created by zhouqiong on 2016/9/23.
+ */
 public class FragmentIndex extends BaseFragment {
     private Context mContext;
-    @Bind(R.id.tabLayout_index)
-    TabLayout tabLayoutIndex;
-    @Bind(R.id.viewpager_index)
-    ViewPager viewpagerIndex;
-    @Bind(R.id.appbar)
-    AppBarLayout mAppBarLayout;
+    @Bind(R.id.tl_index_head)
+    TabLayout mHeadTabLayout;
+    @Bind(R.id.vp_index_content)
+    ViewPager mContentViewPager;
     IndexFragmentPagerAdapter indexFragmentPagerAdapter;
 
     @Override
@@ -46,11 +45,11 @@ public class FragmentIndex extends BaseFragment {
         ButterKnife.bind(this, viewRoot);
         mContext.getResources();
         indexFragmentPagerAdapter = new IndexFragmentPagerAdapter(mContext, getChildFragmentManager());
-        tabLayoutIndex.setTabsFromPagerAdapter(indexFragmentPagerAdapter);
-        viewpagerIndex.setAdapter(indexFragmentPagerAdapter);
-        viewpagerIndex.setOffscreenPageLimit(5);
-        tabLayoutIndex.setupWithViewPager(viewpagerIndex);
-        tabLayoutIndex.setBackgroundColor(content);
+        mHeadTabLayout.setTabsFromPagerAdapter(indexFragmentPagerAdapter);
+        mContentViewPager.setAdapter(indexFragmentPagerAdapter);
+        mContentViewPager.setOffscreenPageLimit(5);
+        mHeadTabLayout.setupWithViewPager(mContentViewPager);
+        mHeadTabLayout.setBackgroundColor(content);
         return viewRoot;
     }
 

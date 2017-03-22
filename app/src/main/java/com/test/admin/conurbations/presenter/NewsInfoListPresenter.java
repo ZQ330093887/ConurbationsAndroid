@@ -1,8 +1,8 @@
 package com.test.admin.conurbations.presenter;
 
 import com.test.admin.conurbations.activitys.INewInformationView;
-import com.test.admin.conurbations.data.response.GankService;
-import com.test.admin.conurbations.model.NewsList;
+import com.test.admin.conurbations.model.api.GankService;
+import com.test.admin.conurbations.model.entity.NewsList;
 import com.test.admin.conurbations.retrofit.ApiCallback;
 import com.test.admin.conurbations.retrofit.AppClient;
 

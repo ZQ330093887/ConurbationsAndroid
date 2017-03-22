@@ -12,12 +12,12 @@ import com.test.admin.conurbations.R;
 import butterknife.Bind;
 
 public class AboutActivity extends BaseActivity {
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar_news_detail_toolbar)
     Toolbar mToolbar;
-    @Bind(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout mCollapsingToolbar;
-    @Bind(R.id.tv_version)
-    TextView mTvVersion;
+    @Bind(R.id.ctb_about_head)
+    CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
+    @Bind(R.id.tv_about_version)
+    TextView mVersionTextView;
 
     @Override
     protected int setLayoutResourceID() {
@@ -27,8 +27,8 @@ public class AboutActivity extends BaseActivity {
     @Override
     protected void initData(Bundle bundle) {
         initToolbar(mToolbar, "", "");
-        mCollapsingToolbar.setTitle(getString(R.string.about));
-        mTvVersion.setText(getVersion());
+        mHeadCollapsingToolbarLayout.setTitle(getString(R.string.about));
+        mVersionTextView.setText(getVersion());
     }
 
     @Override

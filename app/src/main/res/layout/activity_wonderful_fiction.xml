@@ -5,13 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true">
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/abl_wonderful_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_wonderful_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
@@ -25,7 +25,7 @@
 
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/wonderful_fiction_rv"
+            android:id="@+id/rv_wonderful_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none" />

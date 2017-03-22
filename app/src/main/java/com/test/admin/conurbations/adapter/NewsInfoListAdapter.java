@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.activitys.NewsDetailActivity;
-import com.test.admin.conurbations.fragments.NewsDetailFragment;
-import com.test.admin.conurbations.model.News;
+import com.test.admin.conurbations.activitys.NewsInfoListDetailActivity;
+import com.test.admin.conurbations.fragments.NewsInfoListDetailFragment;
+import com.test.admin.conurbations.model.entity.News;
 import com.test.admin.conurbations.utils.RatioImageView;
 import com.test.admin.conurbations.widget.SolidApplication;
 
@@ -32,10 +32,10 @@ public class NewsInfoListAdapter extends BaseListAdapter<News> {
     protected void bindDataToItemView(final BaseViewHolder holder, final News item) {
         if (holder instanceof SampleItemViewHolder) {
             SampleItemViewHolder sampleItemViewHolder = (SampleItemViewHolder) holder;
-            final RatioImageView imageView = sampleItemViewHolder.getView(R.id.news_summary_photo_iv);
+            final RatioImageView imageView = sampleItemViewHolder.getView(R.id.rv_news_summary_photo_iv);
             imageView.setRatio(0.918f);
-            sampleItemViewHolder.setTypeface(R.id.news_summary_title_tv, SolidApplication.songTi);
-            sampleItemViewHolder.setText(R.id.news_summary_title_tv, item.getTitle());
+            sampleItemViewHolder.setTypeface(R.id.tv_news_summary_title, SolidApplication.songTi);
+            sampleItemViewHolder.setText(R.id.tv_news_summary_title, item.getTitle());
             if (item.getImages() != null && item.getImages().size() > 0) {
                 Glide.with(imageView.getContext())
                         .load(item.getImages().get(0))
@@ -45,13 +45,13 @@ public class NewsInfoListAdapter extends BaseListAdapter<News> {
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(imageView);
             }
-            sampleItemViewHolder.setOnClickListener(R.id.news_info_card, getListener(sampleItemViewHolder, item));
+            sampleItemViewHolder.setOnClickListener(R.id.cv_item_news_info, getListener(sampleItemViewHolder, item));
         }
         if (holder instanceof SamplePhotoItemViewHolder) {
             SamplePhotoItemViewHolder photoItemViewHolder = (SamplePhotoItemViewHolder) holder;
-            photoItemViewHolder.setTypeface(R.id.news_summary_title_tv, SolidApplication.songTi);
-            photoItemViewHolder.setText(R.id.news_summary_title_tv, item.getTitle());
-            photoItemViewHolder.setOnClickListener(R.id.news_info_card, getListener(photoItemViewHolder, item));
+            photoItemViewHolder.setTypeface(R.id.tv_item_news_summary_title, SolidApplication.songTi);
+            photoItemViewHolder.setText(R.id.tv_item_news_summary_title, item.getTitle());
+            photoItemViewHolder.setOnClickListener(R.id.cv_item_news_info, getListener(photoItemViewHolder, item));
         }
     }
 
@@ -61,10 +61,10 @@ public class NewsInfoListAdapter extends BaseListAdapter<News> {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent intent = new Intent(context, NewsDetailActivity.class);
-                intent.putExtra(NewsDetailFragment.KEY_NEWS, news.getId());
+                Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
+                intent.putExtra(NewsInfoListDetailFragment.KEY_NEWS, news.getId());
                 ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context
-                        , new Pair<>(holder.getView(R.id.news_summary_title_tv), "key_"));
+                        , new Pair<>(holder.getView(R.id.tv_item_news_summary_title), "key_"));
                 ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
             }
         };

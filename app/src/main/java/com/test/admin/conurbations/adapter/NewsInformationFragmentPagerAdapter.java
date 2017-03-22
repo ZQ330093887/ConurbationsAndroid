@@ -7,45 +7,46 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.fragments.FragmentTeam;
-import com.test.admin.conurbations.fragments.NewsListFragment;
+import com.test.admin.conurbations.fragments.NewsInfoIndexFragment;
+import com.test.admin.conurbations.fragments.NewsInfoListFragment;
+
 
 /**
  * Created by zhouqiong on 2017/1/8.
  */
 public class NewsInformationFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private String[] titles;
-    private String[] titlesId;
-    private Fragment[] fragments;
+    private String[] mTitles;
+    private String[] mTitlesId;
+    private Fragment[] mFragments;
 
     public NewsInformationFragmentPagerAdapter(Context context, FragmentManager fragmentManager) {
         super(fragmentManager);
 
-        titles = context.getResources().getStringArray(R.array.news_info_tab);
-        titlesId = context.getResources().getStringArray(R.array.news_info_tab_id);
-        fragments = new Fragment[titles.length];
-        fragments[0] = new FragmentTeam();
-        ((FragmentTeam) fragments[0]).setRange("知乎");
-        for (int i = 1; i < titles.length; i++) {
-            fragments[i] = new NewsListFragment();
-            ((NewsListFragment) fragments[i]).setTable(titlesId[i]);
+        mTitles = context.getResources().getStringArray(R.array.news_info_tab);
+        mTitlesId = context.getResources().getStringArray(R.array.news_info_tab_id);
+        mFragments = new Fragment[mTitles.length];
+        mFragments[0] = new NewsInfoIndexFragment();
+        ((NewsInfoIndexFragment) mFragments[0]).setRange("知乎");
+        for (int i = 1; i < mTitles.length; i++) {
+            mFragments[i] = new NewsInfoListFragment();
+            ((NewsInfoListFragment) mFragments[i]).setTable(mTitlesId[i]);
         }
     }
 
     @Override
     public Fragment getItem(int position) {
-        return fragments[position];
+        return mFragments[position];
     }
 
     @Override
     public int getCount() {
-        return fragments.length;
+        return mFragments.length;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return titles[position];
+        return mTitles[position];
     }
 
     @Override

@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.test.admin.conurbations.activitys.MainActivity">
+    tools:mContext="com.test.admin.conurbations.activitys.MainActivity">
 
     <com.test.admin.conurbations.views.MaterialSearchView
-        android:id="@+id/search_view"
+        android:id="@+id/mv_main_search"
         style="@style/MaterialSearchViewStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

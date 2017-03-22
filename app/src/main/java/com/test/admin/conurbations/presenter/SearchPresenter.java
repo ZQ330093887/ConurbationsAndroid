@@ -2,8 +2,8 @@ package com.test.admin.conurbations.presenter;
 
 
 import com.test.admin.conurbations.activitys.ISearchView;
-import com.test.admin.conurbations.data.response.GankService;
-import com.test.admin.conurbations.model.NetImage;
+import com.test.admin.conurbations.model.api.GankService;
+import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.retrofit.ApiCallback;
 import com.test.admin.conurbations.retrofit.AppClient;
 

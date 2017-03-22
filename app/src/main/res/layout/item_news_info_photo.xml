@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/news_summary_card_view"
-    android:id="@+id/news_info_card"
+    android:id="@+id/cv_item_news_info"
     app:cardElevation="2dp">
 
     <TextView
-        android:id="@+id/news_summary_title_tv"
+        android:id="@+id/tv_item_news_summary_title"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:textColor="@color/black"

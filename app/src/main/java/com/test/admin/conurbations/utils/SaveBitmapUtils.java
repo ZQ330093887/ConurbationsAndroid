@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
-import com.test.admin.conurbations.data.GankApi;
+import com.test.admin.conurbations.model.api.GankApi;
 import com.test.admin.conurbations.widget.SolidApplication;
 
 import java.io.File;

@@ -22,17 +22,17 @@ import butterknife.OnClick;
  */
 
 public class SearchActivity extends BaseActivity {
-    @Bind(R.id.search_toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.bg_img)
-    ImageView imageView;
-    @Bind(R.id.collapsingToolbarLayout)
-    CollapsingToolbarLayout collapsingToolbarLayout;
-    @Bind(R.id.search_appbar)
-    AppBarLayout appBarLayout;
-    @Bind(R.id.search_fab)
-    FloatingActionButton fab;
-    SearchFragment fragment;
+    @Bind(R.id.toolbar_search_toolbar)
+    Toolbar mToolbar;
+    @Bind(R.id.iv_search_head_bg)
+    ImageView mHeadBgImageView;
+    @Bind(R.id.ctl_search_head)
+    CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
+    @Bind(R.id.abl_search_hand)
+    AppBarLayout mHandAppBarLayout;
+    @Bind(R.id.fab_search_fab)
+    FloatingActionButton mFloatingActionButton;
+    SearchFragment mSearchFragment;
 
     @Override
     protected int setLayoutResourceID() {
@@ -42,19 +42,19 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void initData(Bundle bundle) {
 
-        initToolbar(toolbar, "", "");
+        initToolbar(mToolbar, "", "");
         initAppBarSetting();
         String mSearchQuery = getIntent().getStringExtra(SearchFragment.CLASS_SEARCH);
-        collapsingToolbarLayout.setTitle(mSearchQuery);
+        mHeadCollapsingToolbarLayout.setTitle(mSearchQuery);
 
-        Picasso.with(this).load(getBgImg()).into(imageView);
+        Picasso.with(this).load(getBgImg()).into(mHeadBgImageView);
         if (bundle == null) {
             Bundle arguments = new Bundle();
             arguments.putString(SearchFragment.CLASS_SEARCH, mSearchQuery);
-            fragment = new SearchFragment();
-            fragment.setArguments(arguments);
+            mSearchFragment = new SearchFragment();
+            mSearchFragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.search_container, fragment)
+                    .add(R.id.rl_search_container, mSearchFragment)
                     .commit();
         }
     }
@@ -65,24 +65,24 @@ public class SearchActivity extends BaseActivity {
     }
 
     public void initAppBarSetting() {
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+        mHandAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
                 if (i == 0) {
-                    fab.hide();
+                    mFloatingActionButton.hide();
                 } else {
-                    fab.show();
+                    mFloatingActionButton.show();
                 }
             }
         });
     }
 
-    @OnClick(R.id.search_fab)
+    @OnClick(R.id.fab_search_fab)
     public void clickFab(View view) {
-        fragment.getRecyclerView().setSelection(0);
+        mSearchFragment.getRecyclerView().setSelection(0);
     }
 
-    private int[] bgImgs = {
+    private int[] bgImages = {
             R.drawable.bg_1,
             R.drawable.bg_2,
             R.drawable.bg_3,
@@ -95,6 +95,6 @@ public class SearchActivity extends BaseActivity {
     };
 
     public int getBgImg() {
-        return bgImgs[new Random().nextInt(bgImgs.length)];
+        return bgImages[new Random().nextInt(bgImages.length)];
     }
 }

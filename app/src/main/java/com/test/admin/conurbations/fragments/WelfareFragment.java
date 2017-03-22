@@ -6,20 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.test.admin.conurbations.activitys.IWelfareList;
+import com.test.admin.conurbations.activitys.IWelfareView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.WelfareListAdapter;
-import com.test.admin.conurbations.data.entity.Moment;
-import com.test.admin.conurbations.data.response.GankData;
+import com.test.admin.conurbations.model.response.Moment;
+import com.test.admin.conurbations.model.response.GankData;
 import com.test.admin.conurbations.presenter.WelfarePresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
-
-public class WelfareFragment extends BaseListFragment implements IWelfareList {
+/**
+ * Created by zhouqiong on 2016/9/23.
+ */
+public class WelfareFragment extends BaseListFragment implements IWelfareView {
     private Moment.Range range;
-    protected WelfareListAdapter adapter;
-    protected WelfarePresenter presenter;
+    protected WelfareListAdapter mWelfareListAdapter;
+    protected WelfarePresenter mWelfarePresenter;
     public void setRange(Moment.Range range) {
         this.range = range;
     }
@@ -34,8 +36,8 @@ public class WelfareFragment extends BaseListFragment implements IWelfareList {
         } else {
             recycler.enableLoadMore(true);
             mDataList.addAll(welfareData.results);
-            adapter.setList(mDataList);
-            adapter.notifyDataSetChanged();
+            mWelfareListAdapter.setList(mDataList);
+            mWelfareListAdapter.notifyDataSetChanged();
         }
         recycler.onRefreshCompleted();
     }
@@ -49,18 +51,18 @@ public class WelfareFragment extends BaseListFragment implements IWelfareList {
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        adapter =  new WelfareListAdapter();
-        return adapter;
+        mWelfareListAdapter =  new WelfareListAdapter();
+        return mWelfareListAdapter;
     }
 
     @Override
     protected void setUpPresenter() {
-        presenter = new WelfarePresenter(this);
+        mWelfarePresenter = new WelfarePresenter(this);
     }
 
     @Override
     protected void refreshList(int page) {
-        presenter.getWelfareData(page);
+        mWelfarePresenter.getWelfareData(page);
     }
 
     @Override

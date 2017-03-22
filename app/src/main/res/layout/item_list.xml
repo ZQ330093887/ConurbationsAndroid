@@ -2,12 +2,12 @@
 <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_list"
+    android:id="@+id/rv_beautiful_article_content"
     android:name="com.test.admin.test.ItemListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="@dimen/dimens_16_dp"
+    android:layout_marginRight="@dimen/dimens_16_dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.test.admin.conurbations.activitys.ItemListActivity"
-    tools:listitem="@layout/item_list_content" />
+    tools:mContext="com.test.admin.conurbations.activitys.BeautifulArticleActivity"
+    tools:listitem="@layout/item_beautiful_article" />

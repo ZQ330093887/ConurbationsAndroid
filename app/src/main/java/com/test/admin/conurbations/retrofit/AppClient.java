@@ -1,7 +1,7 @@
 package com.test.admin.conurbations.retrofit;
 
 import com.test.admin.conurbations.BuildConfig;
-import com.test.admin.conurbations.data.GankApi;
+import com.test.admin.conurbations.model.api.GankApi;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

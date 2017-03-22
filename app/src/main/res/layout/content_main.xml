@@ -5,18 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.test.admin.conurbations.activitys.MainActivity"
+    tools:mContext="com.test.admin.conurbations.activitys.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
     <FrameLayout
-        android:id="@+id/frameLayout_content_main"
-        android:layout_above="@+id/tab"
+        android:id="@+id/fl_main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/pbtl_main_tab" />
+
     <me.majiajie.pagerbottomtabstrip.PagerBottomTabLayout
-        android:id="@+id/tab"
-        app:elevation="8dp"
+        android:id="@+id/pbtl_main_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        app:elevation="8dp" />
 </RelativeLayout>

@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.ShowImageActivity;
-import com.test.admin.conurbations.model.SosoSearcher;
+import com.test.admin.conurbations.model.entity.SosoSearcher;
 import com.test.admin.conurbations.utils.RatioImageView;
 
 /**
@@ -20,12 +20,12 @@ import com.test.admin.conurbations.utils.RatioImageView;
 public class SearchAdapter extends BaseListAdapter<SosoSearcher> {
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final SosoSearcher item) {
-        final RatioImageView imageView = vh.getView(R.id.item_sougou_photo);
+        final RatioImageView imageView = vh.getView(R.id.rv_item_sougou_photo);
         imageView.setRatio(0.918f);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startPictureActivity(v,item);
+                startPictureActivity(v, item);
             }
         });
         Glide.with(imageView.getContext())
@@ -35,12 +35,11 @@ public class SearchAdapter extends BaseListAdapter<SosoSearcher> {
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
-
     }
 
     @Override
     protected BaseViewHolder onCreateNormalViewHolder(ViewGroup parent, int viewType) {
-        return new SearchHolder(inflateItemView(parent, R.layout.item_sg_img));
+        return new SearchHolder(inflateItemView(parent, R.layout.item_sougou_image));
     }
 
     class SearchHolder extends BaseViewHolder {
@@ -54,7 +53,7 @@ public class SearchAdapter extends BaseListAdapter<SosoSearcher> {
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 (Activity) transitView.getContext(), transitView, ShowImageActivity.TRANSIT_PIC);
         try {
-            ActivityCompat.startActivity((Activity) transitView.getContext(), intent, optionsCompat.toBundle());
+            ActivityCompat.startActivity(transitView.getContext(), intent, optionsCompat.toBundle());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             transitView.getContext().startActivity(intent);

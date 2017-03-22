@@ -32,13 +32,13 @@
                     android:layout_height="wrap_content">
 
                     <com.test.admin.conurbations.utils.RatioImageView
-                        android:id="@+id/recomend_img"
+                        android:id="@+id/rv_item_wonderful_fiction"
                         android:layout_width="100dp"
                         android:layout_height="120dp"
                         android:padding="3dp" />
 
                     <com.flyco.labelview.LabelView
-                        android:id="@+id/label_view"
+                        android:id="@+id/label_item_wonderful_fiction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="2dp"
@@ -59,7 +59,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/recommend_title"
+                            android:id="@+id/tv_item_wonderful_fiction_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -79,7 +79,7 @@
                             android:layout_marginTop="15dp">
 
                             <TextView
-                                android:id="@+id/item_fiction_type"
+                                android:id="@+id/tv_item_wonderful_fiction_type"
                                 android:layout_width="80dp"
                                 android:layout_height="20dp"
                                 android:background="@drawable/shape_yellow"
@@ -89,7 +89,7 @@
                                 android:textSize="12sp" />
 
                             <TextView
-                                android:id="@+id/item_fiction_script"
+                                android:id="@+id/tv_item_wonderful_fiction_script"
                                 android:layout_width="60dp"
                                 android:layout_height="20dp"
                                 android:layout_marginLeft="10dp"
@@ -101,7 +101,7 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/recommend_content"
+                            android:id="@+id/tv_item_wonderful_fiction_content"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"

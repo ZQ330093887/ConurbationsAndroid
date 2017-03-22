@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.WonderfulFictionAdapter;
-import com.test.admin.conurbations.model.BooksBean;
+import com.test.admin.conurbations.model.entity.BooksBean;
 import com.test.admin.conurbations.utils.DialogUtils;
 import com.test.admin.conurbations.widget.MyGridLayoutManager;
 
@@ -27,19 +27,19 @@ import java.util.List;
 import butterknife.Bind;
 
 public class WonderfulFictionActivity extends BaseActivity {
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.wonderful_fiction_rv)
-    RecyclerView recyclerView;
-    public static List<String[]> images = new ArrayList<>();
-    public static List<String> titles = new ArrayList<>();
+    @Bind(R.id.toolbar_wonderful_toolbar)
+    Toolbar mToolbar;
+    @Bind(R.id.rv_wonderful_content)
+    RecyclerView mContentRecyclerView;
+    public static List<String[]> mBannerImages = new ArrayList<>();
+    public static List<String> mBannerTitles = new ArrayList<>();
     private String[] urls, title;
-    private WonderfulFictionAdapter fictionAdapter;
-    private List<BooksBean> booksBeen = new ArrayList<>();
-    private List<BooksBean> leftBooksBeen = new ArrayList<>();
-    private List<BooksBean> rankContentBooksBeen = new ArrayList<>();
-    private List<BooksBean> rankTitleBooksBeen = new ArrayList<>();
-    private List<BooksBean> updateBooksBeen = new ArrayList<>();
+    private WonderfulFictionAdapter mWonderfulFictionAdapter;
+    private List<BooksBean> mBooksBeen = new ArrayList<>();
+    private List<BooksBean> mLeftBooksBeen = new ArrayList<>();
+    private List<BooksBean> mRankContentBooksBeen = new ArrayList<>();
+    private List<BooksBean> mRankTitleBooksBeen = new ArrayList<>();
+    private List<BooksBean> mUpdateBooksBeen = new ArrayList<>();
 
 
     private Handler mHandler = new Handler() {
@@ -48,9 +48,9 @@ public class WonderfulFictionActivity extends BaseActivity {
             super.handleMessage(msg);
             if (msg.what == 2) {
                 DialogUtils.hideProgressDialog();
-                fictionAdapter.getBannerData(images, titles, leftBooksBeen, rankTitleBooksBeen, rankContentBooksBeen,updateBooksBeen);
-                fictionAdapter.setList(booksBeen);
-                fictionAdapter.notifyDataSetChanged();
+                mWonderfulFictionAdapter.getBannerData(mBannerImages, mBannerTitles, mLeftBooksBeen, mRankTitleBooksBeen, mRankContentBooksBeen,mUpdateBooksBeen);
+                mWonderfulFictionAdapter.setList(mBooksBeen);
+                mWonderfulFictionAdapter.notifyDataSetChanged();
             }
         }
     };
@@ -62,12 +62,12 @@ public class WonderfulFictionActivity extends BaseActivity {
 
     @Override
     protected void initData(Bundle bundle) {
-        initToolbar(toolbar, "热门小说", "");
+        initToolbar(mToolbar, "热门小说", "");
         DialogUtils.showProgressDialog(this);
         show();
-        fictionAdapter = new WonderfulFictionAdapter();
-        recyclerView.setLayoutManager(new MyGridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(fictionAdapter);
+        mWonderfulFictionAdapter = new WonderfulFictionAdapter();
+        mContentRecyclerView.setLayoutManager(new MyGridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
+        mContentRecyclerView.setAdapter(mWonderfulFictionAdapter);
     }
 
     @Override
@@ -95,10 +95,10 @@ public class WonderfulFictionActivity extends BaseActivity {
                             title[i] = titleName;
                         }
                         List list = Arrays.asList(urls);
-                        images = new ArrayList(list);
+                        mBannerImages = new ArrayList(list);
 
                         List list1 = Arrays.asList(title);
-                        titles = new ArrayList(list1);
+                        mBannerTitles = new ArrayList(list1);
                         /**获取banner数据结束*/
                         /**获取新书抢鲜数据开始*/
                         /**获取  --新书抢鲜--  数据开始*/
@@ -122,7 +122,7 @@ public class WonderfulFictionActivity extends BaseActivity {
                             booksBean.setScript(script);
                             booksBean.setScriptNumber(scriptNumber);
                             booksBean.setTextContent(textContent);
-                            booksBeen.add(booksBean);
+                            mBooksBeen.add(booksBean);
                         }
                         /**获取  --新书抢鲜--  数据结束*/
 
@@ -137,7 +137,7 @@ public class WonderfulFictionActivity extends BaseActivity {
                             String textContent = leftElement.getElementsByTag("img").attr("alt");
                             booksBean.setImgUrl(imgUrl);
                             booksBean.setTextContent(textContent);
-                            leftBooksBeen.add(booksBean);
+                            mLeftBooksBeen.add(booksBean);
                         }
                         /**获取  --热门小说--  数据结束*/
                         /**-- start 书单排行榜 --*/
@@ -149,14 +149,14 @@ public class WonderfulFictionActivity extends BaseActivity {
                             BooksBean booksBean = new BooksBean();
                             String title = rankElement.text();
                             booksBean.setTitle(title);
-                            rankTitleBooksBeen.add(booksBean);
+                            mRankTitleBooksBeen.add(booksBean);
                         }
 
                         for (Element rankElement : rankElementLi) {
                             BooksBean booksBean = new BooksBean();
                             String textContent = rankElement.text();
                             booksBean.setTextContent(textContent);
-                            rankContentBooksBeen.add(booksBean);
+                            mRankContentBooksBeen.add(booksBean);
                         }
 
                         /**-- end 书单排行榜 --*/
@@ -173,7 +173,7 @@ public class WonderfulFictionActivity extends BaseActivity {
                             booksBean.setAuthor(rankElement.getElementsByClass("writer").text());
                             booksBean.setScript(rankElement.getElementsByClass("words").text());
                             booksBean.setScriptNumber(rankElement.getElementsByClass("time").text());
-                            updateBooksBeen.add(booksBean);
+                            mUpdateBooksBeen.add(booksBean);
                         }
                         /**-- end 最近更新 --*/
 

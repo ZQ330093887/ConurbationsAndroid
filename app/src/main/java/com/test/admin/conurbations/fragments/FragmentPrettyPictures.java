@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.adapter.SouGouImageFragmentPagerAdapter;
+import com.test.admin.conurbations.adapter.FragmentPrettyFragmentPagerAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,16 +22,16 @@ import butterknife.OnClick;
  */
 public class FragmentPrettyPictures extends BaseFragment {
 
-    @Bind(R.id.tabLayout_index)
-    TabLayout tabLayoutIndex;
-    @Bind(R.id.viewpager_index)
-    ViewPager viewpagerIndex;
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
-    @Bind(R.id.appbar)
-    AppBarLayout appBarLayout;
+    @Bind(R.id.tb_pretty_pictures_hand)
+    TabLayout mHeadTabLayout;
+    @Bind(R.id.vp_pretty_pictures_content)
+    ViewPager mContentViewPager;
+    @Bind(R.id.fab_pretty_pictures_fab)
+    FloatingActionButton mFloatingActionButton;
+    @Bind(R.id.abl_pretty_pictures_hand)
+    AppBarLayout mHeadAppBarLayout;
     private Context mContext;
-    private SouGouImageFragmentPagerAdapter souGouImageFragmentPagerAdapter;
+    private FragmentPrettyFragmentPagerAdapter fragmentPrettyFragmentPagerAdapter;
 
     @Override
     public void onAttach(Context context) {
@@ -50,31 +50,31 @@ public class FragmentPrettyPictures extends BaseFragment {
         ButterKnife.bind(this, viewRoot);
         initAppBarSetting();
         mContext.getResources();
-        souGouImageFragmentPagerAdapter = new SouGouImageFragmentPagerAdapter(mContext, getChildFragmentManager());
-        tabLayoutIndex.setTabsFromPagerAdapter(souGouImageFragmentPagerAdapter);
-        viewpagerIndex.setAdapter(souGouImageFragmentPagerAdapter);
-        viewpagerIndex.setOffscreenPageLimit(5);
-        tabLayoutIndex.setupWithViewPager(viewpagerIndex);
-        tabLayoutIndex.setBackgroundColor(content);
+        fragmentPrettyFragmentPagerAdapter = new FragmentPrettyFragmentPagerAdapter(mContext, getChildFragmentManager());
+        mHeadTabLayout.setTabsFromPagerAdapter(fragmentPrettyFragmentPagerAdapter);
+        mContentViewPager.setAdapter(fragmentPrettyFragmentPagerAdapter);
+        mContentViewPager.setOffscreenPageLimit(5);
+        mHeadTabLayout.setupWithViewPager(mContentViewPager);
+        mHeadTabLayout.setBackgroundColor(content);
         return viewRoot;
     }
 
     public void initAppBarSetting() {
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+        mHeadAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
                 if (i != 0) {
-                    fab.hide();
+                    mFloatingActionButton.hide();
                 } else {
-                    fab.show();
+                    mFloatingActionButton.show();
                 }
             }
         });
     }
 
-    @OnClick(R.id.fab)
+    @OnClick(R.id.fab_pretty_pictures_fab)
     public void clickFab(View view) {
-        ((BaseListFragment) souGouImageFragmentPagerAdapter.getFragment(viewpagerIndex.getCurrentItem())).getRecyclerView().setSelection(0);
+        ((BaseListFragment) fragmentPrettyFragmentPagerAdapter.getFragment(mContentViewPager.getCurrentItem())).getRecyclerView().setSelection(0);
     }
 
     @Override

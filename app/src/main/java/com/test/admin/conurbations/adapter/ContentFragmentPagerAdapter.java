@@ -5,8 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
-import com.test.admin.conurbations.data.entity.Moment;
-import com.test.admin.conurbations.fragments.DayAndDayPrettyPicturesFragment;
+import com.test.admin.conurbations.model.response.Moment;
+import com.test.admin.conurbations.fragments.PrettyPicturesListFragmentList;
 import com.test.admin.conurbations.fragments.WelfareFragment;
 
 /**
@@ -14,36 +14,37 @@ import com.test.admin.conurbations.fragments.WelfareFragment;
  */
 public class ContentFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private String[] titles = new String[]{"精选", "竞技", "热榜" ,"录像"};
+    private String[] mTitles = new String[]{"精选", "竞技", "热榜" ,"录像"};
 
-    private Fragment[] fragments = new Fragment[4];
+
+    private Fragment[] mFragments = new Fragment[4];
 
     public ContentFragmentPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
 
-        fragments[0] = new WelfareFragment();
-        ((WelfareFragment) fragments[0]).setRange(Moment.Range.ONE);
-        fragments[1] = new DayAndDayPrettyPicturesFragment();
-        ((DayAndDayPrettyPicturesFragment) fragments[1]).setRange(Moment.SGImgType.每日一笑);
-        fragments[2] = new DayAndDayPrettyPicturesFragment();
-        ((DayAndDayPrettyPicturesFragment) fragments[2]).setRange(Moment.SGImgType.每日一笑);
-        fragments[3] = new DayAndDayPrettyPicturesFragment();
-        ((DayAndDayPrettyPicturesFragment) fragments[3]).setRange(Moment.SGImgType.每日一笑);
+        mFragments[0] = new WelfareFragment();
+        ((WelfareFragment) mFragments[0]).setRange(Moment.Range.ONE);
+        mFragments[1] = new PrettyPicturesListFragmentList();
+        ((PrettyPicturesListFragmentList) mFragments[1]).setRange(Moment.SGImgType.每日一笑);
+        mFragments[2] = new PrettyPicturesListFragmentList();
+        ((PrettyPicturesListFragmentList) mFragments[2]).setRange(Moment.SGImgType.每日一笑);
+        mFragments[3] = new PrettyPicturesListFragmentList();
+        ((PrettyPicturesListFragmentList) mFragments[3]).setRange(Moment.SGImgType.每日一笑);
     }
 
     @Override
     public Fragment getItem(int position) {
-        return fragments[position];
+        return mFragments[position];
     }
 
     @Override
     public int getCount() {
-        return fragments.length;
+        return mFragments.length;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return titles[position];
+        return mTitles[position];
     }
 
     @Override

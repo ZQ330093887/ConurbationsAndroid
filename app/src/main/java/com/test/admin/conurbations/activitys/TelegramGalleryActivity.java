@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
@@ -24,14 +23,10 @@ import butterknife.OnClick;
  * Created by zhouqiong on 2016/9/29.
  */
 public class TelegramGalleryActivity extends BaseActivity {
-    @Bind(R.id.btn)
-    Button btn;
-    @Bind(R.id.btn2)
-    Button btn2;
-    @Bind(R.id.gv)
-    GridView gv;
-    private List<String> photos;
-    private BaseAdapter adapter;
+    @Bind(R.id.gv_telegram_gallery_content)
+    GridView mContentGridView;
+    private List<String> mPhotoList;
+    private BaseAdapter mBaseAdapter;
 
     @Override
     protected int setLayoutResourceID() {
@@ -41,18 +36,18 @@ public class TelegramGalleryActivity extends BaseActivity {
     @Override
     protected void initData(Bundle bundle) {
 
-        gv.setAdapter(adapter = new BaseAdapter() {
+        mContentGridView.setAdapter(mBaseAdapter = new BaseAdapter() {
             @Override
             public int getCount() {
-                return photos == null ? 0 : photos.size();
+                return mPhotoList == null ? 0 : mPhotoList.size();
             }
 
             @Override
             public Object getItem(int position) {
-                if (photos == null) {
+                if (mPhotoList == null) {
                     return null;
                 }
-                return photos.get(position);
+                return mPhotoList.get(position);
             }
 
             @Override
@@ -86,17 +81,17 @@ public class TelegramGalleryActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (12 == requestCode && resultCode == Activity.RESULT_OK) {
-            photos = (List<String>) data.getSerializableExtra(GalleryActivity.PHOTOS);
-            adapter.notifyDataSetChanged();
+            mPhotoList = (List<String>) data.getSerializableExtra(GalleryActivity.PHOTOS);
+            mBaseAdapter.notifyDataSetChanged();
         }
     }
 
-    @OnClick({R.id.btn, R.id.btn2})
+    @OnClick({R.id.btn_telegram_gallery_multiple_choice, R.id.btn_telegram_gallery_option})
     void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.btn){
+        if (id == R.id.btn_telegram_gallery_multiple_choice){
             GalleryActivity.openActivity(TelegramGalleryActivity.this, false, 9, 12);
-        }else if (id == R.id.btn2){
+        }else if (id == R.id.btn_telegram_gallery_option){
             GalleryActivity.openActivity(TelegramGalleryActivity.this, true, 9, 12);
         }
     }

@@ -18,30 +18,30 @@ import java.util.List;
  */
 
 public class GanHuoListItemAdapter extends PagerAdapter {
-    List<String> images;
-    Context context;
+    private List<String> mListImages;
+    private Context mContext;
 
-    public GanHuoListItemAdapter(Context context, List<String> images) {
-        this.images = images;
-        this.context = context;
+    public GanHuoListItemAdapter(Context mContext, List<String> mListImages) {
+        this.mListImages = mListImages;
+        this.mContext = mContext;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
-        final ImageView imageView = new ImageView(context);
+        final ImageView imageView = new ImageView(mContext);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        ImageLoader.displayImage(imageView, images.get(position));
+        ImageLoader.displayImage(imageView, mListImages.get(position));
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(context, ShowImageActivity.class);
+                intent.setClass(mContext, ShowImageActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("position", images.get(position));
+                bundle.putString("position", mListImages.get(position));
                 if (bundle != null) {
                     intent.putExtras(bundle);
-                    context.startActivity(intent);
+                    mContext.startActivity(intent);
                 }
             }
         });
@@ -51,7 +51,7 @@ public class GanHuoListItemAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return images != null ? images.size() : 0;
+        return mListImages != null ? mListImages.size() : 0;
     }
 
     @Override

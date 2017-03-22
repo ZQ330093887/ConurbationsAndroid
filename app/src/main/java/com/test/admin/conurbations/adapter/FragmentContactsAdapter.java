@@ -27,7 +27,7 @@ public class FragmentContactsAdapter extends RecyclerView.Adapter<FragmentContac
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public static interface OnRecyclerViewItemClickListener {
+    public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, Contact data);
     }
 

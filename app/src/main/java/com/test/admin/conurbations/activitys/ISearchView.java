@@ -1,6 +1,6 @@
 package com.test.admin.conurbations.activitys;
 
-import com.test.admin.conurbations.model.NetImage;
+import com.test.admin.conurbations.model.response.NetImage;
 
 /**
  * Created by zhouqiong on 2017/1/12.

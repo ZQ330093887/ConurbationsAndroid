@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.model.BooksBean;
+import com.test.admin.conurbations.model.entity.BooksBean;
 import com.test.admin.conurbations.utils.RatioImageView;
 
 import java.util.List;

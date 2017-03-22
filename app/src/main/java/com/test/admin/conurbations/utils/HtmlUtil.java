@@ -1,6 +1,6 @@
 package com.test.admin.conurbations.utils;
 
-import com.test.admin.conurbations.model.NewsDetail;
+import com.test.admin.conurbations.model.entity.NewsDetail;
 
 import java.util.List;
 

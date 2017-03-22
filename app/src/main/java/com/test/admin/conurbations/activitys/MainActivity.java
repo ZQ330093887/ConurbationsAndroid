@@ -52,22 +52,22 @@ import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectListener;
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener {
 
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar_main_toolbar)
     Toolbar mToolbar;
-    @Bind(R.id.nav_view)
-    NavigationView navigationView;
-    @Bind(R.id.tab)
-    PagerBottomTabLayout pagerBottomTabLayout;
-    @Bind(R.id.drawer_layout)
-    DrawerLayout drawer;
-    @Bind(R.id.search_view)
-    MaterialSearchView searchView;
+    @Bind(R.id.nav_main_view)
+    NavigationView mViewNavigationView;
+    @Bind(R.id.pbtl_main_tab)
+    PagerBottomTabLayout mTabPagerBottomTabLayout;
+    @Bind(R.id.dl_main_drawer_layout)
+    DrawerLayout mLayoutDrawerLayout;
+    @Bind(R.id.mv_main_search)
+    MaterialSearchView mSearchMaterialSearchView;
 
-    private Controller controller;
+    private Controller mController;
     private List<Fragment> mFragments;
-    private CircleImageView circleImageView;
-    private Bitmap headPhotoBitmap;
-    private Bundle photoBundle;
+    private CircleImageView mCircleImageView;
+    private Bitmap mHeadPhotoBitmap;
+    private Bundle mPhotoBundle;
 
 
     @Override
@@ -92,10 +92,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else if (searchView.isOpen()) {
-            searchView.closeSearch();
+        if (mLayoutDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mLayoutDrawerLayout.closeDrawer(GravityCompat.START);
+        } else if (mSearchMaterialSearchView.isOpen()) {
+            mSearchMaterialSearchView.closeSearch();
         } else {
             super.onBackPressed();
         }
@@ -110,34 +110,33 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         // transaction.setCustomAnimations(R.anim.push_up_in,R.anim.push_up_out);
-        transaction.add(R.id.frameLayout_content_main, mFragments.get(0));
+        transaction.add(R.id.fl_main_content, mFragments.get(0));
         transaction.commit();
     }
 
     private void initLeftDrawerToggleMenu() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, mLayoutDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mLayoutDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
         //初始化左边侧滑栏上部分（头像部分）
-        circleImageView = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.circle_image_view);
+        mCircleImageView = (CircleImageView) mViewNavigationView.getHeaderView(0).findViewById(R.id.circle_image_view);
 
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getHeaderView(0).setOnClickListener(this);
-        circleImageView.setOnClickListener(this);
-        searchView.setOnQueryTextListener(queryTextListener);
-        searchView.adjustTintAlpha(0.8f);
+        mViewNavigationView.setNavigationItemSelectedListener(this);
+        mViewNavigationView.getHeaderView(0).setOnClickListener(this);
+        mCircleImageView.setOnClickListener(this);
+        mSearchMaterialSearchView.setOnQueryTextListener(queryTextListener);
+        mSearchMaterialSearchView.adjustTintAlpha(0.8f);
 
         //处理换头像等逻辑
-        headPhotoBitmap = BitmapFactory.decodeFile(Constants.pathFileName);
-        if (headPhotoBitmap != null) {
-            circleImageView.setImageBitmap(headPhotoBitmap);
+        mHeadPhotoBitmap = BitmapFactory.decodeFile(Constants.pathFileName);
+        if (mHeadPhotoBitmap != null) {
+            mCircleImageView.setImageBitmap(mHeadPhotoBitmap);
         } else {
-            circleImageView.setImageResource(R.mipmap.my_bg);
+            mCircleImageView.setImageResource(R.mipmap.my_bg);
         }
     }
-
 
     private void initMainBottomTab() {
         //用TabItemBuilder构建一个导航按钮
@@ -149,7 +148,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .build();
 
         //构建导航栏,得到Controller进行后续控制
-        controller = pagerBottomTabLayout.builder()
+        mController = mTabPagerBottomTabLayout.builder()
                 .addTabItem(tabItemBuilder)
                 .addTabItem(android.R.drawable.ic_menu_compass, "美图", Constants.testColors[1])
                 .addTabItem(android.R.drawable.ic_menu_crop, "新闻", Constants.testColors[2])
@@ -161,7 +160,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
       /*  controller.setMessageNumber("A",2);
         controller.setDisplayOval(0,true);*/
-        controller.addTabItemClickListener(tabItemSelectListener);
+        mController.addTabItemClickListener(tabItemSelectListener);
     }
 
     private Fragment createFragment(BaseFragment baseFragment, int content) {
@@ -188,7 +187,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.action_Image) {
             startActivity(TelegramGalleryActivity.class);
         } else if (id == R.id.action_search) {
-            searchView.openSearch();
+            mSearchMaterialSearchView.openSearch();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -200,7 +199,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_camera) {
-            startActivity(ItemListActivity.class);
+            startActivity(BeautifulArticleActivity.class);
         } else if (id == R.id.nav_fiction) {
             startActivity(WonderfulFictionActivity.class);
         } else if (id == R.id.nav_slideshow) {
@@ -216,7 +215,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         }
 
-        drawer.closeDrawer(GravityCompat.START);
+        mLayoutDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -227,10 +226,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             mToolbar.setBackgroundColor(Constants.toolBarColors[index]);
-            navigationView.setBackgroundColor(Constants.testColors[index]);
-            navigationView.getHeaderView(0).setBackgroundColor(Constants.toolBarColors[index]);
+            mViewNavigationView.setBackgroundColor(Constants.testColors[index]);
+            mViewNavigationView.getHeaderView(0).setBackgroundColor(Constants.toolBarColors[index]);
             //transaction.setCustomAnimations(R.anim.push_up_in,R.anim.push_up_out);
-            transaction.replace(R.id.frameLayout_content_main, mFragments.get(index));
+            transaction.replace(R.id.fl_main_content, mFragments.get(index));
             transaction.commit();
         }
 
@@ -288,30 +287,29 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
-
     }
 
     //将进行剪裁后的图片显示到UI界面上
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void setPicToView(Intent picToView) {
-        photoBundle = picToView.getExtras();
-        if (photoBundle != null) {
-            headPhotoBitmap = photoBundle.getParcelable("data");
-            circleImageView.setImageBitmap(headPhotoBitmap);
-            ImageUtil.saveBitmap(headPhotoBitmap, Constants.pathFileName);
+        mPhotoBundle = picToView.getExtras();
+        if (mPhotoBundle != null) {
+            mHeadPhotoBitmap = mPhotoBundle.getParcelable("data");
+            mCircleImageView.setImageBitmap(mHeadPhotoBitmap);
+            ImageUtil.saveBitmap(mHeadPhotoBitmap, Constants.pathFileName);
         }
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.nav_view) {
+        if (id == R.id.nav_main_view) {
             PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);//调用选择头像的Dialog
         } else if (id == R.id.circle_image_view) {
-            if (headPhotoBitmap != null) {
+            if (mHeadPhotoBitmap != null) {
                 Intent intent = new Intent(MainActivity.this, PersonalInformationActivity.class);
-                intent.putExtra("photoBundle", headPhotoBitmap);
-                ActivityCompat.startActivity(MainActivity.this, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, circleImageView, TRANSLATE_VIEW).toBundle());
+                intent.putExtra("mPhotoBundle", mHeadPhotoBitmap);
+                ActivityCompat.startActivity(MainActivity.this, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, mCircleImageView, TRANSLATE_VIEW).toBundle());
             } else {
                 PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);
             }

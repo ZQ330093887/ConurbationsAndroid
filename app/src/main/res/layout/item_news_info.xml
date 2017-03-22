@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/news_summary_card_view"
-    android:id="@+id/news_info_card"
+    android:id="@+id/cv_item_news_info"
     app:cardElevation="2dp">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <com.test.admin.conurbations.utils.RatioImageView
-            android:id="@+id/news_summary_photo_iv"
+            android:id="@+id/rv_news_summary_photo_iv"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_centerVertical="true"
@@ -21,12 +21,12 @@
             tools:targetApi="lollipop" />
 
         <TextView
-            android:id="@+id/news_summary_title_tv"
+            android:id="@+id/tv_news_summary_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/news_summary_photo_iv"
+            android:layout_alignTop="@id/rv_news_summary_photo_iv"
             android:layout_marginRight="@dimen/item_margin"
-            android:layout_toRightOf="@+id/news_summary_photo_iv"
+            android:layout_toRightOf="@+id/rv_news_summary_photo_iv"
             android:lines="2"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_title"

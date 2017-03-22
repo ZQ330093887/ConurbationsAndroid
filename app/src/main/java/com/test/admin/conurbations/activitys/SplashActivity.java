@@ -43,8 +43,8 @@ public class SplashActivity extends BaseActivity {
             R.mipmap.splash16,
     };
 
-    @Bind(R.id.iv_splash)
-    ImageView mIvSplash;
+    @Bind(R.id.iv_splash_bg)
+    ImageView mBgImageView;
 
     @Override
     protected int setLayoutResourceID() {
@@ -54,7 +54,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void initData(Bundle bundle) {
         Random r = new Random(SystemClock.elapsedRealtime());
-        mIvSplash.setImageResource(SPLASH_ARRAY[r.nextInt(SPLASH_ARRAY.length)]);
+        mBgImageView.setImageResource(SPLASH_ARRAY[r.nextInt(SPLASH_ARRAY.length)]);
         animateImage();
     }
 
@@ -62,8 +62,8 @@ public class SplashActivity extends BaseActivity {
     protected void initPresenter() {}
 
     private void animateImage() {
-        ObjectAnimator animatorX = ObjectAnimator.ofFloat(mIvSplash, "scaleX", 1f, SCALE_END);
-        ObjectAnimator animatorY = ObjectAnimator.ofFloat(mIvSplash, "scaleY", 1f, SCALE_END);
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(mBgImageView, "scaleX", 1f, SCALE_END);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(mBgImageView, "scaleY", 1f, SCALE_END);
 
         AnimatorSet set = new AnimatorSet();
         set.setDuration(ANIMATION_DURATION).play(animatorX).with(animatorY);

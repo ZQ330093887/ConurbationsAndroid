@@ -14,7 +14,7 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_ganhuo_image_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -25,19 +25,19 @@
             tools:text="基于material design support的开源学习项目(Github)" />
 
         <TextView
-            android:id="@+id/tv_people"
+            android:id="@+id/tv_ganhuo_image_people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
+            android:layout_below="@+id/tv_ganhuo_image_title"
             android:textColor="@color/colorHint"
             android:textSize="@dimen/text_size_summary"
             tools:text="via SOLID" />
 
         <TextView
-            android:id="@+id/tv_time"
+            android:id="@+id/tv_ganhuo_image_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tv_people"
+            android:layout_alignBaseline="@+id/tv_ganhuo_image_people"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="3dp"
             android:textColor="@color/colorHint"

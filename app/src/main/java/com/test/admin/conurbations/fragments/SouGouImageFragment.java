@@ -9,14 +9,16 @@ import android.view.ViewGroup;
 
 import com.test.admin.conurbations.activitys.ISouGouImageView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
-import com.test.admin.conurbations.adapter.SouGouImgListAdapter;
-import com.test.admin.conurbations.model.NetImage;
-import com.test.admin.conurbations.presenter.DayAndDayImagePresenter;
+import com.test.admin.conurbations.adapter.SouGouImageAdapter;
+import com.test.admin.conurbations.model.response.NetImage;
+import com.test.admin.conurbations.presenter.SouGouImagePresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
-
+/**
+ * Created by zhouqiong on 2016/9/23.
+ */
 public class SouGouImageFragment extends BaseListFragment implements ISouGouImageView {
 
     private String range;
@@ -24,8 +26,8 @@ public class SouGouImageFragment extends BaseListFragment implements ISouGouImag
         this.range = range;
     }
 
-    protected DayAndDayImagePresenter dayImagePresenter;
-    protected SouGouImgListAdapter souGouImgListAdapter;
+    protected SouGouImagePresenter mSouGouImagePresenter;
+    protected SouGouImageAdapter mSouGouImageAdapter;
 
     public PullRecycler getRecyclerView() {
         return recycler;
@@ -39,17 +41,17 @@ public class SouGouImageFragment extends BaseListFragment implements ISouGouImag
     }
 
     @Override
-    public void setSouGouImage(NetImage souGouImage) {
+    public void setSouGouImageData(NetImage imageData) {
         if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
             mDataList.clear();
         }
-        if (souGouImage.items == null || souGouImage.items.size() == 0) {
+        if (imageData.items == null || imageData.items.size() == 0) {
             recycler.enableLoadMore(false);
         } else {
             recycler.enableLoadMore(true);
-            mDataList.addAll(souGouImage.items);
-            souGouImgListAdapter.setList(mDataList);
-            souGouImgListAdapter.notifyDataSetChanged();
+            mDataList.addAll(imageData.items);
+            mSouGouImageAdapter.setList(mDataList);
+            mSouGouImageAdapter.notifyDataSetChanged();
         }
         recycler.onRefreshCompleted();
     }
@@ -61,17 +63,17 @@ public class SouGouImageFragment extends BaseListFragment implements ISouGouImag
 
     @Override
     protected void refreshList(int page) {
-        dayImagePresenter.getWelfareData(range, page);
+        mSouGouImagePresenter.getSouGouImageData(range, page);
     }
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        souGouImgListAdapter = new SouGouImgListAdapter();
-        return souGouImgListAdapter;
+        mSouGouImageAdapter = new SouGouImageAdapter();
+        return mSouGouImageAdapter;
     }
 
     @Override
     protected void setUpPresenter() {
-        dayImagePresenter = new DayAndDayImagePresenter(this);
+        mSouGouImagePresenter = new SouGouImagePresenter(this);
     }
 }

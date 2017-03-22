@@ -10,14 +10,16 @@ import android.view.ViewGroup;
 import com.test.admin.conurbations.activitys.ISearchView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.SearchAdapter;
-import com.test.admin.conurbations.data.entity.Moment;
-import com.test.admin.conurbations.model.NetImage;
+import com.test.admin.conurbations.model.response.Moment;
+import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.presenter.SearchPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
-
+/**
+ * Created by zhouqiong on 2016/9/23.
+ */
 public class SearchFragment extends BaseListFragment implements ISearchView {
     public static final String CLASS_SEARCH = "search_query";
     private Moment.SGImgType range;
@@ -26,8 +28,8 @@ public class SearchFragment extends BaseListFragment implements ISearchView {
         this.range = range;
     }
 
-    protected SearchPresenter searchPresenter;
-    protected SearchAdapter recommendAdapter;
+    protected SearchPresenter mSearchPresenter;
+    protected SearchAdapter mSearchAdapter;
     private String mSearchQuery;
 
     public PullRecycler getRecyclerView() {
@@ -54,8 +56,8 @@ public class SearchFragment extends BaseListFragment implements ISearchView {
         } else {
             recycler.enableLoadMore(false);
             mDataList.addAll(searchData.items);
-            recommendAdapter.setList(mDataList);
-            recommendAdapter.notifyDataSetChanged();
+            mSearchAdapter.setList(mDataList);
+            mSearchAdapter.notifyDataSetChanged();
         }
         recycler.onRefreshCompleted();
     }
@@ -67,17 +69,17 @@ public class SearchFragment extends BaseListFragment implements ISearchView {
 
     @Override
     protected void refreshList(int page) {
-        searchPresenter.getSearchQueryInfo(mSearchQuery, page);
+        mSearchPresenter.getSearchQueryInfo(mSearchQuery, page);
     }
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        recommendAdapter = new SearchAdapter();
-        return recommendAdapter;
+        mSearchAdapter = new SearchAdapter();
+        return mSearchAdapter;
     }
 
     @Override
     protected void setUpPresenter() {
-        searchPresenter = new SearchPresenter(this);
+        mSearchPresenter = new SearchPresenter(this);
     }
 }

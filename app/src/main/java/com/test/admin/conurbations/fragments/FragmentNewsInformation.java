@@ -14,13 +14,15 @@ import com.test.admin.conurbations.adapter.NewsInformationFragmentPagerAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
+/**
+ * Created by zhouqiong on 2016/9/23.
+ */
 public class FragmentNewsInformation extends BaseFragment {
     private Context mContext;
-    @Bind(R.id.tabLayout_info_news)
-    TabLayout mTabLayout;
-    @Bind(R.id.viewpager_info_news)
-    ViewPager mViewPager;
+    @Bind(R.id.tb_news_info_head)
+    TabLayout mHeadTabLayout;
+    @Bind(R.id.vp_news_info_content)
+    ViewPager mContentViewPager;
     NewsInformationFragmentPagerAdapter mInformationFragmentPagerAdapter;
 
     @Override
@@ -38,16 +40,16 @@ public class FragmentNewsInformation extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View viewRoot = inflater.inflate(R.layout.information_news_fragment, container, false);
+        View viewRoot = inflater.inflate(R.layout.news_information_fragment, container, false);
         int content = getArguments().getInt("content");
         ButterKnife.bind(this, viewRoot);
         mContext.getResources();
         mInformationFragmentPagerAdapter = new NewsInformationFragmentPagerAdapter(mContext, getChildFragmentManager());
-        mTabLayout.setTabsFromPagerAdapter(mInformationFragmentPagerAdapter);
-        mViewPager.setAdapter(mInformationFragmentPagerAdapter);
-        mViewPager.setOffscreenPageLimit(5);
-        mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setBackgroundColor(content);
+        mHeadTabLayout.setTabsFromPagerAdapter(mInformationFragmentPagerAdapter);
+        mContentViewPager.setAdapter(mInformationFragmentPagerAdapter);
+        mContentViewPager.setOffscreenPageLimit(5);
+        mHeadTabLayout.setupWithViewPager(mContentViewPager);
+        mHeadTabLayout.setBackgroundColor(content);
         return viewRoot;
     }
 

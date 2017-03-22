@@ -5,7 +5,7 @@
     android:padding="5dp"
     android:orientation="vertical">
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/tv_item_wonderful_fiction_rank_title"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

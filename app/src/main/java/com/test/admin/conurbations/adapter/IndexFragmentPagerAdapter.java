@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.data.entity.Moment;
-import com.test.admin.conurbations.fragments.GanHuoListFragment;
-import com.test.admin.conurbations.fragments.TodayNewsFragment;
+import com.test.admin.conurbations.model.response.Moment;
+import com.test.admin.conurbations.fragments.GanHuoFragment;
+import com.test.admin.conurbations.fragments.GankDayFragment;
 import com.test.admin.conurbations.fragments.WelfareFragment;
 
 /**
@@ -17,58 +17,36 @@ import com.test.admin.conurbations.fragments.WelfareFragment;
  */
 public class IndexFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private String[] titles;
-    private Fragment[] fragments;
-    //private String[] titles = new String[]{"最新", "ALL", "App", "福利", "Android", "iOS", "前端", "瞎推荐", "拓展资源", "休息视频"};
-
-    //private Fragment[] fragments = new Fragment[10];
-
+    private String[] mTitles;
+    private Fragment[] mFragments;
     public IndexFragmentPagerAdapter(Context context, FragmentManager fragmentManager) {
         super(fragmentManager);
 
-        titles = context.getResources().getStringArray(R.array.index_tab);
-        fragments = new Fragment[titles.length];
-        fragments[0] = new TodayNewsFragment();
-        ((TodayNewsFragment) fragments[0]).setRange(Moment.Range.THREE);
-        fragments[1] = new WelfareFragment();
-        ((WelfareFragment) fragments[1]).setRange(Moment.Range.ONE);
-        for (int i = 2; i < titles.length; i++) {
-            fragments[i] = new GanHuoListFragment();
-            ((GanHuoListFragment) fragments[i]).setRange(titles[i]);
+        mTitles = context.getResources().getStringArray(R.array.index_tab);
+        mFragments = new Fragment[mTitles.length];
+        mFragments[0] = new GankDayFragment();
+        ((GankDayFragment) mFragments[0]).setRange(Moment.Range.THREE);
+        mFragments[1] = new WelfareFragment();
+        ((WelfareFragment) mFragments[1]).setRange(Moment.Range.ONE);
+        for (int i = 2; i < mTitles.length; i++) {
+            mFragments[i] = new GanHuoFragment();
+            ((GanHuoFragment) mFragments[i]).setRange(mTitles[i]);
         }
-       /* fragments[1] = new GanHuoListFragment();
-        ((GanHuoListFragment) fragments[1]).setRange(Moment.Type.all);
-        fragments[2] = new GanHuoListFragment();
-        ((GanHuoListFragment) fragments[2]).setRange(Moment.Type.App);
-        fragments[3] = new WelfareFragment();
-        ((WelfareFragment) fragments[3]).setRange(Moment.Range.ONE);
-        fragments[4] = new GanHuoListFragment();
-        ((GanHuoListFragment) fragments[4]).setRange(Moment.Type.Android);
-        fragments[5] = new GanHuoListFragment();
-        ((GanHuoListFragment) fragments[5]).setRange(Moment.Type.iOS);
-        fragments[6] = new GanHuoListFragment();
-        ((GanHuoListFragment) fragments[6]).setRange(Moment.Type.前端);
-        fragments[7] = new GanHuoListFragment();
-        ((GanHuoListFragment) fragments[7]).setRange(Moment.Type.瞎推荐);
-        fragments[8] = new GanHuoListFragment();
-        ((GanHuoListFragment) fragments[8]).setRange(Moment.Type.拓展资源);
-        fragments[9] = new GanHuoListFragment();
-        ((GanHuoListFragment) fragments[9]).setRange(Moment.Type.休息视频);*/
     }
 
     @Override
     public Fragment getItem(int position) {
-        return fragments[position];
+        return mFragments[position];
     }
 
     @Override
     public int getCount() {
-        return fragments.length;
+        return mFragments.length;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return titles[position];
+        return mTitles[position];
     }
 
     @Override

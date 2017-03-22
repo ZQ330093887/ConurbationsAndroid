@@ -20,12 +20,12 @@ import butterknife.Bind;
  */
 public class ContactsActivity extends BaseActivity {
 
-    @Bind(R.id.rv_contacts)
-    RecyclerView rvContacts;
-    @Bind(R.id.side_bar)
-    WaveSideBar sideBar;
-    private ArrayList<Contact> contacts = new ArrayList<>();
-    private FragmentContactsAdapter contactsAdapter;
+    @Bind(R.id.rv_contacts_recycle_view)
+    RecyclerView mViewRecyclerView;
+    @Bind(R.id.wsb_contacts_wave)
+    WaveSideBar mWaveSideBar;
+    private ArrayList<Contact> mContactsList = new ArrayList<>();
+    private FragmentContactsAdapter mContactsAdapter;
 
     @Override
     protected int setLayoutResourceID() {
@@ -35,30 +35,30 @@ public class ContactsActivity extends BaseActivity {
     @Override
     protected void initData(Bundle bundle) {
         initView();
-        contacts.addAll(Contact.getNumber(this));
+        mContactsList.addAll(Contact.getNumber(this));
     }
 
     @Override
     protected void initPresenter() {}
 
     private void initView() {
-        contactsAdapter = new FragmentContactsAdapter(contacts, R.layout.item_contacts);
+        mContactsAdapter = new FragmentContactsAdapter(mContactsList, R.layout.item_contacts);
 
-        rvContacts.setLayoutManager(new LinearLayoutManager(this));
-        rvContacts.setAdapter(contactsAdapter);
-        contactsAdapter.setOnItemClickListener(new FragmentContactsAdapter.OnRecyclerViewItemClickListener(){
+        mViewRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mViewRecyclerView.setAdapter(mContactsAdapter);
+        mContactsAdapter.setOnItemClickListener(new FragmentContactsAdapter.OnRecyclerViewItemClickListener(){
             @Override
             public void onItemClick(View view , Contact data){
                 Toast.makeText(ContactsActivity.this, data.getNumber(), Toast.LENGTH_SHORT).show();
             }
         });
-        sideBar.setPosition(WaveSideBar.POSITION_RIGHT);
-        sideBar.setOnSelectIndexItemListener(new WaveSideBar.OnSelectIndexItemListener() {
+        mWaveSideBar.setPosition(WaveSideBar.POSITION_RIGHT);
+        mWaveSideBar.setOnSelectIndexItemListener(new WaveSideBar.OnSelectIndexItemListener() {
             @Override
             public void onSelectIndexItem(String index) {
-                for (int i=0; i<contacts.size(); i++) {
-                    if (contacts.get(i).getIndex().equals(index)) {
-                        ((LinearLayoutManager) rvContacts.getLayoutManager()).scrollToPositionWithOffset(i, 0);
+                for (int i = 0; i< mContactsList.size(); i++) {
+                    if (mContactsList.get(i).getIndex().equals(index)) {
+                        ((LinearLayoutManager) mViewRecyclerView.getLayoutManager()).scrollToPositionWithOffset(i, 0);
                         return;
                     }
                 }

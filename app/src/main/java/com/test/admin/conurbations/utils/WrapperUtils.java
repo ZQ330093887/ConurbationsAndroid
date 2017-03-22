@@ -4,7 +4,7 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.test.admin.conurbations.data.GankApi;
+import com.test.admin.conurbations.model.api.GankApi;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

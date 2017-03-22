@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.flyco.labelview.LabelView;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.model.BooksBean;
+import com.test.admin.conurbations.model.entity.BooksBean;
 import com.test.admin.conurbations.utils.RatioImageView;
 import com.test.admin.conurbations.widget.DashlineItemDivider;
 import com.test.admin.conurbations.widget.GlideImageLoader;
@@ -27,12 +27,12 @@ import java.util.List;
  * Created by zhouqiong on 2017/3/16
  */
 public class WonderfulFictionAdapter extends BaseListAdapter<BooksBean> {
-    private List<String> titles;
-    private List<String[]> images;
-    private List<BooksBean> leftBooksBeen;
+    private List<String> mTitles;
+    private List<String[]> mImages;
+    private List<BooksBean> mLeftBooksBeen;
     private List<BooksBean> rankContentBooksBeen;
-    private List<BooksBean> rankTitleBooksBeen;
-    private List<BooksBean> updateBooksBeen;
+    private List<BooksBean> mRankTitleBooksBeen;
+    private List<BooksBean> mUpdateBooksBeen;
     private static final int VIEW_TYPE_HEAD = 1;
     private static final int VIEW_TYPE_NORMAL = 2;
     private static final int VIEW_TYPE_POPULAR = 3;
@@ -48,8 +48,8 @@ public class WonderfulFictionAdapter extends BaseListAdapter<BooksBean> {
 
         if (vh instanceof CategoryHeaderViewHolder) {
             CategoryHeaderViewHolder headerViewHolder = (CategoryHeaderViewHolder) vh;
-            headerViewHolder.banner.setImages(images)
-                    .setBannerTitles(titles)
+            headerViewHolder.mBanner.setImages(mImages)
+                    .setBannerTitles(mTitles)
                     .setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
                     .setImageLoader(new GlideImageLoader())
                     .setBannerAnimation(AccordionTransformer.class)
@@ -59,8 +59,8 @@ public class WonderfulFictionAdapter extends BaseListAdapter<BooksBean> {
         if (vh instanceof NormalViewHolder) {
             BooksBean item = list.get(position - 5);
             NormalViewHolder normalViewHolder = (NormalViewHolder) vh;
-            RatioImageView imageView = normalViewHolder.getView(R.id.recomend_img);
-            LabelView labelView = normalViewHolder.getView(R.id.label_view);
+            RatioImageView imageView = normalViewHolder.getView(R.id.rv_item_wonderful_fiction);
+            LabelView labelView = normalViewHolder.getView(R.id.label_item_wonderful_fiction);
             LabelView scriptView = normalViewHolder.getView(R.id.wonderful_fiction_scriptNumber_labv);
             imageView.setRatio(0.918f);
 
@@ -73,17 +73,17 @@ public class WonderfulFictionAdapter extends BaseListAdapter<BooksBean> {
                     .into(imageView);
             labelView.setText(item.getAuthor());
             scriptView.setText(item.getScriptNumber());
-            normalViewHolder.setText(R.id.recommend_title, item.getTitle())
-                    .setText(R.id.recommend_content, item.getTextContent())
-                    .setText(R.id.item_fiction_type, item.getType())
-                    .setText(R.id.item_fiction_script, item.getScript());
+            normalViewHolder.setText(R.id.tv_item_wonderful_fiction_title, item.getTitle())
+                    .setText(R.id.tv_item_wonderful_fiction_content, item.getTextContent())
+                    .setText(R.id.tv_item_wonderful_fiction_type, item.getType())
+                    .setText(R.id.tv_item_wonderful_fiction_script, item.getScript());
         }
 
         if (vh instanceof LeftBookBeanHolder) {
             LeftBookBeanHolder leftBookBeanHolder = (LeftBookBeanHolder) vh;
-            DiscreteScrollView cityPicker = leftBookBeanHolder.getView(R.id.forecast_city_picker);
-            if (leftBooksBeen != null && leftBooksBeen.size() > 0) {
-                ForecastAdapter forecastAdapter = new ForecastAdapter(leftBooksBeen);
+            DiscreteScrollView cityPicker = leftBookBeanHolder.getView(R.id.dsv_item_wonderful_fiction);
+            if (mLeftBooksBeen != null && mLeftBooksBeen.size() > 0) {
+                ForecastAdapter forecastAdapter = new ForecastAdapter(mLeftBooksBeen);
                 cityPicker.setAdapter(forecastAdapter);
                 cityPicker.scrollToPosition(2);
                 cityPicker.setItemTransformer(new ScaleTransformer.Builder()
@@ -93,32 +93,34 @@ public class WonderfulFictionAdapter extends BaseListAdapter<BooksBean> {
         }
         if (vh instanceof RankUpdateHolder) {
             RankUpdateHolder rankContentHolder = (RankUpdateHolder) vh;
-            RecyclerView mRecyclerView = rankContentHolder.getView(R.id.content);
+            RecyclerView mRecyclerView = rankContentHolder.getView(R.id.rv_item_wonderful_fiction_rank_text);
             mRecyclerView.setLayoutManager(new MyLinearLayoutManager(mRecyclerView.getContext(), GridLayoutManager.VERTICAL, false));
-            mRecyclerView.setAdapter(new ItemWonderfulFictionRankAdapter(updateBooksBeen));
+            WonderfulFictionRankAdapter wonderfulFictionRankAdapter = new WonderfulFictionRankAdapter();
+            wonderfulFictionRankAdapter.setList(mUpdateBooksBeen);
+            mRecyclerView.setAdapter(wonderfulFictionRankAdapter);
             mRecyclerView.addItemDecoration(new DashlineItemDivider());
         }
         if (vh instanceof RankTitleHolder) {
             RankTitleHolder rankTitleHolder = (RankTitleHolder) vh;
-            rankTitleHolder.setText(R.id.title1, rankTitleBooksBeen.get(0).getTitle())
-                    .setText(R.id.title2, rankTitleBooksBeen.get(1).getTitle())
-                    .setText(R.id.title3, rankTitleBooksBeen.get(2).getTitle())
-                    .setText(R.id.title4, rankTitleBooksBeen.get(3).getTitle());
+            rankTitleHolder.setText(R.id.tv_item_wonderful_fiction_title1, mRankTitleBooksBeen.get(0).getTitle())
+                    .setText(R.id.tv_item_wonderful_fiction_title2, mRankTitleBooksBeen.get(1).getTitle())
+                    .setText(R.id.tv_item_wonderful_fiction_title3, mRankTitleBooksBeen.get(2).getTitle())
+                    .setText(R.id.tv_item_wonderful_fiction_title4, mRankTitleBooksBeen.get(3).getTitle());
         }
 
         if (vh instanceof RankTypeHolder) {
             RankTypeHolder rankTypeHolder = (RankTypeHolder) vh;
-            rankTypeHolder.setText(R.id.title, "热门小说");
+            rankTypeHolder.setText(R.id.tv_item_wonderful_fiction_rank_title, "热门小说");
         }
 
         if (vh instanceof PopularFictionHolder) {
             PopularFictionHolder popularFictionHolder = (PopularFictionHolder) vh;
-            popularFictionHolder.setText(R.id.title, "热门榜单");
+            popularFictionHolder.setText(R.id.tv_item_wonderful_fiction_rank_title, "热门榜单");
         }
 
         if (vh instanceof RankUpdateNewHolder) {
             RankUpdateNewHolder rankUpdateNewHolder = (RankUpdateNewHolder) vh;
-            rankUpdateNewHolder.setText(R.id.title, "最近更新");
+            rankUpdateNewHolder.setText(R.id.tv_item_wonderful_fiction_rank_title, "最近更新");
         }
     }
 
@@ -128,18 +130,18 @@ public class WonderfulFictionAdapter extends BaseListAdapter<BooksBean> {
 
     public void getBannerData(List<String[]> images, List<String> titles, List<BooksBean> leftBooksBeen,
                               List<BooksBean> rankTitleBooksBeen, List<BooksBean> rankContentBooksBeen, List<BooksBean> updateBooksBeen) {
-        this.images = images;
-        this.titles = titles;
-        this.leftBooksBeen = leftBooksBeen;
+        this.mImages = images;
+        this.mTitles = titles;
+        this.mLeftBooksBeen = leftBooksBeen;
         this.rankContentBooksBeen = rankContentBooksBeen;
-        this.rankTitleBooksBeen = rankTitleBooksBeen;
-        this.updateBooksBeen = updateBooksBeen;
+        this.mRankTitleBooksBeen = rankTitleBooksBeen;
+        this.mUpdateBooksBeen = updateBooksBeen;
     }
 
     @Override
     protected BaseViewHolder onCreateNormalViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_HEAD) {
-            return new CategoryHeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item_banner, parent, false));
+            return new CategoryHeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pretty_picture_list_banner, parent, false));
         } else if (viewType == VIEW_TYPE_NORMAL) {
             return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_wonderful_fiction, parent, false));
         } else if (viewType == VIEW_TYPE_LEFT_BOOK_BEAN) {
@@ -159,11 +161,11 @@ public class WonderfulFictionAdapter extends BaseListAdapter<BooksBean> {
     }
 
     public class CategoryHeaderViewHolder extends BaseViewHolder {
-        Banner banner;
+        Banner mBanner;
 
         public CategoryHeaderViewHolder(View view) {
             super(view);
-            banner = (Banner) view.findViewById(R.id.banner);
+            mBanner = (Banner) view.findViewById(R.id.banner_item_pretty_picture_list_banner);
         }
     }
 

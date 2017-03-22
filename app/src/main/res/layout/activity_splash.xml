@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/iv_splash"
+        android:id="@+id/iv_splash_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription=""
@@ -19,7 +19,7 @@
         android:background="@drawable/ban_shadow" />
 
     <TextView
-        android:id="@+id/splash_app_name"
+        android:id="@+id/tv_splash_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -33,7 +33,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/splash_app_name"
+        android:layout_below="@id/tv_splash_app_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/about_title_padding_top"
         android:text="@string/splash_slogan"

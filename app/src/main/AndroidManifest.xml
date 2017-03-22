@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activitys.ItemListActivity"
+            android:name=".activitys.BeautifulArticleActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -44,16 +44,16 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustNothing"/>
         <activity
-            android:name=".activitys.ItemDetailActivity"
+            android:name=".activitys.BeautifulArticleItemDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.ShowImageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activitys.ItemListItemActivity"
+            android:name=".activitys.BeautifulArticleItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activitys.DayAndDayPrettyPicturesMoreActivity"
+            android:name=".activitys.PrettyPicturesActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.PersonalInformationActivity"
@@ -62,10 +62,10 @@
             android:name=".activitys.WonderfulFictionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activitys.WebviewActivity"
+            android:name=".activitys.WebViewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activitys.NewsDetailActivity"
+            android:name=".activitys.NewsInfoListDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.AboutActivity"

@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <com.yarolegovich.discretescrollview.DiscreteScrollView
-        android:id="@+id/forecast_city_picker"
+        android:id="@+id/dsv_item_wonderful_fiction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom" />

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.ShowImageActivity;
-import com.test.admin.conurbations.data.response.GanHuoDataBean;
+import com.test.admin.conurbations.model.entity.GanHuoDataBean;
 import com.test.admin.conurbations.utils.RatioImageView;
 
 
@@ -22,20 +22,20 @@ public class WelfareListAdapter extends BaseListAdapter<GanHuoDataBean> {
 
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final GanHuoDataBean item) {
-        final RatioImageView imageView = vh.getView(R.id.item_welfare_photo);
-        imageView.setRatio(0.618f);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        final RatioImageView mPhotoRatioImageView = vh.getView(R.id.rv_item_welfare_photo);
+        mPhotoRatioImageView.setRatio(0.618f);
+        mPhotoRatioImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startPictureActivity(view, item);
             }
         });
-        Glide.with(imageView.getContext())
+        Glide.with(mPhotoRatioImageView.getContext())
                 .load(item.getUrl())
                 .centerCrop()
                 .placeholder(R.color.white)
                 .crossFade()
-                .into(imageView);
+                .into(mPhotoRatioImageView);
     }
 
 

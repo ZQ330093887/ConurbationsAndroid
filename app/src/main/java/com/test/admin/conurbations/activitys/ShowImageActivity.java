@@ -32,14 +32,14 @@ import butterknife.Bind;
  */
 public class ShowImageActivity extends BaseActivity implements OnMenuItemClickListener {
 
-    @Bind(R.id.toolbar_big_show_image)
-    Toolbar toolbar;
-    @Bind(R.id.pv_big_avatar_avatar)
-    PhotoView avatarPhotoView;
-    @Bind(R.id.lly_progress_bar)
-    LinearLayout linearLayout;
-    @Bind(R.id.whorl)
-    WhorlView whorlView;
+    @Bind(R.id.toolbar_show_image_toolbar)
+    Toolbar mToolbar;
+    @Bind(R.id.pv_show_image_photo)
+    PhotoView mPhotoView;
+    @Bind(R.id.lly_show_image_progress_bar)
+    LinearLayout mProgressBarLinearLayout;
+    @Bind(R.id.wv_show_image_progress_bar)
+    WhorlView mProgressBarWhorlView;
     public static final String EXTRA_IMAGE_URL = "image_url";
     public static final String TRANSIT_PIC = "picture";
     private String mImageUrl;
@@ -47,16 +47,16 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
 
     @Override
     protected int setLayoutResourceID() {
-        return R.layout.activity_big_avatar;
+        return R.layout.activity_show_image;
     }
 
     @Override
     protected void initData(Bundle bundle) {
-        whorlView.start();
-        initToolbar(toolbar, "美图", "");
+        mProgressBarWhorlView.start();
+        initToolbar(mToolbar, "美图", "");
         parseIntent();
         initMenuFragment();
-        ViewCompat.setTransitionName(avatarPhotoView, TRANSIT_PIC);
+        ViewCompat.setTransitionName(mPhotoView, TRANSIT_PIC);
         //ImageUtil.loadImage(mImageUrl, avatarPhotoView);
         //Picasso.with(this).load(mImageUrl).into(avatarPhotoView);
 
@@ -65,17 +65,17 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        whorlView.stop();
-                        linearLayout.setVisibility(View.GONE);
+                        mProgressBarWhorlView.stop();
+                        mProgressBarLinearLayout.setVisibility(View.GONE);
                         Toast.makeText(getApplicationContext(), "资源加载异常", Toast.LENGTH_SHORT).show();
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        whorlView.stop();
-                        linearLayout.setVisibility(View.GONE);
-                        avatarPhotoView.setVisibility(View.VISIBLE);
+                        mProgressBarWhorlView.stop();
+                        mProgressBarLinearLayout.setVisibility(View.GONE);
+                        mPhotoView.setVisibility(View.VISIBLE);
                         return false;
                     }
                 })
@@ -86,15 +86,15 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
                 .skipMemoryCache(true)
                 .thumbnail(0.1f)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .into(avatarPhotoView);
+                .into(mPhotoView);
 
-        avatarPhotoView.setOnLongClickListener(new View.OnLongClickListener() {
+        mPhotoView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 return true;
             }
         });
-        avatarPhotoView.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
+        mPhotoView.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
             @Override
             public void onViewTap(View view, float x, float y) {
                 Glide.get(view.getContext()).clearMemory();

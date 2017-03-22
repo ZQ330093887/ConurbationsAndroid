@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,7 +18,6 @@ import com.test.admin.conurbations.listeners.AppBarStateChangeListener;
 import com.test.admin.conurbations.views.CircleImageView;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 
 
 /**
@@ -28,25 +26,23 @@ import butterknife.OnClick;
 
 public class PersonalInformationActivity extends BaseActivity {
 
-    private PersonalInformationAdapter mInfomationAdapter;
-    @Bind(R.id.personal_info_toolbar)
+    private PersonalInformationAdapter mInformationAdapter;
+    @Bind(R.id.toolbar_personal_information_toolbar)
     Toolbar mToolbar;
-    @Bind(R.id.personal_info_recycler_view)
-    RecyclerView mRecyclerView;
-    @Bind(R.id.toolbar_layout)
-    CollapsingToolbarLayout mToolbarLayout;
-    @Bind(R.id.app_bar)
-    AppBarLayout mAppBarLayout;
-    @Bind(R.id.iv_person_info_hand)
-    ImageView mHandBackgroudView;
-    @Bind(R.id.title_photo_img)
+    @Bind(R.id.rv_personal_information_content)
+    RecyclerView mContentRecyclerView;
+    @Bind(R.id.ctl_personal_information_head)
+    CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
+    @Bind(R.id.abl_personal_information_head)
+    AppBarLayout mHeadAppBarLayout;
+    @Bind(R.id.iv_personal_information_hand)
+    ImageView mHeadImageView;
+    @Bind(R.id.civ_personal_information_title_photo)
     ImageView mPhotoImageView;
-    @Bind(R.id.title_info)
+    @Bind(R.id.tv_personal_information_title)
     TextView mTitleTextView;
-    @Bind(R.id.fab)
-    FloatingActionButton floatingActionButton;
-    @Bind(R.id.fab_img)
-    CircleImageView circleImageView;
+    @Bind(R.id.civ_personal_information_img)
+    CircleImageView mImageCircleImageView;
 
     Bitmap bitmap;
 
@@ -62,21 +58,21 @@ public class PersonalInformationActivity extends BaseActivity {
         Intent intent = getIntent();
 
         if (intent != null) {
-            bitmap = intent.getParcelableExtra("photoBundle");
-            circleImageView.setImageBitmap(bitmap);
+            bitmap = intent.getParcelableExtra("mPhotoBundle");
+            mImageCircleImageView.setImageBitmap(bitmap);
             mPhotoImageView.setImageBitmap(bitmap);
-            mHandBackgroudView.setImageBitmap(bitmap);
+            mHeadImageView.setImageBitmap(bitmap);
         } else {
-            circleImageView.setBackgroundResource(R.color.white);
+            mImageCircleImageView.setBackgroundResource(R.color.white);
             mPhotoImageView.setBackgroundResource(R.color.white);
-            mHandBackgroudView.setBackgroundResource(R.color.white);
+            mHeadImageView.setBackgroundResource(R.color.white);
         }
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mInfomationAdapter = new PersonalInformationAdapter(this);
+        mContentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mInformationAdapter = new PersonalInformationAdapter(this);
         // 为mRecyclerView设置适配器
-        mRecyclerView.setAdapter(mInfomationAdapter);
-        mAppBarLayout.addOnOffsetChangedListener(mStateChangeListener);
+        mContentRecyclerView.setAdapter(mInformationAdapter);
+        mHeadAppBarLayout.addOnOffsetChangedListener(mStateChangeListener);
     }
 
     @Override
@@ -89,29 +85,21 @@ public class PersonalInformationActivity extends BaseActivity {
             if (state == State.EXPANDED) {
                 //展开状态
                 mPhotoImageView.setVisibility(View.GONE);
-                circleImageView.setVisibility(View.VISIBLE);
+                mImageCircleImageView.setVisibility(View.VISIBLE);
                 mTitleTextView.setText("");
-                mToolbarLayout.setTitle("个人信息");
+                mHeadCollapsingToolbarLayout.setTitle("个人信息");
             } else if (state == State.COLLAPSED) {
                 //折叠状态
                 mPhotoImageView.setVisibility(View.VISIBLE);
-                circleImageView.setVisibility(View.GONE);
+                mImageCircleImageView.setVisibility(View.GONE);
                 mTitleTextView.setText(R.string.guard_msg);
 
             } else {
                 //中间状态
                 mPhotoImageView.setVisibility(View.GONE);
-                circleImageView.setVisibility(View.VISIBLE);
+                mImageCircleImageView.setVisibility(View.VISIBLE);
                 mTitleTextView.setText("");
             }
         }
     };
-
-
-    @OnClick({R.id.fab_img, R.id.title_photo_img})
-    void onClick(View view) {
-        Intent intent = new Intent(PersonalInformationActivity.this, BigAvatarActivity.class);
-        intent.putExtra("photoBundle", bitmap);
-        startActivity(intent);
-    }
 }
