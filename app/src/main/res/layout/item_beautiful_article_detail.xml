@@ -4,7 +4,7 @@
     style="?android:attr/textAppearanceLarge"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="@dimen/dimens_16_dp"
     android:textIsSelectable="true"
-    android:textSize="16sp"
+    android:textSize="@dimen/dimens_16_sp"
     tools:mContext="com.test.admin.conurbations.fragments.BeautifulArticleItemDetailFragment" />

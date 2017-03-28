@@ -11,7 +11,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dimens_10_dp"
             android:gravity="center"
             android:text="@string/guard_msg"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
@@ -20,7 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/dimens_5_dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -32,15 +32,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="@dimen/dimens_3_dp"
                 android:text="China.BJ" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="@dimen/dimens_40_dp"
+            android:layout_marginTop="@dimen/dimens_5_dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -52,8 +52,8 @@
                 android:text="GitHub" />
 
             <View
-                android:layout_width="1dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/dimens_1_dp"
+                android:layout_height="@dimen/dimens_20_dp"
                 android:background="@color/colorOrangePrimaryCenter" />
 
             <TextView
@@ -64,8 +64,8 @@
                 android:text="Android" />
 
             <View
-                android:layout_width="1dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/dimens_1_dp"
+                android:layout_height="@dimen/dimens_20_dp"
                 android:background="@color/colorOrangePrimaryCenter" />
 
             <TextView
@@ -76,8 +76,8 @@
                 android:text="Java" />
 
             <View
-                android:layout_width="1dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/dimens_1_dp"
+                android:layout_height="@dimen/dimens_20_dp"
                 android:background="@color/colorOrangePrimaryCenter" />
 
             <TextView

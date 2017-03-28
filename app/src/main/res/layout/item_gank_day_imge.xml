@@ -6,6 +6,6 @@
     <com.test.admin.conurbations.utils.RatioImageView
         android:id="@+id/rv_item_gank_day_image"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/dimens_100_dp"
         android:transitionName="transition_morph_view"/>
 </FrameLayout>

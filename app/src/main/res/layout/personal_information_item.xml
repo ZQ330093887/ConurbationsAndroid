@@ -11,20 +11,20 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="@dimen/dimens_100_dp"
             android:background="@color/colorBrownPrimaryDark" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginLeft="@dimen/dimens_10_dp"
+            android:layout_marginRight="@dimen/dimens_10_dp"
+            android:layout_marginTop="@dimen/dimens_50_dp"
             android:background="@color/cardview_dark_background"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="8dp">
+            app:cardCornerRadius="@dimen/dimens_16_dp"
+            app:cardElevation="@dimen/dimens_8_dp">
 
             <include layout="@layout/introduce" />
         </android.support.v7.widget.CardView>
@@ -35,18 +35,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="@dimen/dimens_10_dp">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="@dimen/dimens_10_dp"
+            android:layout_marginRight="@dimen/dimens_10_dp"
             android:background="@color/cardview_dark_background"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="8dp">
+            app:cardCornerRadius="@dimen/dimens_16_dp"
+            app:cardElevation="@dimen/dimens_8_dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,10 +62,10 @@
                         android:id="@+id/photo_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/context_margin"
+                        android:layout_margin="@dimen/dimens_10_dp"
                         android:src="@mipmap/my_bg"
                         app:border_color="@color/colorLimePrimaryCenter"
-                        app:border_width="2dp" />
+                        app:border_width="@dimen/dimens_2_dp" />
 
                     <LinearLayout
                         style="@style/Widget.AppCompat.ActionButton"
@@ -85,7 +85,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="@dimen/dimens_5_dp"
                             android:text="@string/activity_home" />
 
                     </LinearLayout>
@@ -95,7 +95,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="@dimen/dimens_10_dp"
                     android:text="Copyright ? 2016 Joaquim LeyLicensed under the Apache License, Version 2.0 (the);you may not use this file except in compliance with the License.You may obtain a copy of the License at" />
             </LinearLayout>
 

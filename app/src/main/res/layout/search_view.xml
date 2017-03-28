@@ -32,13 +32,13 @@
                 android:layout_height="match_parent"
                 android:background="?android:attr/selectableItemBackground"
                 android:contentDescription="@string/cd_up_button"
-                android:paddingLeft="@dimen/nav_header_vertical_spacing"
-                android:paddingRight="@dimen/nav_header_vertical_spacing"
+                android:paddingLeft="@dimen/dimens_16_dp"
+                android:paddingRight="@dimen/dimens_16_dp"
                 app:srcCompat="@drawable/ic_action_navigation_arrow_back" />
 
             <EditText
                 android:id="@+id/et_search"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimens_0_dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:layout_weight="1"
@@ -46,8 +46,8 @@
                 android:hint="@string/search_hint"
                 android:imeOptions="actionSearch|flagNoExtractUi"
                 android:maxLines="1"
-                android:paddingLeft="@dimen/padding_gank_title"
-                android:paddingRight="@dimen/padding_gank_title"
+                android:paddingLeft="@dimen/dimens_6_dp"
+                android:paddingRight="@dimen/dimens_6_dp"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray_50"
@@ -59,8 +59,8 @@
                 android:layout_height="match_parent"
                 android:background="?android:attr/selectableItemBackground"
                 android:contentDescription="@string/cd_clear_button"
-                android:paddingLeft="@dimen/nav_header_vertical_spacing"
-                android:paddingRight="@dimen/nav_header_vertical_spacing"
+                android:paddingLeft="@dimen/dimens_16_dp"
+                android:paddingRight="@dimen/dimens_16_dp"
                 app:srcCompat="@drawable/ic_action_navigation_close"
                 android:visibility="gone" />
         </LinearLayout>

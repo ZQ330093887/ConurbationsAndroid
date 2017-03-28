@@ -42,10 +42,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="@dimen/developer_item_icon_width"
-                    android:padding="@dimen/developer_item_icon_width"
+                    android:layout_marginBottom="@dimen/dimens_18_dp"
+                    android:padding="@dimen/dimens_18_dp"
                     android:textColor="@android:color/white"
-                    android:textSize="22sp"
+                    android:textSize="@dimen/dimens_22_sp"
                     android:transitionName="translate_web_view_title"
                     tools:text="哈哈哈哈哈" />
 
@@ -54,9 +54,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
-                    android:padding="@dimen/about_title_padding_top"
+                    android:padding="@dimen/dimens_10_dp"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/ali_feedback_common_text_size"
+                    android:textSize="@dimen/dimens_15_sp"
                     tools:text="哇哇哇哇哇" />
             </FrameLayout>
 
@@ -83,7 +83,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="128dp">
+        android:layout_marginTop="@dimen/dimens_126_dp">
 
         <include layout="@layout/include_empty" />
 

@@ -2,15 +2,15 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="3dp"
-    android:layout_marginRight="3dp"
-    android:layout_marginTop="6dp">
+    android:layout_marginLeft="@dimen/dimens_3_dp"
+    android:layout_marginRight="@dimen/dimens_3_dp"
+    android:layout_marginTop="@dimen/dimens_6_dp">
 
     <TextView
         android:id="@+id/tv_item_beautiful_article_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_margin="@dimen/dimens_10_dp"
         android:text="青春一场梦"
         android:textColor="@color/black" />
 </android.support.v7.widget.CardView>

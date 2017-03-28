@@ -2,14 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingEnd="@dimen/recycler_item_padding"
-    android:paddingStart="@dimen/recycler_item_padding">
+    android:paddingEnd="@dimen/dimens_16_dp"
+    android:paddingStart="@dimen/dimens_16_dp">
 
     <TextView
         android:id="@+id/tv_item_gank_day_head_title"
         style="@style/HeaderTitleTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/context_margin"
-        android:paddingTop="@dimen/padding_gank_header" />
+        android:paddingBottom="@dimen/dimens_10_dp"
+        android:paddingTop="@dimen/dimens_12_dp" />
 </FrameLayout>

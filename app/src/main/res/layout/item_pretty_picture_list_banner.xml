@@ -10,6 +10,6 @@
     <com.youth.banner.Banner
         android:id="@+id/banner_item_pretty_picture_list_banner"
         android:layout_width="match_parent"
-        android:layout_height="140dp" />
+        android:layout_height="@dimen/dimens_120_dp" />
 
 </LinearLayout>

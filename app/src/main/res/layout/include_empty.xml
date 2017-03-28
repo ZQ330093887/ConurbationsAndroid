@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:drawablePadding="10dp"
+        android:drawablePadding="@dimen/dimens_10_dp"
         android:drawableTop="@mipmap/ic_empty"
         android:scaleType="centerInside"
         android:text="没有内容，稍后重试"

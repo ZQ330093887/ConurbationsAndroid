@@ -19,5 +19,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:elevation="8dp" />
+        app:elevation="@dimen/dimens_8_dp" />
 </RelativeLayout>

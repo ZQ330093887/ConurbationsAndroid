@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/news_summary_card_view"
     android:id="@+id/cv_item_news_info"
-    app:cardElevation="2dp">
+    app:cardElevation="@dimen/dimens_2_dp">
 
     <TextView
         android:id="@+id/tv_item_news_summary_title"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:textColor="@color/black"
-        android:layout_marginLeft="@dimen/item_margin"
-        android:layout_marginRight="@dimen/item_margin"
-        android:layout_marginTop="@dimen/item_margin"
+        android:layout_marginLeft="@dimen/dimens_8_dp"
+        android:layout_marginRight="@dimen/dimens_8_dp"
+        android:layout_marginTop="@dimen/dimens_8_dp"
         android:singleLine="true"
-        android:textSize="@dimen/text_size_title"
+        android:textSize="@dimen/dimens_15_sp"
         tools:text="武汉孕妇临盆被洪水围困 消防营救" />
 
 

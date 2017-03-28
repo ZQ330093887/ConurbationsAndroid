@@ -8,58 +8,58 @@
     <TextView
         android:id="@+id/tv_item_wonderful_fiction_title1"
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
-        android:layout_margin="5dp"
+        android:layout_height="@dimen/dimens_60_dp"
+        android:layout_margin="@dimen/dimens_6_dp"
         android:layout_weight="1"
         android:background="@drawable/shape_round_blue"
         android:gravity="center"
         android:text="热门"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="@dimen/dimens_14_sp" />
 
     <TextView
         android:id="@+id/tv_item_wonderful_fiction_title2"
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
-        android:layout_margin="5dp"
+        android:layout_height="@dimen/dimens_60_dp"
+        android:layout_margin="@dimen/dimens_6_dp"
         android:layout_weight="1"
         android:background="@drawable/shape_round_red"
         android:gravity="center"
         android:text="热门"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="@dimen/dimens_14_sp" />
 
     <TextView
         android:id="@+id/tv_item_wonderful_fiction_title3"
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
-        android:layout_margin="5dp"
+        android:layout_height="@dimen/dimens_60_dp"
+        android:layout_margin="@dimen/dimens_6_dp"
         android:layout_weight="1"
         android:background="@drawable/shape_round_yellow"
         android:gravity="center"
         android:text="热门"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="@dimen/dimens_14_sp" />
 
     <TextView
         android:id="@+id/tv_item_wonderful_fiction_title4"
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
-        android:layout_margin="5dp"
+        android:layout_height="@dimen/dimens_60_dp"
+        android:layout_margin="@dimen/dimens_6_dp"
         android:layout_weight="1"
         android:background="@drawable/shape_round_orange"
         android:gravity="center"
         android:text="热门"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="@dimen/dimens_14_sp"/>
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
-        android:layout_margin="5dp"
+        android:layout_height="@dimen/dimens_60_dp"
+        android:layout_margin="@dimen/dimens_6_dp"
         android:layout_weight="1"
         android:background="@drawable/shape_round_green"
         android:gravity="center"
         android:text="其他榜"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="@dimen/dimens_14_sp"/>
 </LinearLayout>

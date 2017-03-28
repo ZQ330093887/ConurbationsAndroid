@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_item_news_info_index"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:layout_marginLeft="@dimen/about_title_padding_top"
-    android:layout_marginRight="@dimen/about_title_padding_top"
-    android:layout_marginTop="@dimen/about_title_padding_top"
+    android:layout_height="@dimen/dimens_100_dp"
+    android:layout_marginLeft="@dimen/dimens_10_dp"
+    android:layout_marginRight="@dimen/dimens_10_dp"
+    android:layout_marginTop="@dimen/dimens_10_dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="2dp">
+    app:cardCornerRadius="@dimen/dimens_3_dp"
+    app:cardElevation="@dimen/dimens_2_dp">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -21,26 +21,26 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp">
+            android:padding="@dimen/dimens_10_dp">
 
             <com.test.admin.conurbations.utils.RatioImageView
                 android:id="@+id/iv_item_news_info_index"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="@dimen/dimens_80_dp"
+                android:layout_height="@dimen/dimens_80_dp"
                 android:layout_centerVertical="true"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/dimens_10_dp"
                 android:transitionName="translate_web_view"/>
 
             <TextView
                 android:id="@+id/tv_item_news_info_index_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/about_title_padding_top"
+                android:layout_marginLeft="@dimen/dimens_10_dp"
                 android:layout_toRightOf="@id/iv_item_news_info_index"
-                android:lineSpacingExtra="2dp"
+                android:lineSpacingExtra="@dimen/dimens_2_dp"
                 android:maxLines="3"
-                android:padding="3dp"
-                android:textSize="16sp"
+                android:padding="@dimen/dimens_3_dp"
+                android:textSize="@dimen/dimens_16_sp"
                 tools:text="新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题,不忘初心,方得始终." />
         </RelativeLayout>
 
@@ -54,7 +54,7 @@
             lv:lv_gravity="BOTTOM_RIGHT"
             lv:lv_text="NEW"
             lv:lv_text_all_caps="false"
-            lv:lv_text_size="8sp" />
+            lv:lv_text_size="@dimen/dimens_8_sp" />
 
     </FrameLayout>
 

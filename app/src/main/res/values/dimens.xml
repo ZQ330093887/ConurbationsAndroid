@@ -1,8 +1,8 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+   <!-- <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">180dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    &lt;!&ndash; Default screen margins, per the Android Design guidelines. &ndash;&gt;
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="context_margin">10dp</dimen>
@@ -11,8 +11,8 @@
 
     <dimen name="item_margin">8dp</dimen>
 
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    &lt;!&ndash; Default screen margins, per the Android Design guidelines. &ndash;&gt;
+    &lt;!&ndash; Default screen margins, per the Android Design guidelines. &ndash;&gt;
     <dimen name="recycler_item_padding">16dp</dimen>
 
     <dimen name="text_size_header_title">18sp</dimen>
@@ -26,31 +26,167 @@
     <dimen name="about_title_padding_top">10dp</dimen>
     <dimen name="tool_bar_height">50dp</dimen>
     <dimen name="developer_item_height">36dp</dimen>
-    <dimen name="developer_item_icon_width">18dp</dimen>
-
+    <dimen name="developer_item_icon_width">18dp</dimen>-->
+   <!--系统指定-->
+    <dimen name="text_size_header_title">18sp</dimen>
+    <dimen name="text_size_title">15sp</dimen>
+    <dimen name="text_size_summary">12sp</dimen>
+    <dimen name="item_title">14sp</dimen>
+    <dimen name="item_margin">8dp</dimen>
 
     <!-- dimens dp-->
     <dimen name="dimens_0_dp">0dp</dimen>
+    <dimen name="dimens_0.5_dp">0.5dp</dimen>
     <dimen name="dimens_1_dp">1dp</dimen>
     <dimen name="dimens_2_dp">2dp</dimen>
+    <dimen name="dimens_2.5_dp">2.5dp</dimen>
+    <dimen name="dimens_3_dp">3dp</dimen>
     <dimen name="dimens_4_dp">4dp</dimen>
+    <dimen name="dimens_5_dp">5dp</dimen>
+    <dimen name="dimens_defeat_7_dp">-7dp</dimen>
+    <dimen name="dimens_6_dp">6dp</dimen>
+    <dimen name="dimens_7_dp">7dp</dimen>
     <dimen name="dimens_8_dp">8dp</dimen>
+    <dimen name="dimens_8.5_dp">8.5dp</dimen>
+    <dimen name="dimens_9_dp">9dp</dimen>
     <dimen name="dimens_10_dp">10dp</dimen>
+    <dimen name="dimens_11_dp">11dp</dimen>
     <dimen name="dimens_12_dp">12dp</dimen>
+    <dimen name="dimens_12.5_dp">12.5dp</dimen>
+    <dimen name="dimens_13_dp">13dp</dimen>
+    <dimen name="dimens_14_dp">14dp</dimen>
+    <dimen name="dimens_14.5_dp">14.5dp</dimen>
     <dimen name="dimens_15_dp">15dp</dimen>
     <dimen name="dimens_16_dp">16dp</dimen>
+    <dimen name="dimens_17_dp">17dp</dimen>
+    <dimen name="dimens_17.5_dp">17.5dp</dimen>
+    <dimen name="dimens_18_dp">18dp</dimen>
+    <dimen name="dimens_19_dp">19dp</dimen>
+    <dimen name="dimens_20_dp">20dp</dimen>
+    <dimen name="dimens_21_dp">21dp</dimen>
+    <dimen name="dimens_22_dp">22dp</dimen>
+    <dimen name="dimens_23_dp">23dp</dimen>
     <dimen name="dimens_24_dp">24dp</dimen>
+    <dimen name="dimens_25_dp">25dp</dimen>
+    <dimen name="dimens_26_dp">26dp</dimen>
+    <dimen name="dimens_27_dp">27dp</dimen>
+    <dimen name="dimens_28_dp">28dp</dimen>
+    <dimen name="dimens_29_dp">29dp</dimen>
+    <dimen name="dimens_30_dp">30dp</dimen>
+    <dimen name="dimens_31_dp">31dp</dimen>
+    <dimen name="dimens_32_dp">32dp</dimen>
+    <dimen name="dimens_33_dp">33dp</dimen>
+    <dimen name="dimens_34_dp">34dp</dimen>
+    <dimen name="dimens_35_dp">35dp</dimen>
+    <dimen name="dimens_36_dp">36dp</dimen>
+    <dimen name="dimens_37_dp">37dp</dimen>
+    <dimen name="dimens_38_dp">38dp</dimen>
+    <dimen name="dimens_39_dp">39dp</dimen>
+    <dimen name="dimens_40_dp">40dp</dimen>
+    <dimen name="dimens_41_dp">41dp</dimen>
+    <dimen name="dimens_42_dp">42dp</dimen>
+    <dimen name="dimens_43_dp">43dp</dimen>
+    <dimen name="dimens_44_dp">44dp</dimen>
     <dimen name="dimens_45_dp">45dp</dimen>
+    <dimen name="dimens_46_dp">46dp</dimen>
+    <dimen name="dimens_47_dp">47dp</dimen>
+    <dimen name="dimens_47.5_dp">47.5dp</dimen>
     <dimen name="dimens_48_dp">48dp</dimen>
+    <dimen name="dimens_49_dp">49dp</dimen>
+    <dimen name="dimens_50_dp">50dp</dimen>
+    <dimen name="dimens_52_dp">52dp</dimen>
+    <dimen name="dimens_54_dp">54dp</dimen>
+    <dimen name="dimens_56_dp">56dp</dimen>
+    <dimen name="dimens_58_dp">58dp</dimen>
+    <dimen name="dimens_59_dp">59dp</dimen>
+    <dimen name="dimens_60_dp">60dp</dimen>
+    <dimen name="dimens_64_dp">64dp</dimen>
+    <dimen name="dimens_72_dp">72dp</dimen>
+    <dimen name="dimens_78_dp">78dp</dimen>
+    <dimen name="dimens_75_dp">75dp</dimen>
+    <dimen name="dimens_62_dp">62dp</dimen>
     <dimen name="dimens_80_dp">80dp</dimen>
+    <dimen name="dimens_81_dp">81dp</dimen>
+    <dimen name="dimens_82_dp">82dp</dimen>
+    <dimen name="dimens_83_dp">83dp</dimen>
+    <dimen name="dimens_84_dp">84dp</dimen>
+    <dimen name="dimens_85_dp">85dp</dimen>
+    <dimen name="dimens_86_dp">86dp</dimen>
+    <dimen name="dimens_87_dp">87dp</dimen>
+    <dimen name="dimens_88_dp">88dp</dimen>
+    <dimen name="dimens_89_dp">89dp</dimen>
+    <dimen name="dimens_90_dp">90dp</dimen>
+    <dimen name="dimens_93_dp">93dp</dimen>
+    <dimen name="dimens_94_dp">94dp</dimen>
+    <dimen name="dimens_95_dp">95dp</dimen>
     <dimen name="dimens_96_dp">96dp</dimen>
+    <dimen name="dimens_100_dp">100dp</dimen>
+    <dimen name="dimens_102_dp">102dp</dimen>
+    <dimen name="dimens_104_dp">104dp</dimen>
+    <dimen name="dimens_107_dp">107dp</dimen>
+    <dimen name="dimens_106_dp">106dp</dimen>
+    <dimen name="dimens_105_dp">105dp</dimen>
+    <dimen name="dimens_110_dp">110dp</dimen>
+    <dimen name="dimens_130_dp">130dp</dimen>
+    <dimen name="dimens_126_dp">126dp</dimen>
+    <dimen name="dimens_132_dp">132dp</dimen>
+    <dimen name="dimens_145_dp">145dp</dimen>
+    <dimen name="dimens_150_dp">150dp</dimen>
+    <dimen name="dimens_7.5_dp">7.5dp</dimen>
+    <dimen name="dimens_55_dp">55dp</dimen>
+    <dimen name="dimens_160_dp">160dp</dimen>
+    <dimen name="dimens_120_dp">160dp</dimen>
+    <dimen name="dimens_70_dp">70dp</dimen>
+    <dimen name="dimens_125_dp">125dp</dimen>
+
+    <dimen name="dimens_170_dp">170dp</dimen>
+    <dimen name="dimens_180_dp">180dp</dimen>
+    <dimen name="dimens_190_dp">190dp</dimen>
+    <dimen name="dimens_260_dp">260dp</dimen>
+    <dimen name="dimens_320_dp">320dp</dimen>
+    <dimen name="dimens_450_dp">450dp</dimen>
+    <dimen name="dimens_115_dp">115dp</dimen>
+    <dimen name="dimens_165_dp">165dp</dimen>
+    <dimen name="dimens_175_dp">175dp</dimen>
+    <dimen name="dimens_184_dp">184dp</dimen>
+    <dimen name="dimens_200_dp">200dp</dimen>
+    <dimen name="dimens_220_dp">220dp</dimen>
+    <dimen name="dimens_224_dp">224dp</dimen>
+    <dimen name="dimens_240_dp">240dp</dimen>
+    <dimen name="dimens_250_dp">250dp</dimen>
+    <dimen name="dimens_256_dp">256dp</dimen>
+    <dimen name="dimens_280_dp">280dp</dimen>
+    <dimen name="dimens_300_dp">300dp</dimen>
+    <dimen name="dimens_310_dp">310dp</dimen>
+    <dimen name="dimens_330_dp">330dp</dimen>
+    <dimen name="dimens_335_dp">335dp</dimen>
+    <dimen name="dimens_346_dp">346dp</dimen>
+    <dimen name="dimens_390_dp">390dp</dimen>
 
 
     <!-- revert dimens sp -->
+    <dimen name="dimens_8_sp">8sp</dimen>
+    <dimen name="dimens_10_sp">10sp</dimen>
+    <dimen name="dimens_9_sp">9sp</dimen>
+    <dimen name="dimens_11_sp">11sp</dimen>
+    <dimen name="dimens_12_sp">12sp</dimen>
+    <dimen name="dimens_13_sp">13sp</dimen>
+    <dimen name="dimens_13.79_sp">13.79sp</dimen>
     <dimen name="dimens_14_sp">14sp</dimen>
     <dimen name="dimens_15_sp">15sp</dimen>
+    <dimen name="dimens_16_sp">16sp</dimen>
+    <dimen name="dimens_17_sp">17sp</dimen>
     <dimen name="dimens_18_sp">18sp</dimen>
+    <dimen name="dimens_19_sp">19sp</dimen>
     <dimen name="dimens_20_sp">20sp</dimen>
-    <dimen name="dimens_256_dp">256dp</dimen>
-    <dimen name="dimens_300_dp">300dp</dimen>
+    <dimen name="dimens_21_sp">21sp</dimen>
+    <dimen name="dimens_22_sp">22sp</dimen>
+    <dimen name="dimens_23_sp">23sp</dimen>
+    <dimen name="dimens_50_sp">50sp</dimen>
+    <dimen name="at_dimens_37_sp">37sp</dimen>
+    <dimen name="at_dimens_cut_17_dp">-17dp</dimen>
+    <dimen name="at_dimens_145_dp">145dp</dimen>
+    <dimen name="at_dimens_155_dp">155dp</dimen>
+    <dimen name="at_dimens_165_dp">165dp</dimen>
+
 </resources>

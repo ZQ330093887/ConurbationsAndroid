@@ -13,13 +13,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:elevation="4dp">
+            android:elevation="@dimen/dimens_4_dp">
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabLayout_content"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:minHeight="48dp"
+                android:layout_height="@dimen/dimens_48_dp"
+                android:minHeight="@dimen/dimens_48_dp"
                 android:background="?attr/colorPrimary"
                 app:tabTextColor="@color/white"
                 app:tabIndicatorColor="@color/colorOrangePrimary"
@@ -35,10 +35,10 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabBtn_content"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="@dimen/dimens_45_dp"
+            android:layout_height="@dimen/dimens_45_dp"
             android:layout_gravity="bottom|right"
-            android:layout_margin="15dp"
+            android:layout_margin="@dimen/dimens_15_dp"
             android:src="@mipmap/add_fab3"
             app:fabSize="normal" />
 

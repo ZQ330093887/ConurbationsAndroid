@@ -8,20 +8,20 @@
         android:id="@+id/tv_index"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="12dp"
+        android:paddingLeft="@dimen/dimens_12_dp"
         android:text="G"
-        android:textSize="14sp"
+        android:textSize="@dimen/dimens_14_sp"
         android:background="#E0E0E0"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/dimens_70_dp"
         android:background="#FAFAFA">
         <ImageView
             android:id="@+id/iv_avatar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
+            android:layout_width="@dimen/dimens_40_dp"
+            android:layout_height="@dimen/dimens_40_dp"
+            android:layout_margin="@dimen/dimens_10_dp"
             android:src="@mipmap/ic_logo"
             android:contentDescription="avatar"
             android:layout_alignParentLeft="true"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="Gjiazhe"
                 android:textColor="#424242"
-                android:textSize="16sp"/>
+                android:textSize="@dimen/dimens_16_sp"/>
 
             <TextView
                 android:id="@+id/tv_number"
@@ -46,14 +46,14 @@
                 android:layout_height="wrap_content"
                 android:text="123456789"
                 android:textColor="#424242"
-                android:textSize="16sp"
-                android:layout_marginLeft="30dp"
+                android:textSize="@dimen/dimens_16_sp"
+                android:layout_marginLeft="@dimen/dimens_30_dp"
                 android:layout_centerInParent="true"/>
 
         </LinearLayout>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/dimens_1_dp"
         android:background="#eee" />
 </LinearLayout>

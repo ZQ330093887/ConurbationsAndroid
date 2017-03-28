@@ -8,10 +8,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="@dimen/dimens_35_dp"
+        android:layout_marginLeft="@dimen/dimens_5_dp"
+        android:layout_marginRight="@dimen/dimens_5_dp"
+        android:layout_marginTop="@dimen/dimens_10_dp"
         android:orientation="horizontal">
 
         <TextView
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textColor="@color/colorTealPrimaryDark"
-            android:textSize="18sp"
+            android:textSize="@dimen/dimens_18_sp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -31,14 +31,14 @@
         android:orientation="horizontal">
 
         <android.support.v7.widget.CardView
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimens_0_dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="@dimen/dimens_8_dp"
+            android:layout_marginTop="@dimen/dimens_8_dp"
             android:layout_weight="1"
             android:clickable="true"
             android:foreground="?selectableItemBackground"
-            card_view:cardCornerRadius="2dp">
+            card_view:cardCornerRadius="@dimen/dimens_2_dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,10 +58,10 @@
                         android:id="@+id/lv_pretty_picture_recommend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="2dp"
-                        android:paddingRight="2dp"
+                        android:paddingLeft="@dimen/dimens_2_dp"
+                        android:paddingRight="@dimen/dimens_2_dp"
                         lv:lv_text="G"
-                        lv:lv_text_size="10sp" />
+                        lv:lv_text_size="@dimen/dimens_10_sp" />
 
                 </FrameLayout>
 
@@ -78,22 +78,22 @@
                             android:id="@+id/tv_pretty_picture_recommend_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="@dimen/dimens_5_dp"
+                            android:layout_marginRight="@dimen/dimens_5_dp"
+                            android:layout_marginTop="@dimen/dimens_5_dp"
                             android:gravity="center_vertical"
                             android:maxLines="1"
                             android:textColor="@color/colorAccent"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/dimens_12_sp" />
 
                         <TextView
                             android:id="@+id/tv_pretty_picture_recommend_content"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
+                            android:layout_margin="@dimen/dimens_5_dp"
                             android:gravity="center_vertical"
                             android:maxLines="1"
-                            android:textSize="10sp" />
+                            android:textSize="@dimen/dimens_10_sp" />
 
                     </LinearLayout>
 
@@ -106,7 +106,7 @@
                         lv:lv_gravity="BOTTOM_RIGHT"
                         lv:lv_text="NEW"
                         lv:lv_text_all_caps="false"
-                        lv:lv_text_size="12sp" />
+                        lv:lv_text_size="@dimen/dimens_12_sp" />
                 </FrameLayout>
 
             </LinearLayout>

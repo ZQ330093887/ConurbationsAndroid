@@ -5,23 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="0dp"
-    app:cardElevation="0dp">
+    app:cardCornerRadius="@dimen/dimens_0_dp"
+    app:cardElevation="@dimen/dimens_0_dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="@dimen/dimens_10_dp">
 
         <TextView
             android:id="@+id/tv_ganhuo_image_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/dimens_10_dp"
             android:layout_weight="1"
             android:textColor="@color/black"
-            android:textSize="@dimen/item_title"
+            android:textSize="@dimen/dimens_14_sp"
             tools:text="基于material design support的开源学习项目(Github)" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_ganhuo_image_title"
             android:textColor="@color/colorHint"
-            android:textSize="@dimen/text_size_summary"
+            android:textSize="@dimen/dimens_12_sp"
             tools:text="via SOLID" />
 
         <TextView
@@ -39,9 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/tv_ganhuo_image_people"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="@dimen/dimens_2_dp"
             android:textColor="@color/colorHint"
-            android:textSize="@dimen/text_size_summary"
+            android:textSize="@dimen/dimens_12_sp"
             tools:text="2016-04-18" />
     </RelativeLayout>
 

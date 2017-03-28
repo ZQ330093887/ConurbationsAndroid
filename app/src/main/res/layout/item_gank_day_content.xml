@@ -5,14 +5,14 @@
     android:background="?attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingEnd="@dimen/recycler_item_padding"
-    android:paddingStart="@dimen/recycler_item_padding">
+    android:paddingEnd="@dimen/dimens_16_dp"
+    android:paddingStart="@dimen/dimens_16_dp">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginEnd="@dimen/padding_gank_title"
+        android:layout_marginEnd="@dimen/dimens_6_dp"
         android:src="@drawable/ic_dot" />
 
     <TextView
@@ -20,7 +20,7 @@
         style="@style/TitleTextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/context_margin"
-        android:paddingTop="@dimen/context_margin" />
+        android:paddingBottom="@dimen/dimens_10_dp"
+        android:paddingTop="@dimen/dimens_10_dp" />
 
 </LinearLayout>
