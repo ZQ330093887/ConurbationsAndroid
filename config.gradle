@@ -1,0 +1,56 @@
+ext {
+
+    android = [
+            compileSdkVersion: 25,
+            buildToolsVersion: "25.0.2",
+            minSdkVersion    : 11,
+            targetSdkVersion : 25,
+    ]
+
+    appConfigs = [
+            "com.test.admin.conurbations":
+                    ["name"         : "ConurbationsAndroid",
+                     "versionName"  : "1.0.1",
+                     "keyStore"     : "../doc/key/conurbation-key",
+                     "storePassword": "330093887",
+                     "keyAlias"     : "GankAndroid",
+                     "keyPassword"  : "330093887"
+                    ]
+    ]
+
+    appChannels = [
+            "lianxiang", "uc", "huawei", "baidu", "c360", "tencent"/*,
+            "wandoujia", "anzhi", "vivo", "oppo", "google", "xiaomi",
+            "sumsung", "eoe", "meizu", "jinli", "leshi", "sougou"*/
+    ]
+
+    dependencies = [
+            "appcompat"  : "com.android.support:appcompat-v7:25.2.0",
+            "umeng"      : "com.umeng.analytics:analytics:latest.integration",
+            "design"     : "com.android.support:design:24.2.1",
+            "cardview"   : "com.android.support:cardview-v7:25.0.1",
+            "gson"       : "com.google.code.gson:gson:2.2.4",
+            "rxbus"      : "com.hwangjr.rxbus:rxbus:1.0.5",
+            "glide"      : "com.github.bumptech.glide:glide:3.7.0",
+            "retrofit2"  : "com.squareup.retrofit2:retrofit:2.0.2",
+            "interceptor": "com.squareup.okhttp3:logging-interceptor:3.1.2",
+            "converter"  : "com.squareup.retrofit2:converter-gson:2.0.2",
+            "rxjava"     : "com.squareup.retrofit2:adapter-rxjava:2.0.2",
+            "picasso"    : "com.squareup.picasso:picasso:2.5.2",
+            "contextmenu": "com.yalantis:contextmenu:1.0.7",
+            "fresco"     : "com.facebook.fresco:fresco:0.9.0+",
+            "whorlview"  : "com.tt:whorlviewlibrary:1.0.3",
+            "junit"      : "junit:junit:4.12",
+            "banner"     : ":banner",
+            "BottomTab"  : ":pagerBottomTabStrip",
+            "telellery"  : ":telegramgallery",
+            "feedback"   : ":feedbacksdk",
+            "labelview"  : ":FlycoLabelView_Lib",
+            "scrollview" : ":AndtroidScrollView",
+            "targetview" : ":TapTargetView",
+            "buttknife"  : "libs/butterknife-7.0.1.jar",
+            "pinyin4j"   : "libs/pinyin4j-2.5.0.jar"
+
+    ]
+
+}

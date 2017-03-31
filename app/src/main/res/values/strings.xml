@@ -33,7 +33,7 @@
     <string name="about">关于</string>
     <string name="search">搜索</string>
     <string name="search_hint">Search&#8230;</string>
-    <string name="about_version">V 1.0.0</string>
+    <string name="about_version">V 1.0.1</string>
     <string name="cd_up_button">Up navigation button</string>
     <string name="cd_clear_button">Clear field</string>
     <string name="hint_prompt">Speak an item name or a number</string>

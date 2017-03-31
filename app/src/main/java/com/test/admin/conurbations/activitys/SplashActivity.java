@@ -9,6 +9,7 @@ import android.os.SystemClock;
 import android.widget.ImageView;
 
 import com.test.admin.conurbations.R;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.Random;
 
@@ -75,5 +76,14 @@ public class SplashActivity extends BaseActivity {
                 startActivityAndFinishWithOutObservable(MainActivity.class);
             }
         });
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
