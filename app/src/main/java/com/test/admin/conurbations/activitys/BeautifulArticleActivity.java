@@ -8,8 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.BeautifulArticleAdapter;
+import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.model.entity.BooksBean;
 
 import org.jsoup.Jsoup;
@@ -20,13 +20,11 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-
 public class BeautifulArticleActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar_beautiful_article_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.rv_beautiful_article_content)
+    @FindView
+    Toolbar mToolbarToolbar;
+    @FindView
     RecyclerView mContentRecyclerView;
     List<BooksBean> mBeautifulArticleList = new ArrayList<>();
     BeautifulArticleAdapter mArticleAdapter;
@@ -43,13 +41,8 @@ public class BeautifulArticleActivity extends BaseActivity {
     };
 
     @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_beautiful_article;
-    }
-
-    @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbar, "", "");
+        initToolbar(mToolbarToolbar, "", "");
         show();
         mArticleAdapter = new BeautifulArticleAdapter();
         mContentRecyclerView.setAdapter(mArticleAdapter);

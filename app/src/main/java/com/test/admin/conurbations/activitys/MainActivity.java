@@ -24,12 +24,13 @@ import android.view.View;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.fragments.BaseFragment;
-import com.test.admin.conurbations.fragments.FragmentHelp;
-import com.test.admin.conurbations.fragments.FragmentIndex;
-import com.test.admin.conurbations.fragments.FragmentNewsInformation;
-import com.test.admin.conurbations.fragments.FragmentPrettyPictures;
+import com.test.admin.conurbations.fragments.NBAFragment;
+import com.test.admin.conurbations.fragments.IndexFragment;
+import com.test.admin.conurbations.fragments.NewsInformationFragment;
+import com.test.admin.conurbations.fragments.PictureFragment;
 import com.test.admin.conurbations.fragments.SearchFragment;
 import com.test.admin.conurbations.utils.PhotoCameralUtil;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
@@ -41,7 +42,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
 import me.majiajie.pagerbottomtabstrip.Controller;
 import me.majiajie.pagerbottomtabstrip.PagerBottomTabLayout;
 import me.majiajie.pagerbottomtabstrip.TabItemBuilder;
@@ -52,32 +52,26 @@ import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectListener;
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener {
 
-    @Bind(R.id.toolbar_main_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.nav_main_view)
-    NavigationView mViewNavigationView;
-    @Bind(R.id.pbtl_main_tab)
-    PagerBottomTabLayout mTabPagerBottomTabLayout;
-    @Bind(R.id.dl_main_drawer_layout)
-    DrawerLayout mLayoutDrawerLayout;
-    @Bind(R.id.mv_main_search)
-    MaterialSearchView mSearchMaterialSearchView;
-
     private Controller mController;
     private List<Fragment> mFragments;
     private CircleImageView mCircleImageView;
     private Bitmap mHeadPhotoBitmap;
     private Bundle mPhotoBundle;
 
-
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_main;
-    }
+    @FindView
+    private Toolbar mToolbarToolbar;
+    @FindView
+    private NavigationView mViewNavigationView;
+    @FindView
+    private PagerBottomTabLayout mTabPagerBottomTabLayout;
+    @FindView
+    private DrawerLayout mLayoutDrawerLayout;
+    @FindView
+    private MaterialSearchView mSearchMaterialSearchView;
 
     @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbar, getResources().getString(R.string.app_name), getResources().getString(R.string.guard_msg));
+        initToolbar(mToolbarToolbar, getResources().getString(R.string.app_name), getResources().getString(R.string.guard_msg));
         //初始化底部导航
         initMainBottomTab();
         //初始化主Activity(底部导航对应的Fragment)
@@ -103,20 +97,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void initAddFragment() {
         mFragments = new ArrayList<>();
-        mFragments.add(createFragment(new FragmentIndex(), Constants.testColors[0]));
-        mFragments.add(createFragment(new FragmentPrettyPictures(), Constants.testColors[1]));
-        mFragments.add(createFragment(new FragmentNewsInformation(), Constants.testColors[2]));
-        mFragments.add(createFragment(new FragmentHelp(), Constants.testColors[3]));
+        mFragments.add(createFragment(new IndexFragment(), Constants.testColors[0]));
+        mFragments.add(createFragment(new PictureFragment(), Constants.testColors[1]));
+        mFragments.add(createFragment(new NewsInformationFragment(), Constants.testColors[2]));
+        mFragments.add(createFragment(new NBAFragment(), Constants.testColors[3]));
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        // transaction.setCustomAnimations(R.anim.push_up_in,R.anim.push_up_out);
         transaction.add(R.id.fl_main_content, mFragments.get(0));
         transaction.commit();
     }
 
     private void initLeftDrawerToggleMenu() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mLayoutDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, mLayoutDrawerLayout, mToolbarToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mLayoutDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -152,7 +145,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .addTabItem(tabItemBuilder)
                 .addTabItem(android.R.drawable.ic_menu_compass, "美图", Constants.testColors[1])
                 .addTabItem(android.R.drawable.ic_menu_crop, "新闻", Constants.testColors[2])
-                .addTabItem(android.R.drawable.ic_menu_help, "帮助", Constants.testColors[3])
+                .addTabItem(android.R.drawable.ic_menu_month, "体育", Constants.testColors[3])
                 .setMode(TabLayoutMode.HIDE_TEXT)
                 .setMode(TabLayoutMode.CHANGE_BACKGROUND_COLOR)
                 .setMode(TabLayoutMode.HIDE_TEXT | TabLayoutMode.CHANGE_BACKGROUND_COLOR)
@@ -196,7 +189,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_camera) {
             startActivity(BeautifulArticleActivity.class);
@@ -225,7 +217,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             Log.i("asd", "onSelected:" + index + "   TAG: " + tag.toString());
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            mToolbar.setBackgroundColor(Constants.toolBarColors[index]);
+            mToolbarToolbar.setBackgroundColor(Constants.toolBarColors[index]);
             mViewNavigationView.setBackgroundColor(Constants.testColors[index]);
             mViewNavigationView.getHeaderView(0).setBackgroundColor(Constants.toolBarColors[index]);
             //transaction.setCustomAnimations(R.anim.push_up_in,R.anim.push_up_out);
@@ -303,7 +295,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.nav_main_view) {
+        if (id == R.id.nv_main_view) {
             PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);//调用选择头像的Dialog
         } else if (id == R.id.circle_image_view) {
             if (mHeadPhotoBitmap != null) {

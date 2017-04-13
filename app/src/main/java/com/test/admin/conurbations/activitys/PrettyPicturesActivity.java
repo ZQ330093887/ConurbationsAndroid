@@ -10,42 +10,35 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.annotations.FindView;
+import com.test.admin.conurbations.annotations.events.OnClick;
 import com.test.admin.conurbations.fragments.PrettyPicturesFragment;
 
 import java.util.Random;
 
-import butterknife.Bind;
-import butterknife.OnClick;
-
 /**
- * Created by wenhuaijun on 2015/11/3 0003.
+ * Created by zhouqiong on 2016/11/3.
  */
 
 public class PrettyPicturesActivity extends BaseActivity {
-    @Bind(R.id.toolbar_pretty_pictures_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.iv_pretty_pictures_head_bg)
+    @FindView
+    Toolbar mToolbarToolbar;
+    @FindView
     ImageView mHeadBgImageView;
-    @Bind(R.id.ctl_pretty_pictures_head)
-    CollapsingToolbarLayout mHeadToolbarLayout;
-    @Bind(R.id.abl_pretty_pictures_hand)
+    @FindView
+    CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
+    @FindView
     AppBarLayout mHeadAppBarLayout;
-    @Bind(R.id.fab_pretty_pictures_fab)
+    @FindView
     FloatingActionButton mFabFloatingActionButton;
     PrettyPicturesFragment mPrettyPicturesItemFragment;
 
-
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_pretty_pictures;
-    }
-
     @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbar,"","");
+        initToolbar(mToolbarToolbar,"","");
         initAppBarSetting();
 
-        mHeadToolbarLayout.setTitle(getIntent().getStringExtra(PrettyPicturesFragment.CLASS_TITLE));
+        mHeadCollapsingToolbarLayout.setTitle(getIntent().getStringExtra(PrettyPicturesFragment.CLASS_TITLE));
 
         Picasso.with(this).load(getBgImg()).into(mHeadBgImageView);
         if (bundle == null) {
@@ -77,7 +70,7 @@ public class PrettyPicturesActivity extends BaseActivity {
         });
     }
 
-    @OnClick(R.id.fab_pretty_pictures_fab)
+    @OnClick("mFabFloatingActionButton")
     public void clickFab(View view) {
         mPrettyPicturesItemFragment.getRecyclerView().setSelection(0);
     }

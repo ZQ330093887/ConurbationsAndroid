@@ -24,7 +24,7 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
-                android:id="@+id/iv_personal_information_hand"
+                android:id="@+id/iv_personal_information_head"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -47,7 +47,7 @@
                     android:textSize="@dimen/dimens_20_sp" />
 
                 <com.test.admin.conurbations.views.CircleImageView
-                    android:id="@+id/civ_personal_information_title_photo"
+                    android:id="@+id/civ_personal_information_photo"
                     android:layout_width="@dimen/dimens_45_dp"
                     android:layout_height="@dimen/dimens_45_dp"
                     android:layout_centerHorizontal="true"
@@ -100,7 +100,7 @@
 
 
     <com.test.admin.conurbations.views.CircleImageView
-        android:id="@+id/civ_personal_information_img"
+        android:id="@+id/civ_personal_information_image"
         android:layout_width="@dimen/dimens_80_dp"
         android:layout_height="@dimen/dimens_80_dp"
         android:layout_margin="@dimen/dimens_16_dp"

@@ -12,25 +12,27 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Pair;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.annotations.SetLayout;
 import com.test.admin.conurbations.utils.CommonUtil;
 import com.test.admin.conurbations.utils.DialogUtils;
+import com.test.admin.conurbations.utils.InjectUtil;
 import com.test.admin.conurbations.utils.SaveBitmapUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.utils.WrapperUtils;
 import com.yalantis.contextmenu.lib.MenuObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import butterknife.ButterKnife;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -39,7 +41,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by zhouqiong on 2017/2/27.
  */
-
+@SetLayout
 public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
 
     private static final String TAG = "BaseActivity";
@@ -49,10 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     public static final String TRANSLATE_WEB_VIEW_TITLE = "translate_web_view_title";
     public static final String EXTRA_URL = "URL";
     public static final String EXTRA_TITLE = "TITLE";
-
-    public static final int REQUEST_CODE_OPEN_ALBUM = 1;
-
-    protected abstract int setLayoutResourceID();
+    public Map<String, View> views;
 
     protected abstract void initData(Bundle bundle);
 
@@ -96,10 +95,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                 return;
             }
         }
-        setContentView(setLayoutResourceID());
+        //1
+        views = new HashMap<>();
+        InjectUtil.inject(this);
+        initPresenter();
+        initData(savedInstanceState);
+
+        //2
+       /* setContentView(setLayoutResourceID());
         ButterKnife.bind(this);
         initData(savedInstanceState);
-        initPresenter();
+        initPresenter();*/
     }
 
     @Override
@@ -116,7 +122,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
     }
 
     @Override
@@ -248,13 +253,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     @Override
-    public void openAlbum() {
-        Intent innerIntent = new Intent(Intent.ACTION_PICK);
-        innerIntent.setType("image/*");
-        startActivityForResult(innerIntent, REQUEST_CODE_OPEN_ALBUM);
-    }
-
-    @Override
     public Activity getRootActivity() {
         Activity activity = this;
         while (activity.getParent() != null) {
@@ -275,38 +273,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         } else {
             this.finish();
         }
-    }
-
-    @Override
-    public void finishWithResultCodeOK() {
-        this.setResult(RESULT_OK);
-        finishActivity();
-    }
-
-    @Override
-    public void setResultCodeOK() {
-        this.setResult(RESULT_OK);
-    }
-
-    @SafeVarargs
-    @Override
-    public final void sendBroadcast(String action, Pair<String, Object>... pairs) {
-        Intent intent = new Intent();
-        Bundle bundle = new Bundle();
-
-        intent.setAction(action);
-        for (Pair<String, Object> pair : pairs) {
-            if (pair.second instanceof Integer) {
-                bundle.putInt(pair.first, (Integer) pair.second);
-            } else if (pair.second instanceof String) {
-                bundle.putString(pair.first, (String) pair.second);
-            } else if (pair.second instanceof Double) {
-                bundle.putDouble(pair.first, (Double) pair.second);
-            }
-        }
-        intent.putExtras(bundle);
-
-        getContext().sendBroadcast(intent);
     }
 
     public static List<MenuObject> getMenuObjects() {

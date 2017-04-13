@@ -18,21 +18,19 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.utils.FileUtil;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by zhouqiong on 2017/1/4.
  */
 public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    @Bind(R.id.toolbar_webview_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.srl_webview_content)
+    @FindView
+    Toolbar mToolbarToolbar;
+    @FindView
     SwipeRefreshLayout mContentSwipeRefreshLayout;
-    @Bind(R.id.wv_webview_content)
+    @FindView
     WebView mContentWebView;
 
     private String mWebViewUrl;
@@ -45,15 +43,9 @@ public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.
         activity.startActivity(intent);
     }
 
-
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_webview;
-    }
-
     @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbar, "", "");
+        initToolbar(mToolbarToolbar, "", "");
         mContentSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent);
         setUpWebView();
 
@@ -169,6 +161,5 @@ public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.
             }
             mContentWebView.destroy();
         }
-        ButterKnife.unbind(this);
     }
 }

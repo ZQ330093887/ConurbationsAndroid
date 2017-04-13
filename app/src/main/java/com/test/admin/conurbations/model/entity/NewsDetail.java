@@ -3,15 +3,18 @@ package com.test.admin.conurbations.model.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by laucherish on 16/3/16.
  */
-public class NewsDetail implements Parcelable {
+public class NewsDetail extends Base  implements Parcelable {
     private String body;
     private String image_source;
-    private String title;
+    public String title;
     private String image;
     private String share_url;
     private String ga_prefix;
@@ -19,6 +22,19 @@ public class NewsDetail implements Parcelable {
     private int id;
     private List<String> js;
     private List<String> css;
+
+    @SerializedName("abstract")
+    public String abstractX;
+    public List<Map<String, String>> content;
+
+    public String url;
+    public String imgurl;
+    public String imgurl1;
+    public String imgurl2;
+    public String time;
+    public String atype;
+    public String commentId;
+    public String newsAppId;
 
     public String getBody() {
         return body;

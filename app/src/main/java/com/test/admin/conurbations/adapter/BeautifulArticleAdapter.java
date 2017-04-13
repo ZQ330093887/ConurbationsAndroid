@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.activitys.BeautifulArticleItemActivity;
+import com.test.admin.conurbations.activitys.ItemBeautifulArticleActivity;
 import com.test.admin.conurbations.fragments.BeautifulArticleItemDetailFragment;
 import com.test.admin.conurbations.model.entity.BooksBean;
 
@@ -23,7 +23,7 @@ public class BeautifulArticleAdapter extends BaseListAdapter<BooksBean> {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent intent = new Intent(context, BeautifulArticleItemActivity.class);
+                Intent intent = new Intent(context, ItemBeautifulArticleActivity.class);
                 intent.putExtra(BeautifulArticleItemDetailFragment.ITEM_TITLE_ID, item.getUrl());
                 intent.putExtra("item_title", item.getTitle());
                 context.startActivity(intent);

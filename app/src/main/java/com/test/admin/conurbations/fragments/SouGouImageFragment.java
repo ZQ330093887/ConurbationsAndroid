@@ -3,9 +3,6 @@ package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.test.admin.conurbations.activitys.ISouGouImageView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
@@ -34,11 +31,7 @@ public class SouGouImageFragment extends BaseListFragment implements ISouGouImag
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        View viewRoot = super.onCreateView(inflater, container, savedInstanceState);
-        return viewRoot;
-    }
+    protected void initData(Bundle bundle) {}
 
     @Override
     public void setSouGouImageData(NetImage imageData) {

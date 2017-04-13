@@ -3,15 +3,12 @@ package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.test.admin.conurbations.activitys.IGankDayView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.GankDayAdapter;
-import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.model.response.GankItem;
+import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.presenter.GankDayPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
@@ -30,6 +27,11 @@ public class GankDayFragment extends BaseListFragment<List<GankItem>> implements
 
     public void setRange(Moment.Range range) {
         this.range = range;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+
     }
 
     Calendar calendar = Calendar.getInstance();
@@ -52,13 +54,6 @@ public class GankDayFragment extends BaseListFragment<List<GankItem>> implements
             mGankDayAdapter.notifyDataSetChanged();
         }
         recycler.onRefreshCompleted();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        View viewRoot = super.onCreateView(inflater, container, savedInstanceState);
-        return viewRoot;
     }
 
     @Override

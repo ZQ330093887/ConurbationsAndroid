@@ -8,27 +8,21 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.test.admin.conurbations.R;
-
-import butterknife.Bind;
+import com.test.admin.conurbations.annotations.FindView;
 
 public class AboutActivity extends BaseActivity {
-    @Bind(R.id.toolbar_news_detail_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.ctb_about_head)
+    @FindView
+    Toolbar mToolbarToolbar;
+    @FindView
     CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
-    @Bind(R.id.tv_about_version)
-    TextView mVersionTextView;
-
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_about;
-    }
+    @FindView
+    TextView mVersionNameTextView;
 
     @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbar, "", "");
+        initToolbar(mToolbarToolbar, "", "");
         mHeadCollapsingToolbarLayout.setTitle(getString(R.string.about));
-        mVersionTextView.setText(getVersion());
+        mVersionNameTextView.setText(getVersion());
     }
 
     @Override

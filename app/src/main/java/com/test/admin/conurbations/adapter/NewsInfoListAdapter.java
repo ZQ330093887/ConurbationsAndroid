@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.activitys.BaseActivity;
 import com.test.admin.conurbations.activitys.NewsInfoListDetailActivity;
 import com.test.admin.conurbations.fragments.NewsInfoListDetailFragment;
 import com.test.admin.conurbations.model.entity.News;
@@ -45,26 +46,30 @@ public class NewsInfoListAdapter extends BaseListAdapter<News> {
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(imageView);
             }
-            sampleItemViewHolder.setOnClickListener(R.id.cv_item_news_info, getListener(sampleItemViewHolder, item));
+            sampleItemViewHolder.setOnClickListener(R.id.cv_item_news_info, getListener(item,
+                    sampleItemViewHolder.getView(R.id.rv_news_summary_photo_iv),
+                    BaseActivity.TRANSLATE_WEB_VIEW_BG_IMG));
         }
         if (holder instanceof SamplePhotoItemViewHolder) {
             SamplePhotoItemViewHolder photoItemViewHolder = (SamplePhotoItemViewHolder) holder;
             photoItemViewHolder.setTypeface(R.id.tv_item_news_summary_title, SolidApplication.songTi);
             photoItemViewHolder.setText(R.id.tv_item_news_summary_title, item.getTitle());
-            photoItemViewHolder.setOnClickListener(R.id.cv_item_news_info, getListener(photoItemViewHolder, item));
+            photoItemViewHolder.setOnClickListener(R.id.cv_item_news_info, getListener(item,
+                    photoItemViewHolder.getView(R.id.tv_item_news_summary_title),
+                    BaseActivity.TRANSLATE_WEB_VIEW_TITLE));
         }
     }
 
     @NonNull
-    private View.OnClickListener getListener(final BaseViewHolder holder, final News news) {
+    private View.OnClickListener getListener(final News news, final View view, final String s) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = v.getContext();
+                Context context = view.getContext();
                 Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
                 intent.putExtra(NewsInfoListDetailFragment.KEY_NEWS, news.getId());
-                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context
-                        , new Pair<>(holder.getView(R.id.tv_item_news_summary_title), "key_"));
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation
+                        ((Activity) context, new Pair<>(view, s));
                 ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
             }
         };

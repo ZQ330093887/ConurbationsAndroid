@@ -2,15 +2,12 @@ package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.test.admin.conurbations.activitys.IWelfareView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.WelfareListAdapter;
-import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.model.response.GankData;
+import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.presenter.WelfarePresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
@@ -43,11 +40,7 @@ public class WelfareFragment extends BaseListFragment implements IWelfareView {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        View viewRoot = super.onCreateView(inflater, container, savedInstanceState);
-        return viewRoot;
-    }
+    protected void initData(Bundle bundle) {}
 
     @Override
     protected BaseListAdapter setUpAdapter() {

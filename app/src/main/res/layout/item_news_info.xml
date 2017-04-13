@@ -17,7 +17,7 @@
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/dimens_10_sp"
             android:scaleType="centerCrop"
-            android:transitionName="translate_web_view"
+            android:transitionName="translate_web_view_bg_img"
             tools:targetApi="lollipop" />
 
         <TextView

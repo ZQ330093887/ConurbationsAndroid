@@ -8,30 +8,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.tangxiaolv.telegramgallery.GalleryActivity;
-import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.annotations.FindView;
+import com.test.admin.conurbations.annotations.events.OnClick;
 
 import java.util.List;
-
-import butterknife.Bind;
-import butterknife.OnClick;
 
 /**
  * Created by zhouqiong on 2016/9/29.
  */
 public class TelegramGalleryActivity extends BaseActivity {
-    @Bind(R.id.gv_telegram_gallery_content)
+    @FindView
     GridView mContentGridView;
+    @FindView
+    Button mOptionButton;
+    @FindView
+    Button mMultipleChoiceButton;
     private List<String> mPhotoList;
     private BaseAdapter mBaseAdapter;
-
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_telegram_gallery;
-    }
 
     @Override
     protected void initData(Bundle bundle) {
@@ -86,13 +84,13 @@ public class TelegramGalleryActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.btn_telegram_gallery_multiple_choice, R.id.btn_telegram_gallery_option})
-    void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.btn_telegram_gallery_multiple_choice){
-            GalleryActivity.openActivity(TelegramGalleryActivity.this, false, 9, 12);
-        }else if (id == R.id.btn_telegram_gallery_option){
-            GalleryActivity.openActivity(TelegramGalleryActivity.this, true, 9, 12);
-        }
+    @OnClick("mOptionButton")
+    void onClickmOptionButton(View view) {
+        GalleryActivity.openActivity(TelegramGalleryActivity.this, true, 9, 12);
+    }
+
+    @OnClick("mMultipleChoiceButton")
+    void onClickmCheckBoxButton(View view) {
+        GalleryActivity.openActivity(TelegramGalleryActivity.this, false, 9, 12);
     }
 }

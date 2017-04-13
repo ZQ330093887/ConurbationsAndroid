@@ -12,15 +12,12 @@ import com.test.admin.conurbations.fragments.NewsInfoListDetailFragment;
 public class NewsInfoListDetailActivity extends BaseActivity {
 
     @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_news_info_list_detail;
-    }
-
-    @Override
     protected void initData(Bundle bundle) {
         if (bundle == null) {
             Bundle arguments = new Bundle();
             arguments.putInt(NewsInfoListDetailFragment.KEY_NEWS, getIntent().getIntExtra(NewsInfoListDetailFragment.KEY_NEWS, 0));
+            arguments.putString(NewsInfoListDetailFragment.KEY_NBA_INDEX, getIntent().getStringExtra(NewsInfoListDetailFragment.KEY_NBA_INDEX));
+            arguments.putString(NewsInfoListDetailFragment.KEY_TITLE, getIntent().getStringExtra(NewsInfoListDetailFragment.KEY_TITLE));
             NewsInfoListDetailFragment fragment = new NewsInfoListDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

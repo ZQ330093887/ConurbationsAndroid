@@ -16,7 +16,8 @@
         android:layout_marginTop="@dimen/dimens_8_dp"
         android:singleLine="true"
         android:textSize="@dimen/dimens_15_sp"
-        tools:text="武汉孕妇临盆被洪水围困 消防营救" />
+        tools:text="武汉孕妇临盆被洪水围困 消防营救"
+        android:transitionName="translate_web_view_title"/>
 
 
 </android.support.v7.widget.CardView>

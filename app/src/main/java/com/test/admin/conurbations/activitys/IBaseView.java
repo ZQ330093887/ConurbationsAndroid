@@ -2,9 +2,7 @@ package com.test.admin.conurbations.activitys;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Pair;
 
 /**
  * Created by zhouqiong on 2017/2/27.
@@ -40,21 +38,11 @@ public interface IBaseView {
 
     void startActivityForResult(Class<?> cls, int requestCode, Bundle bundle);
 
-    void openAlbum();
-
     Activity getRootActivity();
 
     Context getContext();
 
     Context getApplicationContext();
 
-    AssetManager getAssets();
-
     void finishActivity();
-
-    void finishWithResultCodeOK();
-
-    void setResultCodeOK();
-
-    void sendBroadcast(String action, Pair<String, Object>... pairs);
 }

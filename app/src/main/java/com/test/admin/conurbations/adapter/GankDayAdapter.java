@@ -30,8 +30,6 @@ import com.test.admin.conurbations.widget.SolidApplication;
 
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by zhouqiong on 2017/1/12.
@@ -79,11 +77,11 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             switch (viewType) {
                 case VIEW_TYPE_HEADER:
-                    return new CategoryHeaderViewHolder(parent);
+                    return new CategoryHeaderViewHolder((ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gank_day_head, parent, false));
                 case VIEW_TYPE_NORMAL:
-                    return new NormalViewHolder(parent);
+                    return new NormalViewHolder((ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gank_day_content, parent, false));
                 case VIEW_TYPE_GIRL_IMAGE:
-                    return new GirlImageViewHolder(parent);
+                    return new GirlImageViewHolder((ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gank_day_imge, parent, false));
             }
             return null;
         }
@@ -170,35 +168,30 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
         }
 
         public class CategoryHeaderViewHolder extends RecyclerView.ViewHolder {
-
-            @Bind(R.id.tv_item_gank_day_head_title)
             TextView mTitleTextView;
 
             public CategoryHeaderViewHolder(ViewGroup parent) {
-                super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gank_day_head, parent, false));
-                ButterKnife.bind(this, itemView);
+                super(parent);
+                mTitleTextView = (TextView) parent.findViewById(R.id.tv_item_gank_day_head_title);
             }
         }
 
         public class NormalViewHolder extends RecyclerView.ViewHolder {
-
-            @Bind(R.id.tv_item_gank_day_content_title)
             TextView mTitleTextView;
 
             public NormalViewHolder(ViewGroup parent) {
-                super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gank_day_content, parent, false));
-                ButterKnife.bind(this, itemView);
+                super(parent);
+                mTitleTextView = (TextView) parent.findViewById(R.id.tv_item_gank_day_content_title);
             }
         }
 
         public class GirlImageViewHolder extends RecyclerView.ViewHolder {
 
-            @Bind(R.id.rv_item_gank_day_image)
             RatioImageView mImageView;
 
             public GirlImageViewHolder(ViewGroup parent) {
-                super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gank_day_imge, parent, false));
-                ButterKnife.bind(this, itemView);
+                super(parent);
+                mImageView = (RatioImageView) parent.findViewById(R.id.rv_item_gank_day_image);
                 mImageView.setRatio(1.618f);
             }
         }

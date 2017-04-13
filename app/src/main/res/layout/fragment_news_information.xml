@@ -20,7 +20,7 @@
                 android:orientation="vertical">
 
                 <android.support.design.widget.TabLayout
-                    android:id="@+id/tb_news_info_head"
+                    android:id="@+id/tl_news_information_head"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimens_48_dp"
                     android:background="?attr/colorPrimary"
@@ -34,18 +34,11 @@
             </android.support.design.widget.AppBarLayout>
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/vp_news_info_content"
+                android:id="@+id/vp_news_information_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         </android.support.design.widget.CoordinatorLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#90FFFFFF"
-            android:clickable="true"
-            android:visibility="gone" />
     </FrameLayout>
 </RelativeLayout>

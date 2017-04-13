@@ -14,14 +14,14 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <android.support.design.widget.AppBarLayout
-                android:id="@+id/abl_pretty_pictures_hand"
+                android:id="@+id/abl_picture_head"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="@dimen/dimens_4_dp"
                 android:orientation="vertical">
 
                 <android.support.design.widget.TabLayout
-                    android:id="@+id/tb_pretty_pictures_hand"
+                    android:id="@+id/tl_picture_head"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimens_48_dp"
                     android:background="?attr/colorPrimary"
@@ -35,7 +35,7 @@
             </android.support.design.widget.AppBarLayout>
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/vp_pretty_pictures_content"
+                android:id="@+id/vp_picture_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
@@ -51,7 +51,7 @@
     </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_pretty_pictures_fab"
+        android:id="@+id/fab_picture_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

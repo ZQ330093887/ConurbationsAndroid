@@ -1,21 +1,16 @@
 package com.test.admin.conurbations.fragments;
 
-import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.annotations.FindView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,14 +20,17 @@ import org.jsoup.select.Elements;
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class BeautifulArticleItemDetailFragment extends Fragment {
+public class BeautifulArticleItemDetailFragment extends BaseFragment {
 
     public static final String ITEM_URL = "url";
     public static final String ITEM_TITLE_ID = "item_title_id";
     public static final String ITEM_TITLE = "item_title";
     String detailContext;
     private static String text;
-    private TextView textContext;
+    @FindView
+    TextView mContentTextView;
+    @FindView
+    CollapsingToolbarLayout mContentCollapsingToolbarLayout;
 
     private Handler mHandler = new Handler() {
 
@@ -41,8 +39,8 @@ public class BeautifulArticleItemDetailFragment extends Fragment {
             super.handleMessage(msg);
             if (msg.what == 0x123456) {
                 Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/jianshi_default.otf");
-                textContext.setTypeface(tf);
-                textContext.setText(detailContext);
+                mContentTextView.setTypeface(tf);
+                mContentTextView.setText(detailContext);
                 text = detailContext;
             }
         }
@@ -55,32 +53,23 @@ public class BeautifulArticleItemDetailFragment extends Fragment {
        return "暂无数据可复制";
    }
 
+    @Override
+    public BaseFragment newInstance() {
+        return null;
+    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    protected void initData(Bundle bundle) {
         if (getArguments().containsKey(ITEM_URL)) {
             show(getArguments().getString(ITEM_URL));
             String title = getArguments().getString(ITEM_TITLE);
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.ctl_beautiful_article_item_detail_head);
-            if (appBarLayout != null) {
+            if (mContentCollapsingToolbarLayout != null) {
                 Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/jianshi_default.otf");
-                appBarLayout.setCollapsedTitleTypeface(tf);
-                appBarLayout.setTitle(title);
+                mContentCollapsingToolbarLayout.setCollapsedTitleTypeface(tf);
+                mContentCollapsingToolbarLayout.setTitle(title);
             }
         }
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.item_beautiful_article_detail, container, false);
-        textContext = ((TextView) rootView.findViewById(R.id.tv_beautiful_article_detail));
-        return rootView;
-    }
-
     private void show(final String url) {
         new Thread(new Runnable() {
             @Override

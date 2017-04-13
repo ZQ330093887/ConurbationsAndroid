@@ -2,9 +2,6 @@ package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.test.admin.conurbations.activitys.IWelfareView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
@@ -27,6 +24,9 @@ public class GanHuoFragment extends BaseListFragment implements IWelfareView {
     }
 
     @Override
+    protected void initData(Bundle bundle) {}
+
+    @Override
     public void setWelfareData(GankData welfareData) {
         if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
             mDataList.clear();
@@ -40,13 +40,6 @@ public class GanHuoFragment extends BaseListFragment implements IWelfareView {
             mGanHuoAdapter.notifyDataSetChanged();
         }
         recycler.onRefreshCompleted();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        View viewRoot = super.onCreateView(inflater, container, savedInstanceState);
-        return viewRoot;
     }
 
     @Override

@@ -5,7 +5,7 @@
        android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_load_empty"
+        android:id="@+id/tv_news_info_list_detail_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -9,25 +9,19 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.fragments.BeautifulArticleItemDetailFragment;
-
-import butterknife.Bind;
 
 public class BeautifulArticleItemDetailActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.toolbar_beautiful_article_item_detail_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.fab_beautiful_article_item_detail_fab)
-    FloatingActionButton mFloatingActionButton;
-
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_beautiful_article_item_detail;
-    }
+    @FindView
+    Toolbar mToolbarToolbar;
+    @FindView
+    FloatingActionButton mViewFloatingActionButton;
 
     @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbar, "", "");
+        initToolbar(mToolbarToolbar, "", "");
         if (bundle == null) {
             Bundle arguments = new Bundle();
             arguments.putString(BeautifulArticleItemDetailFragment.ITEM_URL, getIntent().getStringExtra(BeautifulArticleItemDetailFragment.ITEM_URL));
@@ -39,7 +33,7 @@ public class BeautifulArticleItemDetailActivity extends BaseActivity implements 
                     .commit();
         }
 
-        mFloatingActionButton.setOnClickListener(this);
+        mViewFloatingActionButton.setOnClickListener(this);
     }
 
     @Override

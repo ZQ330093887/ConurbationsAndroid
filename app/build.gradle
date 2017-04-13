@@ -86,9 +86,11 @@ dependencies {
     compile rootProject.ext.dependencies["design"]
     compile rootProject.ext.dependencies["cardview"]
     compile rootProject.ext.dependencies["gson"]
+    compile rootProject.ext.dependencies["fastjson"]
     compile rootProject.ext.dependencies["rxbus"]
     compile rootProject.ext.dependencies["glide"]
     compile rootProject.ext.dependencies["retrofit2"]
+    compile rootProject.ext.dependencies["converter"]
     compile rootProject.ext.dependencies["interceptor"]
     compile rootProject.ext.dependencies["converter"]
     compile rootProject.ext.dependencies["rxjava"]
@@ -97,6 +99,7 @@ dependencies {
     compile rootProject.ext.dependencies["whorlview"]
     compile rootProject.ext.dependencies["fresco"]
     compile rootProject.ext.dependencies["contextmenu"]
+    compile rootProject.ext.dependencies["con_scalars"]
 
     compile project(rootProject.ext.dependencies["banner"])
     compile project(rootProject.ext.dependencies["BottomTab"])
@@ -105,8 +108,8 @@ dependencies {
     compile project(rootProject.ext.dependencies["labelview"])
     compile project(rootProject.ext.dependencies["scrollview"])
     compile project(rootProject.ext.dependencies["targetview"])
+    compile project(rootProject.ext.dependencies["videoplayer"])
 
-    compile files(rootProject.ext.dependencies["buttknife"])
     compile files(rootProject.ext.dependencies["pinyin4j"])
 
     testCompile rootProject.ext.dependencies["junit"]

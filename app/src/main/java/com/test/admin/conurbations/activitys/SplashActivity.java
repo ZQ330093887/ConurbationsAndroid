@@ -9,11 +9,10 @@ import android.os.SystemClock;
 import android.widget.ImageView;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.annotations.FindView;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.Random;
-
-import butterknife.Bind;
 
 
 /**
@@ -43,28 +42,23 @@ public class SplashActivity extends BaseActivity {
             R.mipmap.splash15,
             R.mipmap.splash16,
     };
-
-    @Bind(R.id.iv_splash_bg)
-    ImageView mBgImageView;
-
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_splash;
-    }
+    @FindView
+    private ImageView mLogoImageView;
 
     @Override
     protected void initData(Bundle bundle) {
         Random r = new Random(SystemClock.elapsedRealtime());
-        mBgImageView.setImageResource(SPLASH_ARRAY[r.nextInt(SPLASH_ARRAY.length)]);
+        mLogoImageView.setImageResource(SPLASH_ARRAY[r.nextInt(SPLASH_ARRAY.length)]);
         animateImage();
     }
 
     @Override
-    protected void initPresenter() {}
+    protected void initPresenter() {
+    }
 
     private void animateImage() {
-        ObjectAnimator animatorX = ObjectAnimator.ofFloat(mBgImageView, "scaleX", 1f, SCALE_END);
-        ObjectAnimator animatorY = ObjectAnimator.ofFloat(mBgImageView, "scaleY", 1f, SCALE_END);
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(mLogoImageView, "scaleX", 1f, SCALE_END);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(mLogoImageView, "scaleY", 1f, SCALE_END);
 
         AnimatorSet set = new AnimatorSet();
         set.setDuration(ANIMATION_DURATION).play(animatorX).with(animatorY);
@@ -82,6 +76,7 @@ public class SplashActivity extends BaseActivity {
         super.onResume();
         MobclickAgent.onResume(this);
     }
+
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);

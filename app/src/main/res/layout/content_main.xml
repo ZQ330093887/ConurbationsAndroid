@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:mContext="com.test.admin.conurbations.activitys.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    android:orientation="vertical">
 
     <FrameLayout
+        android:layout_weight="1"
         android:id="@+id/fl_main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/pbtl_main_tab" />
 
     <me.majiajie.pagerbottomtabstrip.PagerBottomTabLayout
-        android:id="@+id/pbtl_main_tab"
+        android:id="@+id/tl_main_tab_pager_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:elevation="@dimen/dimens_8_dp" />
-</RelativeLayout>
+</LinearLayout>

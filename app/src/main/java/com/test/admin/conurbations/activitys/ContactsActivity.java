@@ -8,29 +8,23 @@ import android.widget.Toast;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.FragmentContactsAdapter;
+import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.config.Contact;
 import com.test.admin.conurbations.views.WaveSideBar;
 
 import java.util.ArrayList;
-
-import butterknife.Bind;
 
 /**
  * Created by zhouqiong on 2016/9/23.
  */
 public class ContactsActivity extends BaseActivity {
 
-    @Bind(R.id.rv_contacts_recycle_view)
+    @FindView
     RecyclerView mViewRecyclerView;
-    @Bind(R.id.wsb_contacts_wave)
-    WaveSideBar mWaveSideBar;
+    @FindView
+    WaveSideBar mViewWaveSideBar;
     private ArrayList<Contact> mContactsList = new ArrayList<>();
     private FragmentContactsAdapter mContactsAdapter;
-
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.contacts_activity;
-    }
 
     @Override
     protected void initData(Bundle bundle) {
@@ -52,8 +46,8 @@ public class ContactsActivity extends BaseActivity {
                 Toast.makeText(ContactsActivity.this, data.getNumber(), Toast.LENGTH_SHORT).show();
             }
         });
-        mWaveSideBar.setPosition(WaveSideBar.POSITION_RIGHT);
-        mWaveSideBar.setOnSelectIndexItemListener(new WaveSideBar.OnSelectIndexItemListener() {
+        mViewWaveSideBar.setPosition(WaveSideBar.POSITION_RIGHT);
+        mViewWaveSideBar.setOnSelectIndexItemListener(new WaveSideBar.OnSelectIndexItemListener() {
             @Override
             public void onSelectIndexItem(String index) {
                 for (int i = 0; i< mContactsList.size(); i++) {

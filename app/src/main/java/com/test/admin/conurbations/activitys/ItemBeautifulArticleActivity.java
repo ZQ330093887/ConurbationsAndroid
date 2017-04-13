@@ -9,8 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.BeautifulArticleItemAdapter;
+import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.fragments.BeautifulArticleItemDetailFragment;
 import com.test.admin.conurbations.model.entity.BooksBean;
 
@@ -22,25 +22,17 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-
-public class BeautifulArticleItemActivity extends BaseActivity {
-    @Bind(R.id.item_beautiful_article_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.rv_beautiful_article_content)
+public class ItemBeautifulArticleActivity extends BaseActivity {
+    @FindView
+    Toolbar mToolbarToolbar;
+    @FindView
     RecyclerView mContentRecyclerView;
     List<BooksBean> mBeautifulArticleItemList = new ArrayList<>();
     BeautifulArticleItemAdapter mArticleItemAdapter;
 
-
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.item_activity_beautiful_article;
-    }
-
     @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbar, getIntent().getStringExtra("item_title"), "");
+        initToolbar(mToolbarToolbar, getIntent().getStringExtra("item_title"), "");
 
         String url = getIntent().getStringExtra(BeautifulArticleItemDetailFragment.ITEM_TITLE_ID);
         if (!TextUtils.isEmpty(url)) {

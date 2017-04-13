@@ -1,2 +1,2 @@
-include ':app', ':pagerBottomTabStrip', ':TapTargetView', ':telegramgallery', ':feedbacksdk', ':FlycoLabelView_Lib', ':banner', ':AndtroidScrollView'
+include ':app', ':pagerBottomTabStrip', ':TapTargetView', ':telegramgallery', ':feedbacksdk', ':FlycoLabelView_Lib', ':banner', ':AndtroidScrollView', ':jcvideoplayer-lib'
 project(':AndtroidScrollView').projectDir = new File('ScrollView')

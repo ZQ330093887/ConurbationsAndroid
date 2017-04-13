@@ -2,107 +2,129 @@ package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.INewsInfoDetailListView;
+import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.model.entity.NewsDetail;
 import com.test.admin.conurbations.presenter.NewsInfoListDetailPresenter;
 import com.test.admin.conurbations.utils.HtmlUtil;
-import com.test.admin.conurbations.utils.RatioImageView;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by zhouqiong on 16/3/17.
  */
-public class NewsInfoListDetailFragment extends Fragment implements INewsInfoDetailListView {
+public class NewsInfoListDetailFragment extends BaseFragment implements INewsInfoDetailListView {
 
-    @Bind(R.id.rv_news_info_list_detail_header)
-    RatioImageView mHeadRatioImageView;
-    @Bind(R.id.tv_news_info_list_detail_title)
+    @FindView
+    ImageView mHeadImageView;
+    @FindView
     TextView mTitleTextView;
-    @Bind(R.id.tv_news_info_list_detail_source)
+    @FindView
     TextView mSourceTextView;
-    @Bind(R.id.toolbar_news_detail_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.ctl_news_info_list_detail_head)
+    @FindView
+    TextView mNewsTextView;
+    @FindView
+    Toolbar mToolbarToolbar;
+    @FindView
     CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
-    @Bind(R.id.wv_news_info_list_detail_news)
+    @FindView
     WebView mNewsWebView;
-    @Bind(R.id.tv_load_empty)
+    @FindView
     TextView mEmptyTextView;
-    @Bind(R.id.tv_load_error)
+    @FindView
     TextView mErrorTextView;
     private int mID;
+    private String keyTitle;
+    private String keyNbaIndex;
     private NewsInfoListDetailPresenter mNewsInfoListDetailPresenter;
     public static final String KEY_NEWS = "key_news";
+    public static final String KEY_TITLE = "key_title";
+    public static final String KEY_NBA_INDEX = "key_nba_index";
+
 
     @Override
     public void setNewsInfoDetailData(NewsDetail newsDetail) {
         if (newsDetail == null) {
             mEmptyTextView.setVisibility(View.VISIBLE);
         } else {
-            mHeadRatioImageView.setRatio(0.918f);
-            Glide.with(getActivity())
-                    .load(newsDetail.getImage())
-                    .into(mHeadRatioImageView);
-            mTitleTextView.setText(newsDetail.getTitle());
-            mSourceTextView.setText(newsDetail.getImage_source());
-            mNewsWebView.setDrawingCacheEnabled(true);
-            String htmlData = HtmlUtil.createHtmlData(newsDetail, false);
-            mNewsWebView.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
-            mEmptyTextView.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(keyNbaIndex)) {
+                mNewsWebView.setVisibility(View.GONE);
+                mNewsTextView.setVisibility(View.VISIBLE);
+                mSourceTextView.setText(newsDetail.time);
+                mTitleTextView.setText(newsDetail.title);
+                List<Map<String, String>> content = newsDetail.content;
+                for (Map<String, String> map : content) {
+                    Set<String> set = map.keySet();
+                    if (set.contains("img")) {
+                        final String url = map.get("img");
+                        Glide.with(getActivity())
+                                .load(url)
+                                .into(mHeadImageView);
+                    } else {
+                        if (!TextUtils.isEmpty(map.get("text"))) {
+                            mNewsTextView.append(map.get("text") + "\n\n");
+                        }
+                    }
+                }
+                mEmptyTextView.setVisibility(View.GONE);
+            } else {
+                Glide.with(getActivity())
+                        .load(newsDetail.getImage())
+                        .centerCrop()
+                        .into(mHeadImageView);
+                mTitleTextView.setText(newsDetail.getTitle());
+                mSourceTextView.setText(newsDetail.getImage_source());
+                mNewsWebView.setDrawingCacheEnabled(true);
+                String htmlData = HtmlUtil.createHtmlData(newsDetail, false);
+                mNewsWebView.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
+                mEmptyTextView.setVisibility(View.GONE);
+            }
         }
         mErrorTextView.setVisibility(View.GONE);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_news_info_list_detail, container, false);
-        ButterKnife.bind(this, contentView);
-        InitView();
-        return contentView;
+    public BaseFragment newInstance() {
+        return null;
     }
 
-    private void InitView() {
+    @Override
+    protected void initData(Bundle bundle) {
         if (getArguments().containsKey(KEY_NEWS)) {
             mID = getArguments().getInt(KEY_NEWS);
         }
+        if (getArguments().containsKey(KEY_NEWS)) {
+            keyTitle = getArguments().getString(KEY_TITLE);
+        }
+        if (getArguments().containsKey(KEY_NBA_INDEX)) {
+            keyNbaIndex = getArguments().getString(KEY_NBA_INDEX);
+        }
         mNewsInfoListDetailPresenter = new NewsInfoListDetailPresenter(this);
         setHasOptionsMenu(true);
-        init();
+        if (!TextUtils.isEmpty(keyTitle)) {
+            initToolbar(mToolbarToolbar, keyTitle, "");
+        } else {
+            initToolbar(mToolbarToolbar, "新闻资讯", "");
+        }
+        mHeadCollapsingToolbarLayout.setTitleEnabled(true);
         loadData();
     }
 
-    private void init() {
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(mToolbar);
-        ActionBar actionBar = activity.getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
-        mHeadCollapsingToolbarLayout.setTitleEnabled(true);
-    }
-
     private void loadData() {
-        mNewsInfoListDetailPresenter.getNewsInfoDetailData(mID);
+        if (!TextUtils.isEmpty(keyTitle)) {
+            mNewsInfoListDetailPresenter.getNBANewsInfoDetailData(keyNbaIndex);
+        } else {
+            mNewsInfoListDetailPresenter.getNewsInfoDetailData(mID);
+        }
     }
-
 }

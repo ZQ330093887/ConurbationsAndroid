@@ -2,9 +2,6 @@ package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.test.admin.conurbations.activitys.INewInfoIndexView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
@@ -23,12 +20,14 @@ public class NewsInfoIndexFragment extends BaseListFragment implements INewInfoI
     protected NewsInfoIndexAdapter mNewsInfoIndexAdapter;
     protected NewsInfoIndexPresenter mNewsInfoIndexPresenter;
     protected String mOrdDate;
-    private String range;
+    protected String range;
 
     public void setRange(String range) {
         this.range = range;
     }
 
+    @Override
+    protected void initData(Bundle bundle) {}
 
     @Override
     public void setNewListData(NewsList newListData) {
@@ -46,13 +45,6 @@ public class NewsInfoIndexFragment extends BaseListFragment implements INewInfoI
             mNewsInfoIndexAdapter.notifyDataSetChanged();
         }
         recycler.onRefreshCompleted();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        View viewRoot = super.onCreateView(inflater, container, savedInstanceState);
-        return viewRoot;
     }
 
     @Override

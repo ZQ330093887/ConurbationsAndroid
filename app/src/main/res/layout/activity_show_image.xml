@@ -25,7 +25,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:id="@+id/lly_show_image_progress_bar"
+        android:id="@+id/ll_show_image_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
@@ -44,7 +44,7 @@
 
 
     <com.test.admin.conurbations.photoview.PhotoView
-        android:id="@+id/pv_show_image_photo"
+        android:id="@+id/pv_show_image_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/abl_show_image_head"

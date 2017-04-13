@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/news_summary_card_view"
+    app:cardElevation="@dimen/dimens_2_dp">
+
+    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+        android:id="@+id/jps_item_news_video_video"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_200_dp" />
+
+    <TextView
+        android:id="@+id/tv_item_news_video_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginLeft="@dimen/dimens_5_dp"
+        android:layout_marginRight="@dimen/dimens_5_dp"
+        android:layout_marginTop="@dimen/dimens_3_dp"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimens_12_sp" />
+
+    <ImageView
+        android:id="@+id/tv_item_news_video_goto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:layout_marginRight="@dimen/dimens_5_dp"
+        android:layout_marginTop="@dimen/dimens_5_dp"
+        android:padding="@dimen/dimens_10_dp"
+        android:src="@mipmap/ic_goto" />
+</android.support.v7.widget.CardView>

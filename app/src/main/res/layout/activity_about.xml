@@ -11,7 +11,7 @@
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/ctb_about_head"
+            android:id="@+id/ctl_about_head"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_256_dp"
             android:fitsSystemWindows="true"
@@ -44,7 +44,7 @@
                     android:textSize="@dimen/dimens_18_sp" />
 
                 <TextView
-                    android:id="@+id/tv_about_version"
+                    android:id="@+id/tv_about_version_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimens_8_dp"
@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="@dimen/dimens_12_dp"
-                android:background="@color/divider" />
+                android:background="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="@dimen/dimens_12_dp"
-                android:background="@color/divider" />
+                android:background="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -203,7 +203,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="@dimen/dimens_12_dp"
-                android:background="@color/divider"
+                android:background="@color/black"
                 android:orientation="vertical"/>
 
             <TextView

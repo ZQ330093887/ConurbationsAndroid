@@ -58,7 +58,7 @@
             android:name=".activitys.ShowImageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activitys.BeautifulArticleItemActivity"
+            android:name=".activitys.ItemBeautifulArticleActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.PrettyPicturesActivity"

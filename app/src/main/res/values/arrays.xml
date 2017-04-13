@@ -34,6 +34,22 @@
         <item>休息视频</item>
     </string-array>
 
+    <string-array name="nba_tab">
+        <item>今日头条</item>
+        <item>新闻资讯</item>
+        <item>视频集锦</item>
+        <item>最佳进球</item>
+        <item>赛场花絮</item>
+    </string-array>
+
+    <string-array name="nba_tab_id">
+        <item>banner</item>
+        <item>news</item>
+        <item>videos</item>
+        <item>depth</item>
+        <item>highlight</item>
+    </string-array>
+
     <string-array name="news_info_tab">
         <item>知乎</item>
         <item>推荐</item>

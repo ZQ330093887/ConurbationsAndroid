@@ -17,6 +17,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.photoview.PhotoView;
 import com.test.admin.conurbations.photoview.PhotoViewAttacher;
 import com.test.admin.conurbations.utils.DialogUtils;
@@ -25,20 +26,18 @@ import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.MenuParams;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 
-import butterknife.Bind;
-
 /**
  * Created by zhouqiong on 2016/9/26.
  */
 public class ShowImageActivity extends BaseActivity implements OnMenuItemClickListener {
 
-    @Bind(R.id.toolbar_show_image_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.pv_show_image_photo)
-    PhotoView mPhotoView;
-    @Bind(R.id.lly_show_image_progress_bar)
+    @FindView
+    Toolbar mToolbarToolbar;
+    @FindView
+    PhotoView mImagePhotoView;
+    @FindView
     LinearLayout mProgressBarLinearLayout;
-    @Bind(R.id.wv_show_image_progress_bar)
+    @FindView
     WhorlView mProgressBarWhorlView;
     public static final String EXTRA_IMAGE_URL = "image_url";
     public static final String TRANSIT_PIC = "picture";
@@ -46,17 +45,12 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
     private ContextMenuDialogFragment mMenuDialogFragment;
 
     @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_show_image;
-    }
-
-    @Override
     protected void initData(Bundle bundle) {
         mProgressBarWhorlView.start();
-        initToolbar(mToolbar, "美图", "");
+        initToolbar(mToolbarToolbar, "美图", "");
         parseIntent();
         initMenuFragment();
-        ViewCompat.setTransitionName(mPhotoView, TRANSIT_PIC);
+        ViewCompat.setTransitionName(mImagePhotoView, TRANSIT_PIC);
         //ImageUtil.loadImage(mImageUrl, avatarPhotoView);
         //Picasso.with(this).load(mImageUrl).into(avatarPhotoView);
 
@@ -75,7 +69,7 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         mProgressBarWhorlView.stop();
                         mProgressBarLinearLayout.setVisibility(View.GONE);
-                        mPhotoView.setVisibility(View.VISIBLE);
+                        mImagePhotoView.setVisibility(View.VISIBLE);
                         return false;
                     }
                 })
@@ -86,15 +80,15 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
                 .skipMemoryCache(true)
                 .thumbnail(0.1f)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .into(mPhotoView);
+                .into(mImagePhotoView);
 
-        mPhotoView.setOnLongClickListener(new View.OnLongClickListener() {
+        mImagePhotoView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 return true;
             }
         });
-        mPhotoView.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
+        mImagePhotoView.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
             @Override
             public void onViewTap(View view, float x, float y) {
                 Glide.get(view.getContext()).clearMemory();

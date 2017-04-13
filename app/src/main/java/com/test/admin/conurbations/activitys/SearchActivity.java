@@ -10,39 +10,33 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.annotations.FindView;
+import com.test.admin.conurbations.annotations.events.OnClick;
 import com.test.admin.conurbations.fragments.SearchFragment;
 
 import java.util.Random;
 
-import butterknife.Bind;
-import butterknife.OnClick;
-
 /**
- * Created by wenhuaijun on 2015/11/3 0003.
+ * Created by zhouqiong on 2015/11/3 0003.
  */
 
 public class SearchActivity extends BaseActivity {
-    @Bind(R.id.toolbar_search_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.iv_search_head_bg)
+    @FindView
+    Toolbar mToolbarToolbar;
+    @FindView
     ImageView mHeadBgImageView;
-    @Bind(R.id.ctl_search_head)
+    @FindView
     CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
-    @Bind(R.id.abl_search_hand)
+    @FindView
     AppBarLayout mHandAppBarLayout;
-    @Bind(R.id.fab_search_fab)
-    FloatingActionButton mFloatingActionButton;
+    @FindView
+    FloatingActionButton mViewFloatingActionButton;
     SearchFragment mSearchFragment;
-
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_search;
-    }
 
     @Override
     protected void initData(Bundle bundle) {
 
-        initToolbar(mToolbar, "", "");
+        initToolbar(mToolbarToolbar, "", "");
         initAppBarSetting();
         String mSearchQuery = getIntent().getStringExtra(SearchFragment.CLASS_SEARCH);
         mHeadCollapsingToolbarLayout.setTitle(mSearchQuery);
@@ -69,15 +63,15 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
                 if (i == 0) {
-                    mFloatingActionButton.hide();
+                    mViewFloatingActionButton.hide();
                 } else {
-                    mFloatingActionButton.show();
+                    mViewFloatingActionButton.show();
                 }
             }
         });
     }
 
-    @OnClick(R.id.fab_search_fab)
+    @OnClick("mViewFloatingActionButton")
     public void clickFab(View view) {
         mSearchFragment.getRecyclerView().setSelection(0);
     }

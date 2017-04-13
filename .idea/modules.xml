@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/banner/banner.iml" filepath="$PROJECT_DIR$/banner/banner.iml" />
       <module fileurl="file://$PROJECT_DIR$/feedbacksdk/feedbacksdk.iml" filepath="$PROJECT_DIR$/feedbacksdk/feedbacksdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jcvideoplayer-lib/jcvideoplayer-lib.iml" filepath="$PROJECT_DIR$/jcvideoplayer-lib/jcvideoplayer-lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/pagerBottomTabStrip/pagerBottomTabStrip.iml" filepath="$PROJECT_DIR$/pagerBottomTabStrip/pagerBottomTabStrip.iml" />
       <module fileurl="file://$PROJECT_DIR$/telegramgallery/telegramgallery.iml" filepath="$PROJECT_DIR$/telegramgallery/telegramgallery.iml" />
     </modules>

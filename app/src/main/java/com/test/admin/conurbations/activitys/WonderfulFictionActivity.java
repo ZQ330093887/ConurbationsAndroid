@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.WonderfulFictionAdapter;
+import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.model.entity.BooksBean;
 import com.test.admin.conurbations.utils.DialogUtils;
 import com.test.admin.conurbations.widget.MyGridLayoutManager;
@@ -24,12 +24,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.Bind;
-
 public class WonderfulFictionActivity extends BaseActivity {
-    @Bind(R.id.toolbar_wonderful_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.rv_wonderful_content)
+    @FindView
+    Toolbar mToolbarToolbar;
+    @FindView
     RecyclerView mContentRecyclerView;
     public static List<String[]> mBannerImages = new ArrayList<>();
     public static List<String> mBannerTitles = new ArrayList<>();
@@ -56,13 +54,8 @@ public class WonderfulFictionActivity extends BaseActivity {
     };
 
     @Override
-    protected int setLayoutResourceID() {
-        return R.layout.activity_wonderful_fiction;
-    }
-
-    @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbar, "热门小说", "");
+        initToolbar(mToolbarToolbar, "热门小说", "");
         DialogUtils.showProgressDialog(this);
         show();
         mWonderfulFictionAdapter = new WonderfulFictionAdapter();

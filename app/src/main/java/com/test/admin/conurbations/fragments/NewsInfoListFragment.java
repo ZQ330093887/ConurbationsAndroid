@@ -2,9 +2,6 @@ package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.test.admin.conurbations.activitys.INewInformationView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
@@ -20,12 +17,17 @@ import com.test.admin.conurbations.widget.PullRecycler;
  */
 public class NewsInfoListFragment extends BaseListFragment implements INewInformationView {
 
-    private String mTabId;
+    protected String mTabId;
     protected NewsInfoListAdapter mInformationListAdapter;
     protected NewsInfoListPresenter mNewsInfoListPresenter;
 
     public void setTable(String tabId) {
         this.mTabId = tabId;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+
     }
 
     @Override
@@ -42,13 +44,6 @@ public class NewsInfoListFragment extends BaseListFragment implements INewInform
             mInformationListAdapter.notifyDataSetChanged();
         }
         recycler.onRefreshCompleted();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        View viewRoot = super.onCreateView(inflater, container, savedInstanceState);
-        return viewRoot;
     }
 
     @Override

@@ -4,12 +4,12 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_contacts_recycle_view"
+        android:id="@+id/rv_contacts_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <com.test.admin.conurbations.views.WaveSideBar
-        android:id="@+id/wsb_contacts_wave"
+        android:id="@+id/wsb_contacts_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingRight="@dimen/dimens_8_dp"

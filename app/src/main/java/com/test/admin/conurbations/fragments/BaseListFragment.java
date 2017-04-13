@@ -30,10 +30,14 @@ public abstract class BaseListFragment<T> extends BaseFragment implements PullRe
     }
 
     @Override
+    protected void initData(Bundle bundle) {}
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_base_list, container, false);
         initView(contentView);
         setUpPresenter();
+        initData(savedInstanceState);
         return contentView;
     }
 
@@ -69,4 +73,6 @@ public abstract class BaseListFragment<T> extends BaseFragment implements PullRe
     protected abstract BaseListAdapter setUpAdapter();
 
     protected abstract void setUpPresenter();
+
+
 }
