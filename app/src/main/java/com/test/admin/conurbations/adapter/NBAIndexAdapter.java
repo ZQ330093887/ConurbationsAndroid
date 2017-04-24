@@ -46,7 +46,7 @@ public class NBAIndexAdapter extends BaseListAdapter<NewsItemBean> {
             SampleVideoViewHolder videoViewHolder = (SampleVideoViewHolder) vh;
             final JCVideoPlayerStandard videoPlayerStandard = videoViewHolder.getView(R.id.jps_item_news_video_video);
 
-            videoPlayerStandard.setUp("", JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, item.title);
+            videoPlayerStandard.setUp("", JCVideoPlayerStandard.SCREEN_LAYOUT_LIST, item.title);
             if (TextUtils.isEmpty(item.realUrl)) {
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("http://h5vv.video.qq.com")
