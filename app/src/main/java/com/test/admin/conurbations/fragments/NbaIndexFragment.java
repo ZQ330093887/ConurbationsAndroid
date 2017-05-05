@@ -55,7 +55,9 @@ public class NbaIndexFragment extends BaseListFragment implements INBAinfoView {
 
     @Override
     protected void refreshList(int page) {
-        mNBAIndexPresenter.getNBAData(((page - 1) * 10), type);
+        if (mNBAIndexPresenter != null){
+            mNBAIndexPresenter.getNBAData(((page - 1) * 10), type);
+        }
     }
 
     @Override

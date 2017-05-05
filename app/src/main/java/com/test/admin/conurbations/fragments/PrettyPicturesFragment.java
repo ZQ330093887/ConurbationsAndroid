@@ -64,7 +64,9 @@ public class PrettyPicturesFragment extends BaseListFragment implements IPrettyP
 
     @Override
     protected void refreshList(int page) {
-        mPrettyPicturesPresenter.getPrettyPictureLisData(classId);
+        if (mPrettyPicturesPresenter != null){
+            mPrettyPicturesPresenter.getPrettyPictureLisData(classId);
+        }
     }
 
     @Override

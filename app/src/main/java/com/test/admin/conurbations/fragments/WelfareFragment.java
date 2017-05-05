@@ -12,6 +12,7 @@ import com.test.admin.conurbations.presenter.WelfarePresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
@@ -19,6 +20,7 @@ public class WelfareFragment extends BaseListFragment implements IWelfareView {
     private Moment.Range range;
     protected WelfareListAdapter mWelfareListAdapter;
     protected WelfarePresenter mWelfarePresenter;
+
     public void setRange(Moment.Range range) {
         this.range = range;
     }
@@ -40,11 +42,12 @@ public class WelfareFragment extends BaseListFragment implements IWelfareView {
     }
 
     @Override
-    protected void initData(Bundle bundle) {}
+    protected void initData(Bundle bundle) {
+    }
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        mWelfareListAdapter =  new WelfareListAdapter();
+        mWelfareListAdapter = new WelfareListAdapter();
         return mWelfareListAdapter;
     }
 
@@ -55,7 +58,9 @@ public class WelfareFragment extends BaseListFragment implements IWelfareView {
 
     @Override
     protected void refreshList(int page) {
-        mWelfarePresenter.getWelfareData(page);
+        if (mWelfarePresenter != null) {
+            mWelfarePresenter.getWelfareData(page);
+        }
     }
 
     @Override

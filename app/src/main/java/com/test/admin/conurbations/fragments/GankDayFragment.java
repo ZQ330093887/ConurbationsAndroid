@@ -69,7 +69,9 @@ public class GankDayFragment extends BaseListFragment<List<GankItem>> implements
 
     @Override
     protected void refreshList(int page) {
-        mGankDayPresenter.getGankDayData(Year, Month, Day);
+        if (mGankDayPresenter != null){
+            mGankDayPresenter.getGankDayData(Year, Month, Day);
+        }
     }
 
     @Override

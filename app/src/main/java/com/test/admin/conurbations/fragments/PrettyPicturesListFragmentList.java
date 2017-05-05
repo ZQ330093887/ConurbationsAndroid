@@ -53,7 +53,9 @@ public class PrettyPicturesListFragmentList extends BaseListFragment implements 
 
     @Override
     protected void refreshList(int page) {
-        mPrettyPicturesListPresenter.getPrettyPictureLisData();
+        if (mPrettyPicturesListPresenter != null){
+            mPrettyPicturesListPresenter.getPrettyPictureLisData();
+        }
     }
 
     @Override

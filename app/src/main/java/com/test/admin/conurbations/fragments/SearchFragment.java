@@ -63,7 +63,9 @@ public class SearchFragment extends BaseListFragment implements ISearchView {
 
     @Override
     protected void refreshList(int page) {
-        mSearchPresenter.getSearchQueryInfo(mSearchQuery, page);
+        if (mSearchPresenter != null){
+            mSearchPresenter.getSearchQueryInfo(mSearchQuery, page);
+        }
     }
 
     @Override

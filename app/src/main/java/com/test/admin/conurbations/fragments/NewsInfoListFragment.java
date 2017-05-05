@@ -59,7 +59,9 @@ public class NewsInfoListFragment extends BaseListFragment implements INewInform
 
     @Override
     protected void refreshList(int page) {
-        mNewsInfoListPresenter.getNewsInfoData(mTabId);
+        if (mNewsInfoListPresenter != null){
+            mNewsInfoListPresenter.getNewsInfoData(mTabId);
+        }
     }
 
     @Override

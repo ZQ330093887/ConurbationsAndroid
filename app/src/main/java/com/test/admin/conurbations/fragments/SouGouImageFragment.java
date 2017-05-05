@@ -56,7 +56,9 @@ public class SouGouImageFragment extends BaseListFragment implements ISouGouImag
 
     @Override
     protected void refreshList(int page) {
-        mSouGouImagePresenter.getSouGouImageData(range, page);
+        if (mSouGouImagePresenter != null){
+            mSouGouImagePresenter.getSouGouImageData(range, page);
+        }
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.test.admin.conurbations.presenter.GanHuoPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
@@ -24,7 +25,8 @@ public class GanHuoFragment extends BaseListFragment implements IWelfareView {
     }
 
     @Override
-    protected void initData(Bundle bundle) {}
+    protected void initData(Bundle bundle) {
+    }
 
     @Override
     public void setWelfareData(GankData welfareData) {
@@ -55,7 +57,9 @@ public class GanHuoFragment extends BaseListFragment implements IWelfareView {
 
     @Override
     protected void refreshList(int page) {
-        mGanHuoPresenter.getWelfareData(range, page);
+        if (mGanHuoPresenter != null){
+            mGanHuoPresenter.getWelfareData(range, page);
+        }
     }
 
     @Override

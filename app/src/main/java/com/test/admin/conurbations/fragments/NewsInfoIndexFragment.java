@@ -54,7 +54,9 @@ public class NewsInfoIndexFragment extends BaseListFragment implements INewInfoI
 
     @Override
     protected void refreshList(int page) {
-        mNewsInfoIndexPresenter.getNewListData(page, mOrdDate);
+        if (mNewsInfoIndexPresenter != null){
+            mNewsInfoIndexPresenter.getNewListData(page, mOrdDate);
+        }
     }
 
     @Override
