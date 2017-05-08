@@ -30,8 +30,11 @@
     <string name="about_open_source_libraries_list">com.squareup.retrofit2:retrofit:2.0.0-beta4\ncom.squareup.okhttp3:okhttp:3.2.0\nio.reactivex:rxandroid:1.1.0\nio.reactivex:rxjava:1.1.0\ncom.facebook.stetho:stetho:1.3.1\ncom.jakewharton:butterknife:7.0.1\ncom.github.bumptech.glide:glide:3.7.0\ncom.yalantis:phoenix:1.2.3\norg.jsoup:jsoup:1.8.3</string>
     <string name="about_function">实现的功能</string>
     <string name="about_function_list">* 干货集中营所有api接口数据\n* 爬虫获取搜狗壁纸\n* 爬虫获取360壁纸\n* 爬虫获取知乎文章\n* 爬虫获取励志网文章\n* 阿里百川用户反馈\n* 强大的图片处理\n* 框架的封装\n* 分享功能\n* RecycleView和ViewPager的结合使用</string>
-    <string name="about">关于</string>
     <string name="search">搜索</string>
+    <string name="set">设置</string>
+    <string name="set_about">关于</string>
+    <string name="set_feed_back">用户反馈</string>
+    <string name="set_clear_cache">清除缓存</string>
     <string name="search_hint">Search&#8230;</string>
     <string name="about_version">V 1.0.4</string>
     <string name="cd_up_button">Up navigation button</string>

@@ -21,7 +21,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--友盟渠道app_key-->
+
+        <!-- 友盟渠道app_key -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="58db7bd8766613597f000a88 " />
@@ -45,7 +46,6 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity android:name="com.tangxiaolv.telegramgallery.GalleryActivity" />
         <activity android:name=".activitys.ContactsActivity" />
         <activity android:name=".activitys.TelegramGalleryActivity" />
@@ -93,6 +93,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activitys.OtherActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

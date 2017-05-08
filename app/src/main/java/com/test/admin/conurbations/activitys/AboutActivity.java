@@ -21,7 +21,7 @@ public class AboutActivity extends BaseActivity {
     @Override
     protected void initData(Bundle bundle) {
         initToolbar(mToolbarToolbar, "", "");
-        mHeadCollapsingToolbarLayout.setTitle(getString(R.string.about));
+        mHeadCollapsingToolbarLayout.setTitle(getString(R.string.set_about));
         mVersionNameTextView.setText(getVersion());
     }
 

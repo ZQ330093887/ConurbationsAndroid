@@ -24,24 +24,25 @@ import com.test.admin.conurbations.views.CircleImageView;
  */
 
 public class PersonalInformationActivity extends BaseActivity {
+    public final static String PHOTOBUNDLE = "phone_bundle";
 
     private PersonalInformationAdapter mInformationAdapter;
     @FindView
-    private Toolbar mToolbarToolbar;
+    Toolbar mToolbarToolbar;
     @FindView
-    private RecyclerView mContentRecyclerView;
+    RecyclerView mContentRecyclerView;
     @FindView
-    private CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
+    CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
     @FindView
-    private AppBarLayout mHeadAppBarLayout;
+    AppBarLayout mHeadAppBarLayout;
     @FindView
-    private ImageView mHeadImageView;
+    ImageView mHeadImageView;
     @FindView
-    private CircleImageView mPhotoCircleImageView;
+    CircleImageView mPhotoCircleImageView;
     @FindView
-    private TextView mTitleTextView;
+    TextView mTitleTextView;
     @FindView
-    private CircleImageView mImageCircleImageView;
+    CircleImageView mImageCircleImageView;
 
     Bitmap bitmap;
 
@@ -51,7 +52,7 @@ public class PersonalInformationActivity extends BaseActivity {
         Intent intent = getIntent();
 
         if (intent != null) {
-            bitmap = intent.getParcelableExtra("mPhotoBundle");
+            bitmap = intent.getParcelableExtra(PHOTOBUNDLE);
             mImageCircleImageView.setImageBitmap(bitmap);
             mPhotoCircleImageView.setImageBitmap(bitmap);
             mHeadImageView.setImageBitmap(bitmap);

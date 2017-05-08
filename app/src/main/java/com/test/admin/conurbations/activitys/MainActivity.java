@@ -27,8 +27,8 @@ import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.fragments.BaseFragment;
-import com.test.admin.conurbations.fragments.NBAFragment;
 import com.test.admin.conurbations.fragments.IndexFragment;
+import com.test.admin.conurbations.fragments.NBAFragment;
 import com.test.admin.conurbations.fragments.NewsInformationFragment;
 import com.test.admin.conurbations.fragments.PictureFragment;
 import com.test.admin.conurbations.fragments.SearchFragment;
@@ -59,15 +59,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private Bundle mPhotoBundle;
 
     @FindView
-    private Toolbar mToolbarToolbar;
+    Toolbar mToolbarToolbar;
     @FindView
-    private NavigationView mViewNavigationView;
+    NavigationView mViewNavigationView;
     @FindView
-    private PagerBottomTabLayout mTabPagerBottomTabLayout;
+    PagerBottomTabLayout mTabPagerBottomTabLayout;
     @FindView
-    private DrawerLayout mLayoutDrawerLayout;
+    DrawerLayout mLayoutDrawerLayout;
     @FindView
-    private MaterialSearchView mSearchMaterialSearchView;
+    MaterialSearchView mSearchMaterialSearchView;
 
     @Override
     protected void initData(Bundle bundle) {
@@ -198,13 +198,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_about) {
+        } else if (id == R.id.nav_about) {//关于
             startActivity(AboutActivity.class);
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_feedback) {//意见反馈
             customFeedbackStyle();
             FeedbackAPI.openFeedbackActivity(this);
-        } else if (id == R.id.nav_recommend) {
-
+        } else if (id == R.id.nav_clear_cache) {//清除缓存
+            startActivity(OtherActivity.class);
         }
 
         mLayoutDrawerLayout.closeDrawer(GravityCompat.START);
@@ -260,8 +260,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-
         switch (requestCode) {
             case Constants.PHOTO_REQUEST_TAKEPHOTO:
                 PhotoCameralUtil.startPhotoZoom(MainActivity.this, Uri.fromFile(new File(Constants.pathFileName)), 150);
@@ -300,7 +298,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.circle_image_view) {
             if (mHeadPhotoBitmap != null) {
                 Intent intent = new Intent(MainActivity.this, PersonalInformationActivity.class);
-                intent.putExtra("mPhotoBundle", mHeadPhotoBitmap);
+                intent.putExtra(PersonalInformationActivity.PHOTOBUNDLE, mHeadPhotoBitmap);
                 ActivityCompat.startActivity(MainActivity.this, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, mCircleImageView, TRANSLATE_VIEW).toBundle());
             } else {
                 PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);

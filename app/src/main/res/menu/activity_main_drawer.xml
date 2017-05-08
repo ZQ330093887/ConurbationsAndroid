@@ -23,20 +23,20 @@
             android:title="head" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/set">
         <menu>
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_resources"
-                android:title="关于" />
+                android:title="@string/set_about" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_feedback"
                 android:icon="@drawable/ic_menu_audio"
-                android:title="用户反馈" />
+                android:title="@string/set_feed_back" />
             <item
-                android:id="@+id/nav_recommend"
+                android:id="@+id/nav_clear_cache"
                 android:icon="@drawable/ic_menu_recommend"
-                android:title="瞎推荐" />
+                android:title="@string/set_clear_cache" />
         </menu>
     </item>
 
