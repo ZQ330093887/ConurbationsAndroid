@@ -13,10 +13,11 @@ import com.test.admin.conurbations.presenter.PrettyPicturesListPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class PrettyPicturesListFragmentList extends BaseListFragment implements IPrettyPictureListView {
+public class PrettyPicturesListFragmentList extends BaseLazyListFragment implements IPrettyPictureListView {
 
     private Moment.SGImgType range;
 
@@ -28,7 +29,8 @@ public class PrettyPicturesListFragmentList extends BaseListFragment implements 
     protected PrettyPictureListAdapter mPrettyPictureListAdapter;
 
     @Override
-    protected void initData(Bundle bundle) {}
+    protected void initData(Bundle bundle) {
+    }
 
     @Override
     public void setPrettyPictureData(NetImage360 netImage) {
@@ -48,13 +50,14 @@ public class PrettyPicturesListFragmentList extends BaseListFragment implements 
 
     @Override
     protected ILayoutManager getLayoutManager() {
-        return new MyGridLayoutManager(getContext(),2,  GridLayoutManager.VERTICAL, false);
+        return new MyGridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
     }
 
     @Override
     protected void refreshList(int page) {
-        if (mPrettyPicturesListPresenter != null){
-            mPrettyPicturesListPresenter.getPrettyPictureLisData();
+        if (mPrettyPicturesListPresenter != null) {
+            mPrettyPicturesListPresenter.getPrettyPictureLisData(page, isRefresh);
+            isRefresh = true;
         }
     }
 

@@ -15,7 +15,7 @@ import com.test.admin.conurbations.widget.PullRecycler;
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class NewsInfoIndexFragment extends BaseListFragment implements INewInfoIndexView {
+public class NewsInfoIndexFragment extends BaseLazyListFragment implements INewInfoIndexView {
 
     protected NewsInfoIndexAdapter mNewsInfoIndexAdapter;
     protected NewsInfoIndexPresenter mNewsInfoIndexPresenter;
@@ -55,7 +55,8 @@ public class NewsInfoIndexFragment extends BaseListFragment implements INewInfoI
     @Override
     protected void refreshList(int page) {
         if (mNewsInfoIndexPresenter != null){
-            mNewsInfoIndexPresenter.getNewListData(page, mOrdDate);
+            mNewsInfoIndexPresenter.getNewListData(page, mOrdDate,isRefresh);
+            isRefresh = true;
         }
     }
 

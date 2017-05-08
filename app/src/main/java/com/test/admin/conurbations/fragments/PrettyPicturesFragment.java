@@ -7,7 +7,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import com.test.admin.conurbations.activitys.IPrettyPictureListView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.PrettyPicturesAdapter;
-import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.model.response.NetImage360;
 import com.test.admin.conurbations.presenter.PrettyPicturesPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
@@ -20,11 +19,6 @@ import com.test.admin.conurbations.widget.PullRecycler;
 public class PrettyPicturesFragment extends BaseListFragment implements IPrettyPictureListView {
     public static final String CLASS_ID = "c_id";
     public static final String CLASS_TITLE = "title";
-    private Moment.SGImgType range;
-
-    public void setRange(Moment.SGImgType range) {
-        this.range = range;
-    }
 
     protected PrettyPicturesPresenter mPrettyPicturesPresenter;
     protected PrettyPicturesAdapter mPrettyPicturesAdapter;
@@ -64,8 +58,8 @@ public class PrettyPicturesFragment extends BaseListFragment implements IPrettyP
 
     @Override
     protected void refreshList(int page) {
-        if (mPrettyPicturesPresenter != null){
-            mPrettyPicturesPresenter.getPrettyPictureLisData(classId);
+        if (mPrettyPicturesPresenter != null) {
+            mPrettyPicturesPresenter.getPrettyPictureLisData(classId, page);
         }
     }
 

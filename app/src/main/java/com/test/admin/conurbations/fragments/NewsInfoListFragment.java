@@ -15,7 +15,7 @@ import com.test.admin.conurbations.widget.PullRecycler;
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class NewsInfoListFragment extends BaseListFragment implements INewInformationView {
+public class NewsInfoListFragment extends BaseLazyListFragment implements INewInformationView {
 
     protected String mTabId;
     protected NewsInfoListAdapter mInformationListAdapter;
@@ -26,9 +26,7 @@ public class NewsInfoListFragment extends BaseListFragment implements INewInform
     }
 
     @Override
-    protected void initData(Bundle bundle) {
-
-    }
+    protected void initData(Bundle bundle) {}
 
     @Override
     public void setNewInfoData(NewsList informationBean) {
@@ -59,8 +57,9 @@ public class NewsInfoListFragment extends BaseListFragment implements INewInform
 
     @Override
     protected void refreshList(int page) {
-        if (mNewsInfoListPresenter != null){
-            mNewsInfoListPresenter.getNewsInfoData(mTabId);
+        if (mNewsInfoListPresenter != null) {
+            mNewsInfoListPresenter.getNewsInfoData(mTabId, page, isRefresh);
+            isRefresh = true;
         }
     }
 

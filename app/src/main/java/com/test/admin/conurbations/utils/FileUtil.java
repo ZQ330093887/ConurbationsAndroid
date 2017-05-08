@@ -23,15 +23,38 @@ import java.io.FileOutputStream;
  * 类的作用：文件缓存调用类
  * 使用方法：调用loadSDCardCache和saveSDCardCache两个方法即可
  * 添加权限：<uses-permission android:name="android.permission.INTERNET"/>
- *          <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
- *          <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+ * <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+ * <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
  */
 public class FileUtil {
 
     private static final String TAG = "FileUtil";
 
+    /**
+     * 递归创建文件夹
+     *
+     * @param file
+     * @return 创建失败返回""
+     */
+    public static String createFile(File file) {
+        try {
+            if (file.getParentFile().exists()) {
+                Log.i("----- 创建文件", file.getAbsolutePath());
+                file.createNewFile();
+                return file.getAbsolutePath();
+            } else {
+                createDir(file.getParentFile().getAbsolutePath());
+                file.createNewFile();
+                Log.i("----- 创建文件", file.getAbsolutePath());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
     public static String imageUriToPath(Context context, Uri uri) {
-        String[] strings = { MediaStore.Images.Media.DATA };
+        String[] strings = {MediaStore.Images.Media.DATA};
         Cursor cursor = context.getContentResolver().query(uri, strings, null, null, null);
 
         String imagePath = "";
@@ -45,8 +68,8 @@ public class FileUtil {
     }
 
     /**
-    * 获取本地缓存数据
-    * */
+     * 获取本地缓存数据
+     */
     public static String loadSDCardCache(String fileName) {
         File dir = new File(Environment.getExternalStorageDirectory() + Constants.DATA_CACHE_FOLDER_PATH);
 
@@ -70,8 +93,7 @@ public class FileUtil {
             Log.d(TAG, "Load cache successfully: " + fileName);
 
             return AES.decode(string, fileName);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -80,12 +102,12 @@ public class FileUtil {
 
     /**
      * 保存网络加载数据缓存到本地
-     * */
+     */
     public static void saveSDCardCache(String content, String fileName) {
         File dir = new File(Environment.getExternalStorageDirectory() + Constants.DATA_CACHE_FOLDER_PATH);
 
         if (!dir.exists()) {
-            if (!dir.mkdirs()){
+            if (!dir.mkdirs()) {
                 return;
             }
         }
@@ -99,8 +121,7 @@ public class FileUtil {
             fileOutputStream.close();
 
             Log.d(TAG, "Save cache successfully: " + fileName);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -126,21 +147,20 @@ public class FileUtil {
         return dir.delete();
     }
 
-    public static String getSDPath(){
+    public static String getSDPath() {
         File sdDir;
         boolean sdCardExist = Environment.getExternalStorageState()
                 .equals(android.os.Environment.MEDIA_MOUNTED); //判断sd卡是否存在
-        if (sdCardExist)
-        {
+        if (sdCardExist) {
             sdDir = Environment.getExternalStorageDirectory();//获取跟目录
-        }else {
-            sdDir =  SolidApplication.getInstance().getFilesDir();
+        } else {
+            sdDir = SolidApplication.getInstance().getFilesDir();
         }
         return sdDir.toString();
     }
 
     //分享图片
-    public  static void  startShareImg(String path,Context context){
+    public static void startShareImg(String path, Context context) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/*");
         File file = new File(path);
@@ -150,7 +170,7 @@ public class FileUtil {
         context.startActivity(Intent.createChooser(shareIntent, "请选择"));
     }
 
-    public static void sharePage(WebView vWebView,Context context) {
+    public static void sharePage(WebView vWebView, Context context) {
         String title = vWebView.getTitle();
         String url = vWebView.getUrl();
         Intent intent = new Intent(Intent.ACTION_SEND);

@@ -15,7 +15,7 @@ import com.test.admin.conurbations.widget.PullRecycler;
  * Created by zhouqiong on 2017/4/11.
  */
 
-public class NbaIndexFragment extends BaseListFragment implements INBAinfoView {
+public class NbaIndexFragment extends BaseLazyListFragment implements INBAinfoView {
     protected NBAIndexAdapter mNbaIndexAdapter;
     protected NBAIndexPresenter mNBAIndexPresenter;
 
@@ -55,8 +55,9 @@ public class NbaIndexFragment extends BaseListFragment implements INBAinfoView {
 
     @Override
     protected void refreshList(int page) {
-        if (mNBAIndexPresenter != null){
-            mNBAIndexPresenter.getNBAData(((page - 1) * 10), type);
+        if (mNBAIndexPresenter != null) {
+            mNBAIndexPresenter.getNBAData(((page - 1) * 10), type,isRefresh);
+            isRefresh = true;
         }
     }
 

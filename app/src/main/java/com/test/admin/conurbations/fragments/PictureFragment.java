@@ -65,6 +65,6 @@ public class PictureFragment extends BaseFragment {
 
     @OnClick("mViewFloatingActionButton")
     public void clickFab(View view) {
-        ((BaseListFragment) fragmentPrettyFragmentPagerAdapter.getFragment(mContentViewPager.getCurrentItem())).getRecyclerView().setSelection(0);
+        ((BaseLazyListFragment) fragmentPrettyFragmentPagerAdapter.getFragment(mContentViewPager.getCurrentItem())).getRecyclerView().setSelection(0);
     }
 }

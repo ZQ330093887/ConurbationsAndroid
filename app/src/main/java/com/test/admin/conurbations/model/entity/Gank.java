@@ -15,12 +15,13 @@ package com.test.admin.conurbations.model.entity;
  * limitations under the License.
  */
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 /**
  * 干货数据
- *
+ * <p>
  * 示例:
  * {
  * "_id": "5715097267765974f5e27db0",
@@ -34,10 +35,10 @@ import java.util.Objects;
  * "who": "Jason"
  * }
  *
- * @author Johnny Shieh
+ * @author zhouqiong
  * @version 1.0
  */
-public class  Gank {
+public class Gank implements Serializable {
 
     public String _id;
     public Date createdAt;
@@ -59,7 +60,7 @@ public class  Gank {
         }
         Gank gank = (Gank) o;
         return Objects.equals(_id, gank._id) &&
-            Objects.equals(type, gank.type);
+                Objects.equals(type, gank.type);
     }
 
     @Override

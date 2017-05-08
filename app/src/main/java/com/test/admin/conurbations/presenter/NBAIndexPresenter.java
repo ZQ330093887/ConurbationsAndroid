@@ -5,10 +5,12 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.test.admin.conurbations.activitys.INBAinfoView;
+import com.test.admin.conurbations.model.api.ACache;
 import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.entity.NewsIndex;
 import com.test.admin.conurbations.model.entity.NewsItem;
 import com.test.admin.conurbations.retrofit.ApiCallback;
+import com.test.admin.conurbations.utils.AppUtils;
 import com.test.admin.conurbations.utils.JsonParserUtil;
 import com.test.admin.conurbations.utils.ToastUtils;
 
@@ -30,12 +32,23 @@ public class NBAIndexPresenter extends BasePresenter {
     private INBAinfoView welfareList;
     private List<String> indexs = new ArrayList<>();
     private int num = 10;
+    private ACache cache;
+    private String key;
 
     public NBAIndexPresenter(INBAinfoView welfareList) {
         this.welfareList = welfareList;
     }
 
-    public void getNBAData(final int pager, final String type) {
+    public void getNBAData(final int pager, final String type, boolean isRefresh) {
+
+        key = "getNBAItem" + type;
+        cache = ACache.get(AppUtils.getAppContext());
+        Object obj = cache.getAsObject(key);
+        if (obj != null && !isRefresh) {
+            NewsItem model = (NewsItem) obj;
+            welfareList.setNBAInfoData(model);
+            return;
+        }
 
         addSubscription(retrofit().create(GankService.class).getNewsIndex(type),
                 new ApiCallback<NewsIndex>() {
@@ -46,7 +59,7 @@ public class NBAIndexPresenter extends BasePresenter {
                             indexs.add(bean.id);
                         }
                         String arcIds = parseIds(pager);
-                        requestNews(arcIds, type);
+                        requestNews(arcIds, type, pager);
                     }
 
                     @Override
@@ -61,7 +74,7 @@ public class NBAIndexPresenter extends BasePresenter {
 
     }
 
-    private void requestNews(String arcIds, String type) {
+    private void requestNews(String arcIds, String type, final int pager) {
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://sportsnba.qq.com")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .client(new OkHttpClient.Builder().build()).build();
@@ -73,6 +86,9 @@ public class NBAIndexPresenter extends BasePresenter {
                 if (response != null && !TextUtils.isEmpty(response.body())) {
                     String jsonStr = response.body();
                     NewsItem newsItem = JsonParserUtil.parseNewsItem(jsonStr);
+                    if (pager == 0) {
+                        cache.put(key, newsItem);
+                    }
                     welfareList.setNBAInfoData(newsItem);
                     Log.d("resp:", jsonStr);
                 } else {

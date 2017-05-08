@@ -7,6 +7,7 @@ import android.os.Environment;
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.ViewNamingRuleXMLParserHandler;
+import com.test.admin.conurbations.utils.AppUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 
 import java.io.File;
@@ -33,6 +34,7 @@ public class SolidApplication extends Application {
         super.onCreate();
         mInstance = this;
         ToastUtils.init(this);
+        AppUtils.init(mInstance);
         //自定义注入框架
         loadViewNamingRule();
         FeedbackAPI.initAnnoy(this, "23601404");

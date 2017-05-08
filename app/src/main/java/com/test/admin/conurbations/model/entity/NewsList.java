@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by laucherish on 16/3/15.
  */
-public class NewsList {
+public class NewsList extends Base{
     private String date;
     public List<News> stories;
 

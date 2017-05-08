@@ -16,7 +16,7 @@ import com.test.admin.conurbations.widget.PullRecycler;
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class WelfareFragment extends BaseListFragment implements IWelfareView {
+public class WelfareFragment extends BaseLazyListFragment implements IWelfareView {
     private Moment.Range range;
     protected WelfareListAdapter mWelfareListAdapter;
     protected WelfarePresenter mWelfarePresenter;
@@ -59,7 +59,8 @@ public class WelfareFragment extends BaseListFragment implements IWelfareView {
     @Override
     protected void refreshList(int page) {
         if (mWelfarePresenter != null) {
-            mWelfarePresenter.getWelfareData(page);
+            mWelfarePresenter.getWelfareData(isRefresh, page);
+            isRefresh = true;
         }
     }
 

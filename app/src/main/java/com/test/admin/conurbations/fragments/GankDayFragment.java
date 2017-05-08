@@ -16,10 +16,11 @@ import com.test.admin.conurbations.widget.PullRecycler;
 
 import java.util.Calendar;
 import java.util.List;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class GankDayFragment extends BaseListFragment<List<GankItem>> implements IGankDayView {
+public class GankDayFragment extends BaseLazyListFragment<List<GankItem>> implements IGankDayView {
 
     private Moment.Range range;
     protected GankDayAdapter mGankDayAdapter;
@@ -45,7 +46,7 @@ public class GankDayFragment extends BaseListFragment<List<GankItem>> implements
             mDataList.clear();
         }
         if (items.size() == 0) {
-            mGankDayPresenter.getGankDayData(Year, Month, Day--);
+            mGankDayPresenter.getGankDayData(Year, Month, Day--, true);
             recycler.enableLoadMore(false);
         } else {
             recycler.enableLoadMore(false);
@@ -69,8 +70,9 @@ public class GankDayFragment extends BaseListFragment<List<GankItem>> implements
 
     @Override
     protected void refreshList(int page) {
-        if (mGankDayPresenter != null){
-            mGankDayPresenter.getGankDayData(Year, Month, Day);
+        if (mGankDayPresenter != null) {
+            mGankDayPresenter.getGankDayData(Year, Month, Day, isRefresh);
+            isRefresh = true;
         }
     }
 

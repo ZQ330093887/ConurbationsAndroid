@@ -16,9 +16,10 @@ import com.test.admin.conurbations.widget.PullRecycler;
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class SouGouImageFragment extends BaseListFragment implements ISouGouImageView {
+public class SouGouImageFragment extends BaseLazyListFragment implements ISouGouImageView {
 
     private String range;
+
     public void setRange(String range) {
         this.range = range;
     }
@@ -31,7 +32,8 @@ public class SouGouImageFragment extends BaseListFragment implements ISouGouImag
     }
 
     @Override
-    protected void initData(Bundle bundle) {}
+    protected void initData(Bundle bundle) {
+    }
 
     @Override
     public void setSouGouImageData(NetImage imageData) {
@@ -56,8 +58,9 @@ public class SouGouImageFragment extends BaseListFragment implements ISouGouImag
 
     @Override
     protected void refreshList(int page) {
-        if (mSouGouImagePresenter != null){
-            mSouGouImagePresenter.getSouGouImageData(range, page);
+        if (mSouGouImagePresenter != null) {
+            mSouGouImagePresenter.getSouGouImageData(range, page, isRefresh);
+            isRefresh = true;
         }
     }
 

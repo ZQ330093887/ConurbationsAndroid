@@ -7,7 +7,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import com.test.admin.conurbations.activitys.ISearchView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.SearchAdapter;
-import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.presenter.SearchPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
@@ -19,12 +18,6 @@ import com.test.admin.conurbations.widget.PullRecycler;
  */
 public class SearchFragment extends BaseListFragment implements ISearchView {
     public static final String CLASS_SEARCH = "search_query";
-    private Moment.SGImgType range;
-
-    public void setRange(Moment.SGImgType range) {
-        this.range = range;
-    }
-
     protected SearchPresenter mSearchPresenter;
     protected SearchAdapter mSearchAdapter;
     private String mSearchQuery;

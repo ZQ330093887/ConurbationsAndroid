@@ -1,15 +1,17 @@
 package com.test.admin.conurbations.presenter;
 
 import com.test.admin.conurbations.activitys.IGankDayView;
-import com.test.admin.conurbations.model.response.GankType;
+import com.test.admin.conurbations.model.api.ACache;
+import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.response.GankGirlImageItem;
 import com.test.admin.conurbations.model.response.GankHeaderItem;
 import com.test.admin.conurbations.model.response.GankItem;
 import com.test.admin.conurbations.model.response.GankNormalItem;
-import com.test.admin.conurbations.model.api.GankService;
+import com.test.admin.conurbations.model.response.GankType;
 import com.test.admin.conurbations.model.response.TodayData;
 import com.test.admin.conurbations.retrofit.ApiCallback;
 import com.test.admin.conurbations.retrofit.AppClient;
+import com.test.admin.conurbations.utils.AppUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +22,29 @@ import java.util.List;
 
 public class GankDayPresenter extends BasePresenter {
 
-    IGankDayView todayNewsList;
+    private IGankDayView todayNewsList;
 
     public GankDayPresenter(IGankDayView todayNewsList) {
         this.todayNewsList = todayNewsList;
     }
 
-    public void getGankDayData(int Year, int Month, int Day) {
+    public void getGankDayData(int Year, int Month, int Day, boolean isRefresh) {
+
+        final String key = "getGankDayData" + "zuixin";
+        final ACache cache = ACache.get(AppUtils.getAppContext());
+        Object obj = cache.getAsObject(key);
+        if (obj != null && !isRefresh) {
+            TodayData model = (TodayData) obj;
+            todayNewsList.setGankDayData(getGankList(model));
+            return;
+        }
+
         addSubscription(AppClient.retrofit().create(GankService.class)
                         .getDayGank(Year, Month, Day),
                 new ApiCallback<TodayData>() {
                     @Override
                     public void onSuccess(TodayData model) {
+                        cache.put(key, model);
                         todayNewsList.setGankDayData(getGankList(model));
                     }
 

@@ -1,10 +1,12 @@
 package com.test.admin.conurbations.model.entity;
 
 
+import java.io.Serializable;
+
 /**
  * Created by zhouqiong on 2017/1/23.
  */
-public class SosoSearcher {
+public class SosoSearcher implements Serializable {
     private String thumbUrl;
     private String pic_url;
 

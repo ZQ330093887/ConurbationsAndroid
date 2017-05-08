@@ -1,15 +1,16 @@
 package com.test.admin.conurbations.model.response;
 
 import com.google.gson.annotations.SerializedName;
+import com.test.admin.conurbations.model.entity.Base;
 import com.test.admin.conurbations.model.entity.Gank;
 
 import java.util.List;
 
-public class TodayData {
+public class TodayData extends Base {
     public List<String> category;
     public Result results;
 
-    public static class Result {
+    public static class Result extends Base {
 
         @SerializedName("Android")
         public List<Gank> androidList;

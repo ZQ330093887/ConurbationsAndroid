@@ -15,7 +15,7 @@ import com.test.admin.conurbations.widget.PullRecycler;
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class GanHuoFragment extends BaseListFragment implements IWelfareView {
+public class GanHuoFragment extends BaseLazyListFragment implements IWelfareView {
     private String range;
     protected GanHuoAdapter mGanHuoAdapter;
     protected GanHuoPresenter mGanHuoPresenter;
@@ -57,8 +57,9 @@ public class GanHuoFragment extends BaseListFragment implements IWelfareView {
 
     @Override
     protected void refreshList(int page) {
-        if (mGanHuoPresenter != null){
-            mGanHuoPresenter.getWelfareData(range, page);
+        if (mGanHuoPresenter != null) {
+            mGanHuoPresenter.getWelfareData(range, page, isRefresh);
+            isRefresh = true;
         }
     }
 

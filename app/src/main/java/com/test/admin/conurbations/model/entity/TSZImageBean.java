@@ -1,10 +1,12 @@
 package com.test.admin.conurbations.model.entity;
 
 
+import java.io.Serializable;
+
 /**
- * Created by wenhuaijun on 2016/2/7 0007.
+ * Created by zhouqiong on 2016/2/7 0007.
  */
-public class TSZImageBean {
+public class TSZImageBean implements Serializable {
     /**
      * class_id : 26
      * url : http://p16.qhimg.com/bdr/__85/t0181089fe285072fe4.jpg

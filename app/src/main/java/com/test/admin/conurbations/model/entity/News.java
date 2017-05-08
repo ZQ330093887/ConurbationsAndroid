@@ -1,11 +1,12 @@
 package com.test.admin.conurbations.model.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by laucherish on 16/3/15.
  */
-public class News {
+public class News implements Serializable {
     private int type;
     private int id;
     private String ga_prefix;
