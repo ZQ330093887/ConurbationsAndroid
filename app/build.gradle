@@ -113,6 +113,9 @@ dependencies {
     compile files(rootProject.ext.dependencies["pinyin4j"])
 
     testCompile rootProject.ext.dependencies["junit"]
+    debugCompile rootProject.ext.dependencies["leakcanary"]
+    releaseCompile rootProject.ext.dependencies["leakcanary2"]
+    testCompile rootProject.ext.dependencies["leakcanary2"]
 }
 
 def releaseTime() {

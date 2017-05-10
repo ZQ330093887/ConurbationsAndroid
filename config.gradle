@@ -52,7 +52,9 @@ ext {
             "scrollview" : ":AndtroidScrollView",
             "targetview" : ":TapTargetView",
             "videoplayer": ":jcvideoplayer-lib",
-            "pinyin4j"   : "libs/pinyin4j-2.5.0.jar"
+            "pinyin4j"   : "libs/pinyin4j-2.5.0.jar",
+            "leakcanary" : "com.squareup.leakcanary:leakcanary-android:1.5",
+            "leakcanary2": "com.squareup.leakcanary:leakcanary-android-no-op:1.5"
     ]
 
 }
