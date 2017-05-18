@@ -13,7 +13,7 @@
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_js"
-            android:title="Android" />
+            android:title="NBA直播" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

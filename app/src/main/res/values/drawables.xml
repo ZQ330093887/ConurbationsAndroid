@@ -1,6 +1,12 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
     <item name="ic_menu_js" type="drawable">@drawable/ic_menu_android</item>
     <item name="ic_menu_manage" type="drawable">@drawable/ic_menu_ios</item>
     <item name="ic_menu_slideshow" type="drawable">@drawable/ic_menu_jss</item>
     <item name="ic_menu_share" type="drawable">@android:drawable/ic_menu_share</item>
+
+    <drawable name="progress_bar_bg">#80FFFFFF</drawable>
+    <drawable name="dwPrimary">@color/colorPrimaryDark</drawable>
+    <drawable name="dwPrimaryBg">@color/white</drawable>
+    <drawable name="dwTransparent">@android:color/transparent</drawable>
+    <drawable name="transparent">@android:color/transparent</drawable>
 </resources>

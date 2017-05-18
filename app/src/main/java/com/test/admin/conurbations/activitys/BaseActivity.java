@@ -49,8 +49,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     public static final String TRANSLATE_VIEW = "translate_view";
     public static final String TRANSLATE_WEB_VIEW_BG_IMG = "translate_web_view_bg_img";
     public static final String TRANSLATE_WEB_VIEW_TITLE = "translate_web_view_title";
+
     public static final String EXTRA_URL = "URL";
     public static final String EXTRA_TITLE = "TITLE";
+    public static final String BUNDLE_KEY_SHOW_BOTTOM_BAR = "BUNDLE_KEY_SHOW_BOTTOM_BAR";
+    public static final String BUNDLE_OVERRIDE = "BUNDLE_OVERRIDE";
     public Map<String, View> views;
 
     protected abstract void initData(Bundle bundle);

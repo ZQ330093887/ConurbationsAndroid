@@ -77,8 +77,16 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile(name: 'jiecaovideoplayer-5.5.4', ext: 'aar')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -108,14 +116,13 @@ dependencies {
     compile project(rootProject.ext.dependencies["labelview"])
     compile project(rootProject.ext.dependencies["scrollview"])
     compile project(rootProject.ext.dependencies["targetview"])
-    compile project(rootProject.ext.dependencies["videoplayer"])
-
     compile files(rootProject.ext.dependencies["pinyin4j"])
-
     testCompile rootProject.ext.dependencies["junit"]
     debugCompile rootProject.ext.dependencies["leakcanary"]
     releaseCompile rootProject.ext.dependencies["leakcanary2"]
     testCompile rootProject.ext.dependencies["leakcanary2"]
+    compile 'com.android.support:support-v4:25.2.0'
+    compile 'com.android.support:recyclerview-v7:25.2.0'
 }
 
 def releaseTime() {

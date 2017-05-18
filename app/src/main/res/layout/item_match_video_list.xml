@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/news_summary_card_view"
+    app:cardElevation="@dimen/dimens_2_dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_match_video_live"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/dimens_6_dp"
+        android:padding="@dimen/dimens_10_dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_horizontal"
+            android:minWidth="@dimen/dimens_80_dp"
+            android:orientation="vertical">
+
+            <com.test.admin.conurbations.utils.RatioImageView
+                android:id="@+id/iv_left_leam"
+                android:layout_width="@dimen/dimens_50_dp"
+                android:layout_height="@dimen/dimens_50_dp"
+                app:placeholderImage="@mipmap/nba_default" />
+
+            <TextView
+                android:id="@+id/tv_left_leam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_5_dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimens_12_dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_live_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NBA"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimens_16_dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_live_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_10_dp"
+                android:text="1212"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center_horizontal"
+            android:minWidth="@dimen/dimens_80_dp"
+            android:orientation="vertical">
+
+            <com.test.admin.conurbations.utils.RatioImageView
+                android:id="@+id/iv_right_team"
+                android:layout_width="@dimen/dimens_50_dp"
+                android:layout_height="@dimen/dimens_50_dp"
+                app:placeholderImage="@mipmap/nba_default" />
+
+            <TextView
+                android:id="@+id/tv_right_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_5_dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimens_12_dp" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

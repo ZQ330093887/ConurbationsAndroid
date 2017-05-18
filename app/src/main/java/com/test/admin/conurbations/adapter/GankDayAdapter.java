@@ -102,7 +102,7 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
                 normalHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        WebViewActivity.openUrl((Activity) context, normalItem.url, normalItem.desc);
+                        WebViewActivity.openUrl((Activity) context, normalItem.url, normalItem.desc, false, false);
                     }
                 });
 

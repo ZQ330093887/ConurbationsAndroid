@@ -194,8 +194,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(BeautifulArticleActivity.class);
         } else if (id == R.id.nav_fiction) {
             startActivity(WonderfulFictionActivity.class);
-        } else if (id == R.id.nav_slideshow) {
-
+        } else if (id == R.id.nav_slideshow) {//NBA直播
+            startActivity(MatchVideoLiveListActivity.class);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_about) {//关于

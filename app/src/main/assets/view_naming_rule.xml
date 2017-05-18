@@ -52,5 +52,6 @@
 		<view name="LockIndicator" abbrev="li" />
 		<view name="Switch" abbrev="switch" />
 		<view name="View" abbrev="view" />
+		<view name="BrowserLayout" abbrev="bl" />
 	</views >
 </root>

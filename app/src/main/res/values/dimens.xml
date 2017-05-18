@@ -1,6 +1,6 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-   <!-- <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <!-- <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">180dp</dimen>
     &lt;!&ndash; Default screen margins, per the Android Design guidelines. &ndash;&gt;
     <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -27,7 +27,7 @@
     <dimen name="tool_bar_height">50dp</dimen>
     <dimen name="developer_item_height">36dp</dimen>
     <dimen name="developer_item_icon_width">18dp</dimen>-->
-   <!--系统指定-->
+    <!--系统指定-->
     <dimen name="text_size_header_title">18sp</dimen>
     <dimen name="text_size_title">15sp</dimen>
     <dimen name="text_size_summary">12sp</dimen>
@@ -188,5 +188,6 @@
     <dimen name="at_dimens_145_dp">145dp</dimen>
     <dimen name="at_dimens_155_dp">155dp</dimen>
     <dimen name="at_dimens_165_dp">165dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
 </resources>
