@@ -121,8 +121,6 @@ dependencies {
     debugCompile rootProject.ext.dependencies["leakcanary"]
     releaseCompile rootProject.ext.dependencies["leakcanary2"]
     testCompile rootProject.ext.dependencies["leakcanary2"]
-    compile 'com.android.support:support-v4:25.2.0'
-    compile 'com.android.support:recyclerview-v7:25.2.0'
 }
 
 def releaseTime() {

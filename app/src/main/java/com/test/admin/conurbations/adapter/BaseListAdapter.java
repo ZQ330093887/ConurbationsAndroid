@@ -1,6 +1,10 @@
 package com.test.admin.conurbations.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -10,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.activitys.ShowImageActivity;
 
 import java.util.List;
 
@@ -148,6 +153,18 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         if (position > mLastPosition) {
             view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.item_bottom_in));
             mLastPosition = position;
+        }
+    }
+
+    public void startShowImageActivity(View transitView, String imgUrl) {
+        Intent intent = ShowImageActivity.newIntent(transitView.getContext(), imgUrl);
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                (Activity) transitView.getContext(), transitView, ShowImageActivity.TRANSIT_PIC);
+        try {
+            ActivityCompat.startActivity(transitView.getContext(), intent, optionsCompat.toBundle());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            transitView.getContext().startActivity(intent);
         }
     }
 }

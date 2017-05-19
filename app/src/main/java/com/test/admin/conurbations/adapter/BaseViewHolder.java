@@ -9,6 +9,9 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.test.admin.conurbations.utils.RatioImageView;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
 
 /**
@@ -37,7 +40,7 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-    public BaseViewHolder setTypeface(int id,Typeface tf){
+    public BaseViewHolder setTypeface(int id, Typeface tf) {
         TextView textView = getView(id);
         textView.setTypeface(tf);
         return this;
@@ -56,6 +59,31 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
     public BaseViewHolder setImageSource(int id, int resId) {
         ImageView imageView = getView(id);
         imageView.setImageResource(resId);
+        return this;
+    }
+
+    //这个功能比较比较常用，大概写了一个
+    public BaseViewHolder setImageUrlUserGlide(int id, String imgUrl, float ratio, int resId) {
+        RatioImageView ratioImageView = getView(id);
+        ratioImageView.setRatio(ratio);
+        Glide.with(ratioImageView.getContext())
+                .load(imgUrl)
+                .centerCrop()
+                .placeholder(resId)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(ratioImageView);
+        return this;
+    }
+
+    public BaseViewHolder setImageUrlUserGlide(final ImageView view, String imgUrl, int resId) {
+        Glide.with(view.getContext())
+                .load(imgUrl)
+                .centerCrop()
+                .placeholder(resId)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(view);
         return this;
     }
 

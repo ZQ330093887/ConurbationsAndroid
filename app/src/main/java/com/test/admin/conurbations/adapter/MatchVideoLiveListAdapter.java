@@ -1,49 +1,38 @@
 package com.test.admin.conurbations.adapter;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.activitys.IVideoLiveSourceView;
+import com.test.admin.conurbations.activitys.WebViewActivity;
 import com.test.admin.conurbations.model.entity.VideoLiveInfo;
+import com.test.admin.conurbations.model.entity.VideoLiveSource;
 import com.test.admin.conurbations.presenter.MatchVideoLivePresenter;
-import com.test.admin.conurbations.utils.RatioImageView;
 
-public class MatchVideoLiveListAdapter extends BaseListAdapter<VideoLiveInfo> {
+import java.util.List;
+
+public class MatchVideoLiveListAdapter extends BaseListAdapter<VideoLiveInfo> implements IVideoLiveSourceView {
 
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final VideoLiveInfo info) {
-        RatioImageView mLeftRatioImageView = vh.getView(R.id.iv_left_leam);
-        RatioImageView mRightRatioImageView = vh.getView(R.id.iv_right_team);
-        mLeftRatioImageView.setRatio(0.918f);
-        mRightRatioImageView.setRatio(0.918f);
-        Glide.with(mLeftRatioImageView.getContext())
-                .load(info.leftImg)
-                .centerCrop()
-                .placeholder(R.mipmap.nba_default)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(mLeftRatioImageView);
 
-        Glide.with(mRightRatioImageView.getContext())
-                .load(info.rightImg)
-                .centerCrop()
-                .placeholder(R.mipmap.nba_default)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(mRightRatioImageView);
-
-        vh.setText(R.id.tv_left_leam, info.leftName)
+        vh.setImageUrlUserGlide(R.id.iv_left_leam, info.leftImg, 0.918f, R.mipmap.nba_default)
+                .setImageUrlUserGlide(R.id.iv_right_team, info.rightImg, 0.918f, R.mipmap.nba_default)
+                .setText(R.id.tv_left_leam, info.leftName)
                 .setText(R.id.tv_right_team, info.rightName)
                 .setText(R.id.tv_live_time, info.time)
-                .setText(R.id.tv_live_type, info.type);
-        vh.setOnClickListener(R.id.rl_match_video_live, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MatchVideoLivePresenter.getVideoLiveSourceInfo(info.link, v.getContext());
-            }
-        });
+                .setText(R.id.tv_live_type, info.type)
+                .setOnClickListener(R.id.rl_match_video_live, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getMatchVideoLivePresenter().getVideoLiveSourceInfo(info.link, v.getContext());
+                    }
+                });
     }
 
     @Override
@@ -55,5 +44,49 @@ public class MatchVideoLiveListAdapter extends BaseListAdapter<VideoLiveInfo> {
         public MatchVideoLiveHolder(View itemView) {
             super(itemView);
         }
+    }
+
+    @NonNull
+    private MatchVideoLivePresenter getMatchVideoLivePresenter() {
+        return new MatchVideoLivePresenter(this);
+    }
+
+    @Override
+    public void setVideoLiveData(List<VideoLiveSource> videoLiveData, Context mContext) {
+        setVideoLiveView(videoLiveData, mContext);
+    }
+
+    private static void setVideoLiveView(List<VideoLiveSource> list, final Context mContext) {
+        if (list != null && list.size() == 1) {
+            WebViewActivity.openUrl(mContext, list.get(0).link, list.get(0).name, false, false);
+            return;
+        } else if (list == null || list.isEmpty()) {
+            return;
+        }
+
+        getAlertDialogAndSetData(list, mContext);
+    }
+
+    private static void getAlertDialogAndSetData(List<VideoLiveSource> list, final Context mContext) {
+
+        final String[] links = new String[list.size()];
+        final String[] names = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            links[i] = list.get(i).link;
+            names[i] = list.get(i).name;
+        }
+
+        new AlertDialog.Builder(mContext)
+                .setTitle("请选择直播源")
+                .setItems(names, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (links[which].startsWith("/")) {
+                            links[which] = "http://nba.tmiaoo.com" + links[which];
+                        }
+                        WebViewActivity.openUrl(mContext, links[which], names[which], false, false);
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 }

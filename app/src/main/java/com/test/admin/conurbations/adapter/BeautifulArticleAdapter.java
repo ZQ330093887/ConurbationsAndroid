@@ -18,17 +18,17 @@ public class BeautifulArticleAdapter extends BaseListAdapter<BooksBean> {
 
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, final BooksBean item) {
-        holder.setText(R.id.tv_item_beautiful_article_content,  "*  " + item.getTitle());
-        holder.setOnClickListener(R.id.tv_item_beautiful_article_content, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = v.getContext();
-                Intent intent = new Intent(context, ItemBeautifulArticleActivity.class);
-                intent.putExtra(BeautifulArticleItemDetailFragment.ITEM_TITLE_ID, item.getUrl());
-                intent.putExtra("item_title", item.getTitle());
-                context.startActivity(intent);
-            }
-        });
+        holder.setText(R.id.tv_item_beautiful_article_content, "*  " + item.getTitle())
+                .setOnClickListener(R.id.tv_item_beautiful_article_content, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        Intent intent = new Intent(context, ItemBeautifulArticleActivity.class);
+                        intent.putExtra(BeautifulArticleItemDetailFragment.ITEM_TITLE_ID, item.getUrl());
+                        intent.putExtra("item_title", item.getTitle());
+                        context.startActivity(intent);
+                    }
+                });
     }
 
     @Override

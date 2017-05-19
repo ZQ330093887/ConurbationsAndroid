@@ -8,14 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.flyco.labelview.LabelView;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.PrettyPicturesActivity;
 import com.test.admin.conurbations.fragments.PrettyPicturesFragment;
 import com.test.admin.conurbations.model.entity.TSZImageBean;
-import com.test.admin.conurbations.utils.RatioImageView;
 import com.test.admin.conurbations.widget.GlideImageLoader;
 import com.test.admin.conurbations.widget.SolidApplication;
 import com.youth.banner.Banner;
@@ -47,31 +44,23 @@ public class PrettyPictureListAdapter extends BaseListAdapter<TSZImageBean> impl
 
         if (vh instanceof NormalViewHolder) {
             NormalViewHolder normalViewHolder = (NormalViewHolder) vh;
-            final RatioImageView imageView = normalViewHolder.getView(R.id.rv_pretty_picture_recommend);
-            final LabelView labelView = normalViewHolder.getView(R.id.lv_pretty_picture_recommend);
-            imageView.setRatio(0.918f);
             final String title = item.getUtag().substring(0, item.getUtag().indexOf(" ") + 1);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, PrettyPicturesActivity.class);
-                    intent.putExtra(PrettyPicturesFragment.CLASS_ID, item.getClass_id());
-                    intent.putExtra(PrettyPicturesFragment.CLASS_TITLE, title);
-                    context.startActivity(intent);
-                }
-            });
-            Glide.with(imageView.getContext())
-                    .load(item.getUrl())
-                    .centerCrop()
-                    .placeholder(R.color.white)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imageView);
+            LabelView labelView = normalViewHolder.getView(R.id.lv_pretty_picture_recommend);
             labelView.setText(item.getCreate_time().substring(0, 10));
-            normalViewHolder.setText(R.id.tv_pretty_picture_recommend_tip, title)
+            normalViewHolder.setImageUrlUserGlide(R.id.rv_pretty_picture_recommend, item.getUrl(), 0.918f, R.color.white)
+                    .setText(R.id.tv_pretty_picture_recommend_tip, title)
                     .setText(R.id.tv_pretty_picture_recommend_title, item.getTag().substring(15))
-                    .setText(R.id.tv_pretty_picture_recommend_content, item.getUtag());
+                    .setText(R.id.tv_pretty_picture_recommend_content, item.getUtag())
+                    .setOnClickListener(R.id.rv_pretty_picture_recommend, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Context context = v.getContext();
+                            Intent intent = new Intent(context, PrettyPicturesActivity.class);
+                            intent.putExtra(PrettyPicturesFragment.CLASS_ID, item.getClass_id());
+                            intent.putExtra(PrettyPicturesFragment.CLASS_TITLE, title);
+                            context.startActivity(intent);
+                        }
+                    });
         }
     }
 

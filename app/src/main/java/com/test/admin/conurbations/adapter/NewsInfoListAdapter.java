@@ -10,14 +10,11 @@ import android.support.v4.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.BaseActivity;
 import com.test.admin.conurbations.activitys.NewsInfoListDetailActivity;
 import com.test.admin.conurbations.fragments.NewsInfoListDetailFragment;
 import com.test.admin.conurbations.model.entity.News;
-import com.test.admin.conurbations.utils.RatioImageView;
 import com.test.admin.conurbations.widget.SolidApplication;
 
 /**
@@ -33,30 +30,22 @@ public class NewsInfoListAdapter extends BaseListAdapter<News> {
     protected void bindDataToItemView(final BaseViewHolder holder, final News item) {
         if (holder instanceof SampleItemViewHolder) {
             SampleItemViewHolder sampleItemViewHolder = (SampleItemViewHolder) holder;
-            final RatioImageView imageView = sampleItemViewHolder.getView(R.id.rv_news_summary_photo_iv);
-            imageView.setRatio(0.918f);
-            sampleItemViewHolder.setTypeface(R.id.tv_news_summary_title, SolidApplication.songTi);
-            sampleItemViewHolder.setText(R.id.tv_news_summary_title, item.getTitle());
-            if (item.getImages() != null && item.getImages().size() > 0) {
-                Glide.with(imageView.getContext())
-                        .load(item.getImages().get(0))
-                        .centerCrop()
-                        .placeholder(R.color.white)
-                        .crossFade()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(imageView);
-            }
-            sampleItemViewHolder.setOnClickListener(R.id.cv_item_news_info, getListener(item,
-                    sampleItemViewHolder.getView(R.id.rv_news_summary_photo_iv),
-                    BaseActivity.TRANSLATE_WEB_VIEW_BG_IMG));
+            sampleItemViewHolder.setTypeface(R.id.tv_news_summary_title, SolidApplication.songTi)
+                    .setText(R.id.tv_news_summary_title, item.getTitle())
+                    .setImageUrlUserGlide(R.id.rv_news_summary_photo_iv,
+                            ((item.getImages() != null && item.getImages().size() > 0) ? item.getImages().get(0) : ""),
+                            0.918f, R.color.white)
+                    .setOnClickListener(R.id.cv_item_news_info, getListener(item,
+                            sampleItemViewHolder.getView(R.id.rv_news_summary_photo_iv),
+                            BaseActivity.TRANSLATE_WEB_VIEW_BG_IMG));
         }
         if (holder instanceof SamplePhotoItemViewHolder) {
             SamplePhotoItemViewHolder photoItemViewHolder = (SamplePhotoItemViewHolder) holder;
-            photoItemViewHolder.setTypeface(R.id.tv_item_news_summary_title, SolidApplication.songTi);
-            photoItemViewHolder.setText(R.id.tv_item_news_summary_title, item.getTitle());
-            photoItemViewHolder.setOnClickListener(R.id.cv_item_news_info, getListener(item,
-                    photoItemViewHolder.getView(R.id.tv_item_news_summary_title),
-                    BaseActivity.TRANSLATE_WEB_VIEW_TITLE));
+            photoItemViewHolder.setTypeface(R.id.tv_item_news_summary_title, SolidApplication.songTi)
+                    .setText(R.id.tv_item_news_summary_title, item.getTitle())
+                    .setOnClickListener(R.id.cv_item_news_info, getListener(item,
+                            photoItemViewHolder.getView(R.id.tv_item_news_summary_title),
+                            BaseActivity.TRANSLATE_WEB_VIEW_TITLE));
         }
     }
 

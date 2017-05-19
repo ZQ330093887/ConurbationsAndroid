@@ -12,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.flyco.labelview.LabelView;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.BaseActivity;
@@ -21,7 +19,6 @@ import com.test.admin.conurbations.activitys.NewsInfoListDetailActivity;
 import com.test.admin.conurbations.fragments.NewsInfoListDetailFragment;
 import com.test.admin.conurbations.model.entity.News;
 import com.test.admin.conurbations.utils.DateUtils;
-import com.test.admin.conurbations.utils.RatioImageView;
 import com.test.admin.conurbations.widget.SolidApplication;
 
 /**
@@ -32,7 +29,6 @@ public class NewsInfoIndexAdapter extends BaseListAdapter<News> {
 
     private String date;
     private Context mContext;
-    private RatioImageView imageView;
 
     public void setDate(String date) {
         this.date = date;
@@ -44,28 +40,18 @@ public class NewsInfoIndexAdapter extends BaseListAdapter<News> {
 
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, News item) {
-
-        imageView = vh.getView(R.id.iv_item_news_info_index);
         final LabelView labelView = vh.getView(R.id.lv_item_news_info_index_view);
-        imageView.setRatio(0.618f);
-        vh.setTypeface(R.id.tv_item_news_info_index_title, SolidApplication.songTi);
-        vh.setText(R.id.tv_item_news_info_index_title, item.getTitle());
+        vh.setImageUrlUserGlide(R.id.iv_item_news_info_index, item.getImages().get(0), 0.618f, R.color.white)
+                .setTypeface(R.id.tv_item_news_info_index_title, SolidApplication.songTi)
+                .setText(R.id.tv_item_news_info_index_title, item.getTitle())
+                .setOnClickListener(R.id.cv_item_news_info_index, getListener(vh, item));
+        labelView.setText(DateUtils.formatDate(date));
         if (!item.isRead()) {
             vh.setTextColor(R.id.tv_item_news_info_index_title, ContextCompat.getColor(mContext, R.color.textColorFirst_Day));
         } else {
             vh.setTextColor(R.id.tv_item_news_info_index_title, ContextCompat.getColor(mContext, R.color.textColorThird_Day));
         }
-        labelView.setText(DateUtils.formatDate(date));
-        Glide.with(imageView.getContext())
-                .load(item.getImages().get(0))
-                .centerCrop()
-                .placeholder(R.color.white)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imageView);
-        vh.setOnClickListener(R.id.cv_item_news_info_index, getListener(vh, item));
     }
-
 
     @NonNull
     private View.OnClickListener getListener(final BaseViewHolder holder, final News news) {
@@ -80,8 +66,8 @@ public class NewsInfoIndexAdapter extends BaseListAdapter<News> {
                 Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
                 intent.putExtra(NewsInfoListDetailFragment.KEY_NEWS, news.getId());
                 ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context
-                        , new Pair<View, String>(imageView, BaseActivity.TRANSLATE_WEB_VIEW_BG_IMG)
-                        , new Pair<View, String>(holder.getView(R.id.tv_item_news_info_index_title), BaseActivity.TRANSLATE_WEB_VIEW_TITLE));
+                        , new Pair<>(holder.getView(R.id.iv_item_news_info_index), BaseActivity.TRANSLATE_WEB_VIEW_BG_IMG)
+                        , new Pair<>(holder.getView(R.id.tv_item_news_info_index_title), BaseActivity.TRANSLATE_WEB_VIEW_TITLE));
                 ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
             }
         };

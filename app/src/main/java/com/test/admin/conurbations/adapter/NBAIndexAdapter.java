@@ -11,7 +11,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.BaseActivity;
@@ -20,7 +19,6 @@ import com.test.admin.conurbations.fragments.NewsInfoListDetailFragment;
 import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.entity.NewsItemBean;
 import com.test.admin.conurbations.model.entity.VideoInfo;
-import com.test.admin.conurbations.utils.RatioImageView;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import okhttp3.OkHttpClient;
@@ -84,28 +82,19 @@ public class NBAIndexAdapter extends BaseListAdapter<NewsItemBean> {
             } else {
                 videoPlayerStandard.setUp(item.realUrl, JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, item.title);
             }
-            Glide.with(videoPlayerStandard.thumbImageView.getContext())
-                    .load(item.imgurl)
-                    .centerCrop()
-                    .placeholder(R.color.white)
-                    .crossFade()
-                    .into(videoPlayerStandard.thumbImageView);
-            videoViewHolder.setText(R.id.tv_item_news_video_time, item.pub_time);
+            videoViewHolder
+                    .setImageUrlUserGlide(videoPlayerStandard.thumbImageView, item.imgurl, R.color.white)
+                    .setText(R.id.tv_item_news_video_time, item.pub_time);
         } else if (vh instanceof SampleNormalViewHolder) {
             SampleNormalViewHolder normalViewHolder = (SampleNormalViewHolder) vh;
-            final RatioImageView mPhotoRatioImageView = normalViewHolder.getView(R.id.rv_item_news_normal_banner_image);
-            mPhotoRatioImageView.setRatio(1.9f);
-            Glide.with(mPhotoRatioImageView.getContext())
-                    .load(item.imgurl)
-                    .centerCrop()
-                    .placeholder(R.color.white)
-                    .crossFade()
-                    .into(mPhotoRatioImageView);
-            normalViewHolder.setText(R.id.tv_item_news_normal_banner_title, item.title)
-                    .setText(R.id.tv_item_news_normal_banner_time, item.pub_time);
-            normalViewHolder.setOnClickListener(R.id.cv_item_news_normal_banner, getListener(item,
-                    vh.getView(R.id.rv_item_news_normal_banner_image),
-                    BaseActivity.TRANSLATE_WEB_VIEW_BG_IMG));
+            normalViewHolder.setImageUrlUserGlide(R.id.rv_item_news_normal_banner_image, item.imgurl, 1.9f, R.color.white)
+                    .setText(R.id.tv_item_news_normal_banner_title, item.title)
+                    .setText(R.id.tv_item_news_normal_banner_time, item.pub_time)
+                    .setOnClickListener(R.id.cv_item_news_normal_banner,
+                            getListener(item, vh.getView(R.id.rv_item_news_normal_banner_image),
+                                    BaseActivity.TRANSLATE_WEB_VIEW_BG_IMG));
+
+
         }
     }
 

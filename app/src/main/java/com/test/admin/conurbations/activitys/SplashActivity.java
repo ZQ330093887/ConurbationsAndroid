@@ -43,7 +43,7 @@ public class SplashActivity extends BaseActivity {
             R.mipmap.splash16,
     };
     @FindView
-    private ImageView mLogoImageView;
+    ImageView mLogoImageView;
 
     @Override
     protected void initData(Bundle bundle) {

@@ -1,19 +1,21 @@
 package com.test.admin.conurbations.presenter;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 
+import com.test.admin.conurbations.activitys.IVideoLiveSourceView;
 import com.test.admin.conurbations.activitys.IVideoLiveView;
-import com.test.admin.conurbations.activitys.WebViewActivity;
 import com.test.admin.conurbations.model.entity.VideoLiveSource;
 import com.test.admin.conurbations.model.response.VideoLiveData;
-import com.test.admin.conurbations.model.response.VideoLiveSourceData;
 import com.test.admin.conurbations.utils.TmiaaoUtils;
 
 import java.util.List;
+
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by zhouqiong on 2017/5/18.
@@ -21,74 +23,52 @@ import java.util.List;
 public class MatchVideoLivePresenter extends BasePresenter {
 
     private IVideoLiveView videoLiveView;
-    private Context mContext;
+    private IVideoLiveSourceView iVideoLiveSourceView;
 
-    public MatchVideoLivePresenter(IVideoLiveView videoLiveView, Context mContext) {
+    public MatchVideoLivePresenter(IVideoLiveView videoLiveView) {
         this.videoLiveView = videoLiveView;
-        this.mContext = mContext;
+    }
+
+    public MatchVideoLivePresenter(IVideoLiveSourceView iVideoLiveSourceView) {
+        this.iVideoLiveSourceView = iVideoLiveSourceView;
     }
 
     public void getVideoLiveInfo() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final VideoLiveData videoLiveData = TmiaaoUtils.getLiveList();
-                ((Activity) mContext).runOnUiThread(new Runnable() {
+        Observable.just(TmiaaoUtils.getLiveList()) // 输入类型
+                .map(new Func1<VideoLiveData, VideoLiveData>() {
                     @Override
-                    public void run() {
+                    public VideoLiveData call(VideoLiveData videoLiveData) {
+                        return TmiaaoUtils.getLiveList();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<VideoLiveData>() {
+                    @Override
+                    public void call(VideoLiveData videoLiveData) {
                         if (videoLiveData != null && videoLiveData.items.size() > 0) {
                             videoLiveView.setVideoLiveData(videoLiveData);
                         }
                     }
                 });
-            }
-
-        }).start();
     }
 
-    public static void getVideoLiveSourceInfo(final String link, final Context mContext) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                final VideoLiveSourceData videoLiveData = TmiaaoUtils.getSourceList(link);
-                final List<VideoLiveSource> list = videoLiveData.items;
-                ((Activity) mContext).runOnUiThread(new Runnable() {
+    public void getVideoLiveSourceInfo(final String link, final Context mContext) {
+        Observable.just(link)
+                .map(new Func1<String, List<VideoLiveSource>>() {
                     @Override
-                    public void run() {
-                        if (list != null && list.size() == 1) {
-                            WebViewActivity.openUrl(mContext, list.get(0).link, list.get(0).name, false, false);
-                            return;
-                        } else if (list == null || list.isEmpty()) {
-                            return;
-                        }
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-
-                        final String[] links = new String[list.size()];
-                        final String[] names = new String[list.size()];
-
-                        for (int i = 0; i < list.size(); i++) {
-                            links[i] = list.get(i).link;
-                            names[i] = list.get(i).name;
-                        }
-
-                        builder.setTitle("请选择直播源")
-                                .setItems(names, new DialogInterface.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        if (links[which].startsWith("/")) {
-                                            links[which] = "http://nba.tmiaoo.com" + links[which];
-                                        }
-                                        WebViewActivity.openUrl(mContext, links[which], names[which], false, false);
-                                        dialog.dismiss();
-                                    }
-                                }).show();
+                    public List<VideoLiveSource> call(String link) {
+                        return TmiaaoUtils.getSourceList(link).items;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<VideoLiveSource>>() {
+                    @Override
+                    public void call(List<VideoLiveSource> list) {
+                        iVideoLiveSourceView.setVideoLiveData(list, mContext);
                     }
                 });
-            }
-        }).start();
-    }
 
+    }
 }
