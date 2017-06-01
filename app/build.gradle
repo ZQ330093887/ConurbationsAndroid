@@ -108,6 +108,7 @@ dependencies {
     compile rootProject.ext.dependencies["fresco"]
     compile rootProject.ext.dependencies["contextmenu"]
     compile rootProject.ext.dependencies["con_scalars"]
+    compile rootProject.ext.dependencies["photoview"]
 
     compile project(rootProject.ext.dependencies["banner"])
     compile project(rootProject.ext.dependencies["BottomTab"])
