@@ -18,13 +18,13 @@ package com.test.admin.conurbations.model.api;
 import com.test.admin.conurbations.utils.FileUtil;
 
 /**
- * @author Johnny Shieh
+ * @author zhouqiong
  * @version 1.0
  */
 public interface GankApi {
     String BASE_URL = "http://gank.io/api/";
 
-    String imgPath= FileUtil.getSDPath()+"/MyPictures";
+    String imgPath = FileUtil.getSDPath() + "/MyPictures";
 
     class status {
         public static final int success = 200;

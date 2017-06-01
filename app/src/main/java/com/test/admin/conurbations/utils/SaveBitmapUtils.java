@@ -20,7 +20,7 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by wenhuaijun on 2016/1/22 0022.
+ * Created by zhouqiong on 2017/1/23
  */
 public class SaveBitmapUtils {
 

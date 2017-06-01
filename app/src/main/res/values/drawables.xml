@@ -1,5 +1,5 @@
 <resources>
-    <item name="ic_menu_js" type="drawable">@drawable/ic_menu_android</item>
+    <item name="ic_menu_js" type="drawable">@drawable/ic_menu_nba</item>
     <item name="ic_menu_manage" type="drawable">@drawable/ic_menu_ios</item>
     <item name="ic_menu_slideshow" type="drawable">@drawable/ic_menu_jss</item>
     <item name="ic_menu_share" type="drawable">@android:drawable/ic_menu_share</item>

@@ -17,7 +17,7 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by wenhuaijun on 2016/1/23 0023.
+ * Created by zhouqiong on 2017/1/23
  */
 public class WrapperUtils {
     public static Observable<Integer> getSetWallWrapperObservable(Bitmap bitmap, final Context context) {
