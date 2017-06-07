@@ -54,11 +54,6 @@ public class BeautifulArticleItemDetailFragment extends BaseFragment {
    }
 
     @Override
-    public BaseFragment newInstance() {
-        return null;
-    }
-
-    @Override
     protected void initData(Bundle bundle) {
         if (getArguments().containsKey(ITEM_URL)) {
             show(getArguments().getString(ITEM_URL));

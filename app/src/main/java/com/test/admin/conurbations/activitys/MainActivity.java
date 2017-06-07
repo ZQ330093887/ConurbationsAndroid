@@ -36,6 +36,7 @@ import com.test.admin.conurbations.utils.PhotoCameralUtil;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
 import com.test.admin.conurbations.views.CircleImageView;
 import com.test.admin.conurbations.views.MaterialSearchView;
+import com.test.admin.conurbations.widget.SolidApplication;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -101,10 +102,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mFragments.add(createFragment(new PictureFragment(), Constants.testColors[1]));
         mFragments.add(createFragment(new NewsInformationFragment(), Constants.testColors[2]));
         mFragments.add(createFragment(new NBAFragment(), Constants.testColors[3]));
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fl_main_content, mFragments.get(0));
-        transaction.commit();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fl_main_content, mFragments.get(0))
+                .commit();
     }
 
     private void initLeftDrawerToggleMenu() {
@@ -157,7 +157,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private Fragment createFragment(BaseFragment baseFragment, int content) {
-        Fragment fragment = baseFragment.newInstance();
+        Fragment fragment = baseFragment;
         Bundle bundle = new Bundle();
         bundle.putInt("content", content);
         fragment.setArguments(bundle);
@@ -234,7 +234,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     MaterialSearchView.OnQueryTextListener queryTextListener = new MaterialSearchView.OnQueryTextListener() {
         @Override
         public boolean onQueryTextSubmit(String query) {
-            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+            Intent intent = new Intent(SolidApplication.getInstance().getApplicationContext()
+                    , SearchActivity.class);
             intent.putExtra(SearchFragment.CLASS_SEARCH, query);
             startActivity(intent);
             return false;

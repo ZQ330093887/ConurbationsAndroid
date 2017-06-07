@@ -3,19 +3,19 @@ package com.test.admin.conurbations.adapter;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.fragments.GanHuoFragment;
 import com.test.admin.conurbations.fragments.GankDayFragment;
 import com.test.admin.conurbations.fragments.WelfareFragment;
+import com.test.admin.conurbations.model.response.Moment;
 
 /**
  * Created by zhouqiong on 2017/1/8.
  */
-public class IndexFragmentPagerAdapter extends FragmentPagerAdapter {
+public class IndexFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     private String[] mTitles;
     private Fragment[] mFragments;

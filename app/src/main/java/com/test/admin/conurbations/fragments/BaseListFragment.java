@@ -27,11 +27,6 @@ public abstract class BaseListFragment<T> extends BaseFragment implements PullRe
     public int action;
 
     @Override
-    public BaseFragment newInstance() {
-        return null;
-    }
-
-    @Override
     protected void initData(Bundle bundle) {
     }
 

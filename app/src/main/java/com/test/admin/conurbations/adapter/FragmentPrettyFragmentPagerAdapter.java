@@ -3,20 +3,21 @@ package com.test.admin.conurbations.adapter;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.fragments.PrettyPicturesListFragmentList;
 import com.test.admin.conurbations.fragments.SouGouImageFragment;
+import com.test.admin.conurbations.model.response.Moment;
 
 /**
  * Created by zhouqiong on 2017/1/12.
  */
-public class FragmentPrettyFragmentPagerAdapter extends FragmentPagerAdapter {
+public class FragmentPrettyFragmentPagerAdapter extends FragmentStatePagerAdapter {
     private String[] mTitles;
     private Fragment[] mFragments;
+
     public FragmentPrettyFragmentPagerAdapter(Context context, FragmentManager fragmentManager) {
         super(fragmentManager);
         mTitles = context.getResources().getStringArray(R.array.sougou_tab);

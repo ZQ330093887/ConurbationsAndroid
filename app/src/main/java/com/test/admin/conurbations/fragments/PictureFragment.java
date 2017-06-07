@@ -1,6 +1,5 @@
 package com.test.admin.conurbations.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -25,29 +24,17 @@ public class PictureFragment extends BaseFragment {
     FloatingActionButton mViewFloatingActionButton;
     @FindView
     AppBarLayout mHeadAppBarLayout;
-    private Context mContext;
     private FragmentPrettyFragmentPagerAdapter fragmentPrettyFragmentPagerAdapter;
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = context;
-    }
-
-    public BaseFragment newInstance() {
-        return new PictureFragment();
-    }
-
-    @Override
     protected void initData(Bundle bundle) {
-        int content = getArguments().getInt("content");
         initAppBarSetting();
-        fragmentPrettyFragmentPagerAdapter = new FragmentPrettyFragmentPagerAdapter(mContext, getChildFragmentManager());
+        fragmentPrettyFragmentPagerAdapter = new FragmentPrettyFragmentPagerAdapter(getContext(), getChildFragmentManager());
         mHeadTabLayout.setTabsFromPagerAdapter(fragmentPrettyFragmentPagerAdapter);
         mContentViewPager.setAdapter(fragmentPrettyFragmentPagerAdapter);
         mContentViewPager.setOffscreenPageLimit(5);
         mHeadTabLayout.setupWithViewPager(mContentViewPager);
-        mHeadTabLayout.setBackgroundColor(content);
+        mHeadTabLayout.setBackgroundColor(getArguments().getInt("content"));
     }
 
     public void initAppBarSetting() {
