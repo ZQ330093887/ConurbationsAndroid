@@ -3,7 +3,7 @@ package com.test.admin.conurbations.adapter;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
 import com.test.admin.conurbations.R;
@@ -14,7 +14,7 @@ import com.test.admin.conurbations.fragments.NewsInfoListFragment;
 /**
  * Created by zhouqiong on 2017/1/8.
  */
-public class NewsInformationFragmentPagerAdapter extends FragmentStatePagerAdapter {
+public class NewsInformationFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private String[] mTitles;
     private String[] mTitlesId;

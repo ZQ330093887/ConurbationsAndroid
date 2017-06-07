@@ -11,7 +11,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -36,7 +35,6 @@ import com.test.admin.conurbations.utils.PhotoCameralUtil;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
 import com.test.admin.conurbations.views.CircleImageView;
 import com.test.admin.conurbations.views.MaterialSearchView;
-import com.test.admin.conurbations.widget.SolidApplication;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -102,9 +100,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mFragments.add(createFragment(new PictureFragment(), Constants.testColors[1]));
         mFragments.add(createFragment(new NewsInformationFragment(), Constants.testColors[2]));
         mFragments.add(createFragment(new NBAFragment(), Constants.testColors[3]));
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fl_main_content, mFragments.get(0))
-                .commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_main_content, mFragments.get(0)).commit();
     }
 
     private void initLeftDrawerToggleMenu() {
@@ -157,11 +153,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private Fragment createFragment(BaseFragment baseFragment, int content) {
-        Fragment fragment = baseFragment;
         Bundle bundle = new Bundle();
         bundle.putInt("content", content);
-        fragment.setArguments(bundle);
-        return fragment;
+        baseFragment.setArguments(bundle);
+        return baseFragment;
     }
 
     @Override
@@ -215,14 +210,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         @Override
         public void onSelected(int index, Object tag) {
             Log.i("asd", "onSelected:" + index + "   TAG: " + tag.toString());
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             mToolbarToolbar.setBackgroundColor(Constants.toolBarColors[index]);
             mViewNavigationView.setBackgroundColor(Constants.testColors[index]);
             mViewNavigationView.getHeaderView(0).setBackgroundColor(Constants.toolBarColors[index]);
-            //transaction.setCustomAnimations(R.anim.push_up_in,R.anim.push_up_out);
-            transaction.replace(R.id.fl_main_content, mFragments.get(index));
-            transaction.commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fl_main_content, mFragments.get(index)).commit();
         }
 
         @Override
@@ -234,8 +226,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     MaterialSearchView.OnQueryTextListener queryTextListener = new MaterialSearchView.OnQueryTextListener() {
         @Override
         public boolean onQueryTextSubmit(String query) {
-            Intent intent = new Intent(SolidApplication.getInstance().getApplicationContext()
-                    , SearchActivity.class);
+            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
             intent.putExtra(SearchFragment.CLASS_SEARCH, query);
             startActivity(intent);
             return false;
