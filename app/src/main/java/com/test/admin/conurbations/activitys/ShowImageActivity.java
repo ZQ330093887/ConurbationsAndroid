@@ -18,14 +18,13 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.FindView;
+import com.test.admin.conurbations.photoview.PhotoView;
+import com.test.admin.conurbations.photoview.PhotoViewAttacher;
 import com.test.admin.conurbations.utils.DialogUtils;
 import com.tt.whorlviewlibrary.WhorlView;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.MenuParams;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
-
-import uk.co.senab.photoview.PhotoView;
-
 
 /**
  * Created by zhouqiong on 2016/9/26.
@@ -89,7 +88,7 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
                 return true;
             }
         });
-        mImagePhotoView.setOnViewTapListener(new uk.co.senab.photoview.PhotoViewAttacher.OnViewTapListener() {
+        mImagePhotoView.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
             @Override
             public void onViewTap(View view, float x, float y) {
                 Glide.get(view.getContext()).clearMemory();
