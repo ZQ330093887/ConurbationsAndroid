@@ -27,6 +27,7 @@ import java.util.Map;
  */
 @SetLayout
 public abstract class BaseFragment extends Fragment implements IBaseView {
+    public abstract BaseFragment newInstance();
 
     private static final String TAG = "BaseFragment";
 

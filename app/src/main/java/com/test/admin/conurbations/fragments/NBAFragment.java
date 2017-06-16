@@ -17,11 +17,17 @@ public class NBAFragment extends BaseFragment {
     ViewPager mViewViewPager;
 
     @Override
+    public BaseFragment newInstance() {
+        return new NBAFragment();
+    }
+
+    @Override
     protected void initData(Bundle bundle) {
+        int content = getArguments().getInt("content");
         NBAFragmentPagerAdapter NBAFragmentPagerAdapter = new NBAFragmentPagerAdapter(getContext(), getChildFragmentManager());
         mViewViewPager.setAdapter(NBAFragmentPagerAdapter);
         mViewViewPager.setOffscreenPageLimit(4);
         mViewTabLayout.setupWithViewPager(mViewViewPager);
-        mViewTabLayout.setBackgroundColor(getArguments().getInt("content"));
+        mViewTabLayout.setBackgroundColor(content);
     }
 }

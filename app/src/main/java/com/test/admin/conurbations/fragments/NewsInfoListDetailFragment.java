@@ -94,6 +94,11 @@ public class NewsInfoListDetailFragment extends BaseFragment implements INewsInf
     }
 
     @Override
+    public BaseFragment newInstance() {
+        return null;
+    }
+
+    @Override
     protected void initData(Bundle bundle) {
         if (getArguments().containsKey(KEY_NEWS)) {
             mID = getArguments().getInt(KEY_NEWS);
