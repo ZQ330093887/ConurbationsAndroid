@@ -18,11 +18,12 @@ public class NewsInformationFragment extends BaseFragment {
 
     @Override
     protected void initData(Bundle bundle) {
+        int content = getArguments().getInt("content");
         NewsInformationFragmentPagerAdapter mInformationFragmentPagerAdapter = new NewsInformationFragmentPagerAdapter(getContext(), getChildFragmentManager());
         mHeadTabLayout.setTabsFromPagerAdapter(mInformationFragmentPagerAdapter);
         mContentViewPager.setAdapter(mInformationFragmentPagerAdapter);
         mContentViewPager.setOffscreenPageLimit(5);
         mHeadTabLayout.setupWithViewPager(mContentViewPager);
-        mHeadTabLayout.setBackgroundColor(getArguments().getInt("content"));
+        mHeadTabLayout.setBackgroundColor(content);
     }
 }
