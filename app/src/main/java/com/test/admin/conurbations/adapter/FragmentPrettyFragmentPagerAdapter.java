@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.fragments.PrettyPicturesListFragmentList;
 import com.test.admin.conurbations.fragments.SouGouImageFragment;
+import com.test.admin.conurbations.model.response.Moment;
 
 /**
  * Created by zhouqiong on 2017/1/12.

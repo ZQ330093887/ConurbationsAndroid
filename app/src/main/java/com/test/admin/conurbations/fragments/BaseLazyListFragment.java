@@ -41,11 +41,6 @@ public abstract class BaseLazyListFragment<T> extends BaseFragment implements Pu
     public boolean isRefresh = false;
 
     @Override
-    public BaseFragment newInstance() {
-        return null;
-    }
-
-    @Override
     protected void initData(Bundle bundle) {
     }
 

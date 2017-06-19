@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.fragments.GanHuoFragment;
 import com.test.admin.conurbations.fragments.GankDayFragment;
 import com.test.admin.conurbations.fragments.WelfareFragment;
+import com.test.admin.conurbations.model.response.Moment;
 
 /**
  * Created by zhouqiong on 2017/1/8.

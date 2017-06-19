@@ -24,11 +24,6 @@ public class IndexFragment extends BaseFragment {
     }
 
     @Override
-    public BaseFragment newInstance() {
-        return new IndexFragment();
-    }
-
-    @Override
     protected void initData(Bundle bundle) {
         int content = getArguments().getInt("content");
         IndexFragmentPagerAdapter indexFragmentPagerAdapter = new IndexFragmentPagerAdapter(mContext, getChildFragmentManager());

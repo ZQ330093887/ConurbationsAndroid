@@ -34,10 +34,6 @@ public class PictureFragment extends BaseFragment {
         mContext = context;
     }
 
-    public BaseFragment newInstance() {
-        return new PictureFragment();
-    }
-
     @Override
     protected void initData(Bundle bundle) {
         int content = getArguments().getInt("content");
