@@ -50,12 +50,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> getActivity().finish());
     }
 
     public void setRootView(int layoutId) {

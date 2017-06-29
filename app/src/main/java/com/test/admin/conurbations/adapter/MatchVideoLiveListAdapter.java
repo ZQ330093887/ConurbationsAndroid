@@ -1,7 +1,6 @@
 package com.test.admin.conurbations.adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -27,12 +26,8 @@ public class MatchVideoLiveListAdapter extends BaseListAdapter<VideoLiveInfo> im
                 .setText(R.id.tv_right_team, info.rightName)
                 .setText(R.id.tv_live_time, info.time)
                 .setText(R.id.tv_live_type, info.type)
-                .setOnClickListener(R.id.rl_match_video_live, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        getMatchVideoLivePresenter().getVideoLiveSourceInfo(info.link, v.getContext());
-                    }
-                });
+                .setOnClickListener(R.id.rl_match_video_live, v -> getMatchVideoLivePresenter().getVideoLiveSourceInfo(info.link, v.getContext()))
+        ;
     }
 
     @Override
@@ -78,15 +73,12 @@ public class MatchVideoLiveListAdapter extends BaseListAdapter<VideoLiveInfo> im
 
         new AlertDialog.Builder(mContext)
                 .setTitle("请选择直播源")
-                .setItems(names, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (links[which].startsWith("/")) {
-                            links[which] = "http://nba.tmiaoo.com" + links[which];
-                        }
-                        WebViewActivity.openUrl(mContext, links[which], names[which], false, false);
-                        dialog.dismiss();
+                .setItems(names, (dialog, which) -> {
+                    if (links[which].startsWith("/")) {
+                        links[which] = "http://nba.tmiaoo.com" + links[which];
                     }
+                    WebViewActivity.openUrl(mContext, links[which], names[which], false, false);
+                    dialog.dismiss();
                 }).show();
     }
 }

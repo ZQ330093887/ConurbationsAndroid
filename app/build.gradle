@@ -23,6 +23,9 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         buildConfigField 'String', 'API_SERVER_URL', '"http://www.jianshu.com/u/9681f3bbb8c2"'
+        jackOptions{
+            enabled true
+        }
     }
     signingConfigs {//签名的配置
         release {

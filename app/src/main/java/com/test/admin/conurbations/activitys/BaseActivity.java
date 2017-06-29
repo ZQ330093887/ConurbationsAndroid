@@ -35,7 +35,6 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -67,10 +66,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     protected void initToolbar(Toolbar toolbar, String toolbarTitle, String toolbarSubtitle) {
 
-        if (!TextUtils.isEmpty(toolbarTitle)){
+        if (!TextUtils.isEmpty(toolbarTitle)) {
             toolbar.setTitle(toolbarTitle);
         }
-        if (!TextUtils.isEmpty(toolbarSubtitle)){
+        if (!TextUtils.isEmpty(toolbarSubtitle)) {
             toolbar.setSubtitle(toolbarSubtitle);
         }
         setSupportActionBar(toolbar);
@@ -79,12 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     @Override
@@ -195,13 +189,19 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         Observable.timer(1000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Long>() {
-                    @Override
-                    public void call(Long aLong) {
-                        startActivity(intent);
-                        overridePendingTransition(0, android.R.anim.fade_out);
-                        finish();
-                    }
+                .subscribe(aLong -> {
+                    startActivity(intent);
+                    overridePendingTransition(0, android.R.anim.fade_out);
+                    finish();
+                });
+
+        Observable.timer(1000, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aLong -> {
+                    startActivity(intent);
+                    overridePendingTransition(0, android.R.anim.fade_out);
+                    finish();
                 });
     }
 

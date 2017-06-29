@@ -16,12 +16,7 @@ public class WelfareListAdapter extends BaseListAdapter<GanHuoDataBean> {
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final GanHuoDataBean item) {
         vh.setImageUrlUserGlide(R.id.rv_item_welfare_photo, item.getUrl(), 0.618f, R.color.white)
-                .setOnClickListener(R.id.rv_item_welfare_photo, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startShowImageActivity(v, item.getUrl());
-                    }
-                });
+                .setOnClickListener(R.id.rv_item_welfare_photo, v -> startShowImageActivity(v, item.getUrl()));
     }
 
     @Override

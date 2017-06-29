@@ -13,12 +13,7 @@ public class SearchAdapter extends BaseListAdapter<SosoSearcher> {
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final SosoSearcher item) {
         vh.setImageUrlUserGlide(R.id.rv_item_sougou_photo, item.getPic_url(), 0.918f, R.color.white)
-                .setOnClickListener(R.id.rv_item_sougou_photo, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startShowImageActivity(v, item.getPic_url());
-                    }
-                });
+                .setOnClickListener(R.id.rv_item_sougou_photo, v -> startShowImageActivity(v, item.getPic_url()));
     }
 
     @Override

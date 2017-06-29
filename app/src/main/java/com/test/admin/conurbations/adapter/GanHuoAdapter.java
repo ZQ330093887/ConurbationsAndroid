@@ -1,6 +1,5 @@
 package com.test.admin.conurbations.adapter;
 
-import android.app.Activity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,12 +50,7 @@ public class GanHuoAdapter extends BaseListAdapter<GanHuoDataBean> {
     }
 
     private View.OnClickListener setOnClickListener(final GanHuoDataBean item) {
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WebViewActivity.openUrl((Activity) v.getContext(), item.getUrl(), item.getDesc(), false, false);
-            }
-        };
+        View.OnClickListener onClickListener = v -> WebViewActivity.openUrl( v.getContext(), item.getUrl(), item.getDesc(), false, false);
         return onClickListener;
     }
 

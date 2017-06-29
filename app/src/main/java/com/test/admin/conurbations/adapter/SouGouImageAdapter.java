@@ -1,6 +1,5 @@
 package com.test.admin.conurbations.adapter;
 
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
@@ -15,12 +14,7 @@ public class SouGouImageAdapter extends BaseListAdapter<SosoSearcher> {
     @Override
     protected void bindDataToItemView(final BaseViewHolder holder, final SosoSearcher item) {
         holder.setImageUrlUserGlide(R.id.rv_item_sougou_photo, item.getPic_url(), 0.618f, R.color.white)
-                .setOnClickListener(R.id.rv_item_sougou_photo, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startShowImageActivity(v, item.getPic_url());
-                    }
-                });
+                .setOnClickListener(R.id.rv_item_sougou_photo, v -> startShowImageActivity(v, item.getPic_url()));
     }
 
     @Override

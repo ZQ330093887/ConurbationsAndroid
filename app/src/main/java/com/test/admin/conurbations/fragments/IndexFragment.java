@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 
 import com.test.admin.conurbations.adapter.IndexFragmentPagerAdapter;
 import com.test.admin.conurbations.annotations.FindView;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
@@ -25,12 +26,9 @@ public class IndexFragment extends BaseFragment {
 
     @Override
     protected void initData(Bundle bundle) {
-        int content = getArguments().getInt("content");
-        IndexFragmentPagerAdapter indexFragmentPagerAdapter = new IndexFragmentPagerAdapter(mContext, getChildFragmentManager());
-        mHeadTabLayout.setTabsFromPagerAdapter(indexFragmentPagerAdapter);
-        mContentViewPager.setAdapter(indexFragmentPagerAdapter);
-        mContentViewPager.setOffscreenPageLimit(5);
+        mContentViewPager.setAdapter(new IndexFragmentPagerAdapter(mContext, getChildFragmentManager()));
+        mContentViewPager.setOffscreenPageLimit(9);
         mHeadTabLayout.setupWithViewPager(mContentViewPager);
-        mHeadTabLayout.setBackgroundColor(content);
+        mHeadTabLayout.setBackgroundColor(getArguments().getInt("content"));
     }
 }
