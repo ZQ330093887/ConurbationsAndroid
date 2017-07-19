@@ -10,17 +10,17 @@ import com.test.admin.conurbations.retrofit.AppClient;
 /**
  * Created by zhouqiong on 2017/1/18.
  */
-public class SearchPresenter extends BasePresenter {
+public class SearchPresenter extends BasePresenter<ISearchView> {
 
     private ISearchView iSearchView;
 
     public SearchPresenter(ISearchView iSearchView) {
         this.iSearchView = iSearchView;
+        attachView(this.iSearchView);
     }
 
     public void getSearchQueryInfo(String mSearchQuery, int pages) {
-        addSubscription(AppClient.retrofit().create(GankService.class)
-                        .getImageList("ajax", "result", mSearchQuery, pages * 24),
+        addSubscription(apiStores.getImageList("ajax", "result", mSearchQuery, pages * 24),
                 new ApiCallback<NetImage>() {
 
                     @Override

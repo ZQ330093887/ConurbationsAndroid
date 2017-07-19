@@ -13,7 +13,7 @@ import com.test.admin.conurbations.utils.AppUtils;
 /**
  * Created by zhouqiong on 2016/11/18.
  */
-public class WelfarePresenter extends BasePresenter {
+public class WelfarePresenter extends BasePresenter<IWelfareView> {
 
     private IWelfareView welfareList;
     private static final int DEFAULT_PAGE_COUNT = 20;
@@ -24,6 +24,7 @@ public class WelfarePresenter extends BasePresenter {
 
     public WelfarePresenter(IWelfareView welfareList) {
         this.welfareList = welfareList;
+        attachView(this.welfareList);
     }
 
     public void getWelfareData(final boolean isRefresh, final int pager) {
@@ -37,7 +38,7 @@ public class WelfarePresenter extends BasePresenter {
             return;
         }
 
-        addSubscription(AppClient.retrofit().create(GankService.class).getGank(GankType.WELFARE, getPageCount(), pager),
+        addSubscription(apiStores.getGank(GankType.WELFARE, getPageCount(), pager),
                 new ApiCallback<GankData>() {
                     @Override
                     public void onSuccess(GankData model) {

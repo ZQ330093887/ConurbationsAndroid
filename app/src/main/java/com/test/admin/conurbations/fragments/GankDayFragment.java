@@ -80,4 +80,11 @@ public class GankDayFragment extends BaseLazyListFragment<List<GankItem>> implem
     protected ILayoutManager getLayoutManager() {
         return new MyStaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
     }
+
+    @Override
+    public void detachView() {
+        if (mGankDayPresenter != null){
+            mGankDayPresenter.detachView();
+        }
+    }
 }

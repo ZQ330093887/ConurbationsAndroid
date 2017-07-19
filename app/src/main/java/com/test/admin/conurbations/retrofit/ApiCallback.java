@@ -1,9 +1,12 @@
 package com.test.admin.conurbations.retrofit;
+
 import android.util.Log;
 
-import retrofit2.adapter.rxjava.HttpException;
-import rx.Subscriber;
-public abstract class ApiCallback<M> extends Subscriber<M> {
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+
+import io.reactivex.observers.DisposableObserver;
+
+public abstract class ApiCallback<M> extends DisposableObserver<M> {
 
     public abstract void onSuccess(M model);
 
@@ -19,7 +22,7 @@ public abstract class ApiCallback<M> extends Subscriber<M> {
             HttpException httpException = (HttpException) e;
             int code = httpException.code();
             String msg = httpException.getMessage();
-            Log.d("code=" , code+"");
+            Log.d("code=", code + "");
             if (code == 504) {
                 msg = "网络不给力";
             }
@@ -39,7 +42,7 @@ public abstract class ApiCallback<M> extends Subscriber<M> {
     }
 
     @Override
-    public void onCompleted() {
+    public void onComplete() {
         onFinish();
     }
 }

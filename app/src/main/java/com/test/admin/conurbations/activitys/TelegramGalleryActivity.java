@@ -93,4 +93,9 @@ public class TelegramGalleryActivity extends BaseActivity {
     void onClickmCheckBoxButton(View view) {
         GalleryActivity.openActivity(TelegramGalleryActivity.this, false, 9, 12);
     }
+
+    @Override
+    public void detachView() {
+
+    }
 }

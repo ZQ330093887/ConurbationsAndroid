@@ -68,4 +68,11 @@ public class WelfareFragment extends BaseLazyListFragment implements IWelfareVie
     protected ILayoutManager getLayoutManager() {
         return new MyStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
     }
+
+    @Override
+    public void detachView() {
+        if (mWelfarePresenter != null) {
+            mWelfarePresenter.detachView();
+        }
+    }
 }

@@ -14,12 +14,13 @@ import com.test.admin.conurbations.utils.AppUtils;
 /**
  * Created by zhouqiong on 2017/1/18.
  */
-public class PrettyPicturesListPresenter extends BasePresenter {
+public class PrettyPicturesListPresenter extends BasePresenter<IPrettyPictureListView> {
 
     private IPrettyPictureListView iPrettyPictureListView;
 
     public PrettyPicturesListPresenter(IPrettyPictureListView iPrettyPictureListView) {
         this.iPrettyPictureListView = iPrettyPictureListView;
+        attachView(this.iPrettyPictureListView);
     }
 
     public void getPrettyPictureLisData(final int page, boolean isRefresh) {
@@ -31,12 +32,11 @@ public class PrettyPicturesListPresenter extends BasePresenter {
             iPrettyPictureListView.setPrettyPictureData(gankData);
             return;
         }
-        addSubscription(AppClient.retrofit().create(GankService.class)
-                        .get360ImageList(30),
+        addSubscription(apiStores.get360ImageList(30),
                 new ApiCallback<NetImage360>() {
                     @Override
                     public void onSuccess(NetImage360 model) {
-                        if (page == 1){
+                        if (page == 1) {
                             cache.put(key, model);
                         }
                         iPrettyPictureListView.setPrettyPictureData(model);

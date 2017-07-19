@@ -21,17 +21,17 @@ import static com.test.admin.conurbations.retrofit.AppClient.retrofit;
 /**
  * Created by zhouqiong on 2017/1/18.
  */
-public class NewsInfoListDetailPresenter extends BasePresenter {
+public class NewsInfoListDetailPresenter extends BasePresenter<INewsInfoDetailListView> {
 
     private INewsInfoDetailListView iNewsInfoDetailListView;
 
     public NewsInfoListDetailPresenter(INewsInfoDetailListView iNewsInfoDetailListView) {
         this.iNewsInfoDetailListView = iNewsInfoDetailListView;
+        attachView(this.iNewsInfoDetailListView);
     }
 
     public void getNewsInfoDetailData(int cid) {
-        addSubscription(retrofit().create(GankService.class)
-                        .getNewsDetail(cid),
+        addSubscription(apiStores.getNewsDetail(cid),
                 new ApiCallback<NewsDetail>() {
                     @Override
                     public void onSuccess(NewsDetail model) {

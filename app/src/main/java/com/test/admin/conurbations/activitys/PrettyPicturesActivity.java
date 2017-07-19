@@ -90,4 +90,9 @@ public class PrettyPicturesActivity extends BaseActivity {
     public int getBgImg() {
         return bgImgs[new Random().nextInt(bgImgs.length)];
     }
+
+    @Override
+    public void detachView() {
+
+    }
 }

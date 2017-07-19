@@ -13,7 +13,7 @@ import com.test.admin.conurbations.config.Contact;
 import java.util.List;
 
 /**
- * Created by gjz on 9/4/16.
+ * Created by zhouqiong on 2017/1/2.
  */
 public class FragmentContactsAdapter extends RecyclerView.Adapter<FragmentContactsAdapter.ContactsViewHolder> implements View.OnClickListener {
 

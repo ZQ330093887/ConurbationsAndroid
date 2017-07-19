@@ -122,4 +122,11 @@ public class NewsInfoListDetailFragment extends BaseFragment implements INewsInf
             mNewsInfoListDetailPresenter.getNewsInfoDetailData(mID);
         }
     }
+
+    @Override
+    public void detachView() {
+        if (mNewsInfoListDetailPresenter != null) {
+            mNewsInfoListDetailPresenter.detachView();
+        }
+    }
 }

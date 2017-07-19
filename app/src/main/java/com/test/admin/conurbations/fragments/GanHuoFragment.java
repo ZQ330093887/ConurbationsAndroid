@@ -67,4 +67,11 @@ public class GanHuoFragment extends BaseLazyListFragment implements IWelfareView
     protected ILayoutManager getLayoutManager() {
         return new MyStaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
     }
+
+    @Override
+    public void detachView() {
+        if (mGanHuoPresenter != null) {
+            mGanHuoPresenter.detachView();
+        }
+    }
 }

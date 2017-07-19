@@ -45,4 +45,6 @@ public interface IBaseView {
     Context getApplicationContext();
 
     void finishActivity();
+
+    void detachView();
 }

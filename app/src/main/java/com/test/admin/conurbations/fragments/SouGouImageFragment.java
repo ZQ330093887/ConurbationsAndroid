@@ -74,4 +74,11 @@ public class SouGouImageFragment extends BaseLazyListFragment implements ISouGou
     protected void setUpPresenter() {
         mSouGouImagePresenter = new SouGouImagePresenter(this);
     }
+
+    @Override
+    public void detachView() {
+        if (mSouGouImagePresenter != null) {
+            mSouGouImagePresenter.detachView();
+        }
+    }
 }

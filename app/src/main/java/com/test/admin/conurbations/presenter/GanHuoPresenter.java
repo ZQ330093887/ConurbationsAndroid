@@ -12,12 +12,13 @@ import com.test.admin.conurbations.utils.AppUtils;
  * Created by zhouqiong on 2016/12/12.
  */
 
-public class GanHuoPresenter extends BasePresenter {
+public class GanHuoPresenter extends BasePresenter<IWelfareView> {
 
     private IWelfareView welfareList;
 
     public GanHuoPresenter(IWelfareView welfareList) {
         this.welfareList = welfareList;
+        attachView(this.welfareList);
     }
 
     public void getWelfareData(final String type, final int pager, boolean isRefresh) {
@@ -29,8 +30,7 @@ public class GanHuoPresenter extends BasePresenter {
             welfareList.setWelfareData(gankData);
             return;
         }
-        addSubscription(AppClient.retrofit().create(GankService.class)
-                        .getGanHuo(type, pager),
+        addSubscription(apiStores.getGanHuo(type, pager),
                 new ApiCallback<GankData>() {
                     @Override
                     public void onSuccess(GankData model) {

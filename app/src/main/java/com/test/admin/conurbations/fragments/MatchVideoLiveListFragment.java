@@ -53,4 +53,11 @@ public class MatchVideoLiveListFragment extends BaseListFragment implements IVid
     protected void setUpPresenter() {
         matchVideoLivePresenter = new MatchVideoLivePresenter(this);
     }
+
+    @Override
+    public void detachView() {
+        if (matchVideoLivePresenter != null) {
+            matchVideoLivePresenter.detachView();
+        }
+    }
 }

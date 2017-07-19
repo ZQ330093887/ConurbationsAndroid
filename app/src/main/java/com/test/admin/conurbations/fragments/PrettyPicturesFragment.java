@@ -73,4 +73,11 @@ public class PrettyPicturesFragment extends BaseListFragment implements IPrettyP
     protected void setUpPresenter() {
         mPrettyPicturesPresenter = new PrettyPicturesPresenter(this);
     }
+
+    @Override
+    public void detachView() {
+        if (mPrettyPicturesPresenter != null) {
+            mPrettyPicturesPresenter.detachView();
+        }
+    }
 }

@@ -33,9 +33,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * Created by zhouqiong on 2017/2/27.
@@ -119,6 +120,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        detachView();
     }
 
     @Override
@@ -186,15 +188,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     public void startActivityAndFinishWithOutObservable(final Class<?> cls) {
         final Intent intent = new Intent();
         intent.setClass(this, cls);
-        Observable.timer(1000, TimeUnit.MILLISECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aLong -> {
-                    startActivity(intent);
-                    overridePendingTransition(0, android.R.anim.fade_out);
-                    finish();
-                });
-
         Observable.timer(1000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -329,5 +322,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                 DialogUtils.hideProgressDialog();
             }
         });
+    }
+
+    @Override
+    public void detachView() {
+
     }
 }

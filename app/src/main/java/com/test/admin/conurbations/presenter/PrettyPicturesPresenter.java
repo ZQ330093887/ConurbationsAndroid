@@ -14,19 +14,19 @@ import com.test.admin.conurbations.utils.AppUtils;
 /**
  * Created by zhouqiong on 2017/1/18.
  */
-public class PrettyPicturesPresenter extends BasePresenter {
+public class PrettyPicturesPresenter extends BasePresenter<IPrettyPictureListView> {
 
     private IPrettyPictureListView iPrettyPictureView;
 
     public PrettyPicturesPresenter(IPrettyPictureListView iTestList) {
         this.iPrettyPictureView = iTestList;
+        attachView(this.iPrettyPictureView);
     }
 
     public void getPrettyPictureLisData(String cid, final int pager) {
         final String key = "getPrettyPictureLisData" + "cid";
         final ACache cache = ACache.get(AppUtils.getAppContext());
-        addSubscription(AppClient.retrofit().create(GankService.class)
-                        .get360ImageItemList(cid),
+        addSubscription(apiStores.get360ImageItemList(cid),
                 new ApiCallback<NetImage360>() {
                     @Override
                     public void onSuccess(NetImage360 model) {

@@ -1,13 +1,9 @@
 package com.test.admin.conurbations.adapter;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
-
-import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.fragments.NbaIndexFragment;
 
 /**
  * Created by zhouqiong on 2017/1/8.
@@ -15,18 +11,12 @@ import com.test.admin.conurbations.fragments.NbaIndexFragment;
 public class NBAFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private String[] mTitles;
-    private String[] mTitlesId;
     private Fragment[] mFragments;
 
-    public NBAFragmentPagerAdapter(Context context, FragmentManager fragmentManager) {
+    public NBAFragmentPagerAdapter(FragmentManager fragmentManager,String[] title,Fragment[] fragments) {
         super(fragmentManager);
-        mTitles =context.getResources().getStringArray(R.array.nba_tab);
-        mTitlesId =context.getResources().getStringArray(R.array.nba_tab_id);
-        mFragments = new Fragment[mTitles.length];
-        for (int i = 0; i < mTitles.length; i++) {
-            mFragments[i] = new NbaIndexFragment();
-            ((NbaIndexFragment) mFragments[i]).setType(mTitlesId[i]);
-        }
+        this.mFragments = fragments;
+        this.mTitles = title;
     }
 
     @Override

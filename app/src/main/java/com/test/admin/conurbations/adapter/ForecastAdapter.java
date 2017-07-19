@@ -14,7 +14,7 @@ import com.test.admin.conurbations.utils.RatioImageView;
 import java.util.List;
 
 /**
- * Created by yarolegovich on 08.03.2017.
+ * Created by zhouqiong on 2017/2/2.
  */
 
 public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHolder> {

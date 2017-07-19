@@ -12,11 +12,12 @@ import com.test.admin.conurbations.utils.AppUtils;
 /**
  * Created by zhouqiong on 2017/1/18.
  */
-public class NewsInfoIndexPresenter extends BasePresenter {
+public class NewsInfoIndexPresenter extends BasePresenter<INewInfoIndexView> {
     private INewInfoIndexView iNewInfoIndexView;
 
     public NewsInfoIndexPresenter(INewInfoIndexView iNewInfoIndexView) {
         this.iNewInfoIndexView = iNewInfoIndexView;
+        attachView(this.iNewInfoIndexView);
     }
 
     public void getNewListData(final int pager, String ordDate, boolean isRefresh) {
@@ -34,7 +35,7 @@ public class NewsInfoIndexPresenter extends BasePresenter {
                 iNewInfoIndexView.setNewListData(model);
                 return;
             }
-            addSubscription(AppClient.retrofit().create(GankService.class).getLatestNews(), new ApiCallback<NewsList>() {
+            addSubscription(apiStores.getLatestNews(), new ApiCallback<NewsList>() {
                 @Override
                 public void onSuccess(NewsList model) {
                     if (pager == 1) {
@@ -52,7 +53,7 @@ public class NewsInfoIndexPresenter extends BasePresenter {
                 }
             });
         } else {
-            addSubscription(AppClient.retrofit().create(GankService.class).getBeforeNews(ordDate), new ApiCallback<NewsList>() {
+            addSubscription(apiStores.getBeforeNews(ordDate), new ApiCallback<NewsList>() {
                 @Override
                 public void onSuccess(NewsList model) {
                     iNewInfoIndexView.setNewListData(model);

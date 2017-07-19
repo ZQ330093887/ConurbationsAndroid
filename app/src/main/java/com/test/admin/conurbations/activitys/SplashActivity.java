@@ -81,4 +81,9 @@ public class SplashActivity extends BaseActivity {
         super.onPause();
         MobclickAgent.onPause(this);
     }
+
+    @Override
+    public void detachView() {
+
+    }
 }

@@ -12,12 +12,13 @@ import com.test.admin.conurbations.utils.AppUtils;
  * Created by zhouqiong on 2016/12/12.
  */
 
-public class NewsInfoListPresenter extends BasePresenter {
+public class NewsInfoListPresenter extends BasePresenter<INewInformationView> {
 
     private INewInformationView iNewInformationView;
 
     public NewsInfoListPresenter(INewInformationView iNewInformationView) {
         this.iNewInformationView = iNewInformationView;
+        attachView(this.iNewInformationView);
     }
 
     public void getNewsInfoData(final String tabId, final int pager, boolean isRefresh) {
@@ -30,8 +31,7 @@ public class NewsInfoListPresenter extends BasePresenter {
             return;
         }
 
-        addSubscription(AppClient.retrofit().create(GankService.class)
-                        .getThemeContentList(tabId),
+        addSubscription(apiStores.getThemeContentList(tabId),
                 new ApiCallback<NewsList>() {
                     @Override
                     public void onSuccess(NewsList newsSummaries) {

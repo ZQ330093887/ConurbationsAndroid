@@ -27,7 +27,7 @@ import static com.test.admin.conurbations.retrofit.AppClient.retrofit;
 /**
  * Created by zhouqiong on 2016/11/18.
  */
-public class NBAIndexPresenter extends BasePresenter {
+public class NBAIndexPresenter extends BasePresenter<INBAinfoView> {
 
     private INBAinfoView welfareList;
     private List<String> indexs = new ArrayList<>();
@@ -37,6 +37,7 @@ public class NBAIndexPresenter extends BasePresenter {
 
     public NBAIndexPresenter(INBAinfoView welfareList) {
         this.welfareList = welfareList;
+        attachView(this.welfareList);
     }
 
     public void getNBAData(final int pager, final String type, boolean isRefresh) {
@@ -50,7 +51,7 @@ public class NBAIndexPresenter extends BasePresenter {
             return;
         }
 
-        addSubscription(retrofit().create(GankService.class).getNewsIndex(type),
+        addSubscription(apiStores.getNewsIndex(type),
                 new ApiCallback<NewsIndex>() {
                     @Override
                     public void onSuccess(NewsIndex newsIndex) {

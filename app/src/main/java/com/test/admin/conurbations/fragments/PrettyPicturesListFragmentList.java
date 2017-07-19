@@ -71,4 +71,11 @@ public class PrettyPicturesListFragmentList extends BaseLazyListFragment impleme
     protected void setUpPresenter() {
         mPrettyPicturesListPresenter = new PrettyPicturesListPresenter(this);
     }
+
+    @Override
+    public void detachView() {
+        if (mPrettyPicturesListPresenter != null) {
+            mPrettyPicturesListPresenter.detachView();
+        }
+    }
 }

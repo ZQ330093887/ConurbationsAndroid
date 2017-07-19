@@ -3,16 +3,18 @@ package com.test.admin.conurbations.presenter;
 import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.retrofit.AppClient;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
 
 public class BasePresenter<V> {
     public V mvpView;
     protected GankService apiStores;
-    private CompositeSubscription mCompositeSubscription;
+    private CompositeDisposable compositeDisposable;
 
     public void attachView(V mvpView) {
         this.mvpView = mvpView;
@@ -25,22 +27,20 @@ public class BasePresenter<V> {
         onUnsubscribe();
     }
 
-
     //RXjava取消注册，以避免内存泄露
     public void onUnsubscribe() {
-        if (mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
-            mCompositeSubscription.unsubscribe();
+        if (compositeDisposable != null) {
+            compositeDisposable.clear();
         }
     }
 
-
-    public void addSubscription(Observable observable, Subscriber subscriber) {
-        if (mCompositeSubscription == null) {
-            mCompositeSubscription = new CompositeSubscription();
+    public void addSubscription(Observable observable, DisposableObserver disposableObserver) {
+        if (compositeDisposable == null) {
+            compositeDisposable = new CompositeDisposable();
         }
-        mCompositeSubscription.add(observable
+        compositeDisposable.add((Disposable) observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber));
+                .subscribeWith(disposableObserver));
     }
 }

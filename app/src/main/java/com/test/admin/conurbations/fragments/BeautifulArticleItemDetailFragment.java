@@ -66,33 +66,35 @@ public class BeautifulArticleItemDetailFragment extends BaseFragment {
         }
     }
     private void show(final String url) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        new Thread(() -> {
+            try {
                 try {
-                    try {
-                        Document doc = Jsoup.connect(url).get();
-                        StringBuilder sbContent = new StringBuilder();
-                        Elements elements = doc.select("div.PostContent > p");
-                        for (int i = 0; i < elements.size(); i++) {
-                            Element ele = elements.get(i);
-                            sbContent.append(ele.ownText() + "\n\n");
-                        }
-                        detailContext = sbContent.toString();
-
-                        Looper.prepare();
-                        Message msg = Message.obtain();
-                        msg.what = 0x123456;
-                        mHandler.sendMessage(msg);
-                        Looper.loop();
-
-                    } catch (Exception e) {
-                        Log.i("mytag", e.toString());
+                    Document doc = Jsoup.connect(url).get();
+                    StringBuilder sbContent = new StringBuilder();
+                    Elements elements = doc.select("div.PostContent > p");
+                    for (int i = 0; i < elements.size(); i++) {
+                        Element ele = elements.get(i);
+                        sbContent.append(ele.ownText() + "\n\n");
                     }
+                    detailContext = sbContent.toString();
+
+                    Looper.prepare();
+                    Message msg = Message.obtain();
+                    msg.what = 0x123456;
+                    mHandler.sendMessage(msg);
+                    Looper.loop();
+
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.i("mytag", e.toString());
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }).start();
+    }
+
+    @Override
+    public void detachView() {
+
     }
 }

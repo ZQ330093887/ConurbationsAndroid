@@ -35,12 +35,13 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
     private LayoutInflater inflater;
 
     public Map<String, View> views;
+
     protected void initToolbar(Toolbar toolbar, String toolbarTitle, String toolbarSubtitle) {
 
-        if (!TextUtils.isEmpty(toolbarTitle)){
+        if (!TextUtils.isEmpty(toolbarTitle)) {
             toolbar.setTitle(toolbarTitle);
         }
-        if (!TextUtils.isEmpty(toolbarSubtitle)){
+        if (!TextUtils.isEmpty(toolbarSubtitle)) {
             toolbar.setSubtitle(toolbarSubtitle);
         }
         AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -90,13 +91,9 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        detachView();
         RefWatcher refWatcher = SolidApplication.refWatcher;
         refWatcher.watch(this);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override
@@ -178,6 +175,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
     public void startActivityForResult(Class<?> cls, int requestCode, Bundle bundle) {
         getBaseActivity().startActivityForResult(cls, requestCode, bundle);
     }
+
     @Override
     public void finishActivity() {
         getBaseActivity().finishActivity();

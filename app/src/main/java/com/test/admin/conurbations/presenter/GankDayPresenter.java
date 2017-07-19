@@ -26,6 +26,7 @@ public class GankDayPresenter extends BasePresenter {
 
     public GankDayPresenter(IGankDayView todayNewsList) {
         this.todayNewsList = todayNewsList;
+        attachView(this.todayNewsList);
     }
 
     public void getGankDayData(int Year, int Month, int Day, boolean isRefresh) {
@@ -39,8 +40,7 @@ public class GankDayPresenter extends BasePresenter {
             return;
         }
 
-        addSubscription(AppClient.retrofit().create(GankService.class)
-                        .getDayGank(Year, Month, Day),
+        addSubscription(apiStores.getDayGank(Year, Month, Day),
                 new ApiCallback<TodayData>() {
                     @Override
                     public void onSuccess(TodayData model) {

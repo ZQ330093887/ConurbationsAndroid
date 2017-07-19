@@ -1,14 +1,9 @@
 package com.test.admin.conurbations.adapter;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
-
-import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.fragments.NewsInfoIndexFragment;
-import com.test.admin.conurbations.fragments.NewsInfoListFragment;
 
 
 /**
@@ -17,21 +12,12 @@ import com.test.admin.conurbations.fragments.NewsInfoListFragment;
 public class NewsInformationFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private String[] mTitles;
-    private String[] mTitlesId;
     private Fragment[] mFragments;
 
-    public NewsInformationFragmentPagerAdapter(Context context, FragmentManager fragmentManager) {
+    public NewsInformationFragmentPagerAdapter(FragmentManager fragmentManager, String[] title, Fragment[] fragments) {
         super(fragmentManager);
-
-        mTitles = context.getResources().getStringArray(R.array.news_info_tab);
-        mTitlesId = context.getResources().getStringArray(R.array.news_info_tab_id);
-        mFragments = new Fragment[mTitles.length];
-        mFragments[0] = new NewsInfoIndexFragment();
-        ((NewsInfoIndexFragment) mFragments[0]).setRange("知乎");
-        for (int i = 1; i < mTitles.length; i++) {
-            mFragments[i] = new NewsInfoListFragment();
-            ((NewsInfoListFragment) mFragments[i]).setTable(mTitlesId[i]);
-        }
+        this.mFragments = fragments;
+        this.mTitles = title;
     }
 
     @Override

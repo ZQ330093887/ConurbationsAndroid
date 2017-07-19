@@ -12,12 +12,13 @@ import com.test.admin.conurbations.utils.AppUtils;
 /**
  * Created by zhouqiong on 2016/11/18.
  */
-public class SouGouImagePresenter extends BasePresenter {
+public class SouGouImagePresenter extends BasePresenter<ISouGouImageView> {
 
     private ISouGouImageView souGouImageList;
 
     public SouGouImagePresenter(ISouGouImageView souGouImageList) {
         this.souGouImageList = souGouImageList;
+        attachView(this.souGouImageList);
     }
 
     public void getSouGouImageData(String imgType, final int pages, boolean isRefresh) {
@@ -30,9 +31,7 @@ public class SouGouImagePresenter extends BasePresenter {
             souGouImageList.setSouGouImageData(model);
             return;
         }
-
-        addSubscription(AppClient.retrofit().create(GankService.class)
-                        .getImageList("ajax", "result", imgType, pages * 24),
+        addSubscription(apiStores.getImageList("ajax", "result", imgType, pages * 24),
                 new ApiCallback<NetImage>() {
 
                     @Override

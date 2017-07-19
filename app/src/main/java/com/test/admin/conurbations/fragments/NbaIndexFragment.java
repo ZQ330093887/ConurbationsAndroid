@@ -65,4 +65,11 @@ public class NbaIndexFragment extends BaseLazyListFragment implements INBAinfoVi
     protected ILayoutManager getLayoutManager() {
         return new MyStaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
     }
+
+    @Override
+    public void detachView() {
+        if (mNBAIndexPresenter != null) {
+            mNBAIndexPresenter.detachView();
+        }
+    }
 }

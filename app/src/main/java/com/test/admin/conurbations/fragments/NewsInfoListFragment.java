@@ -26,7 +26,8 @@ public class NewsInfoListFragment extends BaseLazyListFragment implements INewIn
     }
 
     @Override
-    protected void initData(Bundle bundle) {}
+    protected void initData(Bundle bundle) {
+    }
 
     @Override
     public void setNewInfoData(NewsList informationBean) {
@@ -66,5 +67,12 @@ public class NewsInfoListFragment extends BaseLazyListFragment implements INewIn
     @Override
     protected ILayoutManager getLayoutManager() {
         return new MyStaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+    }
+
+    @Override
+    public void detachView() {
+        if (mNewsInfoListPresenter != null) {
+            mNewsInfoListPresenter.detachView();
+        }
     }
 }

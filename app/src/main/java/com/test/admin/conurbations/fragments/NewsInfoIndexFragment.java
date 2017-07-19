@@ -69,4 +69,11 @@ public class NewsInfoIndexFragment extends BaseLazyListFragment implements INewI
     protected void setUpPresenter() {
         mNewsInfoIndexPresenter = new NewsInfoIndexPresenter(this);
     }
+
+    @Override
+    public void detachView() {
+        if (mNewsInfoIndexPresenter != null){
+            mNewsInfoIndexPresenter.detachView();
+        }
+    }
 }
