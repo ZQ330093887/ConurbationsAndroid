@@ -100,17 +100,14 @@ public class NBAIndexAdapter extends BaseListAdapter<NewsItemBean> {
 
     @NonNull
     private View.OnClickListener getListener(final NewsItemBean news, final View view, final String s) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
-                intent.putExtra(NewsInfoListDetailFragment.KEY_NBA_INDEX, news.index);
-                intent.putExtra(NewsInfoListDetailFragment.KEY_TITLE, news.title);
-                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation
-                        ((Activity) context, new Pair<>(view, s));
-                ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
-            }
+        return v -> {
+            Context context = view.getContext();
+            Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
+            intent.putExtra(NewsInfoListDetailFragment.KEY_NBA_INDEX, news.index);
+            intent.putExtra(NewsInfoListDetailFragment.KEY_TITLE, news.title);
+            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation
+                    ((Activity) context, new Pair<>(view, s));
+            ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
         };
     }
 

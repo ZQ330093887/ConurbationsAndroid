@@ -15,7 +15,6 @@ import com.test.admin.conurbations.utils.PinyinUtil;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 
 /**
@@ -114,12 +113,7 @@ public class Contact {
         //利用HashSet对List去重
         phoneInfoList = new ArrayList<>(new HashSet<>(phoneInfoList));
         //按照字母从A-Z排序
-        Collections.sort(phoneInfoList, new Comparator<Contact>() {
-            @Override
-            public int compare(Contact o1, Contact o2) {
-                return o1.index.compareTo(o2.index);
-            }
-        });
+        Collections.sort(phoneInfoList, (o1, o2) -> o1.index.compareTo(o2.index));
         return phoneInfoList;
     }
 }

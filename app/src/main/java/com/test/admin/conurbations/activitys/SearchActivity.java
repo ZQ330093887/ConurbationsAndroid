@@ -59,14 +59,11 @@ public class SearchActivity extends BaseActivity {
     }
 
     public void initAppBarSetting() {
-        mHandAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-                if (i == 0) {
-                    mViewFloatingActionButton.hide();
-                } else {
-                    mViewFloatingActionButton.show();
-                }
+        mHandAppBarLayout.addOnOffsetChangedListener((appBarLayout, i) -> {
+            if (i == 0) {
+                mViewFloatingActionButton.hide();
+            } else {
+                mViewFloatingActionButton.show();
             }
         });
     }

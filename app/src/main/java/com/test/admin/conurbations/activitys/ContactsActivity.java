@@ -3,7 +3,6 @@ package com.test.admin.conurbations.activitys;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import com.test.admin.conurbations.R;
@@ -40,21 +39,13 @@ public class ContactsActivity extends BaseActivity {
 
         mViewRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mViewRecyclerView.setAdapter(mContactsAdapter);
-        mContactsAdapter.setOnItemClickListener(new FragmentContactsAdapter.OnRecyclerViewItemClickListener(){
-            @Override
-            public void onItemClick(View view , Contact data){
-                Toast.makeText(ContactsActivity.this, data.getNumber(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        mContactsAdapter.setOnItemClickListener((view, data) -> Toast.makeText(ContactsActivity.this, data.getNumber(), Toast.LENGTH_SHORT).show());
         mViewWaveSideBar.setPosition(WaveSideBar.POSITION_RIGHT);
-        mViewWaveSideBar.setOnSelectIndexItemListener(new WaveSideBar.OnSelectIndexItemListener() {
-            @Override
-            public void onSelectIndexItem(String index) {
-                for (int i = 0; i< mContactsList.size(); i++) {
-                    if (mContactsList.get(i).getIndex().equals(index)) {
-                        ((LinearLayoutManager) mViewRecyclerView.getLayoutManager()).scrollToPositionWithOffset(i, 0);
-                        return;
-                    }
+        mViewWaveSideBar.setOnSelectIndexItemListener(index -> {
+            for (int i = 0; i< mContactsList.size(); i++) {
+                if (mContactsList.get(i).getIndex().equals(index)) {
+                    ((LinearLayoutManager) mViewRecyclerView.getLayoutManager()).scrollToPositionWithOffset(i, 0);
+                    return;
                 }
             }
         });

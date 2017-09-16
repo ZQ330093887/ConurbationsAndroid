@@ -51,15 +51,12 @@ public class PrettyPictureListAdapter extends BaseListAdapter<TSZImageBean> impl
                     .setText(R.id.tv_pretty_picture_recommend_tip, title)
                     .setText(R.id.tv_pretty_picture_recommend_title, item.getTag().substring(15))
                     .setText(R.id.tv_pretty_picture_recommend_content, item.getUtag())
-                    .setOnClickListener(R.id.rv_pretty_picture_recommend, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Context context = v.getContext();
-                            Intent intent = new Intent(context, PrettyPicturesActivity.class);
-                            intent.putExtra(PrettyPicturesFragment.CLASS_ID, item.getClass_id());
-                            intent.putExtra(PrettyPicturesFragment.CLASS_TITLE, title);
-                            context.startActivity(intent);
-                        }
+                    .setOnClickListener(R.id.rv_pretty_picture_recommend, v -> {
+                        Context context = v.getContext();
+                        Intent intent = new Intent(context, PrettyPicturesActivity.class);
+                        intent.putExtra(PrettyPicturesFragment.CLASS_ID, item.getClass_id());
+                        intent.putExtra(PrettyPicturesFragment.CLASS_TITLE, title);
+                        context.startActivity(intent);
                     });
         }
     }
