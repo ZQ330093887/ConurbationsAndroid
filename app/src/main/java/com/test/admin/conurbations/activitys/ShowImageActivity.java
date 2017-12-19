@@ -83,18 +83,10 @@ public class ShowImageActivity extends BaseActivity implements OnMenuItemClickLi
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(mImagePhotoView);
 
-        mImagePhotoView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return true;
-            }
-        });
-        mImagePhotoView.setOnViewTapListener(new uk.co.senab.photoview.PhotoViewAttacher.OnViewTapListener() {
-            @Override
-            public void onViewTap(View view, float x, float y) {
-                Glide.get(view.getContext()).clearMemory();
-                finish();
-            }
+        mImagePhotoView.setOnLongClickListener(v -> true);
+        mImagePhotoView.setOnViewTapListener((view, x, y) -> {
+            Glide.get(view.getContext()).clearMemory();
+            finish();
         });
     }
 

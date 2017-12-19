@@ -38,6 +38,7 @@ public class SolidApplication extends Application {
         mInstance = this;
         ToastUtils.init(this);
         AppUtils.init(mInstance);
+
         //自定义注入框架
         loadViewNamingRule();
         FeedbackAPI.initAnnoy(this, "23601404");
