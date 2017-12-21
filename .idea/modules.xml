@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndtroidScrollView/AndtroidScrollView.iml" filepath="$PROJECT_DIR$/AndtroidScrollView/AndtroidScrollView.iml" />
       <module fileurl="file://$PROJECT_DIR$/ConurbationsAndroid.iml" filepath="$PROJECT_DIR$/ConurbationsAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/AndtroidScrollView/ConurbationsAndroid-AndtroidScrollView.iml" filepath="$PROJECT_DIR$/AndtroidScrollView/ConurbationsAndroid-AndtroidScrollView.iml" />
       <module fileurl="file://$PROJECT_DIR$/FlycoLabelView_Lib/FlycoLabelView_Lib.iml" filepath="$PROJECT_DIR$/FlycoLabelView_Lib/FlycoLabelView_Lib.iml" />

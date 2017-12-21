@@ -1,1 +1,1 @@
-include ':app', ':TapTargetView', ':telegramgallery', ':feedbacksdk', ':FlycoLabelView_Lib', ':AndtroidScrollView'
+include ':app', ':TapTargetView', ':telegramgallery', ':feedbacksdk', ':FlycoLabelView_Lib'
