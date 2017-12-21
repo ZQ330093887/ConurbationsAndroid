@@ -1,57 +1,58 @@
 <root>
-	<about version="1.0" author="nevaryyy" />
-	<containers>
-		<container name="Activity" />
-		<container name="Fragment" />
-		<container name="Dialog" />
-	</containers>
-	<views>
-		<view name="TextView" abbrev="tv" />
-		<view name="Button" abbrev="btn" />
-		<view name="EditText" abbrev="edt" />
-		<view name="MyItemView" abbrev="miv" />
-		<view name="Toolbar" abbrev="toolbar" />
-		<view name="RecyclerView" abbrev="rv" />
-		<view name="SwipeRefreshLayout" abbrev="srl" />
-		<view name="AppBarLayout" abbrev="abl" />
-		<view name="CircleImageView" abbrev="civ" />
-		<view name="RatioImageView" abbrev="riv" />
-		<view name="RelativeLayout" abbrev="rl" />
-		<view name="LinearLayout" abbrev="ll" />
-		<view name="DrawerLayout" abbrev="dl" />
-		<view name="CardView" abbrev="cv" />
-		<view name="LineCharView" abbrev="lcv" />
-		<view name="ViewPager" abbrev="vp" />
-		<view name="TabLayout" abbrev="tl" />
-		<view name="WaterWaveProgress" abbrev="wwp" />
-		<view name="PasswordInputView" abbrev="piv" />
-		<view name="NavigationView" abbrev="nv" />
-		<view name="TimerButton" abbrev="tb" />
-		<view name="ImageView" abbrev="iv" />
-		<view name="SeekBar" abbrev="sb" />
-		<view name="ImageButton" abbrev="ib" />
-		<view name="CheckBox" abbrev="cb" />
-		<view name="IndexBar" abbrev="ib" />
+    <about author="nevaryyy" version="1.0" />
+    <containers>
+        <container name="Activity" />
+        <container name="Fragment" />
+        <container name="Dialog" />
+    </containers>
+    <views>
+        <view name="TextView" abbrev="tv" />
+        <view name="Button" abbrev="btn" />
+        <view name="EditText" abbrev="edt" />
+        <view name="MyItemView" abbrev="miv" />
+        <view name="Toolbar" abbrev="toolbar" />
+        <view name="RecyclerView" abbrev="rv" />
+        <view name="SwipeRefreshLayout" abbrev="srl" />
+        <view name="AppBarLayout" abbrev="abl" />
+        <view name="CircleImageView" abbrev="civ" />
+        <view name="RatioImageView" abbrev="riv" />
+        <view name="RelativeLayout" abbrev="rl" />
+        <view name="LinearLayout" abbrev="ll" />
+        <view name="DrawerLayout" abbrev="dl" />
+        <view name="CardView" abbrev="cv" />
+        <view name="LineCharView" abbrev="lcv" />
+        <view name="ViewPager" abbrev="vp" />
+        <view name="TabLayout" abbrev="tl" />
+        <view name="WaterWaveProgress" abbrev="wwp" />
+        <view name="PasswordInputView" abbrev="piv" />
+        <view name="NavigationView" abbrev="nv" />
+        <view name="TimerButton" abbrev="tb" />
+        <view name="ImageView" abbrev="iv" />
+        <view name="SeekBar" abbrev="sb" />
+        <view name="ImageButton" abbrev="ib" />
+        <view name="CheckBox" abbrev="cb" />
+        <view name="IndexBar" abbrev="ib" />
         <view name="IndexBubble" abbrev="ib" />
-		<view name="KeyboardView" abbrev="kv" />
-		<view name="RadioButton" abbrev="rb" />
-		<view name="ScrollView" abbrev="sv" />
-		<view name="WebView" abbrev="wv" />
-		<view name="GridView" abbrev="gv" />
-		<view name="FloatingActionButton" abbrev="fab" />
-		<view name="ProgressBar" abbrev="pb" />
-		<view name="CollapsingToolbarLayout" abbrev="ctl" />
-		<view name="WaveSwipeRefreshLayout" abbrev="wsrl" />
-		<view name="ListView" abbrev="lv" />
-		<view name="ViewPagerCompat" abbrev="vpc" />
-		<view name="RadioGroup" abbrev="rg" />
-		<view name="FrameLayout" abbrev="fl" />
-		<view name="PhotoView" abbrev="pv" />
-		<view name="WhorlView" abbrev="wv" />
-		<view name="WaveSideBar" abbrev="wsb" />
-		<view name="LockIndicator" abbrev="li" />
-		<view name="Switch" abbrev="switch" />
-		<view name="View" abbrev="view" />
-		<view name="BrowserLayout" abbrev="bl" />
-	</views >
+        <view name="KeyboardView" abbrev="kv" />
+        <view name="RadioButton" abbrev="rb" />
+        <view name="ScrollView" abbrev="sv" />
+        <view name="WebView" abbrev="wv" />
+        <view name="GridView" abbrev="gv" />
+        <view name="FloatingActionButton" abbrev="fab" />
+        <view name="BottomNavigationBar" abbrev="bnb" />
+        <view name="ProgressBar" abbrev="pb" />
+        <view name="CollapsingToolbarLayout" abbrev="ctl" />
+        <view name="WaveSwipeRefreshLayout" abbrev="wsrl" />
+        <view name="ListView" abbrev="lv" />
+        <view name="ViewPagerCompat" abbrev="vpc" />
+        <view name="RadioGroup" abbrev="rg" />
+        <view name="FrameLayout" abbrev="fl" />
+        <view name="PhotoView" abbrev="pv" />
+        <view name="WhorlView" abbrev="wv" />
+        <view name="WaveSideBar" abbrev="wsb" />
+        <view name="LockIndicator" abbrev="li" />
+        <view name="Switch" abbrev="switch" />
+        <view name="View" abbrev="view" />
+        <view name="BrowserLayout" abbrev="bl" />
+    </views>
 </root>

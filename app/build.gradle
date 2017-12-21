@@ -1,17 +1,15 @@
 apply plugin: 'com.android.application'
-apply plugin: 'AndResGuard'
 
-
-def appLicationId = "com.test.admin.conurbations"
+def appLocationId = "com.test.admin.conurbations"
 android {
-    def packageConfig = appConfigs[appLicationId]
-    def _applicationId = appLicationId
+    def packageConfig = appConfigs[appLocationId]
+    def _applicationId = appLocationId
     def _name = packageConfig.name
     def _versionCode = new Date().format("yyyyMMdd").toInteger()
     def _versionName = packageConfig.versionName
     def _keyStore = packageConfig.keyStore
     def _keyStorePass = packageConfig.storePassword
-    def _keyAlias = packageConfig.keyAlias;
+    def _keyAlias = packageConfig.keyAlias
     def _keyAliasPass = packageConfig.keyPassword
 
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -23,9 +21,7 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         buildConfigField 'String', 'API_SERVER_URL', '"http://www.jianshu.com/u/9681f3bbb8c2"'
-        jackOptions{
-            enabled true
-        }
+        flavorDimensions "versionCode"
     }
     signingConfigs {//签名的配置
         release {
@@ -34,12 +30,12 @@ android {
             keyAlias = _keyAlias
             keyPassword = _keyAliasPass
         }
-        debug {
-            storeFile file(_keyStore)
-            storePassword = _keyStorePass
-            keyAlias = _keyAlias
-            keyPassword = _keyAliasPass
-        }
+//        debug {
+//            storeFile file(_keyStore)
+//            storePassword = _keyStorePass
+//            keyAlias = _keyAlias
+//            keyPassword = _keyAliasPass
+//        }
     }
     buildTypes {
         release {
@@ -49,14 +45,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release//打包命令行：gradlew assembleRelease
             applicationVariants.all { variant ->
-                if (variant.buildType.name == 'release') {
-                    variant.outputs.each { output ->
-                        def outputFile = output.outputFile
-                        if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                            def fileName = "${_name}_${defaultConfig.versionName}_${releaseTime()}_${variant.flavorName}.apk"
-                            output.outputFile = new File(outputFile.parent, fileName)
-                        }
-                    }
+                variant.outputs.all {
+                    outputFileName = "${_name}_${defaultConfig.versionName}_${releaseTime()}_${variant.flavorName}.apk"
                 }
             }
             //针对很多渠道
@@ -77,6 +67,11 @@ android {
     lintOptions {
         //设置编译的lint开关，程序在buid的时候，会执行lint检查，有任何的错误或者警告提示，都会终止构建
         abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -100,6 +95,8 @@ dependencies {
     compile rootProject.ext.dependencies["fastjson"]
     compile rootProject.ext.dependencies["rfadrx"]
     compile rootProject.ext.dependencies["glide"]
+    compile rootProject.ext.dependencies["okhttp"]
+    compile rootProject.ext.dependencies["logging"]
     compile rootProject.ext.dependencies["retrofit2"]
     compile rootProject.ext.dependencies["converter"]
     compile rootProject.ext.dependencies["interceptor"]
@@ -113,13 +110,12 @@ dependencies {
     compile rootProject.ext.dependencies["con_scalars"]
     compile rootProject.ext.dependencies["photoview"]
     compile rootProject.ext.dependencies["rxandroid2"]
+    compile rootProject.ext.dependencies["banner"]
+    compile rootProject.ext.dependencies["navigation"]
 
-    compile project(rootProject.ext.dependencies["banner"])
-    compile project(rootProject.ext.dependencies["BottomTab"])
     compile project(rootProject.ext.dependencies["telellery"])
     compile project(rootProject.ext.dependencies["feedback"])
     compile project(rootProject.ext.dependencies["labelview"])
-    compile project(rootProject.ext.dependencies["scrollview"])
     compile project(rootProject.ext.dependencies["targetview"])
     compile files(rootProject.ext.dependencies["pinyin4j"])
     testCompile rootProject.ext.dependencies["junit"]
@@ -128,66 +124,6 @@ dependencies {
     testCompile rootProject.ext.dependencies["leakcanary2"]
 }
 
-def releaseTime() {
+static def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
-}
-
-//AndResGuard打包命令行：gradlew resguardRelease
-andResGuard {
-    // mappingFile = file("./resource_mapping.txt")
-    mappingFile = null
-    use7zip = true
-    useSign = true
-    // 打开这个开关，会keep住所有资源的原始路径，只混淆资源的名字
-    keepRoot = false
-    whiteList = [
-            // for your icon
-            "R.drawable.icon",
-            // for fabric
-            "R.string.com.crashlytics.*",
-            // for umeng update
-            "R.string.umeng*",
-            "R.string.UM*",
-            "R.string.tb_*",
-            "R.layout.umeng*",
-            "R.layout.tb_*",
-            "R.drawable.umeng*",
-            "R.drawable.tb_*",
-            "R.anim.umeng*",
-            "R.color.umeng*",
-            "R.color.tb_*",
-            "R.style.*UM*",
-            "R.style.umeng*",
-            "R.id.umeng*",
-            // umeng share for sina
-            "R.drawable.sina*",
-            // for google-services.json
-            "R.string.google_app_id",
-            "R.string.gcm_defaultSenderId",
-            "R.string.default_web_client_id",
-            "R.string.ga_trackingId",
-            "R.string.firebase_database_url",
-            "R.string.google_api_key",
-            "R.string.google_crash_reporting_api_key",
-            // umeng share for facebook
-            "R.layout.*facebook*",
-            "R.id.*facebook*",
-            // umeng share for messager
-            "R.layout.*messager*",
-            "R.id.*messager*",
-            // umeng share commond
-            "R.id.progress_bar_parent",
-            "R.id.webView"
-    ]
-    compressFilePattern = [
-            "*.png",
-            "*.jpg",
-            "*.jpeg",
-            "*.gif",
-            "resources.arsc"
-    ]
-    sevenzip {
-        artifact = 'com.tencent.mm:SevenZip:1.2.0'
-        //path = "/usr/local/bin/7za"
-    }
 }

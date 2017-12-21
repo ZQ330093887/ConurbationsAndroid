@@ -23,6 +23,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.config.Constants;
@@ -43,17 +45,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import me.majiajie.pagerbottomtabstrip.Controller;
-import me.majiajie.pagerbottomtabstrip.PagerBottomTabLayout;
-import me.majiajie.pagerbottomtabstrip.TabItemBuilder;
-import me.majiajie.pagerbottomtabstrip.TabLayoutMode;
-import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectListener;
-
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener {
-
-    private Controller mController;
     private List<Fragment> mFragments;
     private CircleImageView mCircleImageView;
     private Bitmap mHeadPhotoBitmap;
@@ -64,7 +58,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @FindView
     NavigationView mViewNavigationView;
     @FindView
-    PagerBottomTabLayout mTabPagerBottomTabLayout;
+    BottomNavigationBar mViewBottomNavigationBar;
     @FindView
     DrawerLayout mLayoutDrawerLayout;
     @FindView
@@ -114,7 +108,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         toggle.syncState();
 
         //初始化左边侧滑栏上部分（头像部分）
-        mCircleImageView = (CircleImageView) mViewNavigationView.getHeaderView(0).findViewById(R.id.circle_image_view);
+        mCircleImageView = mViewNavigationView.getHeaderView(0).findViewById(R.id.circle_image_view);
 
         mViewNavigationView.setNavigationItemSelectedListener(this);
         mViewNavigationView.getHeaderView(0).setOnClickListener(this);
@@ -133,27 +127,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void initMainBottomTab() {
         //用TabItemBuilder构建一个导航按钮
-        TabItemBuilder tabItemBuilder = new TabItemBuilder(this).create()
-                .setDefaultIcon(android.R.drawable.ic_menu_send)
-                .setText("干货")
-                .setSelectedColor(Constants.testColors[0])
-                .setTag("A")
-                .build();
+        mViewBottomNavigationBar
+                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_send, "干货").setActiveColor(Constants.testColors[0]))
+                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_compass, "美图").setActiveColor(Constants.testColors[1]))
+                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_crop, "新闻").setActiveColor(Constants.testColors[2]))
+                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_month, "体育").setActiveColor(Constants.testColors[3]))
+                .setFirstSelectedPosition(0)
+                .setMode(BottomNavigationBar.MODE_SHIFTING)
+                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE)
+                .initialise();
 
-        //构建导航栏,得到Controller进行后续控制
-        mController = mTabPagerBottomTabLayout.builder()
-                .addTabItem(tabItemBuilder)
-                .addTabItem(android.R.drawable.ic_menu_compass, "美图", Constants.testColors[1])
-                .addTabItem(android.R.drawable.ic_menu_crop, "新闻", Constants.testColors[2])
-                .addTabItem(android.R.drawable.ic_menu_month, "体育", Constants.testColors[3])
-                .setMode(TabLayoutMode.HIDE_TEXT)
-                .setMode(TabLayoutMode.CHANGE_BACKGROUND_COLOR)
-                .setMode(TabLayoutMode.HIDE_TEXT | TabLayoutMode.CHANGE_BACKGROUND_COLOR)
-                .build();
-
-      /*  controller.setMessageNumber("A",2);
-        controller.setDisplayOval(0,true);*/
-        mController.addTabItemClickListener(tabItemSelectListener);
+        mViewBottomNavigationBar.setTabSelectedListener(tabItemSelectListener);
     }
 
     private Fragment createFragment(BaseFragment baseFragment, int content) {
@@ -193,7 +177,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (id == R.id.nav_camera) {
             startActivity(BeautifulArticleActivity.class);
         } else if (id == R.id.nav_fiction) {
-            startActivity(WonderfulFictionActivity.class);
+
         } else if (id == R.id.nav_slideshow) {//NBA直播
             startActivity(MatchVideoLiveListActivity.class);
         } else if (id == R.id.nav_manage) {
@@ -211,23 +195,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return true;
     }
 
-    OnTabItemSelectListener tabItemSelectListener = new OnTabItemSelectListener() {
+    BottomNavigationBar.OnTabSelectedListener tabItemSelectListener = new BottomNavigationBar.OnTabSelectedListener() {
         @Override
-        public void onSelected(int index, Object tag) {
-            Log.i("asd", "onSelected:" + index + "   TAG: " + tag.toString());
-
+        public void onTabSelected(int position) {
+            Log.d("onTabSelected", "onTabSelected: " + position);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            mToolbarToolbar.setBackgroundColor(Constants.toolBarColors[index]);
-            mViewNavigationView.setBackgroundColor(Constants.testColors[index]);
-            mViewNavigationView.getHeaderView(0).setBackgroundColor(Constants.toolBarColors[index]);
+            mToolbarToolbar.setBackgroundColor(Constants.toolBarColors[position]);
+            mViewNavigationView.setBackgroundColor(Constants.testColors[position]);
+            mViewNavigationView.getHeaderView(0).setBackgroundColor(Constants.toolBarColors[position]);
             //transaction.setCustomAnimations(R.anim.push_up_in,R.anim.push_up_out);
-            transaction.replace(R.id.fl_main_content, mFragments.get(index));
+            transaction.replace(R.id.fl_main_content, mFragments.get(position));
             transaction.commit();
         }
 
         @Override
-        public void onRepeatClick(int index, Object tag) {
-            Log.i("asd", "onRepeatClick:" + index + "   TAG: " + tag.toString());
+        public void onTabUnselected(int position) {
+
+        }
+
+        @Override
+        public void onTabReselected(int position) {
+
         }
     };
 
@@ -248,7 +236,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     };
 
     public void customFeedbackStyle() {
-        Map<String, String> map = new ArrayMap<String, String>();
+        Map<String, String> map = new ArrayMap<>();
         map.put("enableAudio", "0");
         map.put("themeColor", "#D91D36");
         map.put("pageTitle", "用户反馈");

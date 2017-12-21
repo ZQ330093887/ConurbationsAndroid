@@ -1,10 +1,10 @@
 ext {
 
     android = [
-            compileSdkVersion: 25,
-            buildToolsVersion: "25.0.2",
-            minSdkVersion    : 11,
-            targetSdkVersion : 25,
+            compileSdkVersion: 26,
+            buildToolsVersion: "26.0.2",
+            minSdkVersion    : 14,
+            targetSdkVersion : 26,
     ]
 
     appConfigs = [
@@ -45,17 +45,18 @@ ext {
             "fresco"     : "com.facebook.fresco:fresco:0.9.0+",
             "whorlview"  : "com.tt:whorlviewlibrary:1.0.3",
             "con_scalars": "com.squareup.retrofit2:converter-scalars:2.0.0-beta4",
+            "navigation" : "com.ashokvarma.android:bottom-navigation-bar:2.0.4",
             "junit"      : "junit:junit:4.12",
-            "banner"     : ":banner",
+            "banner"     : "com.youth.banner:banner:1.4.10",
             "BottomTab"  : ":pagerBottomTabStrip",
             "telellery"  : ":telegramgallery",
             "feedback"   : ":feedbacksdk",
             "labelview"  : ":FlycoLabelView_Lib",
-            "scrollview" : ":AndtroidScrollView",
             "targetview" : ":TapTargetView",
             "pinyin4j"   : "libs/pinyin4j-2.5.0.jar",
+            "okhttp"     : 'com.squareup.okhttp3:okhttp:3.3.1',
+            "logging"    : 'com.squareup.okhttp3:logging-interceptor:3.3.1',
             "leakcanary" : "com.squareup.leakcanary:leakcanary-android:1.5",
             "leakcanary2": "com.squareup.leakcanary:leakcanary-android-no-op:1.5"
     ]
-
 }

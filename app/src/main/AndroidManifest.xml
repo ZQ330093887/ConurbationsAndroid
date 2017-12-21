@@ -76,10 +76,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activitys.WonderfulFictionActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activitys.WebViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
