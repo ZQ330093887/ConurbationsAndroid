@@ -1,5 +1,6 @@
-# ConurbationsAndroid
+# ConurbationsAndroid概述
 ![image](https://github.com/Papeone/Coroutines/raw/master/image/coroutines.jpg)
+
 ## 更新日志
 ### 8月26号
     优化代码：
@@ -10,9 +11,9 @@
         1. 添加合理的线程池 为协程作为上下文 
         2. 将协程函数标记为内联函数提高性能
 
-## kotlin 协程封装计划安排
+## 功能介绍
 
-        1.  顺序执行 task1，task2
+        1. 
         2. 并发执行 task1，task2
         3. 等待执行 task2 需等待 task1执行完毕后执行
         4. 延迟执行 task1 需要10秒之后执行
