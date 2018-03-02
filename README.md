@@ -1,32 +1,36 @@
-# ConurbationsAndroid概述
+# RxJava+RxAndroid+Retrofit+OkHttp+MVP概述
 ![image](https://github.com/Papeone/Coroutines/raw/master/image/coroutines.jpg)
 
-## 更新日志
-### 8月26号
-    优化代码：
-        1.添加弱引用例子，解决协程会导致的内存泄露问题
-
-### 8月24号
-    优化代码： 
-        1. 添加合理的线程池 为协程作为上下文 
-        2. 将协程函数标记为内联函数提高性能
-
+## 技术支持
+   RxJava+RxAndroid+Retrofit+OkHttp+自定义butterknife+MVP+leakCanary+各种封装
+   
 ## 功能介绍
+        1. NBA相关体育新闻、视频锦集等功能
+        2. 推荐信息信息（按照时间推荐最新）
+        3. 美图展示
+        4. gank集中营每日数据展示
+        5. NBA体育直播
+        6. 网络爬虫精彩文章
+        7. 阿里百川技术反馈
+        8. 搜索美图
+        9. 设置桌面、锁屏、图片下载、分享等
+        10.自己实现butterknife功能
 
-        1. 
-        2. 并发执行 task1，task2
-        3. 等待执行 task2 需等待 task1执行完毕后执行
-        4. 延迟执行 task1 需要10秒之后执行
-        5. 心跳执行 异步任务按指定间隔执行 Task 
-        6. 任务执行感知生命周期，可以跟随当前activity的生命周期结束而自动结束，并可以配置是否在重新打开activity时是否要重新执行
-        7. 任务执行可选主线程还是子线程
-        8. 任务执行可以选择 需要网络或者不需要网络
-        9. 任务执行可以选择网络制式4G 或者wifi下执行（5.0以上特性）
-        10.任务可以选择在充电时执行（5.0以上特性）
-        11. 任务执行可以随时取消，可以取消所有当前任务
+## 特别感谢
+   gank集中营提供的数据接口
+   
+## 感谢开源
+   com.squareup.retrofit2:retrofit:2.0.0beta4
+   com.squareup.okhttp3:okhttp:3.2.0
+   io.reactivex:rxandroid:1.1.0
+   io.reactivex:rxjava:1.1.0
+   com.facebook.stetho:stetho:1.3.1
+   com.jakewharton:butterknife:7.0.1
+   com.github.bumptech.glide:glide:3.7.0
+   com.yalantis:phoenix:1.2.3
+   org.jsoup:jsoup:1.8.3
+   
+## 关于我
+   <a href="http://www.jianshu.com/p/8fe64be36301">魔君</a>
+   附：闲来无事写着玩，技术万岁
 
-## 项目介绍地址
-| 例子 | 描述 |
-| ------------- | ------------- |
-| [协程简单封装](http://www.jianshu.com/p/5986ca746bd5)|主要包含对协程的顺序执行，并发执行，还有等待执行的封装的例子，以及如何延迟，如何切换android UI 线程|
-| [协程实现防止按钮多次点击](http://www.jianshu.com/p/34165f6484bb)|主要用到actor协程，实现无通道Channel的处理|
