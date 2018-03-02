@@ -36,6 +36,6 @@
 ![](http://upload-images.jianshu.io/upload_images/3278692-57da8e74d5c570a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
    
 ## 关于我
-   <a href="http://www.jianshu.com/p/8fe64be36301">魔君</a>
+   <a href="http://www.jianshu.com/p/0bf43a368b11">魔君</a>
    附：闲来无事写着玩，技术万岁
 
