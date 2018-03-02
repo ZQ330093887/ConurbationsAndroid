@@ -1,11 +1,4 @@
 # RxJava+RxAndroid+Retrofit+OkHttp+MVP概述
-![](http://upload-images.jianshu.io/upload_images/3278692-3a0d5e9414a05408.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![](http://upload-images.jianshu.io/upload_images/3278692-7ee3a1486389b339.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![](http://upload-images.jianshu.io/upload_images/3278692-18ea9e6c4e05e48b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![](http://upload-images.jianshu.io/upload_images/3278692-148ef8b741eaccbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![](http://upload-images.jianshu.io/upload_images/3278692-e609bd931a4ee8bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![](http://upload-images.jianshu.io/upload_images/3278692-57da8e74d5c570a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
 
 ## 技术支持
    RxJava+RxAndroid+Retrofit+OkHttp+自定义butterknife+MVP+leakCanary+各种封装
@@ -35,6 +28,12 @@
    com.github.bumptech.glide:glide:3.7.0
    com.yalantis:phoenix:1.2.3
    org.jsoup:jsoup:1.8.3
+![](http://upload-images.jianshu.io/upload_images/3278692-3a0d5e9414a05408.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](http://upload-images.jianshu.io/upload_images/3278692-7ee3a1486389b339.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](http://upload-images.jianshu.io/upload_images/3278692-18ea9e6c4e05e48b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](http://upload-images.jianshu.io/upload_images/3278692-148ef8b741eaccbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](http://upload-images.jianshu.io/upload_images/3278692-e609bd931a4ee8bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](http://upload-images.jianshu.io/upload_images/3278692-57da8e74d5c570a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
    
 ## 关于我
    <a href="http://www.jianshu.com/p/8fe64be36301">魔君</a>
