@@ -1,10 +1,10 @@
 package com.test.admin.conurbations.activitys;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +16,6 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.SetLayout;
 import com.test.admin.conurbations.utils.CommonUtil;
@@ -25,8 +24,10 @@ import com.test.admin.conurbations.utils.InjectUtil;
 import com.test.admin.conurbations.utils.SaveBitmapUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.utils.WrapperUtils;
+import com.test.admin.conurbations.utils.bigImageView.glide.engine.SimpleFileTarget;
 import com.yalantis.contextmenu.lib.MenuObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,12 +99,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         InjectUtil.inject(this);
         initPresenter();
         initData(savedInstanceState);
-
-        //2
-       /* setContentView(setLayoutResourceID());
-        ButterKnife.bind(this);
-        initData(savedInstanceState);
-        initPresenter();*/
     }
 
     @Override
@@ -234,6 +229,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         startActivityForResult(cls, requestCode, null);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void startActivityForResult(Class<?> cls, int requestCode, Bundle bundle) {
         Intent intent = new Intent();
@@ -297,22 +293,22 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         return menuObjects;
     }
 
-    public static void downloadBitmap(final Context context, String url, final int state) {
-        Glide.with(context).load(url).asBitmap().into(new SimpleTarget<Bitmap>() {
+    public static void downloadBitmap(final Context context, String url, final int state, final String path, final String name) {
+        Glide.with(context).load(url).downloadOnly(new SimpleFileTarget() {
             @Override
-            public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+            public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
                 if (state == 1) {
                     //保存图片
-                    SaveBitmapUtils.getSaveBitmapObservable(bitmap).subscribe(SaveBitmapUtils.saveSubscriber);
+                    SaveBitmapUtils.getSaveBitmapObservable(resource, path, name).subscribe(SaveBitmapUtils.getSaveSubscriber(context, path));
                 } else if (state == 2) {
                     //分享图片
-                    SaveBitmapUtils.getSaveBitmapObservable(bitmap).subscribe(SaveBitmapUtils.getShareSubscriber(context));
+                    SaveBitmapUtils.getSaveBitmapObservable(resource, path, name).subscribe(SaveBitmapUtils.getShareSubscriber(context, path));
                 } else if (state == 4) {
                     //设置桌面壁纸
-                    WrapperUtils.getSetWallWrapperObservable(bitmap, context).subscribe(WrapperUtils.callbackSubscriber);
+                    WrapperUtils.getSetWallWrapperObservable(resource, context).subscribe(WrapperUtils.callbackSubscriber);
                 } else if (state == 5) {
                     //设置锁屏壁纸
-                    WrapperUtils.getSetLockWrapperObservable(bitmap, context).subscribe(WrapperUtils.callbackSubscriber);
+                    WrapperUtils.getSetLockWrapperObservable(resource, context).subscribe(WrapperUtils.callbackSubscriber);
                 }
             }
 
@@ -322,6 +318,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                 DialogUtils.hideProgressDialog();
             }
         });
+
+
     }
 
     @Override

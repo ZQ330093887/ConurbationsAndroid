@@ -1,10 +1,6 @@
 package com.test.admin.conurbations.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.SpannableString;
@@ -18,7 +14,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.activitys.ShowImageActivity;
 import com.test.admin.conurbations.activitys.WebViewActivity;
 import com.test.admin.conurbations.model.response.GankGirlImageItem;
 import com.test.admin.conurbations.model.response.GankHeaderItem;
@@ -99,11 +94,9 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
                 NormalViewHolder normalHolder = (NormalViewHolder) holder;
                 final GankNormalItem normalItem = (GankNormalItem) mItems.get(position);
                 normalHolder.mTitleTextView.setText(getGankTitleStr(normalItem.desc, normalItem.who));
-                normalHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        WebViewActivity.openUrl((Activity) context, normalItem.url, normalItem.desc, false, false);
-                    }
+                normalHolder.itemView.setOnClickListener(v -> {
+                    //
+                    WebViewActivity.openUrl(context, normalItem.url, normalItem.desc, false, false);
                 });
 
                 showItemAnim(normalHolder.mTitleTextView, position);
@@ -117,26 +110,24 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
                         .placeholder(R.color.white)
                         .centerCrop()
                         .into(girlHolder.mImageView);
-                girlHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startPictureActivity(v, girlItem);
-                    }
+                girlHolder.itemView.setOnClickListener(v -> {
+//                        startPictureActivity(v, girlItem);
+                    startShowImageActivity(v, getStringToList(girlItem.imgUrl));
                 });
             }
         }
 
-        private void startPictureActivity(View transitView, GankGirlImageItem item) {
-            Intent intent = ShowImageActivity.newIntent(transitView.getContext(), item.imgUrl);
-            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    (Activity) transitView.getContext(), transitView, ShowImageActivity.TRANSIT_PIC);
-            try {
-                ActivityCompat.startActivity(transitView.getContext(), intent, optionsCompat.toBundle());
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-                transitView.getContext().startActivity(intent);
-            }
-        }
+//        private void startPictureActivity(View transitView, GankGirlImageItem item) {
+//            Intent intent = ShowImageActivity.newIntent(transitView.getContext(), item.imgUrl);
+//            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+//                    (Activity) transitView.getContext(), transitView, ShowImageActivity.TRANSIT_PIC);
+//            try {
+//                ActivityCompat.startActivity(transitView.getContext(), intent, optionsCompat.toBundle());
+//            } catch (IllegalArgumentException e) {
+//                e.printStackTrace();
+//                transitView.getContext().startActivity(intent);
+//            }
+//        }
 
         private CharSequence getGankTitleStr(String desc, String who) {
             if (TextUtils.isEmpty(who)) {
@@ -172,7 +163,7 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
 
             public CategoryHeaderViewHolder(ViewGroup parent) {
                 super(parent);
-                mTitleTextView = (TextView) parent.findViewById(R.id.tv_item_gank_day_head_title);
+                mTitleTextView = parent.findViewById(R.id.tv_item_gank_day_head_title);
             }
         }
 
@@ -181,7 +172,7 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
 
             public NormalViewHolder(ViewGroup parent) {
                 super(parent);
-                mTitleTextView = (TextView) parent.findViewById(R.id.tv_item_gank_day_content_title);
+                mTitleTextView = parent.findViewById(R.id.tv_item_gank_day_content_title);
             }
         }
 
@@ -191,7 +182,7 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
 
             public GirlImageViewHolder(ViewGroup parent) {
                 super(parent);
-                mImageView = (RatioImageView) parent.findViewById(R.id.rv_item_gank_day_image);
+                mImageView = parent.findViewById(R.id.rv_item_gank_day_image);
                 mImageView.setRatio(1.618f);
             }
         }

@@ -29,8 +29,8 @@ public class LoadingDialog extends Dialog {
         setCancelable(true);
         setCanceledOnTouchOutside(true);
 
-        mDesView = (TextView) findViewById(R.id.des_view);
-        mWhorlView = (WhorlView) findViewById(R.id.whorl);
+        mDesView = findViewById(R.id.des_view);
+        mWhorlView = findViewById(R.id.whorl);
         mWhorlView.start();
     }
 

@@ -12,12 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.leakcanary.RefWatcher;
 import com.test.admin.conurbations.activitys.BaseActivity;
 import com.test.admin.conurbations.activitys.IBaseView;
 import com.test.admin.conurbations.annotations.SetLayout;
 import com.test.admin.conurbations.utils.InjectUtil;
-import com.test.admin.conurbations.widget.SolidApplication;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -92,8 +90,6 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
     public void onDestroy() {
         super.onDestroy();
         detachView();
-        RefWatcher refWatcher = SolidApplication.refWatcher;
-        refWatcher.watch(this);
     }
 
     @Override

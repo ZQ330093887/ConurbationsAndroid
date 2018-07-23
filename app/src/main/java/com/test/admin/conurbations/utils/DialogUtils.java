@@ -2,7 +2,6 @@ package com.test.admin.conurbations.utils;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 
 /**
  * Created by zhouqiong on 2017/2/23.
@@ -20,12 +19,7 @@ public class DialogUtils {
         }
         mProgressDialog = LoadingDialog.newLoadingDialog(context);
         mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                mProgressDialog = null;
-            }
-        });
+        mProgressDialog.setOnDismissListener(dialog -> mProgressDialog = null);
         mProgressDialog.show();
     }
 
@@ -38,12 +32,7 @@ public class DialogUtils {
         }
         mProgressDialog = LoadingDialog.newLoadingDialog(context, message);
         mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                mProgressDialog = null;
-            }
-        });
+        mProgressDialog.setOnDismissListener(dialog -> mProgressDialog = null);
         mProgressDialog.show();
     }
 

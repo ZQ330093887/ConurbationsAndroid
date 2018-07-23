@@ -1,16 +1,16 @@
 package com.test.admin.conurbations.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.test.admin.conurbations.activitys.ShowImageActivity;
-import com.test.admin.conurbations.utils.imageloader.ImageLoader;
+import com.bumptech.glide.Glide;
+import com.test.admin.conurbations.utils.bigImageView.ImagePreview;
+import com.test.admin.conurbations.utils.bigImageView.bean.ImageInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,19 +31,32 @@ public class GanHuoListItemAdapter extends PagerAdapter {
         final ImageView imageView = new ImageView(mContext);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        ImageLoader.displayImage(imageView, mListImages.get(position));
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(mContext, ShowImageActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("position", mListImages.get(position));
-                if (bundle != null) {
-                    intent.putExtras(bundle);
-                    mContext.startActivity(intent);
-                }
-            }
+
+        Glide.with(mContext).load(mListImages.get(position)).into(imageView);
+
+
+        ImageInfo imageInfo;
+        final List<ImageInfo> imageInfoList = new ArrayList<>();
+        for (String imgPath : mListImages) {
+            imageInfo = new ImageInfo();
+            imageInfo.setOriginUrl(imgPath);// 原图
+            imageInfo.setThumbnailUrl(imgPath);// 缩略图，实际使用中，根据需求传入缩略图路径。如果没有缩略图url，可以将两项设置为一样，并隐藏查看原图按钮即可。
+            imageInfoList.add(imageInfo);
+            imageInfo = null;
+        }
+
+        imageView.setOnClickListener(view -> {
+            ImagePreview
+                    .getInstance()
+                    .setContext(mContext)
+                    .setIndex(0)
+                    .setImageInfoList(imageInfoList)
+                    .setShowDownButton(true)
+                    .setShowOriginButton(true)
+                    .setFolderName("BigImageViewDownload")
+                    .setScaleLevel(1, 3, 8)
+                    .setZoomTransitionDuration(500)
+                    .start();
         });
         container.addView(imageView);
         return imageView;

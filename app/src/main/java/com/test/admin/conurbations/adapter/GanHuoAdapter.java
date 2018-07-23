@@ -50,8 +50,7 @@ public class GanHuoAdapter extends BaseListAdapter<GanHuoDataBean> {
     }
 
     private View.OnClickListener setOnClickListener(final GanHuoDataBean item) {
-        View.OnClickListener onClickListener = v -> WebViewActivity.openUrl( v.getContext(), item.getUrl(), item.getDesc(), false, false);
-        return onClickListener;
+        return v -> WebViewActivity.openUrl(v.getContext(), item.getUrl(), item.getDesc(), false, false);
     }
 
     @Override

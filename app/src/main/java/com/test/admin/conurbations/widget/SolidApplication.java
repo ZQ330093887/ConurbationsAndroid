@@ -5,8 +5,6 @@ import android.graphics.Typeface;
 import android.os.Environment;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.ViewNamingRuleXMLParserHandler;
 import com.test.admin.conurbations.utils.AppUtils;
@@ -30,7 +28,6 @@ public class SolidApplication extends Application {
     public static List<?> images=new ArrayList<>();
     public static List<String> titles=new ArrayList<>();
     public static Typeface songTi; // 宋体
-    public static RefWatcher refWatcher;
 
     @Override
     public void onCreate() {
@@ -42,12 +39,6 @@ public class SolidApplication extends Application {
         //自定义注入框架
         loadViewNamingRule();
         FeedbackAPI.initAnnoy(this, "23601404");
-        //内存泄露检测
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        LeakCanary.install(this);
-        refWatcher  = LeakCanary.install(this);
 
         String[] urls = getResources().getStringArray(R.array.url);
         String[] tips = getResources().getStringArray(R.array.title);

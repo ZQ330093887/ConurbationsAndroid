@@ -1,10 +1,6 @@
 package com.test.admin.conurbations.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -14,8 +10,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.activitys.ShowImageActivity;
+import com.test.admin.conurbations.utils.bigImageView.ImagePreview;
+import com.test.admin.conurbations.utils.bigImageView.bean.ImageInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -123,27 +121,24 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         final Context context = view.getContext();
         if (position > mLastPosition) {
             view.setAlpha(0);
-            view.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Animation animation = AnimationUtils.loadAnimation(context,
-                            R.anim.slide_in_right);
-                    animation.setAnimationListener(new Animation.AnimationListener() {
-                        @Override
-                        public void onAnimationStart(Animation animation) {
-                            view.setAlpha(1);
-                        }
+            view.postDelayed(() -> {
+                Animation animation = AnimationUtils.loadAnimation(context,
+                        R.anim.slide_in_right);
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        view.setAlpha(1);
+                    }
 
-                        @Override
-                        public void onAnimationEnd(Animation animation) {
-                        }
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                    }
 
-                        @Override
-                        public void onAnimationRepeat(Animation animation) {
-                        }
-                    });
-                    view.startAnimation(animation);
-                }
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+                });
+                view.startAnimation(animation);
             }, DELAY * position);
             mLastPosition = position;
         }
@@ -156,15 +151,26 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         }
     }
 
-    public void startShowImageActivity(View transitView, String imgUrl) {
-        Intent intent = ShowImageActivity.newIntent(transitView.getContext(), imgUrl);
-        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                (Activity) transitView.getContext(), transitView, ShowImageActivity.TRANSIT_PIC);
-        try {
-            ActivityCompat.startActivity(transitView.getContext(), intent, optionsCompat.toBundle());
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            transitView.getContext().startActivity(intent);
-        }
+    public List<ImageInfo> getStringToList(String imgUrl) {
+        List<ImageInfo> imageInfoList = new ArrayList<>();
+        ImageInfo imageInfo = new ImageInfo();
+        imageInfo.setOriginUrl(imgUrl);// 原图
+        imageInfo.setThumbnailUrl(imgUrl);// 缩略图，实际使用中，根据需求传入缩略图路径。如果没有缩略图url，可以将两项设置为一样，并隐藏查看原图按钮即可。
+        imageInfoList.add(imageInfo);
+        return imageInfoList;
+    }
+
+    public void startShowImageActivity(View transitView, List<ImageInfo> imageInfoList) {
+        ImagePreview
+                .getInstance()
+                .setContext(transitView.getContext())
+                .setIndex(0)
+                .setImageInfoList(imageInfoList)
+                .setShowDownButton(true)
+                .setShowOriginButton(true)
+                .setFolderName("BigImageViewDownload")
+                .setScaleLevel(1, 3, 8)
+                .setZoomTransitionDuration(500)
+                .start();
     }
 }

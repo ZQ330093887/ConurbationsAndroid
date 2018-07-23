@@ -7,18 +7,15 @@ import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.model.entity.TSZImageBean;
 
 /**
- * Created by wenhuaijun on 2016/2/7 0007.
+ * Created by ZQiong on 2016/2/7 0007.
  */
 public class PrettyPicturesAdapter extends BaseListAdapter<TSZImageBean> {
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final TSZImageBean item) {
 
         vh.setImageUrlUserGlide(R.id.rv_item_sougou_photo, item.getUrl(), 0.918f, R.color.white)
-                .setOnClickListener(R.id.rv_item_sougou_photo, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startShowImageActivity(v, item.getUrl());
-                    }
+                .setOnClickListener(R.id.rv_item_sougou_photo, v -> {
+                    startShowImageActivity(v, getStringToList(item.getUrl()));
                 });
     }
 

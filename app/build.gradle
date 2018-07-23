@@ -99,8 +99,10 @@ dependencies {
     compile rootProject.ext.dependencies["logging"]
     compile rootProject.ext.dependencies["retrofit2"]
     compile rootProject.ext.dependencies["converter"]
+    compile rootProject.ext.dependencies["retrofit2-converter"]
     compile rootProject.ext.dependencies["interceptor"]
-    compile rootProject.ext.dependencies["converter"]
+    compile rootProject.ext.dependencies["glide-okhttp3"]
+    compile rootProject.ext.dependencies["davemorrissey"]
     compile rootProject.ext.dependencies["rxjava2"]
     compile rootProject.ext.dependencies["picasso"]
     compile rootProject.ext.dependencies["umeng"]
@@ -119,9 +121,6 @@ dependencies {
     compile project(rootProject.ext.dependencies["targetview"])
     compile files(rootProject.ext.dependencies["pinyin4j"])
     testCompile rootProject.ext.dependencies["junit"]
-    debugCompile rootProject.ext.dependencies["leakcanary"]
-    releaseCompile rootProject.ext.dependencies["leakcanary2"]
-    testCompile rootProject.ext.dependencies["leakcanary2"]
 }
 
 static def releaseTime() {

@@ -54,5 +54,6 @@
         <view name="Switch" abbrev="switch" />
         <view name="View" abbrev="view" />
         <view name="BrowserLayout" abbrev="bl" />
+        <view name="HackyViewPager" abbrev="hvp" />
     </views>
 </root>
