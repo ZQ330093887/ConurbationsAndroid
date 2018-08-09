@@ -4,10 +4,12 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.test.admin.conurbations.BuildConfig;
 import com.test.admin.conurbations.model.api.GankApi;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppClient {
@@ -24,7 +26,16 @@ public class AppClient {
                 //设置 Debug Log 模式
                 builder.addInterceptor(loggingInterceptor);
             }
-            OkHttpClient okHttpClient = builder.build();
+            OkHttpClient okHttpClient;
+            try {
+                SSLContext sslcontext = SSLContext.getInstance("TLSv1.2");
+                sslcontext.init(null, null, null);
+                SSLSocketFactory sslSocketFactory = new NoSSLv3SocketFactory(sslcontext.getSocketFactory());
+                builder.sslSocketFactory(sslSocketFactory);
+                okHttpClient = builder.build();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             mRetrofit = new Retrofit.Builder()
                     .baseUrl(GankApi.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())

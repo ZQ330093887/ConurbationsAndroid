@@ -22,7 +22,7 @@ import com.test.admin.conurbations.utils.FileUtil;
  * @version 1.0
  */
 public interface GankApi {
-    String BASE_URL = "http://gank.io/api/";
+    String BASE_URL = "https://gank.io/api/";
 
     String imgPath = FileUtil.getSDPath() + "/MyPictures";
 

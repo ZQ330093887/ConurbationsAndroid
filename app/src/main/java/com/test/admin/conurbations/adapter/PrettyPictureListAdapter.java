@@ -17,13 +17,12 @@ import com.test.admin.conurbations.widget.GlideImageLoader;
 import com.test.admin.conurbations.widget.SolidApplication;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-import com.youth.banner.listener.OnBannerClickListener;
 import com.youth.banner.transformer.AccordionTransformer;
 
 /**
  * Created by zhouqiong on 2017/1/7
  */
-public class PrettyPictureListAdapter extends BaseListAdapter<TSZImageBean> implements OnBannerClickListener {
+public class PrettyPictureListAdapter extends BaseListAdapter<TSZImageBean> {
 
     private static final int VIEW_TYPE_HEAD = 1;
     private static final int VIEW_TYPE_NORMAL = 2;
@@ -37,16 +36,20 @@ public class PrettyPictureListAdapter extends BaseListAdapter<TSZImageBean> impl
                     .setBannerTitles(SolidApplication.titles)
                     .setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
                     .setImageLoader(new GlideImageLoader())
-                    .setOnBannerClickListener(this)
                     .setBannerAnimation(AccordionTransformer.class)
                     .start();
         }
 
         if (vh instanceof NormalViewHolder) {
+            String title = "其他";
             NormalViewHolder normalViewHolder = (NormalViewHolder) vh;
-            final String title = item.getUtag().substring(0, item.getUtag().indexOf(" ") + 1);
+            if (null != item.getUtag()) {
+                title = item.getUtag().substring(0, item.getUtag().indexOf(" ") + 1);
+            }
+
             LabelView labelView = normalViewHolder.getView(R.id.lv_pretty_picture_recommend);
             labelView.setText(item.getCreate_time().substring(0, 10));
+            String finalTitle = title;
             normalViewHolder.setImageUrlUserGlide(R.id.rv_pretty_picture_recommend, item.getUrl(), 0.918f, R.color.white)
                     .setText(R.id.tv_pretty_picture_recommend_tip, title)
                     .setText(R.id.tv_pretty_picture_recommend_title, item.getTag().substring(15))
@@ -55,7 +58,7 @@ public class PrettyPictureListAdapter extends BaseListAdapter<TSZImageBean> impl
                         Context context = v.getContext();
                         Intent intent = new Intent(context, PrettyPicturesActivity.class);
                         intent.putExtra(PrettyPicturesFragment.CLASS_ID, item.getClass_id());
-                        intent.putExtra(PrettyPicturesFragment.CLASS_TITLE, title);
+                        intent.putExtra(PrettyPicturesFragment.CLASS_TITLE, finalTitle);
                         context.startActivity(intent);
                     });
         }
@@ -77,12 +80,8 @@ public class PrettyPictureListAdapter extends BaseListAdapter<TSZImageBean> impl
 
         public CategoryHeaderViewHolder(View view) {
             super(view);
-            mBanner = (Banner) view.findViewById(R.id.banner_item_pretty_picture_list_banner);
+            mBanner = view.findViewById(R.id.banner_item_pretty_picture_list_banner);
         }
-    }
-
-    @Override
-    public void OnBannerClick(int position) {
     }
 
     public class NormalViewHolder extends BaseViewHolder {

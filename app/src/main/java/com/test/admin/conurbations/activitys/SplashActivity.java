@@ -16,7 +16,7 @@ import java.util.Random;
 
 
 /**
- * Created by Eric on 2017/1/21.
+ * Created by ZQiong on 2017/1/21.
  */
 
 public class SplashActivity extends BaseActivity {
@@ -30,17 +30,7 @@ public class SplashActivity extends BaseActivity {
             R.mipmap.splash3,
             R.mipmap.splash4,
 
-            R.mipmap.splash6,
-            R.mipmap.splash7,
-            R.mipmap.splash8,
-            R.mipmap.splash9,
-            R.mipmap.splash10,
-            R.mipmap.splash11,
-            R.mipmap.splash12,
-            R.mipmap.splash13,
-            R.mipmap.splash14,
-            R.mipmap.splash15,
-            R.mipmap.splash16,
+            R.mipmap.splash6
     };
     @FindView
     ImageView mLogoImageView;
