@@ -1,10 +1,16 @@
 package com.test.admin.conurbations.widget;
 
 import android.app.Application;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Environment;
+import android.support.multidex.MultiDex;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
+import com.tencent.tinker.loader.app.TinkerApplication;
+import com.tencent.tinker.loader.shareutil.ShareConstants;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.ViewNamingRuleXMLParserHandler;
 import com.test.admin.conurbations.utils.AppUtils;
@@ -25,8 +31,8 @@ import javax.xml.parsers.SAXParserFactory;
  */
 public class SolidApplication extends Application {
     private static SolidApplication mInstance;
-    public static List<?> images=new ArrayList<>();
-    public static List<String> titles=new ArrayList<>();
+    public static List<?> images = new ArrayList<>();
+    public static List<String> titles = new ArrayList<>();
     public static Typeface songTi; // 宋体
 
     @Override
@@ -39,13 +45,13 @@ public class SolidApplication extends Application {
         //自定义注入框架
         loadViewNamingRule();
         FeedbackAPI.initAnnoy(this, "23601404");
-
+        Bugly.init(this, "df40649721", true);
         String[] urls = getResources().getStringArray(R.array.url);
         String[] tips = getResources().getStringArray(R.array.title);
         List list = Arrays.asList(urls);
         images = new ArrayList(list);
         List list1 = Arrays.asList(tips);
-        titles= new ArrayList(list1);
+        titles = new ArrayList(list1);
 
         songTi = Typeface.createFromAsset(getAssets(), "SongTi.TTF");
     }
@@ -72,9 +78,19 @@ public class SolidApplication extends Application {
             SAXParser parser = parserFactory.newSAXParser();
             ViewNamingRuleXMLParserHandler parserHandler = new ViewNamingRuleXMLParserHandler();
             parser.parse(inputStream, parserHandler);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // you must install multiDex whatever tinker is installed!
+        MultiDex.install(base);
+
+
+        // 安装tinker
+        Beta.installTinker();
     }
 }

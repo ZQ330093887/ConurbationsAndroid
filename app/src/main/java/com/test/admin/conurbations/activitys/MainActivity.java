@@ -21,10 +21,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.tencent.bugly.beta.tinker.TinkerManager;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.config.Constants;
@@ -35,6 +37,7 @@ import com.test.admin.conurbations.fragments.NewsInformationFragment;
 import com.test.admin.conurbations.fragments.PictureFragment;
 import com.test.admin.conurbations.fragments.SearchFragment;
 import com.test.admin.conurbations.utils.PhotoCameralUtil;
+import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
 import com.test.admin.conurbations.views.CircleImageView;
 import com.test.admin.conurbations.views.MaterialSearchView;
@@ -78,6 +81,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void initPresenter() {
     }
+
 
     @Override
     public void onBackPressed() {
