@@ -91,6 +91,6 @@ public class SolidApplication extends Application {
 
 
         // 安装tinker
-        Beta.installTinker();
+//        Beta.installTinker();
     }
 }

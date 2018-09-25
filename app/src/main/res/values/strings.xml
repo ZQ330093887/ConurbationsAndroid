@@ -37,7 +37,7 @@
     <string name="set_clear_cache">清除缓存</string>
     <string name="search_hint">Search&#8230;</string>
     <string name="indicator">%1$s/%2$s</string>
-    <string name="about_version">V 1.1.0</string>
+    <string name="about_version">V 2.0.0</string>
     <string name="cd_up_button">Up navigation button</string>
     <string name="cd_clear_button">Clear field</string>
     <string name="hint_prompt">Speak an item name or a number</string>

@@ -5,7 +5,7 @@ def bakPath = file("${buildDir}/bakApk/")
 /**
  * 此处填写每次构建生成的基准包目录
  */
-def baseApkDir = "app-0815-12-38-15"
+def baseApkDir = "app-0815-15-31-42"
 
 /**
  * 对于插件各参数的详细解析请参考
@@ -25,16 +25,17 @@ tinkerSupport {
     // 编译补丁包时，必需指定基线版本的apk，默认值为空
     // 如果为空，则表示不是进行补丁包的编译
     // @{link tinkerPatch.oldApk }
-    baseApk = "${bakPath}/${baseApkDir}/baidu/Gank_1.1.0_baidu.apk"
+    baseApk = "${bakPath}/${baseApkDir}/baidu/Gank_1.1.1_baidu.apk"
 
     // 对应tinker插件applyMapping
-    baseApkProguardMapping = "${bakPath}/${baseApkDir}/baidu/Gank_1.1.0_baidu-mapping.txt"
+    baseApkProguardMapping = "${bakPath}/${baseApkDir}/baidu/Gank_1.1.1_baidu-mapping.txt"
 
     // 对应tinker插件applyResourceMapping
-    baseApkResourceMapping = "${bakPath}/${baseApkDir}/baidu/Gank_1.1.0_baidu-R.txt"
+    baseApkResourceMapping = "${bakPath}/${baseApkDir}/baidu/Gank_1.1.1_baidu-R.txt"
 
     // 构建基准包和补丁包都要指定不同的tinkerId，并且必须保证唯一性 "1.0.0-base" "1.0.0-patch"
-    tinkerId = "1.1.0-patch"
+    tinkerId = "1.1.1-patch"
+//    tinkerId = "1.1.1-base"
 
     // 构建多渠道补丁时使用
     // buildAllFlavorsDir = "${bakPath}/${baseApkDir}"
@@ -86,9 +87,15 @@ tinkerPatch {
         //applyResourceMapping = "${bakPath}/${appName}/app-release-R.txt" // 可选，设置R.txt文件，通过旧apk文件保持ResId的分配
     }
 
-    /**
-     * bak apk and mapping
-     */
+
+    List<String> flavors = new ArrayList<>();
+    project.android.productFlavors.each { flavor ->
+        flavors.add(flavor.name)
+    }
+    boolean hasFlavors = flavors.size() > 0
+/**
+ * bak apk and mapping
+ */
     android.applicationVariants.all { variant ->
         /**
          * task type, you want to bak
@@ -101,13 +108,14 @@ tinkerPatch {
 
                 it.doLast {
                     copy {
+                        hasFlavors = false
                         def fileNamePrefix = "Gank_${variant.versionName}_${variant.flavorName}"
+                        def newFileNamePrefix = !hasFlavors ? "${fileNamePrefix}" : "${fileNamePrefix}-${date}"
 
-                        def newFileNamePrefix = "${fileNamePrefix}"
-
-                        def destPath = file("${bakPath}/${project.name}-${date}/${variant.flavorName}")
-
+                        def destPath = !hasFlavors ? file("${bakPath}/${project.name}-${date}/${variant.flavorName}") : bakPath
+// from variant.outputs.outputFile
                         from variant.outputs.first().outputFile
+//variant.outputs.all
                         into destPath
                         rename { String fileName ->
                             fileName.replace("${fileNamePrefix}.apk", "${newFileNamePrefix}.apk")
