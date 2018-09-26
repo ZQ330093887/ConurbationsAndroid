@@ -1,7 +1,7 @@
 # RxJava+RxAndroid+Retrofit+OkHttp+MVP概述
 
 ## 技术支持
-   RxJava+RxAndroid+Retrofit+OkHttp+自定义butterknife+MVP+leakCanary+各种封装
+   RxJava+RxAndroid+Retrofit+OkHttp+DataBinding+MVP+leakCanary+各种封装
    
 ## 功能介绍
         1. NBA相关体育新闻、视频锦集等功能
@@ -12,7 +12,7 @@
         6. 网络爬虫精彩文章
         7. 阿里百川技术反馈
         8. 搜索美图
-        9. 设置桌面、锁屏、图片下载、分享等
+        9. 设置桌面、锁屏、图片下载、分享等自
         10.自己实现butterknife功能
 
 ## 特别感谢
@@ -24,7 +24,6 @@
    io.reactivex:rxandroid:1.1.0
    io.reactivex:rxjava:1.1.0
    com.facebook.stetho:stetho:1.3.1
-   com.jakewharton:butterknife:7.0.1
    com.github.bumptech.glide:glide:3.7.0
    com.yalantis:phoenix:1.2.3
    org.jsoup:jsoup:1.8.3
