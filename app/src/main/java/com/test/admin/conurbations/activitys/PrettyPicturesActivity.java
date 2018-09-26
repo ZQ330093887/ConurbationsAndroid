@@ -1,17 +1,10 @@
 package com.test.admin.conurbations.activitys;
 
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.annotations.FindView;
-import com.test.admin.conurbations.annotations.events.OnClick;
+import com.test.admin.conurbations.databinding.ActivityPrettyPicturesBinding;
 import com.test.admin.conurbations.fragments.PrettyPicturesFragment;
 
 import java.util.Random;
@@ -20,27 +13,22 @@ import java.util.Random;
  * Created by zhouqiong on 2016/11/3.
  */
 
-public class PrettyPicturesActivity extends BaseActivity {
-    @FindView
-    Toolbar mToolbarToolbar;
-    @FindView
-    ImageView mHeadBgImageView;
-    @FindView
-    CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
-    @FindView
-    AppBarLayout mHeadAppBarLayout;
-    @FindView
-    FloatingActionButton mFabFloatingActionButton;
+public class PrettyPicturesActivity extends BaseActivity<ActivityPrettyPicturesBinding> {
+
     PrettyPicturesFragment mPrettyPicturesItemFragment;
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_pretty_pictures;
+    }
+
+    @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbarToolbar,"","");
+        initToolbar(mBinding.toolbarPrettyPicturesToolbar, "", "");
         initAppBarSetting();
 
-        mHeadCollapsingToolbarLayout.setTitle(getIntent().getStringExtra(PrettyPicturesFragment.CLASS_TITLE));
-
-        Picasso.with(this).load(getBgImg()).into(mHeadBgImageView);
+        mBinding.ctlPrettyPicturesHead.setTitle(getIntent().getStringExtra(PrettyPicturesFragment.CLASS_TITLE));
+        Picasso.with(this).load(getBgImg()).into(mBinding.ivPrettyPicturesHeadBg);
         if (bundle == null) {
             Bundle arguments = new Bundle();
             arguments.putString(PrettyPicturesFragment.CLASS_ID, getIntent().getStringExtra(PrettyPicturesFragment.CLASS_ID));
@@ -50,6 +38,7 @@ public class PrettyPicturesActivity extends BaseActivity {
                     .add(R.id.rl_pretty_pictures_container, mPrettyPicturesItemFragment)
                     .commit();
         }
+        mBinding.fabPrettyPicturesFab.setOnClickListener(v -> clickFab());
     }
 
     @Override
@@ -58,20 +47,16 @@ public class PrettyPicturesActivity extends BaseActivity {
     }
 
     public void initAppBarSetting() {
-        mHeadAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-                if (i == 0) {
-                    mFabFloatingActionButton.hide();
-                } else {
-                    mFabFloatingActionButton.show();
-                }
+        mBinding.ablPrettyPicturesHead.addOnOffsetChangedListener((appBarLayout, i) -> {
+            if (i == 0) {
+                mBinding.fabPrettyPicturesFab.hide();
+            } else {
+                mBinding.fabPrettyPicturesFab.show();
             }
         });
     }
 
-    @OnClick("mFabFloatingActionButton")
-    public void clickFab(View view) {
+    public void clickFab() {
         mPrettyPicturesItemFragment.getRecyclerView().setSelection(0);
     }
 

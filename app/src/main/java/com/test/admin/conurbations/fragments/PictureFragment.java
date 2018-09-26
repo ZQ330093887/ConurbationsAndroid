@@ -1,47 +1,33 @@
 package com.test.admin.conurbations.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.view.View;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.adapter.FragmentPrettyFragmentPagerAdapter;
-import com.test.admin.conurbations.annotations.FindView;
-import com.test.admin.conurbations.annotations.events.OnClick;
+import com.test.admin.conurbations.adapter.FragmentAdapter;
+import com.test.admin.conurbations.databinding.FragmentPictureBinding;
 import com.test.admin.conurbations.model.response.Moment;
+import com.test.admin.conurbations.rxbus.Event;
+import com.test.admin.conurbations.rxbus.EventType;
+import com.test.admin.conurbations.rxbus.RxBus;
 
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class PictureFragment extends BaseFragment {
+public class PictureFragment extends BaseFragment<FragmentPictureBinding> {
 
-    @FindView
-    TabLayout mHeadTabLayout;
-    @FindView
-    ViewPager mContentViewPager;
-    @FindView
-    FloatingActionButton mViewFloatingActionButton;
-    @FindView
-    AppBarLayout mHeadAppBarLayout;
-    private Context mContext;
-    private FragmentPrettyFragmentPagerAdapter fragmentPrettyFragmentPagerAdapter;
+    private FragmentAdapter fragmentPrettyFragmentPagerAdapter;
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = context;
+    protected int getLayoutId() {
+        return R.layout.fragment_picture;
     }
 
     @Override
     protected void initData(Bundle bundle) {
         initAppBarSetting();
 
-        String[] mTitles = mContext.getResources().getStringArray(R.array.sougou_tab);
+        String[] mTitles = getActivity().getResources().getStringArray(R.array.sougou_tab);
         Fragment[] mFragments = new Fragment[mTitles.length];
         mFragments[0] = new PrettyPicturesListFragmentList();
         ((PrettyPicturesListFragmentList) mFragments[0]).setRange(Moment.SGImgType.美女);
@@ -50,30 +36,31 @@ public class PictureFragment extends BaseFragment {
             ((SouGouImageFragment) mFragments[i]).setRange(mTitles[i]);
         }
 
-        fragmentPrettyFragmentPagerAdapter = new FragmentPrettyFragmentPagerAdapter(getChildFragmentManager(), mTitles, mFragments);
-        mContentViewPager.setAdapter(fragmentPrettyFragmentPagerAdapter);
-        mContentViewPager.setOffscreenPageLimit(5);
-        mHeadTabLayout.setupWithViewPager(mContentViewPager);
-        mHeadTabLayout.setBackgroundColor(getArguments().getInt("content"));
+        fragmentPrettyFragmentPagerAdapter = new FragmentAdapter(getChildFragmentManager(), mTitles, mFragments);
+        mBinding.get().vpPictureContent.setAdapter(fragmentPrettyFragmentPagerAdapter);
+        mBinding.get().vpPictureContent.setOffscreenPageLimit(5);
+        mBinding.get().tlPictureHead.setupWithViewPager(mBinding.get().vpPictureContent);
+        mBinding.get().tlPictureHead.setBackgroundColor(getArguments().getInt("content"));
     }
 
     public void initAppBarSetting() {
-        mHeadAppBarLayout.addOnOffsetChangedListener((appBarLayout, i) -> {
+        RxBus.getDefault().post(new Event(R.color.colorTealPrimaryDark, EventType.STATUE_BAR_COLOR));
+        mBinding.get().ablPictureHead.addOnOffsetChangedListener((appBarLayout, i) -> {
             if (i != 0) {
-                mViewFloatingActionButton.hide();
+                mBinding.get().fabPictureView.hide();
             } else {
-                mViewFloatingActionButton.show();
+                mBinding.get().fabPictureView.show();
             }
         });
+
+        mBinding.get().fabPictureView.setOnClickListener(v -> clickFab());
     }
 
-    @OnClick("mViewFloatingActionButton")
-    public void clickFab(View view) {
-        ((BaseLazyListFragment) fragmentPrettyFragmentPagerAdapter.getFragment(mContentViewPager.getCurrentItem())).getRecyclerView().setSelection(0);
+    public void clickFab() {
+        ((BaseLazyListFragment) fragmentPrettyFragmentPagerAdapter.getFragment(mBinding.get().vpPictureContent.getCurrentItem())).getRecyclerView().setSelection(0);
     }
 
     @Override
     public void detachView() {
-
     }
 }

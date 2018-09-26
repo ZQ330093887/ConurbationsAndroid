@@ -1,12 +1,10 @@
 package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
+import com.test.admin.conurbations.databinding.FragmentBaseListBinding;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
@@ -19,7 +17,7 @@ import java.util.List;
  * 处理懒加载，不需要懒加载这个功能则依然使用或者类
  */
 
-public abstract class BaseListFragment<T> extends BaseFragment implements PullRecycler.OnRecyclerRefreshListener {
+public abstract class BaseListFragment<T> extends BaseFragment<FragmentBaseListBinding> implements PullRecycler.OnRecyclerRefreshListener {
 
     public PullRecycler recycler;
     private int page = 1;
@@ -31,20 +29,26 @@ public abstract class BaseListFragment<T> extends BaseFragment implements PullRe
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_base_list, container, false);
-        initView(contentView);
-        setUpPresenter();
-        initData(savedInstanceState);
-        return contentView;
+    protected int getLayoutId() {
+        return R.layout.fragment_base_list;
     }
 
-    private void initView(View view) {
-        recycler = (PullRecycler) view.findViewById(R.id.pullRecycler);
-        recycler.setRefreshing();
-        recycler.setOnRefreshListener(this);
-        recycler.setLayoutManager(getLayoutManager());
-        recycler.setAdapter(setUpAdapter());
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initView();
+        setUpPresenter();
+        initData(savedInstanceState);
+    }
+
+    private void initView() {
+        if (mBinding != null) {
+            recycler = mBinding.get().listView;
+            recycler.setRefreshing();
+            recycler.setOnRefreshListener(this);
+            recycler.setLayoutManager(getLayoutManager());
+            recycler.setAdapter(setUpAdapter());
+        }
     }
 
     @Override

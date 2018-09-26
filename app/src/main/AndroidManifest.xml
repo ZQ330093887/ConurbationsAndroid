@@ -62,11 +62,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activitys.BeautifulArticleActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.tangxiaolv.telegramgallery.GalleryActivity" />
         <activity android:name=".activitys.ContactsActivity" />
         <activity android:name=".activitys.TelegramGalleryActivity" />
@@ -76,14 +71,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustNothing" />
-        <activity
-            android:name=".activitys.BeautifulArticleItemDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activitys.ItemBeautifulArticleActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.PrettyPicturesActivity"
             android:screenOrientation="portrait"
@@ -114,10 +101,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitys.OtherActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activitys.MatchVideoLiveListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

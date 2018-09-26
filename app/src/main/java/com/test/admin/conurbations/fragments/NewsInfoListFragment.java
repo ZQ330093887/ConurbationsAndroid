@@ -1,6 +1,5 @@
 package com.test.admin.conurbations.fragments;
 
-import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.test.admin.conurbations.activitys.INewInformationView;
@@ -23,10 +22,6 @@ public class NewsInfoListFragment extends BaseLazyListFragment implements INewIn
 
     public void setTable(String tabId) {
         this.mTabId = tabId;
-    }
-
-    @Override
-    protected void initData(Bundle bundle) {
     }
 
     @Override

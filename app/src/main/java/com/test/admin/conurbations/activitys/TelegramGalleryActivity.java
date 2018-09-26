@@ -8,33 +8,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.tangxiaolv.telegramgallery.GalleryActivity;
-import com.test.admin.conurbations.annotations.FindView;
-import com.test.admin.conurbations.annotations.events.OnClick;
+import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.databinding.ActivityTelegramGalleryBinding;
 
 import java.util.List;
 
 /**
  * Created by zhouqiong on 2016/9/29.
  */
-public class TelegramGalleryActivity extends BaseActivity {
-    @FindView
-    GridView mContentGridView;
-    @FindView
-    Button mOptionButton;
-    @FindView
-    Button mMultipleChoiceButton;
+public class TelegramGalleryActivity extends BaseActivity<ActivityTelegramGalleryBinding> {
+
     private List<String> mPhotoList;
     private BaseAdapter mBaseAdapter;
 
     @Override
-    protected void initData(Bundle bundle) {
+    protected int getLayoutId() {
+        return R.layout.activity_telegram_gallery;
+    }
 
-        mContentGridView.setAdapter(mBaseAdapter = new BaseAdapter() {
+    @Override
+    protected void initData(Bundle bundle) {
+        mBinding.gvTelegramGalleryContent.setAdapter(mBaseAdapter = new BaseAdapter() {
             @Override
             public int getCount() {
                 return mPhotoList == null ? 0 : mPhotoList.size();
@@ -68,6 +66,10 @@ public class TelegramGalleryActivity extends BaseActivity {
                 return view;
             }
         });
+
+        mBinding.btnTelegramGalleryOption.setOnClickListener(v -> onClickOptionButton());
+
+        mBinding.btnTelegramGalleryMultipleChoice.setOnClickListener(v -> onClickCheckBoxButton());
     }
 
     @Override
@@ -84,13 +86,11 @@ public class TelegramGalleryActivity extends BaseActivity {
         }
     }
 
-    @OnClick("mOptionButton")
-    void onClickmOptionButton(View view) {
+    void onClickOptionButton() {
         GalleryActivity.openActivity(TelegramGalleryActivity.this, true, 9, 12);
     }
 
-    @OnClick("mMultipleChoiceButton")
-    void onClickmCheckBoxButton(View view) {
+    void onClickCheckBoxButton() {
         GalleryActivity.openActivity(TelegramGalleryActivity.this, false, 9, 12);
     }
 

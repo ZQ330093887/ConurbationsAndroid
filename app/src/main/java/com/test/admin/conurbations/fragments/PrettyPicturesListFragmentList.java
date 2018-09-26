@@ -1,7 +1,6 @@
 package com.test.admin.conurbations.fragments;
 
 
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 
 import com.test.admin.conurbations.activitys.IPrettyPictureListView;
@@ -28,9 +27,6 @@ public class PrettyPicturesListFragmentList extends BaseLazyListFragment impleme
     protected PrettyPicturesListPresenter mPrettyPicturesListPresenter;
     protected PrettyPictureListAdapter mPrettyPictureListAdapter;
 
-    @Override
-    protected void initData(Bundle bundle) {
-    }
 
     @Override
     public void setPrettyPictureData(NetImage360 netImage) {

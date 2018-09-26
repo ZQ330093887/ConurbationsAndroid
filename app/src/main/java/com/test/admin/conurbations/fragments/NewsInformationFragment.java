@@ -1,35 +1,30 @@
 package com.test.admin.conurbations.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.adapter.NewsInformationFragmentPagerAdapter;
-import com.test.admin.conurbations.annotations.FindView;
+import com.test.admin.conurbations.adapter.FragmentAdapter;
+import com.test.admin.conurbations.databinding.FragmentNewsInformationBinding;
+import com.test.admin.conurbations.rxbus.Event;
+import com.test.admin.conurbations.rxbus.EventType;
+import com.test.admin.conurbations.rxbus.RxBus;
 
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class NewsInformationFragment extends BaseFragment {
-    @FindView
-    TabLayout mHeadTabLayout;
-    @FindView
-    ViewPager mContentViewPager;
-    private Context mContext;
+public class NewsInformationFragment extends BaseFragment<FragmentNewsInformationBinding> {
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = context;
+    protected int getLayoutId() {
+        return R.layout.fragment_news_information;
     }
 
     @Override
     protected void initData(Bundle bundle) {
-        String[] mTitles = mContext.getResources().getStringArray(R.array.news_info_tab);
-        String[] mTitlesId = mContext.getResources().getStringArray(R.array.news_info_tab_id);
+        RxBus.getDefault().post(new Event(R.color.colorBluePrimary, EventType.STATUE_BAR_COLOR));
+        String[] mTitles = getActivity().getResources().getStringArray(R.array.news_info_tab);
+        String[] mTitlesId = getActivity().getResources().getStringArray(R.array.news_info_tab_id);
         Fragment[] mFragments = new Fragment[mTitles.length];
         mFragments[0] = new NewsInfoIndexFragment();
         ((NewsInfoIndexFragment) mFragments[0]).setRange("知乎");
@@ -38,11 +33,11 @@ public class NewsInformationFragment extends BaseFragment {
             ((NewsInfoListFragment) mFragments[i]).setTable(mTitlesId[i]);
         }
 
-        NewsInformationFragmentPagerAdapter mInformationFragmentPagerAdapter = new NewsInformationFragmentPagerAdapter(getChildFragmentManager(), mTitles, mFragments);
-        mContentViewPager.setAdapter(mInformationFragmentPagerAdapter);
-        mContentViewPager.setOffscreenPageLimit(5);
-        mHeadTabLayout.setupWithViewPager(mContentViewPager);
-        mHeadTabLayout.setBackgroundColor(getArguments().getInt("content"));
+        FragmentAdapter mInformationFragmentPagerAdapter = new FragmentAdapter(getChildFragmentManager(), mTitles, mFragments);
+        mBinding.get().vpNewsInformationContent.setAdapter(mInformationFragmentPagerAdapter);
+        mBinding.get().vpNewsInformationContent.setOffscreenPageLimit(5);
+        mBinding.get().tlNewsInformationHead.setupWithViewPager(mBinding.get().vpNewsInformationContent);
+        mBinding.get().tlNewsInformationHead.setBackgroundColor(getArguments().getInt("content"));
     }
 
     @Override

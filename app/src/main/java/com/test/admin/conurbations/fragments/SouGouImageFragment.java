@@ -1,7 +1,6 @@
 package com.test.admin.conurbations.fragments;
 
 
-import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.test.admin.conurbations.activitys.ISouGouImageView;
@@ -29,10 +28,6 @@ public class SouGouImageFragment extends BaseLazyListFragment implements ISouGou
 
     public PullRecycler getRecyclerView() {
         return recycler;
-    }
-
-    @Override
-    protected void initData(Bundle bundle) {
     }
 
     @Override

@@ -1,17 +1,10 @@
 package com.test.admin.conurbations.activitys;
 
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.annotations.FindView;
-import com.test.admin.conurbations.annotations.events.OnClick;
+import com.test.admin.conurbations.databinding.ActivitySearchBinding;
 import com.test.admin.conurbations.fragments.SearchFragment;
 
 import java.util.Random;
@@ -20,28 +13,24 @@ import java.util.Random;
  * Created by zhouqiong on 2015/11/3 0003.
  */
 
-public class SearchActivity extends BaseActivity {
-    @FindView
-    Toolbar mToolbarToolbar;
-    @FindView
-    ImageView mHeadBgImageView;
-    @FindView
-    CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
-    @FindView
-    AppBarLayout mHandAppBarLayout;
-    @FindView
-    FloatingActionButton mViewFloatingActionButton;
+public class SearchActivity extends BaseActivity<ActivitySearchBinding> {
+
     SearchFragment mSearchFragment;
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_search;
+    }
 
     @Override
     protected void initData(Bundle bundle) {
 
-        initToolbar(mToolbarToolbar, "", "");
+        initToolbar(mBinding.toolbarSearchToolbar, "", "");
         initAppBarSetting();
         String mSearchQuery = getIntent().getStringExtra(SearchFragment.CLASS_SEARCH);
-        mHeadCollapsingToolbarLayout.setTitle(mSearchQuery);
+        mBinding.ctlSearchHead.setTitle(mSearchQuery);
 
-        Picasso.with(this).load(getBgImg()).into(mHeadBgImageView);
+        Picasso.with(this).load(getBgImg()).into(mBinding.ivSearchHeadBg);
         if (bundle == null) {
             Bundle arguments = new Bundle();
             arguments.putString(SearchFragment.CLASS_SEARCH, mSearchQuery);
@@ -51,6 +40,8 @@ public class SearchActivity extends BaseActivity {
                     .add(R.id.rl_search_container, mSearchFragment)
                     .commit();
         }
+
+        mBinding.fabSearchView.setOnClickListener(v -> clickFab());
     }
 
     @Override
@@ -59,17 +50,16 @@ public class SearchActivity extends BaseActivity {
     }
 
     public void initAppBarSetting() {
-        mHandAppBarLayout.addOnOffsetChangedListener((appBarLayout, i) -> {
+        mBinding.ablSearchHand.addOnOffsetChangedListener((appBarLayout, i) -> {
             if (i == 0) {
-                mViewFloatingActionButton.hide();
+                mBinding.fabSearchView.hide();
             } else {
-                mViewFloatingActionButton.show();
+                mBinding.fabSearchView.show();
             }
         });
     }
 
-    @OnClick("mViewFloatingActionButton")
-    public void clickFab(View view) {
+    public void clickFab() {
         mSearchFragment.getRecyclerView().setSelection(0);
     }
 

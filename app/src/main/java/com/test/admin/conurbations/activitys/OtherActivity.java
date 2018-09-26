@@ -1,31 +1,27 @@
 package com.test.admin.conurbations.activitys;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.annotations.FindView;
+import com.test.admin.conurbations.databinding.ActivityOtherBinding;
 import com.test.admin.conurbations.model.api.ACache;
 import com.test.admin.conurbations.utils.AppUtils;
 import com.test.admin.conurbations.utils.CacheUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 
-public class OtherActivity extends BaseActivity implements View.OnClickListener {
-    @FindView
-    Toolbar mToolbarToolbar;
-    @FindView
-    TextView mCacheSizeTextView;
-    @FindView
-    RelativeLayout mCleanCacheRelativeLayout;
+public class OtherActivity extends BaseActivity<ActivityOtherBinding> implements View.OnClickListener {
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_other;
+    }
 
     @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbarToolbar, "设置", "");
-        mCacheSizeTextView.setText(CacheUtils.getCacheSize(this));
-        mCleanCacheRelativeLayout.setOnClickListener(this);
+        initToolbar(mBinding.toolbarOtherToolbar, "设置", "");
+        mBinding.tvOtherCacheSize.setText(CacheUtils.getCacheSize(this));
+        mBinding.rlOtherCleanCache.setOnClickListener(this);
     }
 
     @Override
@@ -40,7 +36,7 @@ public class OtherActivity extends BaseActivity implements View.OnClickListener 
             ACache cache = ACache.get(AppUtils.getAppContext());
             cache.clear();
             CacheUtils.cleanApplicationCache(this);
-            mCacheSizeTextView.setText(CacheUtils.getCacheSize(this));
+            mBinding.tvOtherCacheSize.setText(CacheUtils.getCacheSize(this));
             ToastUtils.getInstance().showToast("缓存清理成功！");
             ACache.get(AppUtils.getAppContext());
         }

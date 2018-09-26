@@ -12,8 +12,7 @@ import com.test.admin.conurbations.adapter.BaseListAdapter;
 
 
 /**
- * Created by Stay on 5/3/16.
- * Powered by www.stay4it.com
+ * Created by zhouqiong on 2016/9/23.
  */
 public class PullRecycler extends FrameLayout implements SwipeRefreshLayout.OnRefreshListener {
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -45,9 +44,9 @@ public class PullRecycler extends FrameLayout implements SwipeRefreshLayout.OnRe
 
     private void setUpView() {
         LayoutInflater.from(getContext()).inflate(R.layout.widget_pull_to_refresh, this, true);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

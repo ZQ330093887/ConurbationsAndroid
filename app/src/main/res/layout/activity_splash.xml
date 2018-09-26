@@ -1,71 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/FitSystemWindows"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_splash_logo"
+    <data></data>
+
+    <RelativeLayout
+        style="@style/FitSystemWindows"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription=""
-        android:scaleType="fitXY"
-        tools:ignore="ContentDescription" />
+        android:layout_height="match_parent">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/ban_shadow" />
+        <ImageView
+            android:id="@+id/iv_splash_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription=""
+            android:scaleType="fitXY"
+            tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/tv_splash_app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dimens_130_dp"
-        android:text="@string/app_name"
-        android:textColor="@android:color/white"
-        android:textSize="50sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_splash_app_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dimens_10_dp"
-        android:text="@string/splash_slogan"
-        android:textColor="@color/white"
-        android:textSize="@dimen/dimens_14_sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dimens_10_dp"
-        android:background="@color/alpha_10_white"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/dimens_36_dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ban_shadow" />
 
         <TextView
+            android:id="@+id/tv_splash_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/about_version"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimens_130_dp"
+            android:text="@string/app_name"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/dimens_15_sp" />
+            android:textSize="50sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_splash_app_name"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dimens_10_dp"
+            android:text="@string/splash_slogan"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimens_14_sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dimens_10_dp"
+            android:background="@color/alpha_10_white"
             android:gravity="center"
-            android:lineSpacingExtra="@dimen/dimens_2_dp"
-            android:text="@string/splash_copyright"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/dimens_12_sp" />
-    </LinearLayout>
-</RelativeLayout>
+            android:orientation="vertical"
+            android:padding="@dimen/dimens_36_dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/about_version"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimens_15_sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_10_dp"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/dimens_2_dp"
+                android:text="@string/splash_copyright"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimens_12_sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

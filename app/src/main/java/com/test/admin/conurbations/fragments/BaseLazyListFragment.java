@@ -2,12 +2,10 @@ package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
+import com.test.admin.conurbations.databinding.FragmentBaseListBinding;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
@@ -15,10 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 懒加载BaseListFragment
  * Created by zhouqiong on 2017/5/3.
  */
 
-public abstract class BaseLazyListFragment<T> extends BaseFragment implements PullRecycler.OnRecyclerRefreshListener {
+public abstract class BaseLazyListFragment<T> extends BaseFragment<FragmentBaseListBinding> implements PullRecycler.OnRecyclerRefreshListener {
     /**
      * 懒加载
      */
@@ -32,7 +31,6 @@ public abstract class BaseLazyListFragment<T> extends BaseFragment implements Pu
     private int page = 1;
     protected List<T> mDataList;
     public PullRecycler recycler;
-    private View contentView;
     /**
      * isRefresh这个属性是添加缓存功能的时候用到的，我的缓存思路是：第一次进入界面走缓存，缓存为空的情况下
      * 网络请求数据，然后缓存起来，这个时候我需要一个属性判断是否需要刷新，之前在做刷新逻辑的时候没有将是否
@@ -41,17 +39,20 @@ public abstract class BaseLazyListFragment<T> extends BaseFragment implements Pu
     public boolean isRefresh = false;
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_base_list;
+    }
+
+    @Override
     protected void initData(Bundle bundle) {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        contentView = inflater.inflate(R.layout.fragment_base_list, container, false);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         isInitView = true;
-        lazyLoadData(contentView);
+        lazyLoadData();
         setUpPresenter();
-        initData(savedInstanceState);
-        return contentView;
     }
 
     @Override
@@ -59,7 +60,7 @@ public abstract class BaseLazyListFragment<T> extends BaseFragment implements Pu
         Log.e("isVisibleToUser " + isVisibleToUser + "   ", this.getClass().getSimpleName());
         if (isVisibleToUser) {
             isVisible = true;
-            lazyLoadData(contentView);
+            lazyLoadData();
 
         } else {
             isVisible = false;
@@ -67,9 +68,9 @@ public abstract class BaseLazyListFragment<T> extends BaseFragment implements Pu
         super.setUserVisibleHint(isVisibleToUser);
     }
 
-    private void initView(View view) {
-        if (view != null) {
-            recycler = (PullRecycler) view.findViewById(R.id.pullRecycler);
+    private void initView() {
+        if (mBinding != null) {
+            recycler = mBinding.get().listView;
             recycler.setRefreshing();
             recycler.setOnRefreshListener(this);
             recycler.setLayoutManager(getLayoutManager());
@@ -102,7 +103,7 @@ public abstract class BaseLazyListFragment<T> extends BaseFragment implements Pu
 
     protected abstract void setUpPresenter();
 
-    private void lazyLoadData(View contentView) {
+    private void lazyLoadData() {
         if (isFirstLoad) {
             Log.e("第一次加载 ", " isInitView  " + isInitView + "  isVisible  " + isVisible + "   " + this.getClass().getSimpleName());
         } else {
@@ -114,7 +115,7 @@ public abstract class BaseLazyListFragment<T> extends BaseFragment implements Pu
         }
 
         Log.e("完成数据第一次加载" + "   ", this.getClass().getSimpleName());
-        initView(contentView);
+        initView();
         isFirstLoad = false;
     }
 }

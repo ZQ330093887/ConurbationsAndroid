@@ -109,6 +109,7 @@ dependencies {
     compile rootProject.ext.dependencies["logging"]
     compile rootProject.ext.dependencies["retrofit2"]
     compile rootProject.ext.dependencies["converter"]
+    compile rootProject.ext.dependencies["rxrelay"]
     compile rootProject.ext.dependencies["retrofit2-converter"]
     compile rootProject.ext.dependencies["interceptor"]
     compile rootProject.ext.dependencies["glide-okhttp3"]

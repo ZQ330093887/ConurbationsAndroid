@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/dimens_180_dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/side_nav_bar"
-    android:gravity="bottom"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/dimens_16_dp"
-    android:paddingLeft="@dimen/dimens_16_dp"
-    android:paddingRight="@dimen/dimens_16_dp"
-    android:paddingTop="@dimen/dimens_16_dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.test.admin.conurbations.views.CircleImageView
-        android:id="@+id/circle_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dimens_16_dp"
-        app:border_width="@dimen/dimens_2_dp"
-        app:border_color="@color/colorLimePrimaryCenter"
-        android:transitionName="translate_view"/>
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/guard_msg"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:layout_height="@dimen/dimens_180_dp"
+        android:background="@drawable/side_nav_bar"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dimens_16_dp"
+        android:paddingLeft="@dimen/dimens_16_dp"
+        android:paddingRight="@dimen/dimens_16_dp"
+        android:paddingTop="@dimen/dimens_16_dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="zhouqiong330093887@163.com" />
+        <com.test.admin.conurbations.views.CircleImageView
+            android:id="@+id/circle_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dimens_16_dp"
+            android:transitionName="translate_view"
+            app:border_color="@color/colorLimePrimaryCenter"
+            app:border_width="@dimen/dimens_2_dp" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/guard_msg"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="zhouqiong330093887@163.com" />
+
+    </LinearLayout>
+</layout>

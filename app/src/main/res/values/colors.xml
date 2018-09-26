@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="theme_primary">#432e2a</color>
-    <color name="theme_primary_darker">#2d1e1b</color>
-    <color name="theme_primary_dark">#231714</color>
+    <color name="theme_primary">#a6172d</color>
+    <color name="theme_primary_darker">#c72e45</color>
+    <color name="theme_primary_dark">#f1404b</color>
     <color name="lite_blue">#ff359ff2</color>
 
     <!--basic color-->
@@ -28,6 +28,7 @@
     <!--purple-->
     <!--teal-->
     <color name="colorTealPrimaryDark">#00796b</color>
+    <color name="colorToolbarDark">#c8c8a9</color>
     <!--pink-->
     <!--deepPurple-->
     <!--orange-->
@@ -46,7 +47,10 @@
     <color name="colorLimePrimaryDark">#AFB42B</color>
     <color name="colorLimePrimaryCenter">#52540c</color>
     <!--deepOrange-->
+    <color name="colorDeepPrimary">#FF44633F</color>
+
     <!--blueGrey-->
+    <color name="colorBluePrimary">#FF455A64</color>
 
 
     <color name="textColorFirst_Day">#DD000000</color>

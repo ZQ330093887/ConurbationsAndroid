@@ -4,27 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.annotations.FindView;
+import com.test.admin.conurbations.databinding.ActivityWebViewBinding;
 import com.test.admin.conurbations.utils.FileUtil;
 import com.test.admin.conurbations.utils.ToastUtils;
-import com.test.admin.conurbations.widget.BrowserLayout;
 
 /**
  * Created by zhouqiong on 2017/1/4.
  * Update 2017/5/18
  */
-public class WebViewActivity extends BaseActivity {
-
-    @FindView
-    Toolbar mToolbarToolbar;
-    @FindView
-    BrowserLayout mContentBrowserLayout;
+public class WebViewActivity extends BaseActivity<ActivityWebViewBinding> {
 
     private String mWebViewUrl;
     private String mWebViewTitle;
@@ -41,8 +34,13 @@ public class WebViewActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_web_view;
+    }
+
+    @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbarToolbar, "", "");
+        initToolbar(mBinding.toolbarWebViewToolbar, "", "");
         getIntentData();
         setTitle(mWebViewTitle);
         isShowToolbar();
@@ -50,9 +48,9 @@ public class WebViewActivity extends BaseActivity {
     }
 
     private void isLoadUrl() {
-        mContentBrowserLayout.setOverrideUrlLoading(isOverrideUrlLoading);
+        mBinding.blWebViewContent.setOverrideUrlLoading(isOverrideUrlLoading);
         if (!TextUtils.isEmpty(mWebViewUrl)) {
-            mContentBrowserLayout.loadUrl(mWebViewUrl);
+            mBinding.blWebViewContent.loadUrl(mWebViewUrl);
         } else {
             ToastUtils.getInstance().showToast("获取URL地址失败");
         }
@@ -60,9 +58,9 @@ public class WebViewActivity extends BaseActivity {
 
     private void isShowToolbar() {
         if (!isShowBottomBar) {
-            mContentBrowserLayout.hideBrowserController();
+            mBinding.blWebViewContent.hideBrowserController();
         } else {
-            mContentBrowserLayout.showBrowserController();
+            mBinding.blWebViewContent.showBrowserController();
         }
     }
 
@@ -81,9 +79,9 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     protected void onPause() {
-        if (mContentBrowserLayout.getWebView() != null) {
-            mContentBrowserLayout.getWebView().onPause();
-            mContentBrowserLayout.getWebView().reload();
+        if (mBinding.blWebViewContent.getWebView() != null) {
+            mBinding.blWebViewContent.getWebView().onPause();
+            mBinding.blWebViewContent.getWebView().reload();
         }
         super.onPause();
     }
@@ -98,13 +96,13 @@ public class WebViewActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (mContentBrowserLayout.canGoBack()) {
-                    mContentBrowserLayout.goBack();
+                if (mBinding.blWebViewContent.canGoBack()) {
+                    mBinding.blWebViewContent.goBack();
                     return true;
                 }
                 break;
             case R.id.action_share:
-                FileUtil.sharePage(mContentBrowserLayout.getWebView(), getContext());
+                FileUtil.sharePage(mBinding.blWebViewContent.getWebView(), getContext());
                 return true;
             case R.id.action_open_in_browser:
                 openInBrowser();
@@ -117,7 +115,7 @@ public class WebViewActivity extends BaseActivity {
 
     private void openInBrowser() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        Uri uri = Uri.parse(mContentBrowserLayout.getWebView().getUrl());
+        Uri uri = Uri.parse(mBinding.blWebViewContent.getWebView().getUrl());
         intent.setData(uri);
         startActivity(intent);
     }
@@ -125,9 +123,9 @@ public class WebViewActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mContentBrowserLayout.getWebView() != null) {
-            mContentBrowserLayout.getWebView().removeAllViews();
-            mContentBrowserLayout.getWebView().destroy();
+        if (mBinding.blWebViewContent.getWebView() != null) {
+            mBinding.blWebViewContent.getWebView().removeAllViews();
+            mBinding.blWebViewContent.getWebView().destroy();
         }
     }
 }

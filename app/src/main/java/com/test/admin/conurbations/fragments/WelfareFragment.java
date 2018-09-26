@@ -1,6 +1,5 @@
 package com.test.admin.conurbations.fragments;
 
-import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.test.admin.conurbations.activitys.IWelfareView;
@@ -39,10 +38,6 @@ public class WelfareFragment extends BaseLazyListFragment implements IWelfareVie
             mWelfareListAdapter.notifyDataSetChanged();
         }
         recycler.onRefreshCompleted();
-    }
-
-    @Override
-    protected void initData(Bundle bundle) {
     }
 
     @Override

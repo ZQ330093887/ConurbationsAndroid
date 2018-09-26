@@ -1,7 +1,6 @@
 package com.test.admin.conurbations.fragments;
 
 
-import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.test.admin.conurbations.activitys.IGankDayView;
@@ -28,11 +27,6 @@ public class GankDayFragment extends BaseLazyListFragment<List<GankItem>> implem
 
     public void setRange(Moment.Range range) {
         this.range = range;
-    }
-
-    @Override
-    protected void initData(Bundle bundle) {
-
     }
 
     Calendar calendar = Calendar.getInstance();
@@ -83,7 +77,7 @@ public class GankDayFragment extends BaseLazyListFragment<List<GankItem>> implem
 
     @Override
     public void detachView() {
-        if (mGankDayPresenter != null){
+        if (mGankDayPresenter != null) {
             mGankDayPresenter.detachView();
         }
     }

@@ -2,6 +2,8 @@ package com.test.admin.conurbations.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -14,25 +16,15 @@ import android.view.ViewGroup;
 
 import com.test.admin.conurbations.activitys.BaseActivity;
 import com.test.admin.conurbations.activitys.IBaseView;
-import com.test.admin.conurbations.annotations.SetLayout;
-import com.test.admin.conurbations.utils.InjectUtil;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.test.admin.conurbations.utils.AutoClearedValue;
 
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-@SetLayout
-public abstract class BaseFragment extends Fragment implements IBaseView {
+public abstract class BaseFragment<VB extends ViewDataBinding> extends Fragment implements IBaseView {
 
     private static final String TAG = "BaseFragment";
-
-    protected View rootView;
-
-    private LayoutInflater inflater;
-
-    public Map<String, View> views;
+    protected AutoClearedValue<VB> mBinding;
 
     protected void initToolbar(Toolbar toolbar, String toolbarTitle, String toolbarSubtitle) {
 
@@ -52,23 +44,17 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
         toolbar.setNavigationOnClickListener(v -> getActivity().finish());
     }
 
-    public void setRootView(int layoutId) {
-        rootView = inflater.inflate(layoutId, null);
-    }
-
-    public View getRootView() {
-        return rootView;
-    }
+    protected abstract int getLayoutId();
 
     protected abstract void initData(Bundle bundle);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.inflater = inflater;
-        views = new HashMap<>();
-        InjectUtil.inject(this);
+        VB dataBinding = DataBindingUtil.inflate(inflater, this.getLayoutId(), container, false);
+        this.mBinding = new AutoClearedValue(this, dataBinding);
         initData(savedInstanceState);
-        return rootView;
+
+        return dataBinding.getRoot();
     }
 
     @Override

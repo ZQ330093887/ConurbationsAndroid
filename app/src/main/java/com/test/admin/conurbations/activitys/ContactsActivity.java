@@ -2,13 +2,12 @@ package com.test.admin.conurbations.activitys;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.FragmentContactsAdapter;
-import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.config.Contact;
+import com.test.admin.conurbations.databinding.ActivityContactsBinding;
+import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.views.WaveSideBar;
 
 import java.util.ArrayList;
@@ -16,14 +15,14 @@ import java.util.ArrayList;
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class ContactsActivity extends BaseActivity {
+public class ContactsActivity extends BaseActivity<ActivityContactsBinding> {
 
-    @FindView
-    RecyclerView mViewRecyclerView;
-    @FindView
-    WaveSideBar mViewWaveSideBar;
     private ArrayList<Contact> mContactsList = new ArrayList<>();
-    private FragmentContactsAdapter mContactsAdapter;
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_contacts;
+    }
 
     @Override
     protected void initData(Bundle bundle) {
@@ -32,19 +31,21 @@ public class ContactsActivity extends BaseActivity {
     }
 
     @Override
-    protected void initPresenter() {}
+    protected void initPresenter() {
+    }
 
     private void initView() {
-        mContactsAdapter = new FragmentContactsAdapter(mContactsList, R.layout.item_contacts);
+        FragmentContactsAdapter mContactsAdapter = new FragmentContactsAdapter(mContactsList, R.layout.item_contacts);
 
-        mViewRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mViewRecyclerView.setAdapter(mContactsAdapter);
-        mContactsAdapter.setOnItemClickListener((view, data) -> Toast.makeText(ContactsActivity.this, data.getNumber(), Toast.LENGTH_SHORT).show());
-        mViewWaveSideBar.setPosition(WaveSideBar.POSITION_RIGHT);
-        mViewWaveSideBar.setOnSelectIndexItemListener(index -> {
-            for (int i = 0; i< mContactsList.size(); i++) {
+        mBinding.rvContactsView.setLayoutManager(new LinearLayoutManager(this));
+        mBinding.rvContactsView.setAdapter(mContactsAdapter);
+        mContactsAdapter.setOnItemClickListener((view, data) ->
+                ToastUtils.getInstance().showToast(data.getNumber()));
+        mBinding.wsbContactsView.setPosition(WaveSideBar.POSITION_RIGHT);
+        mBinding.wsbContactsView.setOnSelectIndexItemListener(index -> {
+            for (int i = 0; i < mContactsList.size(); i++) {
                 if (mContactsList.get(i).getIndex().equals(index)) {
-                    ((LinearLayoutManager) mViewRecyclerView.getLayoutManager()).scrollToPositionWithOffset(i, 0);
+                    ((LinearLayoutManager) mBinding.rvContactsView.getLayoutManager()).scrollToPositionWithOffset(i, 0);
                     return;
                 }
             }

@@ -23,9 +23,9 @@ public class Constants {
 
     public static final int PHOTO_REQUEST_CUT = 3;// 结果
 
-    public static final int[] testColors = {0xFF5D4037, 0xFF009688, 0xFF607D8B, 0xFF7B1FA2};
+    public static final int[] testColors = {0xFFc72e45, 0xFF009688, 0xFF607D8B, 0xFF5A9367};
 
-    public static final int[] toolBarColors = {0xFF431D12, 0xFF00796B, 0xFF455A64, 0xFF3F0F53};
+    public static final int[] toolBarColors = {0xFFa6172d, 0xFF00796B, 0xFF455A64, 0xFF44633F};
 
 
     // 使用系统当前日期加以调整作为照片的名称

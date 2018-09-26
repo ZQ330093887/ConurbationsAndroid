@@ -4,7 +4,7 @@
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@id/swipeRefreshLayout"
-        android:layout_below="@id/toolbar_webview_toolbar"
+        android:layout_below="@+id/toolbar_webview_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

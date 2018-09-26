@@ -6,10 +6,9 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.widget.ImageView;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.annotations.FindView;
+import com.test.admin.conurbations.databinding.ActivitySplashBinding;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.Random;
@@ -19,7 +18,7 @@ import java.util.Random;
  * Created by ZQiong on 2017/1/21.
  */
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
 
     private static final int ANIMATION_DURATION = 2000;
     private static final float SCALE_END = 1.13F;
@@ -32,13 +31,16 @@ public class SplashActivity extends BaseActivity {
 
             R.mipmap.splash6
     };
-    @FindView
-    ImageView mLogoImageView;
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_splash;
+    }
 
     @Override
     protected void initData(Bundle bundle) {
         Random r = new Random(SystemClock.elapsedRealtime());
-        mLogoImageView.setImageResource(SPLASH_ARRAY[r.nextInt(SPLASH_ARRAY.length)]);
+        mBinding.ivSplashLogo.setImageResource(SPLASH_ARRAY[r.nextInt(SPLASH_ARRAY.length)]);
         animateImage();
     }
 
@@ -47,8 +49,8 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void animateImage() {
-        ObjectAnimator animatorX = ObjectAnimator.ofFloat(mLogoImageView, "scaleX", 1f, SCALE_END);
-        ObjectAnimator animatorY = ObjectAnimator.ofFloat(mLogoImageView, "scaleY", 1f, SCALE_END);
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(mBinding.ivSplashLogo, "scaleX", 1f, SCALE_END);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(mBinding.ivSplashLogo, "scaleY", 1f, SCALE_END);
 
         AnimatorSet set = new AnimatorSet();
         set.setDuration(ANIMATION_DURATION).play(animatorX).with(animatorY);

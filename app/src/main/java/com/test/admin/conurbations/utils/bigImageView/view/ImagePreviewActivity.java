@@ -1,7 +1,6 @@
 package com.test.admin.conurbations.utils.bigImageView.view;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,13 +10,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -25,7 +20,7 @@ import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.BaseActivity;
-import com.test.admin.conurbations.annotations.FindView;
+import com.test.admin.conurbations.databinding.ActivityImagePreviewBinding;
 import com.test.admin.conurbations.utils.DialogUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.utils.bigImageView.ImagePreview;
@@ -44,27 +39,10 @@ import java.util.List;
 
 import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 
-public class ImagePreviewActivity extends BaseActivity implements Handler.Callback,
+public class ImagePreviewActivity extends BaseActivity<ActivityImagePreviewBinding> implements Handler.Callback,
         View.OnClickListener, OnMenuItemClickListener {
 
     public static final String TAG = "ImagePreview";
-
-
-    @FindView
-    Toolbar mToolbarToolbar;
-    @FindView
-    TextView mShowOriginTextView;
-    @FindView
-    FrameLayout mImageFrameLayout;
-    @FindView
-    TextView mIndicatorTextView;
-    @FindView
-    ImageView mDownloadImageView;
-    @FindView
-    HackyViewPager mPagerHackyViewPager;
-
-
-    private Context context;
 
     private List<ImageInfo> imageInfoList;
     private int currentItem;// 当前显示的图片索引
@@ -79,9 +57,13 @@ public class ImagePreviewActivity extends BaseActivity implements Handler.Callba
     private ContextMenuDialogFragment mMenuDialogFragment;
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_image_preview;
+    }
+
+    @Override
     protected void initData(Bundle bundle) {
-        context = this;
-        initToolbar(mToolbarToolbar, "美图", "");
+        initToolbar(mBinding.toolbarImagePreviewToolbar, "美图", "");
         initMenuFragment();
         handlerHolder = new HandlerUtils.HandlerHolder(this);
 
@@ -99,30 +81,31 @@ public class ImagePreviewActivity extends BaseActivity implements Handler.Callba
         }
 
         // 查看与原图按钮
-        mShowOriginTextView.setOnClickListener(this);
+        mBinding.tvImagePreviewShowOrigin.setOnClickListener(this);
         // 下载图片按钮
-        mDownloadImageView.setOnClickListener(this);
+        mBinding.ivImagePreviewDownload.setOnClickListener(this);
 
         if (imageInfoList.size() > 1) {
-            mIndicatorTextView.setVisibility(View.VISIBLE);
+            mBinding.tvImagePreviewIndicator.setVisibility(View.VISIBLE);
         } else {
-            mIndicatorTextView.setVisibility(View.GONE);
+            mBinding.tvImagePreviewIndicator.setVisibility(View.GONE);
         }
 
         if (isShowDownButton) {
-            mDownloadImageView.setVisibility(View.VISIBLE);
+            mBinding.ivImagePreviewDownload.setVisibility(View.VISIBLE);
         } else {
-            mDownloadImageView.setVisibility(View.GONE);
+            mBinding.ivImagePreviewDownload.setVisibility(View.GONE);
         }
 
         // 更新进度指示器
-        mIndicatorTextView.setText(
+        mBinding.tvImagePreviewIndicator.setText(
                 String.format(getString(R.string.indicator), currentItem + 1 + " ", " " + imageInfoList.size()));
 
         imagePreviewAdapter = new ImagePreviewAdapter(this, imageInfoList);
-        mPagerHackyViewPager.setAdapter(imagePreviewAdapter);
-        mPagerHackyViewPager.setCurrentItem(currentItem);
-        mPagerHackyViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+
+        mBinding.hvpImagePreviewPager.setAdapter(imagePreviewAdapter);
+        mBinding.hvpImagePreviewPager.setCurrentItem(currentItem);
+        mBinding.hvpImagePreviewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 currentItem = position;
@@ -132,7 +115,7 @@ public class ImagePreviewActivity extends BaseActivity implements Handler.Callba
                     checkCache(currentItemOriginPathUrl);
                 }
                 // 更新进度指示器
-                mIndicatorTextView.setText(
+                mBinding.tvImagePreviewIndicator.setText(
                         String.format(getString(R.string.indicator), currentItem + 1 + " ", " " + imageInfoList.size()));
             }
         });
@@ -147,7 +130,7 @@ public class ImagePreviewActivity extends BaseActivity implements Handler.Callba
      */
     private void downloadCurrentImg() {
         String path = Environment.getExternalStorageDirectory() + "/" + downloadFolderName + "/";
-        DownloadPictureUtil.downloadPicture(context, currentItemOriginPathUrl, path,
+        DownloadPictureUtil.downloadPicture(getContext(), currentItemOriginPathUrl, path,
                 System.currentTimeMillis() + ".jpeg");
     }
 
@@ -166,7 +149,7 @@ public class ImagePreviewActivity extends BaseActivity implements Handler.Callba
             final String path = imageInfoList.get(currentItem).getOriginUrl();
             Print.d(TAG, "handler == 0 path = " + path);
             visible();
-            mShowOriginTextView.setText("0 %");
+            mBinding.tvImagePreviewShowOrigin.setText("0 %");
 
             Glide.with(this).load(path).downloadOnly(new ProgressTarget<String, File>(path, null) {
                 @Override
@@ -222,14 +205,14 @@ public class ImagePreviewActivity extends BaseActivity implements Handler.Callba
             int progress = bundle.getInt("progress");
             if (currentItem == getRealIndexWithPath(url)) {
                 visible();
-                mShowOriginTextView.setText(progress + " %");
+                mBinding.tvImagePreviewShowOrigin.setText(progress + " %");
                 Print.d(TAG, "handler == 2 progress == " + progress);
             }
         } else if (msg.what == 3) {// gone
-            mShowOriginTextView.setText("查看原图");
-            mImageFrameLayout.setVisibility(View.GONE);
+            mBinding.tvImagePreviewShowOrigin.setText("查看原图");
+            mBinding.flImagePreviewImage.setVisibility(View.GONE);
         } else if (msg.what == 4) {// visible
-            mImageFrameLayout.setVisibility(View.VISIBLE);
+            mBinding.flImagePreviewImage.setVisibility(View.VISIBLE);
         }
         return true;
     }
@@ -246,7 +229,7 @@ public class ImagePreviewActivity extends BaseActivity implements Handler.Callba
     private void checkCache(final String url_) {
         gone();
         new Thread(() -> {
-            File cacheFile = ImageLoader.getGlideCacheFile(context, url_);
+            File cacheFile = ImageLoader.getGlideCacheFile(getContext(), url_);
             if (cacheFile != null && cacheFile.exists()) {
                 gone();
             } else {
@@ -259,7 +242,7 @@ public class ImagePreviewActivity extends BaseActivity implements Handler.Callba
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.iv_image_preview_download) {// 检查权限
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(ImagePreviewActivity.this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)) {

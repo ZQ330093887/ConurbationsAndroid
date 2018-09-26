@@ -3,13 +3,19 @@ package com.test.admin.conurbations.activitys;
 import android.os.Bundle;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.databinding.ActivityNewsInfoListDetailBinding;
 import com.test.admin.conurbations.fragments.NewsInfoListDetailFragment;
 
 
 /**
  * Created by zhouqiong on 17/3/17.
  */
-public class NewsInfoListDetailActivity extends BaseActivity {
+public class NewsInfoListDetailActivity extends BaseActivity<ActivityNewsInfoListDetailBinding> {
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_news_info_list_detail;
+    }
 
     @Override
     protected void initData(Bundle bundle) {

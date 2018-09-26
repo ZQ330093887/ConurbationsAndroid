@@ -1,124 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.design.widget.AppBarLayout
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:transitionName="translate_web_view_bg_img">
+        android:orientation="vertical">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/ctl_news_info_list_detail_head"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_256_dp"
+            android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginEnd="@dimen/dimens_96_dp"
-            app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle.About"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:transitionName="translate_web_view_bg_img">
 
-            <FrameLayout
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/ctl_news_info_list_detail_head"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/dimens_256_dp"
                 android:fitsSystemWindows="true"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.8"
-                app:layout_scrollFlags="scroll|snap|enterAlways|enterAlwaysCollapsed">
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginEnd="@dimen/dimens_96_dp"
+                app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle.About"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <ImageView
-                    android:id="@+id/iv_news_info_list_detail_head"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
+                    android:fitsSystemWindows="true"
                     app:layout_collapseMode="parallax"
-                    app:layout_collapseParallaxMultiplier="0.7" />
+                    app:layout_collapseParallaxMultiplier="0.8"
+                    app:layout_scrollFlags="scroll|snap|enterAlways|enterAlwaysCollapsed">
 
-                <TextView
-                    android:id="@+id/tv_news_info_list_detail_title"
+                    <ImageView
+                        android:id="@+id/iv_news_info_list_detail_head"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.7" />
+
+                    <TextView
+                        android:id="@+id/tv_news_info_list_detail_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="@dimen/dimens_18_dp"
+                        android:padding="@dimen/dimens_18_dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/dimens_22_sp"
+                        android:transitionName="translate_web_view_title"
+                        tools:text="哈哈哈哈哈" />
+
+                    <TextView
+                        android:id="@+id/tv_news_info_list_detail_source"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:padding="@dimen/dimens_10_dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimens_15_sp"
+                        tools:text="哇哇哇哇哇" />
+                </FrameLayout>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar_news_info_list_detail_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="@dimen/dimens_18_dp"
-                    android:padding="@dimen/dimens_18_dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/dimens_22_sp"
-                    android:transitionName="translate_web_view_title"
-                    tools:text="哈哈哈哈哈" />
-
-                <TextView
-                    android:id="@+id/tv_news_info_list_detail_source"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:padding="@dimen/dimens_10_dp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/dimens_15_sp"
-                    tools:text="哇哇哇哇哇" />
-            </FrameLayout>
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar_news_info_list_detail_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:minHeight="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:theme="@style/MyToolbar" />
+                    android:layout_height="?attr/actionBarSize"
+                    android:minHeight="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:theme="@style/MyToolbar" />
 
 
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <WebView
-                android:id="@+id/wv_news_info_list_detail_news"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:isScrollContainer="false"
-                android:scrollbars="vertical" />
+                android:orientation="vertical">
+
+                <WebView
+                    android:id="@+id/wv_news_info_list_detail_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:isScrollContainer="false"
+                    android:scrollbars="vertical" />
+
+                <TextView
+                    android:id="@+id/tv_news_info_list_detail_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="left"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="\u3000\u3000"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimens_126_dp">
 
             <TextView
-                android:id="@+id/tv_news_info_list_detail_news"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="left"
-                android:orientation="vertical"
-                android:paddingBottom="10dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="5dp"
-                android:text="\u3000\u3000"
-                android:textSize="16sp"
-                android:visibility="gone"/>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                android:id="@+id/tv_news_info_list_detail_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="@dimen/dimens_10_dp"
+                android:drawableTop="@mipmap/ic_empty"
+                android:scaleType="centerInside"
+                android:text="没有内容，稍后重试"
+                android:visibility="gone" />
 
+            <TextView
+                android:id="@+id/tv_news_info_list_detail_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="@dimen/dimens_10_dp"
+                android:drawableTop="@mipmap/ic_error"
+                android:scaleType="centerInside"
+                android:text="@string/load_fail"
+                android:visibility="gone" />
+        </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dimens_126_dp">
-
-        <include layout="@layout/include_empty" />
-
-        <include layout="@layout/include_error" />
-    </FrameLayout>
-
-</android.support.design.widget.CoordinatorLayout>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
 
 

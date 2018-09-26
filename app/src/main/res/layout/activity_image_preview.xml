@@ -1,84 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rootView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000000">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/abl_show_image_head"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+    <data></data>
 
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_image_preview_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="@dimen/dimens_4_dp"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="childActivity" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <com.test.admin.conurbations.utils.bigImageView.view.HackyViewPager
-        android:id="@+id/hvp_image_preview_pager"
+    <RelativeLayout
+        android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/abl_show_image_head" />
+        android:background="#000000">
 
-    <TextView
-        android:id="@+id/tv_image_preview_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/gray_circle_bg"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="1 / 4"
-        android:textColor="#ffffff"
-        android:textSize="16sp" />
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/abl_show_image_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-    <FrameLayout
-        android:id="@+id/fl_image_preview_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:visibility="gone">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_image_preview_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:elevation="@dimen/dimens_4_dp"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="childActivity" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <com.test.admin.conurbations.utils.bigImageView.view.HackyViewPager
+            android:id="@+id/hvp_image_preview_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/abl_show_image_head" />
 
         <TextView
-            android:id="@+id/tv_image_preview_show_origin"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@drawable/gray_square_circle_bg_white_stroke"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="5dp"
-            android:text="查看原图"
-            android:textColor="#ffffff" />
-    </FrameLayout>
+            android:id="@+id/tv_image_preview_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/gray_circle_bg"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="1 / 4"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
 
-    <ImageView
-        android:id="@+id/iv_image_preview_download"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/gray_square_circle_bg"
-        android:padding="6dp"
-        android:src="@drawable/icon_download"
-        android:visibility="gone" />
-</RelativeLayout>
+        <FrameLayout
+            android:id="@+id/fl_image_preview_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_image_preview_show_origin"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="@drawable/gray_square_circle_bg_white_stroke"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="5dp"
+                android:text="查看原图"
+                android:textColor="#ffffff" />
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_image_preview_download"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/gray_square_circle_bg"
+            android:padding="6dp"
+            android:src="@drawable/icon_download"
+            android:visibility="gone" />
+    </RelativeLayout>
+</layout>

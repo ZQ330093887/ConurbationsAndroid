@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Button
-        android:id="@+id/btn_telegram_gallery_multiple_choice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="相册多选" />
+    <data></data>
 
-    <Button
-        android:id="@+id/btn_telegram_gallery_option"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="相册单选" />
-
-
-    <GridView
-        android:id="@+id/gv_telegram_gallery_content"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dimens_8_dp"
-        android:horizontalSpacing="@dimen/dimens_4_dp"
-        android:numColumns="3"
-        android:verticalSpacing="@dimen/dimens_4_dp" />
-</LinearLayout>
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_telegram_gallery_multiple_choice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="相册多选" />
+
+        <Button
+            android:id="@+id/btn_telegram_gallery_option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="相册单选" />
+
+
+        <GridView
+            android:id="@+id/gv_telegram_gallery_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimens_8_dp"
+            android:horizontalSpacing="@dimen/dimens_4_dp"
+            android:numColumns="3"
+            android:verticalSpacing="@dimen/dimens_4_dp" />
+    </LinearLayout>
+</layout>

@@ -1,17 +1,13 @@
 package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.INewsInfoDetailListView;
-import com.test.admin.conurbations.annotations.FindView;
+import com.test.admin.conurbations.databinding.FragmentNewsInfoListDetailBinding;
 import com.test.admin.conurbations.model.entity.NewsDetail;
 import com.test.admin.conurbations.presenter.NewsInfoListDetailPresenter;
 import com.test.admin.conurbations.utils.HtmlUtil;
@@ -23,26 +19,9 @@ import java.util.Set;
 /**
  * Created by zhouqiong on 16/3/17.
  */
-public class NewsInfoListDetailFragment extends BaseFragment implements INewsInfoDetailListView {
+public class NewsInfoListDetailFragment extends BaseFragment<FragmentNewsInfoListDetailBinding>
+        implements INewsInfoDetailListView {
 
-    @FindView
-    ImageView mHeadImageView;
-    @FindView
-    TextView mTitleTextView;
-    @FindView
-    TextView mSourceTextView;
-    @FindView
-    TextView mNewsTextView;
-    @FindView
-    Toolbar mToolbarToolbar;
-    @FindView
-    CollapsingToolbarLayout mHeadCollapsingToolbarLayout;
-    @FindView
-    WebView mNewsWebView;
-    @FindView
-    TextView mEmptyTextView;
-    @FindView
-    TextView mErrorTextView;
     private int mID;
     private String keyTitle;
     private String keyNbaIndex;
@@ -55,13 +34,13 @@ public class NewsInfoListDetailFragment extends BaseFragment implements INewsInf
     @Override
     public void setNewsInfoDetailData(NewsDetail newsDetail) {
         if (newsDetail == null) {
-            mEmptyTextView.setVisibility(View.VISIBLE);
+            mBinding.get().tvNewsInfoListDetailEmpty.setVisibility(View.VISIBLE);
         } else {
             if (!TextUtils.isEmpty(keyNbaIndex)) {
-                mNewsWebView.setVisibility(View.GONE);
-                mNewsTextView.setVisibility(View.VISIBLE);
-                mSourceTextView.setText(newsDetail.time);
-                mTitleTextView.setText(newsDetail.title);
+                mBinding.get().wvNewsInfoListDetailNews.setVisibility(View.GONE);
+                mBinding.get().tvNewsInfoListDetailNews.setVisibility(View.VISIBLE);
+                mBinding.get().tvNewsInfoListDetailSource.setText(newsDetail.time);
+                mBinding.get().tvNewsInfoListDetailTitle.setText(newsDetail.title);
                 List<Map<String, String>> content = newsDetail.content;
                 for (Map<String, String> map : content) {
                     Set<String> set = map.keySet();
@@ -69,28 +48,33 @@ public class NewsInfoListDetailFragment extends BaseFragment implements INewsInf
                         final String url = map.get("img");
                         Glide.with(getActivity())
                                 .load(url)
-                                .into(mHeadImageView);
+                                .into(mBinding.get().ivNewsInfoListDetailHead);
                     } else {
                         if (!TextUtils.isEmpty(map.get("text"))) {
-                            mNewsTextView.append(map.get("text") + "\n\n");
+                            mBinding.get().tvNewsInfoListDetailNews.append(map.get("text") + "\n\n");
                         }
                     }
                 }
-                mEmptyTextView.setVisibility(View.GONE);
+                mBinding.get().tvNewsInfoListDetailEmpty.setVisibility(View.GONE);
             } else {
                 Glide.with(getActivity())
                         .load(newsDetail.getImage())
                         .centerCrop()
-                        .into(mHeadImageView);
-                mTitleTextView.setText(newsDetail.getTitle());
-                mSourceTextView.setText(newsDetail.getImage_source());
-                mNewsWebView.setDrawingCacheEnabled(true);
+                        .into(mBinding.get().ivNewsInfoListDetailHead);
+                mBinding.get().tvNewsInfoListDetailTitle.setText(newsDetail.getTitle());
+                mBinding.get().tvNewsInfoListDetailSource.setText(newsDetail.getImage_source());
+                mBinding.get().wvNewsInfoListDetailNews.setDrawingCacheEnabled(true);
                 String htmlData = HtmlUtil.createHtmlData(newsDetail, false);
-                mNewsWebView.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
-                mEmptyTextView.setVisibility(View.GONE);
+                mBinding.get().wvNewsInfoListDetailNews.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
+                mBinding.get().tvNewsInfoListDetailEmpty.setVisibility(View.GONE);
             }
         }
-        mErrorTextView.setVisibility(View.GONE);
+        mBinding.get().tvNewsInfoListDetailError.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_news_info_list_detail;
     }
 
     @Override
@@ -107,11 +91,11 @@ public class NewsInfoListDetailFragment extends BaseFragment implements INewsInf
         mNewsInfoListDetailPresenter = new NewsInfoListDetailPresenter(this);
         setHasOptionsMenu(true);
         if (!TextUtils.isEmpty(keyTitle)) {
-            initToolbar(mToolbarToolbar, keyTitle, "");
+            initToolbar(mBinding.get().toolbarNewsInfoListDetailToolbar, keyTitle, "");
         } else {
-            initToolbar(mToolbarToolbar, "新闻资讯", "");
+            initToolbar(mBinding.get().toolbarNewsInfoListDetailToolbar, "新闻资讯", "");
         }
-        mHeadCollapsingToolbarLayout.setTitleEnabled(true);
+        mBinding.get().ctlNewsInfoListDetailHead.setTitleEnabled(true);
         loadData();
     }
 

@@ -1,12 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true">
+        android:layout_height="match_parent">
 
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -27,7 +25,7 @@
                     android:background="?attr/colorPrimary"
                     android:minHeight="@dimen/dimens_48_dp"
                     app:layout_scrollFlags="enterAlways|scroll"
-                    app:tabIndicatorColor="@color/colorOrangePrimary"
+                    app:tabIndicatorColor="@color/colorToolbarDark"
                     app:tabMode="scrollable"
                     app:tabSelectedTextColor="@color/black"
                     app:tabTextColor="@color/white" />
@@ -42,57 +40,14 @@
 
         </android.support.design.widget.CoordinatorLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#90FFFFFF"
-            android:clickable="true"
-            android:visibility="gone" />
-    </FrameLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_picture_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="bottom|right"
-        android:src="@mipmap/ic_top" />
-    <!--<com.example.zhouqiong.frameworkattributeset.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        fab:fab_addButtonColorNormal="@color/material_indigo_700"
-        fab:fab_addButtonColorPressed="@color/white_pressed"
-        fab:fab_addButtonPlusIconColor="@color/half_black"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp">
-
-        <com.example.zhouqiong.frameworkattributeset.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_a"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_picture_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/phone"
-            fab:fab_colorNormal="@color/result_points"
-            fab:fab_title="来电"
-            fab:fab_colorPressed="@color/white_pressed"/>
-
-        <com.example.zhouqiong.frameworkattributeset.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_b"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/viewfinder_laser"
-            android:src="@mipmap/message_info"
-            fab:fab_title="邮件"
-            app:fabSize="normal"
-            android:visibility="gone"
-            fab:fab_colorPressed="@color/white_pressed"/>
-
-    </com.example.zhouqiong.frameworkattributeset.floatingactionbutton.FloatingActionsMenu>-->
-</RelativeLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|right"
+            android:src="@mipmap/ic_top" />
+    </RelativeLayout>
+</layout>

@@ -1,258 +1,269 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+    <data></data>
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/ctl_about_head"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_256_dp"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle.About"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimens_256_dp"
-                android:background="?attr/colorPrimary"
-                android:fitsSystemWindows="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/dimens_96_dp"
-                    android:layout_height="@dimen/dimens_96_dp"
-                    android:layout_marginTop="@dimen/dimens_24_dp"
-                    android:src="@mipmap/ic_logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimens_8_dp"
-                    android:gravity="center"
-                    android:text="@string/about_app_name_with_introduce"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/dimens_18_sp" />
-
-                <TextView
-                    android:id="@+id/tv_about_version_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimens_8_dp"
-                    android:text="@string/about_version"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/dimens_14_sp" />
-            </LinearLayout>
-
-            <include layout="@layout/include_toolbar" />
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.NestedScrollView
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:fitsSystemWindows="true">
 
-        <LinearLayout
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/dimens_8_dp">
+            android:fitsSystemWindows="true">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/about_introduce_and_help"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimens_15_sp" />
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/ctl_about_head"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_256_dp"
+                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle.About"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <RelativeLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_256_dp"
+                    android:background="?attr/colorPrimary"
+                    android:fitsSystemWindows="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dimens_96_dp"
+                        android:layout_height="@dimen/dimens_96_dp"
+                        android:layout_marginTop="@dimen/dimens_24_dp"
+                        android:src="@mipmap/ic_logo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_8_dp"
+                        android:gravity="center"
+                        android:text="@string/about_app_name_with_introduce"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/dimens_18_sp" />
+
+                    <TextView
+                        android:id="@+id/tv_about_version_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_8_dp"
+                        android:text="@string/about_version"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/dimens_14_sp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar_about_toolbar"
+                    android:minHeight="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:theme="@style/MyToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"/>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:padding="@dimen/dimens_8_dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:autoLink="web"
-                    android:text="@string/about_introduce"
-                    android:textColor="@color/colorSecondText"
-                    android:textIsSelectable="true"
+                    android:text="@string/about_introduce_and_help"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimens_15_sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimens_8_dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:autoLink="web"
+                        android:text="@string/about_introduce"
+                        android:textColor="@color/colorSecondText"
+                        android:textIsSelectable="true"
+                        android:textSize="@dimen/dimens_14_sp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="@dimen/dimens_12_dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimens_12_dp"
+                    android:text="@string/about_developers"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/dimens_14_sp" />
 
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="@dimen/dimens_12_dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimens_12_dp"
-                android:text="@string/about_developers"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimens_14_sp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dimens_12_dp">
-
-                <TextView
-                    android:id="@+id/tv_about_author"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimens_8_dp"
-                    android:text="开发者:"
-                    android:textColor="@color/black" />
+                    android:padding="@dimen/dimens_12_dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tv_about_author"
-                    android:layout_toRightOf="@id/tv_about_author"
-                    android:autoLink="web"
-                    android:text="@string/guard_msg"
-                    android:textColor="@color/colorSecondText" />
+                    <TextView
+                        android:id="@+id/tv_about_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_8_dp"
+                        android:text="开发者:"
+                        android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tv_about_github"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/tv_about_author"
-                    android:layout_below="@id/tv_about_author"
-                    android:text="GitHub: "
-                    android:layout_marginTop="@dimen/dimens_15_dp"
-                    android:textColor="@color/black" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/tv_about_author"
+                        android:layout_toRightOf="@id/tv_about_author"
+                        android:autoLink="web"
+                        android:text="@string/guard_msg"
+                        android:textColor="@color/colorSecondText" />
 
-                <TextView
-                    android:id="@+id/tv_about_github_content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tv_about_github"
-                    android:layout_toRightOf="@id/tv_about_github"
-                    android:autoLink="web"
-                    android:text="https://github.com/ZQ330093887/ConurbationsAndroid"
-                    android:textColor="@color/colorSecondText" />
+                    <TextView
+                        android:id="@+id/tv_about_github"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/tv_about_author"
+                        android:layout_below="@id/tv_about_author"
+                        android:text="GitHub: "
+                        android:layout_marginTop="@dimen/dimens_15_dp"
+                        android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tv_about_jianshu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/tv_about_author"
-                    android:layout_below="@id/tv_about_github_content"
-                    android:layout_marginTop="@dimen/dimens_15_dp"
-                    android:text="简  书: "
-                    android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/tv_about_github_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/tv_about_github"
+                        android:layout_toRightOf="@id/tv_about_github"
+                        android:autoLink="web"
+                        android:text="https://github.com/ZQ330093887/ConurbationsAndroid"
+                        android:textColor="@color/colorSecondText" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tv_about_jianshu"
-                    android:layout_toRightOf="@id/tv_about_jianshu"
-                    android:autoLink="web"
-                    android:text="http://www.jianshu.com/u/9681f3bbb8c2"
-                    android:textColor="@color/colorSecondText" />
+                    <TextView
+                        android:id="@+id/tv_about_jianshu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/tv_about_author"
+                        android:layout_below="@id/tv_about_github_content"
+                        android:layout_marginTop="@dimen/dimens_15_dp"
+                        android:text="简  书: "
+                        android:textColor="@color/black" />
 
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/tv_about_jianshu"
+                        android:layout_toRightOf="@id/tv_about_jianshu"
+                        android:autoLink="web"
+                        android:text="http://www.jianshu.com/u/9681f3bbb8c2"
+                        android:textColor="@color/colorSecondText" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="@dimen/dimens_12_dp"
-                android:background="@color/black" />
+                </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimens_12_dp"
-                android:text="@string/about_function"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimens_15_sp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dimens_8_dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="@dimen/dimens_12_dp"
+                    android:background="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/about_function_list"
-                    android:textColor="@color/colorSecondText"
-                    android:textSize="@dimen/dimens_14_sp"
-                    tools:ignore="HardcodedText" />
+                    android:layout_marginTop="@dimen/dimens_12_dp"
+                    android:text="@string/about_function"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimens_15_sp" />
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimens_8_dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="@dimen/dimens_12_dp"
-                android:background="@color/black"
-                android:orientation="vertical"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_function_list"
+                        android:textColor="@color/colorSecondText"
+                        android:textSize="@dimen/dimens_14_sp"
+                        tools:ignore="HardcodedText" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimens_12_dp"
-                android:text="@string/about_open_source_special"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimens_14_sp" />
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dimens_8_dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="@dimen/dimens_12_dp"
+                    android:background="@color/black"
+                    android:orientation="vertical" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="干货集中营"
-                    android:textColor="@color/colorRedPrimaryDark"
-                    android:textSize="@dimen/dimens_14_sp"
-                    tools:ignore="HardcodedText" />
+                    android:layout_marginTop="@dimen/dimens_12_dp"
+                    android:text="@string/about_open_source_special"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimens_14_sp" />
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimens_8_dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimens_12_dp"
-                android:text="@string/about_open_source_lis"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimens_14_sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="干货集中营"
+                        android:textColor="@color/colorRedPrimaryDark"
+                        android:textSize="@dimen/dimens_14_sp"
+                        tools:ignore="HardcodedText" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dimens_8_dp">
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/about_open_source_libraries_list"
-                    android:textColor="@color/colorSecondText"
-                    android:textSize="@dimen/dimens_14_sp"
-                    tools:ignore="HardcodedText" />
+                    android:layout_marginTop="@dimen/dimens_12_dp"
+                    android:text="@string/about_open_source_lis"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimens_14_sp" />
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimens_8_dp">
 
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_open_source_libraries_list"
+                        android:textColor="@color/colorSecondText"
+                        android:textSize="@dimen/dimens_14_sp"
+                        tools:ignore="HardcodedText" />
 
-</android.support.design.widget.CoordinatorLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

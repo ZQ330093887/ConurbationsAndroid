@@ -6,13 +6,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
 /**
- * Created by zhouqiong on 2017/1/12.
+ * Created by zhouqiong on 2017/1/8.
  */
-public class FragmentPrettyFragmentPagerAdapter extends FragmentPagerAdapter {
+public class FragmentAdapter extends FragmentPagerAdapter {
+
     private String[] mTitles;
     private Fragment[] mFragments;
 
-    public FragmentPrettyFragmentPagerAdapter(FragmentManager fragmentManager, String[] title, Fragment[] fragments) {
+    public FragmentAdapter(FragmentManager fragmentManager, String[] title, Fragment[] fragments) {
         super(fragmentManager);
         this.mFragments = fragments;
         this.mTitles = title;

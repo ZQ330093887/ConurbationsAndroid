@@ -1,38 +1,41 @@
 package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.adapter.NBAFragmentPagerAdapter;
-import com.test.admin.conurbations.annotations.FindView;
+import com.test.admin.conurbations.adapter.FragmentAdapter;
+import com.test.admin.conurbations.databinding.FragmentNbBinding;
+import com.test.admin.conurbations.rxbus.Event;
+import com.test.admin.conurbations.rxbus.EventType;
+import com.test.admin.conurbations.rxbus.RxBus;
 
 /**
  * Created by zhouqiong on 2017/4/13.
  */
-public class NBAFragment extends BaseFragment {
-    @FindView
-    TabLayout mViewTabLayout;
-    @FindView
-    ViewPager mViewViewPager;
+public class NBAFragment extends BaseFragment<FragmentNbBinding> {
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_nb;
+    }
 
     @Override
     protected void initData(Bundle bundle) {
-        String[] mTitles = getApplicationContext().getResources().getStringArray(R.array.nba_tab);
-        String[] mTitlesId = getApplicationContext().getResources().getStringArray(R.array.nba_tab_id);
+        RxBus.getDefault().post(new Event(R.color.colorDeepPrimary, EventType.STATUE_BAR_COLOR));
+        String[] mTitles = getActivity().getResources().getStringArray(R.array.nba_tab);
+        String[] mTitlesId = getActivity().getResources().getStringArray(R.array.nba_tab_id);
         Fragment[] mFragments = new Fragment[mTitles.length];
         for (int i = 0; i < mTitles.length; i++) {
             mFragments[i] = new NbaIndexFragment();
             ((NbaIndexFragment) mFragments[i]).setType(mTitlesId[i]);
         }
 
-        NBAFragmentPagerAdapter NBAFragmentPagerAdapter = new NBAFragmentPagerAdapter(getChildFragmentManager(), mTitles, mFragments);
-        mViewViewPager.setAdapter(NBAFragmentPagerAdapter);
-        mViewViewPager.setOffscreenPageLimit(4);
-        mViewTabLayout.setupWithViewPager(mViewViewPager);
-        mViewTabLayout.setBackgroundColor(getArguments().getInt("content"));
+        FragmentAdapter NBAFragmentPagerAdapter = new FragmentAdapter(getChildFragmentManager(), mTitles, mFragments);
+        mBinding.get().vpNbView.setAdapter(NBAFragmentPagerAdapter);
+        mBinding.get().vpNbView.setOffscreenPageLimit(4);
+        mBinding.get().tlNbView.setupWithViewPager(mBinding.get().vpNbView);
+        mBinding.get().tlNbView.setBackgroundColor(getArguments().getInt("content"));
     }
 
     @Override

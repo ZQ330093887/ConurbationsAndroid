@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +14,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -20,7 +21,6 @@ import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.SetLayout;
 import com.test.admin.conurbations.utils.CommonUtil;
 import com.test.admin.conurbations.utils.DialogUtils;
-import com.test.admin.conurbations.utils.InjectUtil;
 import com.test.admin.conurbations.utils.SaveBitmapUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.utils.WrapperUtils;
@@ -29,9 +29,7 @@ import com.yalantis.contextmenu.lib.MenuObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -43,10 +41,10 @@ import io.reactivex.schedulers.Schedulers;
  * Created by zhouqiong on 2017/2/27.
  */
 @SetLayout
-public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity<VB extends ViewDataBinding> extends AppCompatActivity implements IBaseView {
 
     private static final String TAG = "BaseActivity";
-
+    protected VB mBinding;
     public static final String TRANSLATE_VIEW = "translate_view";
     public static final String TRANSLATE_WEB_VIEW_BG_IMG = "translate_web_view_bg_img";
     public static final String TRANSLATE_WEB_VIEW_TITLE = "translate_web_view_title";
@@ -55,7 +53,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     public static final String EXTRA_TITLE = "TITLE";
     public static final String BUNDLE_KEY_SHOW_BOTTOM_BAR = "BUNDLE_KEY_SHOW_BOTTOM_BAR";
     public static final String BUNDLE_OVERRIDE = "BUNDLE_OVERRIDE";
-    public Map<String, View> views;
+
+    protected abstract int getLayoutId();
 
     protected abstract void initData(Bundle bundle);
 
@@ -94,9 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                 return;
             }
         }
-        //1
-        views = new HashMap<>();
-        InjectUtil.inject(this);
+        this.mBinding = DataBindingUtil.setContentView(this, this.getLayoutId());
         initPresenter();
         initData(savedInstanceState);
     }

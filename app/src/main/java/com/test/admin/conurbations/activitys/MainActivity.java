@@ -14,30 +14,28 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.tencent.bugly.beta.tinker.TinkerManager;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.annotations.FindView;
 import com.test.admin.conurbations.config.Constants;
+import com.test.admin.conurbations.databinding.ActivityMainBinding;
 import com.test.admin.conurbations.fragments.BaseFragment;
 import com.test.admin.conurbations.fragments.IndexFragment;
 import com.test.admin.conurbations.fragments.NBAFragment;
 import com.test.admin.conurbations.fragments.NewsInformationFragment;
 import com.test.admin.conurbations.fragments.PictureFragment;
 import com.test.admin.conurbations.fragments.SearchFragment;
+import com.test.admin.conurbations.rxbus.Event;
+import com.test.admin.conurbations.rxbus.RxBus;
 import com.test.admin.conurbations.utils.PhotoCameralUtil;
-import com.test.admin.conurbations.utils.ToastUtils;
+import com.test.admin.conurbations.utils.StatusBarUtils;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
 import com.test.admin.conurbations.views.CircleImageView;
 import com.test.admin.conurbations.views.MaterialSearchView;
@@ -49,27 +47,25 @@ import java.util.List;
 import java.util.Map;
 
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
-        View.OnClickListener {
+public class MainActivity extends BaseActivity<ActivityMainBinding>
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private List<Fragment> mFragments;
     private CircleImageView mCircleImageView;
     private Bitmap mHeadPhotoBitmap;
-    private Bundle mPhotoBundle;
 
-    @FindView
-    Toolbar mToolbarToolbar;
-    @FindView
-    NavigationView mViewNavigationView;
-    @FindView
-    BottomNavigationBar mViewBottomNavigationBar;
-    @FindView
-    DrawerLayout mLayoutDrawerLayout;
-    @FindView
-    MaterialSearchView mSearchMaterialSearchView;
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
 
     @Override
     protected void initData(Bundle bundle) {
-        initToolbar(mToolbarToolbar, getResources().getString(R.string.app_name), getResources().getString(R.string.guard_msg));
+        RxBus.getDefault().toObservable(Event.class).subscribe(event -> {
+            int barColor = (int) event.body;
+            StatusBarUtils.setWindowStatusBarColor(getBaseActivity(), barColor);
+
+        });
+        initToolbar(mBinding.toolbarMainToolbar, getResources().getString(R.string.app_name), getResources().getString(R.string.guard_msg));
         //初始化底部导航
         initMainBottomTab();
         //初始化主Activity(底部导航对应的Fragment)
@@ -82,13 +78,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected void initPresenter() {
     }
 
-
     @Override
     public void onBackPressed() {
-        if (mLayoutDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mLayoutDrawerLayout.closeDrawer(GravityCompat.START);
-        } else if (mSearchMaterialSearchView.isOpen()) {
-            mSearchMaterialSearchView.closeSearch();
+        if (mBinding.dlMainLayout.isDrawerOpen(GravityCompat.START)) {
+            mBinding.dlMainLayout.closeDrawer(GravityCompat.START);
+        } else if (mBinding.viewMainSearchMaterialSearch.isOpen()) {
+            mBinding.viewMainSearchMaterialSearch.closeSearch();
         } else {
             super.onBackPressed();
         }
@@ -107,18 +102,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void initLeftDrawerToggleMenu() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mLayoutDrawerLayout, mToolbarToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mLayoutDrawerLayout.setDrawerListener(toggle);
+                this, mBinding.dlMainLayout, mBinding.toolbarMainToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mBinding.dlMainLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         //初始化左边侧滑栏上部分（头像部分）
-        mCircleImageView = mViewNavigationView.getHeaderView(0).findViewById(R.id.circle_image_view);
+        mCircleImageView = mBinding.nvMainView.getHeaderView(0).findViewById(R.id.circle_image_view);
 
-        mViewNavigationView.setNavigationItemSelectedListener(this);
-        mViewNavigationView.getHeaderView(0).setOnClickListener(this);
+        mBinding.nvMainView.setNavigationItemSelectedListener(this);
+        mBinding.nvMainView.getHeaderView(0).setOnClickListener(this);
         mCircleImageView.setOnClickListener(this);
-        mSearchMaterialSearchView.setOnQueryTextListener(queryTextListener);
-        mSearchMaterialSearchView.adjustTintAlpha(0.8f);
+        mBinding.viewMainSearchMaterialSearch.setOnQueryTextListener(queryTextListener);
+        mBinding.viewMainSearchMaterialSearch.adjustTintAlpha(0.8f);
 
         //处理换头像等逻辑
         mHeadPhotoBitmap = BitmapFactory.decodeFile(Constants.pathFileName);
@@ -131,25 +126,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void initMainBottomTab() {
         //用TabItemBuilder构建一个导航按钮
-        mViewBottomNavigationBar
-                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_send, "干货").setActiveColor(Constants.testColors[0]))
-                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_compass, "美图").setActiveColor(Constants.testColors[1]))
-                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_crop, "新闻").setActiveColor(Constants.testColors[2]))
-                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_month, "体育").setActiveColor(Constants.testColors[3]))
+        mBinding.bnbMainView
+                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_send, "干货").setActiveColor(Constants.toolBarColors[0]))
+                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_compass, "美图").setActiveColor(Constants.toolBarColors[1]))
+                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_crop, "新闻").setActiveColor(Constants.toolBarColors[2]))
+                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_month, "体育").setActiveColor(Constants.toolBarColors[3]))
                 .setFirstSelectedPosition(0)
                 .setMode(BottomNavigationBar.MODE_SHIFTING)
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE)
                 .initialise();
 
-        mViewBottomNavigationBar.setTabSelectedListener(tabItemSelectListener);
+        mBinding.bnbMainView.setTabSelectedListener(tabItemSelectListener);
     }
 
     private Fragment createFragment(BaseFragment baseFragment, int content) {
-        Fragment fragment = baseFragment;
         Bundle bundle = new Bundle();
         bundle.putInt("content", content);
-        fragment.setArguments(bundle);
-        return fragment;
+        baseFragment.setArguments(bundle);
+        return baseFragment;
     }
 
     @Override
@@ -168,7 +162,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.action_Image) {
             startActivity(TelegramGalleryActivity.class);
         } else if (id == R.id.action_search) {
-            mSearchMaterialSearchView.openSearch();
+            mBinding.viewMainSearchMaterialSearch.openSearch();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -179,11 +173,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_camera) {
-            startActivity(BeautifulArticleActivity.class);
+
         } else if (id == R.id.nav_fiction) {
 
         } else if (id == R.id.nav_slideshow) {//NBA直播
-            startActivity(MatchVideoLiveListActivity.class);
+
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_about) {//关于
@@ -195,7 +189,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(OtherActivity.class);
         }
 
-        mLayoutDrawerLayout.closeDrawer(GravityCompat.START);
+        mBinding.dlMainLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -204,9 +198,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         public void onTabSelected(int position) {
             Log.d("onTabSelected", "onTabSelected: " + position);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            mToolbarToolbar.setBackgroundColor(Constants.toolBarColors[position]);
-            mViewNavigationView.setBackgroundColor(Constants.testColors[position]);
-            mViewNavigationView.getHeaderView(0).setBackgroundColor(Constants.toolBarColors[position]);
+            mBinding.toolbarMainToolbar.setBackgroundColor(Constants.toolBarColors[position]);
+            mBinding.nvMainView.setBackgroundColor(Constants.testColors[position]);
+            mBinding.nvMainView.getHeaderView(0).setBackgroundColor(Constants.toolBarColors[position]);
             //transaction.setCustomAnimations(R.anim.push_up_in,R.anim.push_up_out);
             transaction.replace(R.id.fl_main_content, mFragments.get(position));
             transaction.commit();
@@ -275,7 +269,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     //将进行剪裁后的图片显示到UI界面上
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void setPicToView(Intent picToView) {
-        mPhotoBundle = picToView.getExtras();
+        Bundle mPhotoBundle = picToView.getExtras();
         if (mPhotoBundle != null) {
             mHeadPhotoBitmap = mPhotoBundle.getParcelable("data");
             mCircleImageView.setImageBitmap(mHeadPhotoBitmap);
