@@ -36,6 +36,7 @@ import com.test.admin.conurbations.rxbus.Event;
 import com.test.admin.conurbations.rxbus.RxBus;
 import com.test.admin.conurbations.utils.PhotoCameralUtil;
 import com.test.admin.conurbations.utils.StatusBarUtils;
+import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
 import com.test.admin.conurbations.views.CircleImageView;
 import com.test.admin.conurbations.views.MaterialSearchView;
@@ -72,6 +73,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
         initAddFragment();
         //初始化左边侧滑栏
         initLeftDrawerToggleMenu();
+//        ToastUtils.getInstance().showToast("2.0.2");
     }
 
     @Override

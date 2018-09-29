@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.support.multidex.MultiDex;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
+import com.meituan.android.walle.WalleChannelReader;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.TinkerApplication;
@@ -88,9 +89,6 @@ public class SolidApplication extends Application {
         super.attachBaseContext(base);
         // you must install multiDex whatever tinker is installed!
         MultiDex.install(base);
-
-
-        // 安装tinker
 //        Beta.installTinker();
     }
 }

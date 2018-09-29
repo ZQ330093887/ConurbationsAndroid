@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.flyco.labelview.LabelView;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.PrettyPicturesActivity;
 import com.test.admin.conurbations.fragments.PrettyPicturesFragment;
 import com.test.admin.conurbations.model.entity.TSZImageBean;
 import com.test.admin.conurbations.widget.GlideImageLoader;
+import com.test.admin.conurbations.widget.LabelView;
 import com.test.admin.conurbations.widget.SolidApplication;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;

@@ -3,13 +3,33 @@ apply plugin: 'com.tencent.bugly.tinker-support'
 def bakPath = file("${buildDir}/bakApk/")
 
 /**
- * 此处填写每次构建生成的基准包目录
+ * ---------------------------------------------------------
+ * 注释：单个渠道打热跟新包只需要修改一下4个参数
+ * 仅仅是单渠道打包，单渠道！！！当然一个一个打完也是多渠道了，但是如果因为
+ * 这种操作累死你概不负责！！！
+ * 多渠道打包操作详情说明：channel文件）
  */
-def baseApkDir = "app-0815-15-31-42"
 
 /**
- * 对于插件各参数的详细解析请参考
+ * 1，此处填写每次构建生成的基准包目录
  */
+def baseApkDir = "app-0929-18-10-05"
+/**
+ * 2，渠道
+ */
+def channel = "baidu"
+/**
+ * 版本号
+ */
+def versionCode = "2.0.2"
+/**
+ * 正常编译false，打布丁是改为true
+ */
+def isEnable = false
+/**
+ * ---------------------------------------------------------
+ */
+
 tinkerSupport {
 
     // 开启tinker-support插件，默认值true
@@ -25,20 +45,22 @@ tinkerSupport {
     // 编译补丁包时，必需指定基线版本的apk，默认值为空
     // 如果为空，则表示不是进行补丁包的编译
     // @{link tinkerPatch.oldApk }
-    baseApk = "${bakPath}/${baseApkDir}/baidu/Gank_1.1.1_baidu.apk"
+    baseApk = "${bakPath}/${baseApkDir}/${channel}/Gank_${versionCode}_${channel}.apk"
 
     // 对应tinker插件applyMapping
-    baseApkProguardMapping = "${bakPath}/${baseApkDir}/baidu/Gank_1.1.1_baidu-mapping.txt"
+    baseApkProguardMapping = "${bakPath}/${baseApkDir}/${channel}/Gank_${versionCode}_${channel}-mapping.txt"
 
     // 对应tinker插件applyResourceMapping
-    baseApkResourceMapping = "${bakPath}/${baseApkDir}/baidu/Gank_1.1.1_baidu-R.txt"
+    baseApkResourceMapping = "${bakPath}/${baseApkDir}/${channel}/Gank_${versionCode}_${channel}-R.txt"
 
     // 构建基准包和补丁包都要指定不同的tinkerId，并且必须保证唯一性 "1.0.0-base" "1.0.0-patch"
-    tinkerId = "1.1.1-patch"
-//    tinkerId = "1.1.1-base"
-
+    if (isEnable) {
+        tinkerId = "${versionCode}-patch"
+    } else {
+        tinkerId = "${versionCode}-base"
+    }
     // 构建多渠道补丁时使用
-    // buildAllFlavorsDir = "${bakPath}/${baseApkDir}"
+//    buildAllFlavorsDir = "${bakPath}/${baseApkDir}"
 
     // 是否启用加固模式，默认为false.(tinker-spport 1.0.7起支持）
     // isProtectedApp = true
@@ -81,14 +103,14 @@ tinkerPatch {
 //        path = "/usr/local/bin/7za"
     }
     buildConfig {
-        keepDexApply = false
-        //tinkerId = "1.0.1-base"
-        //applyMapping = "${bakPath}/${appName}/app-release-mapping.txt" //  可选，设置mapping文件，建议保持旧apk的proguard混淆方式
-        //applyResourceMapping = "${bakPath}/${appName}/app-release-R.txt" // 可选，设置R.txt文件，通过旧apk文件保持ResId的分配
+//        keepDexApply = false
+//        tinkerId = "2.0.2-base"
+//        applyMapping = "${bakPath}/${project.name}/app-release-mapping.txt" //  可选，设置mapping文件，建议保持旧apk的proguard混淆方式
+//        applyResourceMapping = "${bakPath}/${project.name}/app-release-R.txt" // 可选，设置R.txt文件，通过旧apk文件保持ResId的分配
     }
 
 
-    List<String> flavors = new ArrayList<>();
+    List<String> flavors = new ArrayList<>()
     project.android.productFlavors.each { flavor ->
         flavors.add(flavor.name)
     }

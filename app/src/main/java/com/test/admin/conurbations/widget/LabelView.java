@@ -1,4 +1,4 @@
-package com.flyco.labelview;
+package com.test.admin.conurbations.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,6 +9,8 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+
+import com.test.admin.conurbations.R;
 
 public class LabelView extends View {
     private String mTextContent;

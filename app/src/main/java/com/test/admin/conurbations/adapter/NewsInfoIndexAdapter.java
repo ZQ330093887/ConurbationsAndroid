@@ -12,13 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.flyco.labelview.LabelView;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.BaseActivity;
 import com.test.admin.conurbations.activitys.NewsInfoListDetailActivity;
 import com.test.admin.conurbations.fragments.NewsInfoListDetailFragment;
 import com.test.admin.conurbations.model.entity.News;
 import com.test.admin.conurbations.utils.DateUtils;
+import com.test.admin.conurbations.widget.LabelView;
 import com.test.admin.conurbations.widget.SolidApplication;
 
 /**

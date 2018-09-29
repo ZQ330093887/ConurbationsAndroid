@@ -10,7 +10,7 @@ ext {
     appConfigs = [
             "com.test.admin.conurbations":
                     ["name"         : "ConurbationsAndroid",
-                     "versionName"  : "2.0.0",
+                     "versionName"  : "2.0.2",
                      "keyStore"     : "../doc/key/conurbation-key",
                      "storePassword": "330093887",
                      "keyAlias"     : "GankAndroid",
@@ -54,7 +54,6 @@ ext {
             "BottomTab"          : ":pagerBottomTabStrip",
             "telellery"          : ":telegramgallery",
             "feedback"           : ":feedbacksdk",
-            "labelview"          : ":FlycoLabelView_Lib",
             "targetview"         : ":TapTargetView",
             "pinyin4j"           : "libs/pinyin4j-2.5.0.jar",
             "okhttp"             : 'com.squareup.okhttp3:okhttp:3.3.1',
