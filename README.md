@@ -19,6 +19,7 @@
    gank集中营提供的数据接口
    
 ## 感谢开源
+
    - com.squareup.retrofit2:retrofit:2.0.0beta4
    - com.squareup.okhttp3:okhttp:3.2.0
    - io.reactivex:rxandroid:1.1.0
