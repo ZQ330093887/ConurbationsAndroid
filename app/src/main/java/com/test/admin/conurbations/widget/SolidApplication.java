@@ -8,6 +8,7 @@ import android.support.multidex.MultiDex;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.ViewNamingRuleXMLParserHandler;
 import com.test.admin.conurbations.di.component.AppComponent;
@@ -93,7 +94,7 @@ public class SolidApplication extends Application {
         super.attachBaseContext(base);
         // you must install multiDex whatever tinker is installed!
         MultiDex.install(base);
-//        Beta.installTinker();
+        Beta.installTinker();
     }
 
     public AppComponent getAppComponent() {

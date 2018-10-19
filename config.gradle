@@ -10,7 +10,8 @@ ext {
     appConfigs = [
             "com.test.admin.conurbations":
                     ["name"         : "ConurbationsAndroid",
-                     "versionName"  : "2.1.0",
+                     "versionName"  : "2.1.2",
+                     "versionCode"  : 212,
                      "keyStore"     : "../doc/key/conurbation-key",
                      "storePassword": "330093887",
                      "keyAlias"     : "GankAndroid",
