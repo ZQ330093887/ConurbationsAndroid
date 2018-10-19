@@ -1,20 +1,18 @@
-# RxJava+RxAndroid+Retrofit+OkHttp+MVP概述
+# RxJava+RxAndroid+Retrofit+Dagger2+DataBinding+MVP概述
 
 ## 技术支持
-   RxJava+RxAndroid+Retrofit+OkHttp+DataBinding+MVP+leakCanary+各种封装
+   RxJava+RxAndroid+Retrofit+Dagger2+DataBinding+MVP+leakCanary
    
 ## 功能介绍
 
-- NBA相关体育新闻、视频锦集等功能
 - 推荐信息信息（按照时间推荐最新）
 - 美图展示
-- gank集中营每日数据展示
-- NBA体育直播
+- Gank集中营每日数据展示
+- NBA体育直播、新闻、视频锦集等功能
 - 网络爬虫精彩文章
 - 阿里百川技术反馈
 - 搜索美图
 - 设置桌面、锁屏、图片下载、分享等自
-- 自己实现butterknife功能
         
 
 ## 特别感谢
