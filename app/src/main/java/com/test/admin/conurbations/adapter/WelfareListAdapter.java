@@ -1,10 +1,13 @@
 package com.test.admin.conurbations.adapter;
 
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.model.entity.GanHuoDataBean;
+
+import javax.inject.Inject;
 
 
 /**
@@ -12,6 +15,11 @@ import com.test.admin.conurbations.model.entity.GanHuoDataBean;
  */
 
 public class WelfareListAdapter extends BaseListAdapter<GanHuoDataBean> {
+
+    @Inject
+    public WelfareListAdapter(Fragment context) {
+        super(context);
+    }
 
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final GanHuoDataBean item) {

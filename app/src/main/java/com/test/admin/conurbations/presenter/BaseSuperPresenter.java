@@ -11,27 +11,27 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class BasePresenter<V> implements Presenter<V> {
-
+public class BasePresenter<V> {
     public V mvpView;
     protected GankService apiStores;
     private CompositeDisposable compositeDisposable;
 
-    @Override
     public void attachView(V mvpView) {
         this.mvpView = mvpView;
         apiStores = AppClient.retrofit().create(GankService.class);
     }
 
-    @Override
-    public boolean isAttached() {
-        return mvpView != null;
-    }
 
-    @Override
     public void detachView() {
         this.mvpView = null;
-        onUnSubscribe();
+        onUnsubscribe();
+    }
+
+    //RXjava取消注册，以避免内存泄露
+    public void onUnsubscribe() {
+        if (compositeDisposable != null) {
+            compositeDisposable.clear();
+        }
     }
 
     public void addSubscription(Observable observable, DisposableObserver disposableObserver) {
@@ -42,12 +42,5 @@ public class BasePresenter<V> implements Presenter<V> {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(disposableObserver));
-    }
-
-    //RxJava取消注册，以避免内存泄露
-    private void onUnSubscribe() {
-        if (compositeDisposable != null) {
-            compositeDisposable.clear();
-        }
     }
 }

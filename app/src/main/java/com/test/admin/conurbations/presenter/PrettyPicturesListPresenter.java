@@ -5,22 +5,19 @@ import android.util.Log;
 
 import com.test.admin.conurbations.activitys.IPrettyPictureListView;
 import com.test.admin.conurbations.model.api.ACache;
-import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.response.NetImage360;
 import com.test.admin.conurbations.retrofit.ApiCallback;
-import com.test.admin.conurbations.retrofit.AppClient;
 import com.test.admin.conurbations.utils.AppUtils;
+
+import javax.inject.Inject;
 
 /**
  * Created by zhouqiong on 2017/1/18.
  */
 public class PrettyPicturesListPresenter extends BasePresenter<IPrettyPictureListView> {
 
-    private IPrettyPictureListView iPrettyPictureListView;
-
-    public PrettyPicturesListPresenter(IPrettyPictureListView iPrettyPictureListView) {
-        this.iPrettyPictureListView = iPrettyPictureListView;
-        attachView(this.iPrettyPictureListView);
+    @Inject
+    public PrettyPicturesListPresenter() {
     }
 
     public void getPrettyPictureLisData(final int page, boolean isRefresh) {
@@ -29,7 +26,7 @@ public class PrettyPicturesListPresenter extends BasePresenter<IPrettyPictureLis
         Object obj = cache.getAsObject(key);
         if (obj != null && !isRefresh) {
             NetImage360 gankData = (NetImage360) obj;
-            iPrettyPictureListView.setPrettyPictureData(gankData);
+            mvpView.setPrettyPictureData(gankData);
             return;
         }
         addSubscription(apiStores.get360ImageList(30),
@@ -39,7 +36,7 @@ public class PrettyPicturesListPresenter extends BasePresenter<IPrettyPictureLis
                         if (page == 1) {
                             cache.put(key, model);
                         }
-                        iPrettyPictureListView.setPrettyPictureData(model);
+                        mvpView.setPrettyPictureData(model);
                     }
 
                     @Override

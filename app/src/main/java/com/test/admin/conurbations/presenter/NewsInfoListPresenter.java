@@ -2,11 +2,11 @@ package com.test.admin.conurbations.presenter;
 
 import com.test.admin.conurbations.activitys.INewInformationView;
 import com.test.admin.conurbations.model.api.ACache;
-import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.entity.NewsList;
 import com.test.admin.conurbations.retrofit.ApiCallback;
-import com.test.admin.conurbations.retrofit.AppClient;
 import com.test.admin.conurbations.utils.AppUtils;
+
+import javax.inject.Inject;
 
 /**
  * Created by zhouqiong on 2016/12/12.
@@ -14,11 +14,8 @@ import com.test.admin.conurbations.utils.AppUtils;
 
 public class NewsInfoListPresenter extends BasePresenter<INewInformationView> {
 
-    private INewInformationView iNewInformationView;
-
-    public NewsInfoListPresenter(INewInformationView iNewInformationView) {
-        this.iNewInformationView = iNewInformationView;
-        attachView(this.iNewInformationView);
+    @Inject
+    public NewsInfoListPresenter() {
     }
 
     public void getNewsInfoData(final String tabId, final int pager, boolean isRefresh) {
@@ -27,7 +24,7 @@ public class NewsInfoListPresenter extends BasePresenter<INewInformationView> {
         Object obj = cache.getAsObject(key);
         if (obj != null && !isRefresh) {
             NewsList model = (NewsList) obj;
-            iNewInformationView.setNewInfoData(model);
+            mvpView.setNewInfoData(model);
             return;
         }
 
@@ -38,7 +35,7 @@ public class NewsInfoListPresenter extends BasePresenter<INewInformationView> {
                         if (pager == 1) {
                             cache.put(key, newsSummaries);
                         }
-                        iNewInformationView.setNewInfoData(newsSummaries);
+                        mvpView.setNewInfoData(newsSummaries);
                     }
 
                     @Override

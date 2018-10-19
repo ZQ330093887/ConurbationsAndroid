@@ -2,11 +2,11 @@ package com.test.admin.conurbations.presenter;
 
 import com.test.admin.conurbations.activitys.IWelfareView;
 import com.test.admin.conurbations.model.api.ACache;
-import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.response.GankData;
 import com.test.admin.conurbations.retrofit.ApiCallback;
-import com.test.admin.conurbations.retrofit.AppClient;
 import com.test.admin.conurbations.utils.AppUtils;
+
+import javax.inject.Inject;
 
 /**
  * Created by zhouqiong on 2016/12/12.
@@ -14,11 +14,8 @@ import com.test.admin.conurbations.utils.AppUtils;
 
 public class GanHuoPresenter extends BasePresenter<IWelfareView> {
 
-    private IWelfareView welfareList;
-
-    public GanHuoPresenter(IWelfareView welfareList) {
-        this.welfareList = welfareList;
-        attachView(this.welfareList);
+    @Inject
+    public GanHuoPresenter() {
     }
 
     public void getWelfareData(final String type, final int pager, boolean isRefresh) {
@@ -27,7 +24,7 @@ public class GanHuoPresenter extends BasePresenter<IWelfareView> {
         Object obj = cache.getAsObject(key);
         if (obj != null && !isRefresh) {
             GankData gankData = (GankData) obj;
-            welfareList.setWelfareData(gankData);
+            mvpView.setWelfareData(gankData);
             return;
         }
         addSubscription(apiStores.getGanHuo(type, pager),
@@ -37,7 +34,7 @@ public class GanHuoPresenter extends BasePresenter<IWelfareView> {
                         if (pager == 1) {//只缓存第一页的数据
                             cache.put(key, model);
                         }
-                        welfareList.setWelfareData(model);
+                        mvpView.setWelfareData(model);
                     }
 
                     @Override

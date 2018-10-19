@@ -1,11 +1,13 @@
 package com.test.admin.conurbations.fragments;
 
 
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 
 import com.test.admin.conurbations.activitys.IPrettyPictureListView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.PrettyPictureListAdapter;
+import com.test.admin.conurbations.model.entity.TSZImageBean;
 import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.model.response.NetImage360;
 import com.test.admin.conurbations.presenter.PrettyPicturesListPresenter;
@@ -13,10 +15,12 @@ import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
+import javax.inject.Inject;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class PrettyPicturesListFragmentList extends BaseLazyListFragment implements IPrettyPictureListView {
+public class PrettyPicturesListFragmentList extends BaseLazyListFragment<TSZImageBean, PrettyPicturesListPresenter> implements IPrettyPictureListView {
 
     private Moment.SGImgType range;
 
@@ -24,8 +28,13 @@ public class PrettyPicturesListFragmentList extends BaseLazyListFragment impleme
         this.range = range;
     }
 
-    protected PrettyPicturesListPresenter mPrettyPicturesListPresenter;
-    protected PrettyPictureListAdapter mPrettyPictureListAdapter;
+    @Inject
+    PrettyPictureListAdapter mPrettyPictureListAdapter;
+
+    @Override
+    protected void initData(Bundle bundle) {
+        getFragmentComponent().inject(this);
+    }
 
 
     @Override
@@ -51,27 +60,14 @@ public class PrettyPicturesListFragmentList extends BaseLazyListFragment impleme
 
     @Override
     protected void refreshList(int page) {
-        if (mPrettyPicturesListPresenter != null) {
-            mPrettyPicturesListPresenter.getPrettyPictureLisData(page, isRefresh);
+        if (mPresenter != null) {
+            mPresenter.getPrettyPictureLisData(page, isRefresh);
             isRefresh = true;
         }
     }
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        mPrettyPictureListAdapter = new PrettyPictureListAdapter();
         return mPrettyPictureListAdapter;
-    }
-
-    @Override
-    protected void setUpPresenter() {
-        mPrettyPicturesListPresenter = new PrettyPicturesListPresenter(this);
-    }
-
-    @Override
-    public void detachView() {
-        if (mPrettyPicturesListPresenter != null) {
-            mPrettyPicturesListPresenter.detachView();
-        }
     }
 }

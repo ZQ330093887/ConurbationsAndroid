@@ -17,6 +17,8 @@ import com.test.admin.conurbations.utils.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -29,15 +31,13 @@ import static com.test.admin.conurbations.retrofit.AppClient.retrofit;
  */
 public class NBAIndexPresenter extends BasePresenter<INBAinfoView> {
 
-    private INBAinfoView welfareList;
     private List<String> indexs = new ArrayList<>();
     private int num = 10;
     private ACache cache;
     private String key;
 
-    public NBAIndexPresenter(INBAinfoView welfareList) {
-        this.welfareList = welfareList;
-        attachView(this.welfareList);
+    @Inject
+    public NBAIndexPresenter() {
     }
 
     public void getNBAData(final int pager, final String type, boolean isRefresh) {
@@ -47,7 +47,7 @@ public class NBAIndexPresenter extends BasePresenter<INBAinfoView> {
         Object obj = cache.getAsObject(key);
         if (obj != null && !isRefresh) {
             NewsItem model = (NewsItem) obj;
-            welfareList.setNBAInfoData(model);
+            mvpView.setNBAInfoData(model);
             return;
         }
 
@@ -90,7 +90,7 @@ public class NBAIndexPresenter extends BasePresenter<INBAinfoView> {
                     if (pager == 0) {
                         cache.put(key, newsItem);
                     }
-                    welfareList.setNBAInfoData(newsItem);
+                    mvpView.setNBAInfoData(newsItem);
                     Log.d("resp:", jsonStr);
                 } else {
                     ToastUtils.getInstance().showToast("获取数据失败");

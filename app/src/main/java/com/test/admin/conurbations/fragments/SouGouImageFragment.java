@@ -1,21 +1,25 @@
 package com.test.admin.conurbations.fragments;
 
 
+import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.test.admin.conurbations.activitys.ISouGouImageView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.SouGouImageAdapter;
+import com.test.admin.conurbations.model.entity.SosoSearcher;
 import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.presenter.SouGouImagePresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
+import javax.inject.Inject;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class SouGouImageFragment extends BaseLazyListFragment implements ISouGouImageView {
+public class SouGouImageFragment extends BaseLazyListFragment<SosoSearcher, SouGouImagePresenter> implements ISouGouImageView {
 
     private String range;
 
@@ -23,8 +27,13 @@ public class SouGouImageFragment extends BaseLazyListFragment implements ISouGou
         this.range = range;
     }
 
-    protected SouGouImagePresenter mSouGouImagePresenter;
-    protected SouGouImageAdapter mSouGouImageAdapter;
+    @Inject
+    SouGouImageAdapter mSouGouImageAdapter;
+
+    @Override
+    protected void initData(Bundle bundle) {
+        getFragmentComponent().inject(this);
+    }
 
     public PullRecycler getRecyclerView() {
         return recycler;
@@ -53,27 +62,14 @@ public class SouGouImageFragment extends BaseLazyListFragment implements ISouGou
 
     @Override
     protected void refreshList(int page) {
-        if (mSouGouImagePresenter != null) {
-            mSouGouImagePresenter.getSouGouImageData(range, page, isRefresh);
+        if (mPresenter != null) {
+            mPresenter.getSouGouImageData(range, page, isRefresh);
             isRefresh = true;
         }
     }
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        mSouGouImageAdapter = new SouGouImageAdapter();
         return mSouGouImageAdapter;
-    }
-
-    @Override
-    protected void setUpPresenter() {
-        mSouGouImagePresenter = new SouGouImagePresenter(this);
-    }
-
-    @Override
-    public void detachView() {
-        if (mSouGouImagePresenter != null) {
-            mSouGouImagePresenter.detachView();
-        }
     }
 }

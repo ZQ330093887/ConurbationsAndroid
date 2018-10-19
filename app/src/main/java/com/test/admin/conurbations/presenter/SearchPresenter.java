@@ -2,21 +2,18 @@ package com.test.admin.conurbations.presenter;
 
 
 import com.test.admin.conurbations.activitys.ISearchView;
-import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.retrofit.ApiCallback;
-import com.test.admin.conurbations.retrofit.AppClient;
+
+import javax.inject.Inject;
 
 /**
  * Created by zhouqiong on 2017/1/18.
  */
 public class SearchPresenter extends BasePresenter<ISearchView> {
 
-    private ISearchView iSearchView;
-
-    public SearchPresenter(ISearchView iSearchView) {
-        this.iSearchView = iSearchView;
-        attachView(this.iSearchView);
+    @Inject
+    public SearchPresenter() {
     }
 
     public void getSearchQueryInfo(String mSearchQuery, int pages) {
@@ -25,7 +22,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
 
                     @Override
                     public void onSuccess(NetImage model) {
-                        iSearchView.setSearchData(model);
+                        mvpView.setSearchData(model);
                     }
 
                     @Override

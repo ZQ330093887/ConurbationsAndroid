@@ -1,15 +1,23 @@
 package com.test.admin.conurbations.adapter;
 
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.model.entity.TSZImageBean;
 
+import javax.inject.Inject;
+
 /**
  * Created by ZQiong on 2016/2/7 0007.
  */
 public class PrettyPicturesAdapter extends BaseListAdapter<TSZImageBean> {
+    @Inject
+    public PrettyPicturesAdapter(Fragment context) {
+        super(context);
+    }
+
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final TSZImageBean item) {
 

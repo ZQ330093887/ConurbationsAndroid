@@ -27,6 +27,13 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     protected int mLastPosition = -1;
     private static final int DELAY = 138;
 
+    public Object mContext;
+
+    public BaseListAdapter(Object context) {
+        mContext = context;
+    }
+
+
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_LOAD_MORE_FOOTER) {

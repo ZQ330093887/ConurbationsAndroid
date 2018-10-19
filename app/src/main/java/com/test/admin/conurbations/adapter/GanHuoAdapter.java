@@ -1,5 +1,6 @@
 package com.test.admin.conurbations.adapter;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import com.test.admin.conurbations.activitys.WebViewActivity;
 import com.test.admin.conurbations.model.entity.GanHuoDataBean;
 import com.test.admin.conurbations.utils.DateUtils;
 
+import javax.inject.Inject;
+
 /**
  * Created by zhouqiong on 2017/1/5.
  */
@@ -17,6 +20,11 @@ public class GanHuoAdapter extends BaseListAdapter<GanHuoDataBean> {
 
     private static final int VIEW_TYPE_HAVE_IMAGE = 1;
     private static final int VIEW_TYPE_HAVE_TEXT = 2;
+
+    @Inject
+    public GanHuoAdapter(Fragment context) {
+        super(context);
+    }
 
     @Override
     protected void bindDataToItemView(final BaseViewHolder holder, final GanHuoDataBean item) {

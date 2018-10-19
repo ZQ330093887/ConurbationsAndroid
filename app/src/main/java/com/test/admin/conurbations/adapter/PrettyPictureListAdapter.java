@@ -2,9 +2,9 @@ package com.test.admin.conurbations.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,6 +19,8 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.transformer.AccordionTransformer;
 
+import javax.inject.Inject;
+
 /**
  * Created by zhouqiong on 2017/1/7
  */
@@ -26,6 +28,11 @@ public class PrettyPictureListAdapter extends BaseListAdapter<TSZImageBean> {
 
     private static final int VIEW_TYPE_HEAD = 1;
     private static final int VIEW_TYPE_NORMAL = 2;
+
+    @Inject
+    public PrettyPictureListAdapter(Fragment context) {
+        super(context);
+    }
 
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final TSZImageBean item) {
@@ -68,9 +75,9 @@ public class PrettyPictureListAdapter extends BaseListAdapter<TSZImageBean> {
     protected BaseViewHolder onCreateNormalViewHolder(ViewGroup parent, int viewType) {
 
         if (viewType == VIEW_TYPE_HEAD) {
-            return new CategoryHeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pretty_picture_list_banner, parent, false));
+            return new CategoryHeaderViewHolder(inflateItemView(parent, R.layout.item_pretty_picture_list_banner));
         } else if (viewType == VIEW_TYPE_NORMAL) {
-            return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pretty_picture_recommend, parent, false));
+            return new NormalViewHolder(inflateItemView(parent, R.layout.item_pretty_picture_recommend));
         }
         return null;
     }

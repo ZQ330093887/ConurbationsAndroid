@@ -16,18 +16,14 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-import static com.test.admin.conurbations.retrofit.AppClient.retrofit;
-
 /**
  * Created by zhouqiong on 2017/1/18.
  */
 public class NewsInfoListDetailPresenter extends BasePresenter<INewsInfoDetailListView> {
 
-    private INewsInfoDetailListView iNewsInfoDetailListView;
 
     public NewsInfoListDetailPresenter(INewsInfoDetailListView iNewsInfoDetailListView) {
-        this.iNewsInfoDetailListView = iNewsInfoDetailListView;
-        attachView(this.iNewsInfoDetailListView);
+        attachView(iNewsInfoDetailListView);
     }
 
     public void getNewsInfoDetailData(int cid) {
@@ -35,7 +31,7 @@ public class NewsInfoListDetailPresenter extends BasePresenter<INewsInfoDetailLi
                 new ApiCallback<NewsDetail>() {
                     @Override
                     public void onSuccess(NewsDetail model) {
-                        iNewsInfoDetailListView.setNewsInfoDetailData(model);
+                        mvpView.setNewsInfoDetailData(model);
                     }
 
                     @Override
@@ -61,7 +57,7 @@ public class NewsInfoListDetailPresenter extends BasePresenter<INewsInfoDetailLi
                 if (response != null && !TextUtils.isEmpty(response.body())) {
                     String jsonStr = response.body();
                     NewsDetail detail = JsonParserUtil.parseNewsDetail(jsonStr);
-                    iNewsInfoDetailListView.setNewsInfoDetailData(detail);
+                    mvpView.setNewsInfoDetailData(detail);
                 } else {
                     ToastUtils.getInstance().showToast("获取数据失败");
                 }

@@ -1,6 +1,7 @@
 package com.test.admin.conurbations.adapter;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.SpannableString;
@@ -25,15 +26,17 @@ import com.test.admin.conurbations.widget.SolidApplication;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 /**
  * Created by zhouqiong on 2017/1/12.
  */
 public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
-    private Context mContext;
 
-    public GankDayAdapter(Context mContext) {
-        this.mContext = mContext;
+    @Inject
+    public GankDayAdapter(Fragment mContext) {
+        super(mContext);
     }
 
     @Override
@@ -41,7 +44,7 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
         RecyclerView mListRecyclerView = vh.getView(R.id.item_gank_day_list);
         mListRecyclerView.setLayoutManager(new MyStaggeredGridLayoutManager(1,
                 StaggeredGridLayoutManager.VERTICAL));
-        mListRecyclerView.setAdapter(new HomeAdapter(item, mContext));
+        mListRecyclerView.setAdapter(new HomeAdapter(item, ((Fragment) mContext).getContext()));
     }
 
     @Override

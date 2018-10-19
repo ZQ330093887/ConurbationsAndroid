@@ -7,27 +7,32 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import com.test.admin.conurbations.activitys.ISearchView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.SearchAdapter;
+import com.test.admin.conurbations.model.entity.SosoSearcher;
 import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.presenter.SearchPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
+import javax.inject.Inject;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class SearchFragment extends BaseListFragment implements ISearchView {
+public class SearchFragment extends BaseListFragment<SosoSearcher, SearchPresenter> implements ISearchView {
     public static final String CLASS_SEARCH = "search_query";
-    protected SearchPresenter mSearchPresenter;
-    protected SearchAdapter mSearchAdapter;
     private String mSearchQuery;
 
     public PullRecycler getRecyclerView() {
         return recycler;
     }
 
+    @Inject
+    SearchAdapter mSearchAdapter;
+
     @Override
     protected void initData(Bundle bundle) {
+        getFragmentComponent().inject(this);
         if (getArguments().containsKey(CLASS_SEARCH)) {
             mSearchQuery = getArguments().getString(CLASS_SEARCH);
         }
@@ -56,26 +61,13 @@ public class SearchFragment extends BaseListFragment implements ISearchView {
 
     @Override
     protected void refreshList(int page) {
-        if (mSearchPresenter != null) {
-            mSearchPresenter.getSearchQueryInfo(mSearchQuery, page);
+        if (mPresenter != null) {
+            mPresenter.getSearchQueryInfo(mSearchQuery, page);
         }
     }
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        mSearchAdapter = new SearchAdapter();
         return mSearchAdapter;
-    }
-
-    @Override
-    protected void setUpPresenter() {
-        mSearchPresenter = new SearchPresenter(this);
-    }
-
-    @Override
-    public void detachView() {
-        if (mSearchPresenter != null) {
-            mSearchPresenter.detachView();
-        }
     }
 }

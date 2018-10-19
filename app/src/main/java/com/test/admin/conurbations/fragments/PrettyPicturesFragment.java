@@ -7,29 +7,34 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import com.test.admin.conurbations.activitys.IPrettyPictureListView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.PrettyPicturesAdapter;
+import com.test.admin.conurbations.model.entity.TSZImageBean;
 import com.test.admin.conurbations.model.response.NetImage360;
 import com.test.admin.conurbations.presenter.PrettyPicturesPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
+import javax.inject.Inject;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class PrettyPicturesFragment extends BaseListFragment implements IPrettyPictureListView {
+public class PrettyPicturesFragment extends BaseListFragment<TSZImageBean, PrettyPicturesPresenter> implements IPrettyPictureListView {
     public static final String CLASS_ID = "c_id";
     public static final String CLASS_TITLE = "title";
 
-    protected PrettyPicturesPresenter mPrettyPicturesPresenter;
-    protected PrettyPicturesAdapter mPrettyPicturesAdapter;
     private String classId;
 
     public PullRecycler getRecyclerView() {
         return recycler;
     }
 
+    @Inject
+    PrettyPicturesAdapter mPrettyPicturesAdapter;
+
     @Override
     protected void initData(Bundle bundle) {
+        getFragmentComponent().inject(this);
         if (getArguments().containsKey(CLASS_ID)) {
             classId = getArguments().getString(CLASS_ID);
         }
@@ -58,26 +63,13 @@ public class PrettyPicturesFragment extends BaseListFragment implements IPrettyP
 
     @Override
     protected void refreshList(int page) {
-        if (mPrettyPicturesPresenter != null) {
-            mPrettyPicturesPresenter.getPrettyPictureLisData(classId, page);
+        if (mPresenter != null) {
+            mPresenter.getPrettyPictureLisData(classId, page);
         }
     }
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        mPrettyPicturesAdapter = new PrettyPicturesAdapter();
         return mPrettyPicturesAdapter;
-    }
-
-    @Override
-    protected void setUpPresenter() {
-        mPrettyPicturesPresenter = new PrettyPicturesPresenter(this);
-    }
-
-    @Override
-    public void detachView() {
-        if (mPrettyPicturesPresenter != null) {
-            mPrettyPicturesPresenter.detachView();
-        }
     }
 }

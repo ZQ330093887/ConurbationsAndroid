@@ -54,7 +54,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                    <com.flyco.labelview.LabelView
+                    <com.test.admin.conurbations.widget.LabelView
                         android:id="@+id/lv_pretty_picture_recommend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
 
                     </LinearLayout>
 
-                    <com.flyco.labelview.LabelView
+                    <com.test.admin.conurbations.widget.LabelView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|right"

@@ -3,21 +3,19 @@ package com.test.admin.conurbations.presenter;
 
 import com.test.admin.conurbations.activitys.INewInfoIndexView;
 import com.test.admin.conurbations.model.api.ACache;
-import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.entity.NewsList;
 import com.test.admin.conurbations.retrofit.ApiCallback;
-import com.test.admin.conurbations.retrofit.AppClient;
 import com.test.admin.conurbations.utils.AppUtils;
+
+import javax.inject.Inject;
 
 /**
  * Created by zhouqiong on 2017/1/18.
  */
 public class NewsInfoIndexPresenter extends BasePresenter<INewInfoIndexView> {
-    private INewInfoIndexView iNewInfoIndexView;
 
-    public NewsInfoIndexPresenter(INewInfoIndexView iNewInfoIndexView) {
-        this.iNewInfoIndexView = iNewInfoIndexView;
-        attachView(this.iNewInfoIndexView);
+    @Inject
+    public NewsInfoIndexPresenter() {
     }
 
     public void getNewListData(final int pager, String ordDate, boolean isRefresh) {
@@ -32,7 +30,7 @@ public class NewsInfoIndexPresenter extends BasePresenter<INewInfoIndexView> {
             Object obj = cache.getAsObject(key);
             if (obj != null && !isRefresh) {
                 NewsList model = (NewsList) obj;
-                iNewInfoIndexView.setNewListData(model);
+                mvpView.setNewListData(model);
                 return;
             }
             addSubscription(apiStores.getLatestNews(), new ApiCallback<NewsList>() {
@@ -41,7 +39,7 @@ public class NewsInfoIndexPresenter extends BasePresenter<INewInfoIndexView> {
                     if (pager == 1) {
                         cache.put(key, model);
                     }
-                    iNewInfoIndexView.setNewListData(model);
+                    mvpView.setNewListData(model);
                 }
 
                 @Override
@@ -56,7 +54,7 @@ public class NewsInfoIndexPresenter extends BasePresenter<INewInfoIndexView> {
             addSubscription(apiStores.getBeforeNews(ordDate), new ApiCallback<NewsList>() {
                 @Override
                 public void onSuccess(NewsList model) {
-                    iNewInfoIndexView.setNewListData(model);
+                    mvpView.setNewListData(model);
                 }
 
                 @Override

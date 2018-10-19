@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ import com.test.admin.conurbations.utils.DateUtils;
 import com.test.admin.conurbations.widget.LabelView;
 import com.test.admin.conurbations.widget.SolidApplication;
 
+import javax.inject.Inject;
+
 /**
  * Created by zhouqiong on 2017/1/12.
  */
@@ -28,14 +31,14 @@ import com.test.admin.conurbations.widget.SolidApplication;
 public class NewsInfoIndexAdapter extends BaseListAdapter<News> {
 
     private String date;
-    private Context mContext;
 
     public void setDate(String date) {
         this.date = date;
     }
 
-    public NewsInfoIndexAdapter(Context mContext) {
-        this.mContext = mContext;
+    @Inject
+    public NewsInfoIndexAdapter(Fragment mContext) {
+        super(mContext);
     }
 
     @Override
@@ -47,9 +50,11 @@ public class NewsInfoIndexAdapter extends BaseListAdapter<News> {
                 .setOnClickListener(R.id.cv_item_news_info_index, getListener(vh, item));
         labelView.setText(DateUtils.formatDate(date));
         if (!item.isRead()) {
-            vh.setTextColor(R.id.tv_item_news_info_index_title, ContextCompat.getColor(mContext, R.color.textColorFirst_Day));
+            vh.setTextColor(R.id.tv_item_news_info_index_title,
+                    ContextCompat.getColor(((Fragment) mContext).getActivity(), R.color.textColorFirst_Day));
         } else {
-            vh.setTextColor(R.id.tv_item_news_info_index_title, ContextCompat.getColor(mContext, R.color.textColorThird_Day));
+            vh.setTextColor(R.id.tv_item_news_info_index_title,
+                    ContextCompat.getColor(((Fragment) mContext).getActivity(), R.color.textColorThird_Day));
         }
     }
 
@@ -60,7 +65,8 @@ public class NewsInfoIndexAdapter extends BaseListAdapter<News> {
             public void onClick(View v) {
                 if (!news.isRead()) {
                     news.setRead(true);
-                    holder.setTextColor(R.id.tv_item_news_info_index_title, ContextCompat.getColor(mContext, R.color.color_read));
+                    holder.setTextColor(R.id.tv_item_news_info_index_title,
+                            ContextCompat.getColor(((Fragment) mContext).getActivity(), R.color.color_read));
                 }
                 Context context = v.getContext();
                 Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
@@ -75,7 +81,7 @@ public class NewsInfoIndexAdapter extends BaseListAdapter<News> {
 
     @Override
     protected BaseViewHolder onCreateNormalViewHolder(ViewGroup parent, int viewType) {
-        return new CategoryHeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_info_index, parent, false));
+        return new CategoryHeaderViewHolder(inflateItemView(parent, R.layout.item_news_info_index));
     }
 
     public class CategoryHeaderViewHolder extends BaseViewHolder {

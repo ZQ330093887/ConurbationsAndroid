@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.text.TextUtils;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.test.admin.conurbations.fragments.NewsInfoListDetailFragment;
 import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.entity.NewsItemBean;
 import com.test.admin.conurbations.model.entity.VideoInfo;
+
+import javax.inject.Inject;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import okhttp3.OkHttpClient;
@@ -37,6 +40,11 @@ public class NBAIndexAdapter extends BaseListAdapter<NewsItemBean> {
 
     private static final int VIEW_TYPE_VIDEO = 1;
     private static final int VIEW_TYPE_NORMAL = 2;
+
+    @Inject
+    public NBAIndexAdapter(Fragment context) {
+        super(context);
+    }
 
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final NewsItemBean item) {

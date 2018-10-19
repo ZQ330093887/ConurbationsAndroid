@@ -1,33 +1,23 @@
 package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.View;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.databinding.FragmentBaseListBinding;
-import com.test.admin.conurbations.di.component.DaggerFragmentComponent;
-import com.test.admin.conurbations.di.component.FragmentComponent;
-import com.test.admin.conurbations.di.module.FragmentModule;
-import com.test.admin.conurbations.presenter.BasePresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
-import com.test.admin.conurbations.widget.SolidApplication;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  * 懒加载BaseListFragment
  * Created by zhouqiong on 2017/5/3.
  */
 
-public abstract class BaseLazyListFragment<T, P extends BasePresenter> extends BaseFragment<FragmentBaseListBinding>
-        implements PullRecycler.OnRecyclerRefreshListener {
+public abstract class BaseLazyListFragment<T> extends BaseFragment<FragmentBaseListBinding> implements PullRecycler.OnRecyclerRefreshListener {
     /**
      * 懒加载
      */
@@ -48,9 +38,6 @@ public abstract class BaseLazyListFragment<T, P extends BasePresenter> extends B
      */
     public boolean isRefresh = false;
 
-    @Inject
-    protected P mPresenter;
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_base_list;
@@ -58,13 +45,6 @@ public abstract class BaseLazyListFragment<T, P extends BasePresenter> extends B
 
     @Override
     protected void initData(Bundle bundle) {
-
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mPresenter.attachView(this);
     }
 
     @Override
@@ -72,6 +52,7 @@ public abstract class BaseLazyListFragment<T, P extends BasePresenter> extends B
         super.onActivityCreated(savedInstanceState);
         isInitView = true;
         lazyLoadData();
+        setUpPresenter();
     }
 
     @Override
@@ -120,6 +101,8 @@ public abstract class BaseLazyListFragment<T, P extends BasePresenter> extends B
 
     protected abstract BaseListAdapter setUpAdapter();
 
+    protected abstract void setUpPresenter();
+
     private void lazyLoadData() {
         if (isFirstLoad) {
             Log.e("第一次加载 ", " isInitView  " + isInitView + "  isVisible  " + isVisible + "   " + this.getClass().getSimpleName());
@@ -134,29 +117,5 @@ public abstract class BaseLazyListFragment<T, P extends BasePresenter> extends B
         Log.e("完成数据第一次加载" + "   ", this.getClass().getSimpleName());
         initView();
         isFirstLoad = false;
-    }
-
-    protected FragmentComponent getFragmentComponent() {
-        return DaggerFragmentComponent.builder()
-                .appComponent(SolidApplication.getInstance().getAppComponent())
-                .fragmentModule(getFragmentModule())
-                .build();
-    }
-
-    protected FragmentModule getFragmentModule() {
-        return new FragmentModule(this);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mPresenter != null) {
-            mPresenter.detachView();
-        }
-    }
-
-    @Override
-    public void detachView() {
-
     }
 }

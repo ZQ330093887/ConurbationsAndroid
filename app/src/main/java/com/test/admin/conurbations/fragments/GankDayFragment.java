@@ -1,6 +1,7 @@
 package com.test.admin.conurbations.fragments;
 
 
+import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.test.admin.conurbations.activitys.IGankDayView;
@@ -16,14 +17,14 @@ import com.test.admin.conurbations.widget.PullRecycler;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class GankDayFragment extends BaseLazyListFragment<List<GankItem>> implements IGankDayView {
+public class GankDayFragment extends BaseLazyListFragment<List<GankItem>, GankDayPresenter> implements IGankDayView {
 
     private Moment.Range range;
-    protected GankDayAdapter mGankDayAdapter;
-    protected GankDayPresenter mGankDayPresenter;
 
     public void setRange(Moment.Range range) {
         this.range = range;
@@ -34,13 +35,21 @@ public class GankDayFragment extends BaseLazyListFragment<List<GankItem>> implem
     int Month = calendar.get(Calendar.MONTH) + 1;
     int Day = calendar.get(Calendar.DAY_OF_MONTH);
 
+    @Inject
+    GankDayAdapter mGankDayAdapter;
+
+    @Override
+    protected void initData(Bundle bundle) {
+        getFragmentComponent().inject(this);
+    }
+
     @Override
     public void setGankDayData(List<GankItem> items) {
         if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
             mDataList.clear();
         }
         if (items.size() == 0) {
-            mGankDayPresenter.getGankDayData(Year, Month, Day--, true);
+            mPresenter.getGankDayData(Year, Month, Day--, true);
             recycler.enableLoadMore(false);
         } else {
             recycler.enableLoadMore(false);
@@ -53,19 +62,13 @@ public class GankDayFragment extends BaseLazyListFragment<List<GankItem>> implem
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        mGankDayAdapter = new GankDayAdapter(getActivity());
         return mGankDayAdapter;
     }
 
     @Override
-    protected void setUpPresenter() {
-        mGankDayPresenter = new GankDayPresenter(this);
-    }
-
-    @Override
     protected void refreshList(int page) {
-        if (mGankDayPresenter != null) {
-            mGankDayPresenter.getGankDayData(Year, Month, Day, isRefresh);
+        if (mPresenter != null) {
+            mPresenter.getGankDayData(Year, Month, Day, isRefresh);
             isRefresh = true;
         }
     }
@@ -73,12 +76,5 @@ public class GankDayFragment extends BaseLazyListFragment<List<GankItem>> implem
     @Override
     protected ILayoutManager getLayoutManager() {
         return new MyStaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-    }
-
-    @Override
-    public void detachView() {
-        if (mGankDayPresenter != null) {
-            mGankDayPresenter.detachView();
-        }
     }
 }

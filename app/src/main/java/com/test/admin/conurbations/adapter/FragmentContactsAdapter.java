@@ -46,7 +46,7 @@ public class FragmentContactsAdapter extends RecyclerView.Adapter<FragmentContac
         holder.itemView.setTag(contacts.get(position));
 
         Contact contact = contacts.get(position);
-        if (position == 0 || !contacts.get(position-1).getIndex().equals(contact.getIndex())) {
+        if (position == 0 || !contacts.get(position - 1).getIndex().equals(contact.getIndex())) {
             holder.tvIndex.setVisibility(View.VISIBLE);
             holder.tvIndex.setText(contact.getIndex());
         } else {
@@ -86,7 +86,7 @@ public class FragmentContactsAdapter extends RecyclerView.Adapter<FragmentContac
     public void onClick(View v) {
         if (mOnItemClickListener != null) {
             //注意这里使用getTag方法获取数据
-            mOnItemClickListener.onItemClick(v,(Contact)v.getTag());
+            mOnItemClickListener.onItemClick(v, (Contact) v.getTag());
         }
     }
 }

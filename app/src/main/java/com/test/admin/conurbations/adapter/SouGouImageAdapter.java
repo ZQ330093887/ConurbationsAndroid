@@ -1,15 +1,23 @@
 package com.test.admin.conurbations.adapter;
 
+import android.support.v4.app.Fragment;
 import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.model.entity.SosoSearcher;
+
+import javax.inject.Inject;
 
 /**
  * Created by zhouqiong on 2017/1/5.
  */
 
 public class SouGouImageAdapter extends BaseListAdapter<SosoSearcher> {
+
+    @Inject
+    public SouGouImageAdapter(Fragment context) {
+        super(context);
+    }
 
     @Override
     protected void bindDataToItemView(final BaseViewHolder holder, final SosoSearcher item) {

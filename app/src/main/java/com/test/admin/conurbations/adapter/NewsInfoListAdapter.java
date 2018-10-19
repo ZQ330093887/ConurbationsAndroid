@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.test.admin.conurbations.fragments.NewsInfoListDetailFragment;
 import com.test.admin.conurbations.model.entity.News;
 import com.test.admin.conurbations.widget.SolidApplication;
 
+import javax.inject.Inject;
+
 /**
  * Created by zhouqiong on 2017/1/5.
  */
@@ -25,6 +28,11 @@ public class NewsInfoListAdapter extends BaseListAdapter<News> {
 
     public static final int TYPE_ITEM = 0;
     public static final int TYPE_PHOTO_ITEM = 1;
+
+    @Inject
+    public NewsInfoListAdapter(Fragment context) {
+        super(context);
+    }
 
     @Override
     protected void bindDataToItemView(final BaseViewHolder holder, final News item) {
@@ -51,16 +59,13 @@ public class NewsInfoListAdapter extends BaseListAdapter<News> {
 
     @NonNull
     private View.OnClickListener getListener(final News news, final View view, final String s) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
-                intent.putExtra(NewsInfoListDetailFragment.KEY_NEWS, news.getId());
-                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation
-                        ((Activity) context, new Pair<>(view, s));
-                ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
-            }
+        return v -> {
+            Context context = view.getContext();
+            Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
+            intent.putExtra(NewsInfoListDetailFragment.KEY_NEWS, news.getId());
+            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation
+                    ((Activity) context, new Pair<>(view, s));
+            ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
         };
     }
 

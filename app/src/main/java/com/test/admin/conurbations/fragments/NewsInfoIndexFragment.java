@@ -6,28 +6,34 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import com.test.admin.conurbations.activitys.INewInfoIndexView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.NewsInfoIndexAdapter;
+import com.test.admin.conurbations.model.entity.News;
 import com.test.admin.conurbations.model.entity.NewsList;
 import com.test.admin.conurbations.presenter.NewsInfoIndexPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
+import javax.inject.Inject;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class NewsInfoIndexFragment extends BaseLazyListFragment implements INewInfoIndexView {
+public class NewsInfoIndexFragment extends BaseLazyListFragment<News, NewsInfoIndexPresenter> implements INewInfoIndexView {
 
-    protected NewsInfoIndexAdapter mNewsInfoIndexAdapter;
-    protected NewsInfoIndexPresenter mNewsInfoIndexPresenter;
     protected String mOrdDate;
     protected String range;
+
+    @Inject
+    NewsInfoIndexAdapter mNewsInfoIndexAdapter;
 
     public void setRange(String range) {
         this.range = range;
     }
 
     @Override
-    protected void initData(Bundle bundle) {}
+    protected void initData(Bundle bundle) {
+        getFragmentComponent().inject(this);
+    }
 
     @Override
     public void setNewListData(NewsList newListData) {
@@ -54,26 +60,14 @@ public class NewsInfoIndexFragment extends BaseLazyListFragment implements INewI
 
     @Override
     protected void refreshList(int page) {
-        if (mNewsInfoIndexPresenter != null){
-            mNewsInfoIndexPresenter.getNewListData(page, mOrdDate,isRefresh);
+        if (mPresenter != null) {
+            mPresenter.getNewListData(page, mOrdDate, isRefresh);
             isRefresh = true;
         }
     }
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        return mNewsInfoIndexAdapter = new NewsInfoIndexAdapter(getActivity());
-    }
-
-    @Override
-    protected void setUpPresenter() {
-        mNewsInfoIndexPresenter = new NewsInfoIndexPresenter(this);
-    }
-
-    @Override
-    public void detachView() {
-        if (mNewsInfoIndexPresenter != null){
-            mNewsInfoIndexPresenter.detachView();
-        }
+        return mNewsInfoIndexAdapter;
     }
 }

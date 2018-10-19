@@ -29,7 +29,7 @@
                 android:layout_height="@dimen/dimens_80_dp"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="@dimen/dimens_10_dp"
-                android:transitionName="translate_web_view"/>
+                android:transitionName="translate_web_view" />
 
             <TextView
                 android:id="@+id/tv_item_news_info_index_title"
@@ -44,7 +44,7 @@
                 tools:text="新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题,不忘初心,方得始终." />
         </RelativeLayout>
 
-        <com.flyco.labelview.LabelView
+        <com.test.admin.conurbations.widget.LabelView
             android:id="@+id/lv_item_news_info_index_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

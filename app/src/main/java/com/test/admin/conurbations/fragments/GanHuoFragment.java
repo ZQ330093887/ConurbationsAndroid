@@ -1,26 +1,35 @@
 package com.test.admin.conurbations.fragments;
 
+import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.test.admin.conurbations.activitys.IWelfareView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.GanHuoAdapter;
+import com.test.admin.conurbations.model.entity.GanHuoDataBean;
 import com.test.admin.conurbations.model.response.GankData;
 import com.test.admin.conurbations.presenter.GanHuoPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.PullRecycler;
 
+import javax.inject.Inject;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class GanHuoFragment extends BaseLazyListFragment implements IWelfareView {
+public class GanHuoFragment extends BaseLazyListFragment<GanHuoDataBean, GanHuoPresenter> implements IWelfareView {
     private String range;
-    protected GanHuoAdapter mGanHuoAdapter;
-    protected GanHuoPresenter mGanHuoPresenter;
+    @Inject
+    GanHuoAdapter mGanHuoAdapter;
 
     public void setRange(String range) {
         this.range = range;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+        getFragmentComponent().inject(this);
     }
 
     @Override
@@ -41,19 +50,13 @@ public class GanHuoFragment extends BaseLazyListFragment implements IWelfareView
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        mGanHuoAdapter = new GanHuoAdapter();
         return mGanHuoAdapter;
     }
 
     @Override
-    protected void setUpPresenter() {
-        mGanHuoPresenter = new GanHuoPresenter(this);
-    }
-
-    @Override
     protected void refreshList(int page) {
-        if (mGanHuoPresenter != null) {
-            mGanHuoPresenter.getWelfareData(range, page, isRefresh);
+        if (mPresenter != null) {
+            mPresenter.getWelfareData(range, page, isRefresh);
             isRefresh = true;
         }
     }
@@ -61,12 +64,5 @@ public class GanHuoFragment extends BaseLazyListFragment implements IWelfareView
     @Override
     protected ILayoutManager getLayoutManager() {
         return new MyStaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-    }
-
-    @Override
-    public void detachView() {
-        if (mGanHuoPresenter != null) {
-            mGanHuoPresenter.detachView();
-        }
     }
 }

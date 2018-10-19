@@ -7,13 +7,12 @@ import android.os.Environment;
 import android.support.multidex.MultiDex;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
-import com.meituan.android.walle.WalleChannelReader;
 import com.tencent.bugly.Bugly;
-import com.tencent.bugly.beta.Beta;
-import com.tencent.tinker.loader.app.TinkerApplication;
-import com.tencent.tinker.loader.shareutil.ShareConstants;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.ViewNamingRuleXMLParserHandler;
+import com.test.admin.conurbations.di.component.AppComponent;
+import com.test.admin.conurbations.di.component.DaggerAppComponent;
+import com.test.admin.conurbations.di.module.AppModule;
 import com.test.admin.conurbations.utils.AppUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 
@@ -35,6 +34,7 @@ public class SolidApplication extends Application {
     public static List<?> images = new ArrayList<>();
     public static List<String> titles = new ArrayList<>();
     public static Typeface songTi; // 宋体
+    private AppComponent appComponent;
 
     @Override
     public void onCreate() {
@@ -42,9 +42,13 @@ public class SolidApplication extends Application {
         mInstance = this;
         ToastUtils.init(this);
         AppUtils.init(mInstance);
-
         //自定义注入框架
         loadViewNamingRule();
+
+        appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
+
         FeedbackAPI.initAnnoy(this, "23601404");
         Bugly.init(this, "df40649721", true);
         String[] urls = getResources().getStringArray(R.array.url);
@@ -90,5 +94,9 @@ public class SolidApplication extends Application {
         // you must install multiDex whatever tinker is installed!
         MultiDex.install(base);
 //        Beta.installTinker();
+    }
+
+    public AppComponent getAppComponent() {
+        return appComponent;
     }
 }
