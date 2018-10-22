@@ -13,7 +13,7 @@ def bakPath = file("${buildDir}/bakApk/")
 /**
  * 1，此处填写每次构建生成的基准包目录
  */
-def baseApkDir = "app-0929-18-10-05"
+def baseApkDir = "app-1022-11-53-36"
 /**
  * 2，渠道
  */
@@ -21,7 +21,7 @@ def channel = "baidu"
 /**
  * 版本号
  */
-def versionCode = "2.0.2"
+def versionCode = "2.1.2"
 /**
  * 正常编译false，打布丁是改为true
  */

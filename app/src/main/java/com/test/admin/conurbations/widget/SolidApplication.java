@@ -10,6 +10,7 @@ import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.activitys.MainActivity;
 import com.test.admin.conurbations.annotations.ViewNamingRuleXMLParserHandler;
 import com.test.admin.conurbations.di.component.AppComponent;
 import com.test.admin.conurbations.di.component.DaggerAppComponent;
@@ -51,7 +52,9 @@ public class SolidApplication extends Application {
                 .build();
 
         FeedbackAPI.initAnnoy(this, "23601404");
-        Bugly.init(this, "df40649721", true);
+
+        setBugly();
+
         String[] urls = getResources().getStringArray(R.array.url);
         String[] tips = getResources().getStringArray(R.array.title);
         List list = Arrays.asList(urls);
@@ -99,5 +102,20 @@ public class SolidApplication extends Application {
 
     public AppComponent getAppComponent() {
         return appComponent;
+    }
+
+
+    /**
+     * bugly简单配置
+     * app升级千万记得要杀死app进程这个不是热更新
+     */
+    private void setBugly() {
+        /**
+         * 只允许在MainActivity上显示更新弹窗，其他activity上不显示弹窗; 不设置会默认所有activity都可以显示弹窗;
+         */
+        Beta.canShowUpgradeActs.add(MainActivity.class);
+
+        /***** 统一初始化Bugly产品，包含Beta *****/
+        Bugly.init(this, "df40649721", true);
     }
 }

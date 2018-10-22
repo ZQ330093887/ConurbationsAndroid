@@ -11,7 +11,7 @@ ext {
             "com.test.admin.conurbations":
                     ["name"         : "ConurbationsAndroid",
                      "versionName"  : "2.1.2",
-                     "versionCode"  : 212,
+                     "versionCode"  : 213,
                      "keyStore"     : "../doc/key/conurbation-key",
                      "storePassword": "330093887",
                      "keyAlias"     : "GankAndroid",
