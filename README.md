@@ -3,7 +3,8 @@
 ## 技术支持
    RxJava+RxAndroid+Retrofit+Dagger2+DataBinding+MVP+leakCanary
  
-## <a href="https://fir.im/4yrv">APK下载地址</a>
+## <a href="https://fir.im/4yrv">APK下载fir地址</a>
+## <a href="https://www.pgyer.com/LQT4">APK下载蒲公英地址</a>
    
 ## 功能介绍
 
