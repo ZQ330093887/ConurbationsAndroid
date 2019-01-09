@@ -27,10 +27,12 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
 
                     @Override
                     public void onFailure(String msg) {
+                        mvpView.showError(msg);
                     }
 
                     @Override
                     public void onFinish() {
+                        mvpView.showFinishState();
                     }
                 });
     }

@@ -9,7 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
-import com.test.admin.conurbations.utils.FileUtil;
+import com.test.admin.conurbations.utils.FileUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -267,7 +267,7 @@ public class ACache {
         File file = mCache.newFile(key);
         if (!file.exists()) {
             Log.d("-----" , file.getAbsolutePath() + "------");
-            FileUtil.createFile(file);
+            FileUtils.createFile(file);
         }
         FileOutputStream out = null;
         try {

@@ -114,23 +114,10 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
                         .centerCrop()
                         .into(girlHolder.mImageView);
                 girlHolder.itemView.setOnClickListener(v -> {
-//                        startPictureActivity(v, girlItem);
                     startShowImageActivity(v, getStringToList(girlItem.imgUrl));
                 });
             }
         }
-
-//        private void startPictureActivity(View transitView, GankGirlImageItem item) {
-//            Intent intent = ShowImageActivity.newIntent(transitView.getContext(), item.imgUrl);
-//            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-//                    (Activity) transitView.getContext(), transitView, ShowImageActivity.TRANSIT_PIC);
-//            try {
-//                ActivityCompat.startActivity(transitView.getContext(), intent, optionsCompat.toBundle());
-//            } catch (IllegalArgumentException e) {
-//                e.printStackTrace();
-//                transitView.getContext().startActivity(intent);
-//            }
-//        }
 
         private CharSequence getGankTitleStr(String desc, String who) {
             if (TextUtils.isEmpty(who)) {

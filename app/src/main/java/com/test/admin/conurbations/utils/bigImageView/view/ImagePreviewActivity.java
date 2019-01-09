@@ -121,10 +121,6 @@ public class ImagePreviewActivity extends BaseActivity<ActivityImagePreviewBindi
         });
     }
 
-    @Override
-    protected void initPresenter() {
-    }
-
     /**
      * 下载当前图片到SD卡
      */

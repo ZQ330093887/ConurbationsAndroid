@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/top_container"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_gravity="top"
+        android:background="@color/white"
+        android:elevation="5dp">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_gravity="top"
+            android:progress="10"
+            android:tag="tint_accent_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/bottomPlayRcv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clipToPadding="false" />
+
+            <com.test.admin.conurbations.views.CircleImageView
+                android:id="@+id/album"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/dimens_8_dp"
+                android:src="@mipmap/default_cover"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="@string/app_name"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/artist"
+                    style="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:text="@string/app_name"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <com.test.admin.conurbations.player.PlayPauseView
+                android:id="@+id/playPauseView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                app:anim_duration="200"
+                app:bg_color="@color/translucent"
+                app:btn_color="@color/colorPrimary"
+                app:gap_width="10"
+                tools:targetApi="lollipop" />
+
+
+            <ImageButton
+                android:id="@+id/playQueueIv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/play_next"
+                android:padding="@dimen/dimens_16_dp"
+                android:src="@drawable/ic_queue_music"
+                android:tint="@color/colorPrimary"
+                tools:targetApi="lollipop" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

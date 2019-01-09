@@ -11,15 +11,16 @@ import com.test.admin.conurbations.model.response.GankData;
 import com.test.admin.conurbations.presenter.GanHuoPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
-import com.test.admin.conurbations.widget.PullRecycler;
 
 import javax.inject.Inject;
 
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class GanHuoFragment extends BaseLazyListFragment<GanHuoDataBean, GanHuoPresenter> implements IWelfareView {
+public class GanHuoFragment extends BaseSubFragment<GanHuoDataBean, GanHuoPresenter> implements IWelfareView {
+
     private String range;
+
     @Inject
     GanHuoAdapter mGanHuoAdapter;
 
@@ -33,19 +34,47 @@ public class GanHuoFragment extends BaseLazyListFragment<GanHuoDataBean, GanHuoP
     }
 
     @Override
-    public void setWelfareData(GankData welfareData) {
-        if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
+    protected void loadingData() {
+        mPresenter.getCacheData(range);
+    }
+
+    @Override
+    public void setCacheData(GankData welfareData) {
+        mStatusManager.showSuccessLayout();
+        if (welfareData != null && welfareData.results.size() > 0) {
             mDataList.clear();
-        }
-        if (welfareData.results == null || welfareData.results.size() == 0) {
-            recycler.enableLoadMore(false);
+            mDataList.addAll(welfareData.results);
+            mGanHuoAdapter.setList(mDataList);
+            mGanHuoAdapter.notifyDataSetChanged();
         } else {
-            recycler.enableLoadMore(true);
+            mStatusManager.showLoadingLayout();
+            refreshList(1);
+        }
+    }
+
+    @Override
+    public void setWelfareData(GankData welfareData) {
+        mStatusManager.showSuccessLayout();
+        if (welfareData.results == null || welfareData.results.size() == 0) {
+            if (isRefresh) {
+                if (mGanHuoAdapter.list == null || mGanHuoAdapter.list.size() <= 0) {
+                    mStatusManager.showEmptyLayout();
+                }
+            } else {
+                if (page > 1) {
+                    mBinding.get().refreshLayout.finishLoadMoreWithNoMoreData();
+                }
+            }
+        } else {
+            if (isRefresh) {
+                mDataList.clear();
+            } else {
+                mBinding.get().refreshLayout.finishLoadMore(true);
+            }
             mDataList.addAll(welfareData.results);
             mGanHuoAdapter.setList(mDataList);
             mGanHuoAdapter.notifyDataSetChanged();
         }
-        recycler.onRefreshCompleted();
     }
 
     @Override
@@ -56,8 +85,7 @@ public class GanHuoFragment extends BaseLazyListFragment<GanHuoDataBean, GanHuoP
     @Override
     protected void refreshList(int page) {
         if (mPresenter != null) {
-            mPresenter.getWelfareData(range, page, isRefresh);
-            isRefresh = true;
+            mPresenter.getWelfareData(range, page);
         }
     }
 

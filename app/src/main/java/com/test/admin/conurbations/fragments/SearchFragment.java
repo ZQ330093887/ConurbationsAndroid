@@ -12,7 +12,6 @@ import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.presenter.SearchPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
-import com.test.admin.conurbations.widget.PullRecycler;
 
 import javax.inject.Inject;
 
@@ -22,10 +21,6 @@ import javax.inject.Inject;
 public class SearchFragment extends BaseListFragment<SosoSearcher, SearchPresenter> implements ISearchView {
     public static final String CLASS_SEARCH = "search_query";
     private String mSearchQuery;
-
-    public PullRecycler getRecyclerView() {
-        return recycler;
-    }
 
     @Inject
     SearchAdapter mSearchAdapter;
@@ -39,19 +34,35 @@ public class SearchFragment extends BaseListFragment<SosoSearcher, SearchPresent
     }
 
     @Override
-    public void setSearchData(NetImage searchData) {
-        if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
-            mDataList.clear();
+    protected void loadingData() {
+        if (mPresenter != null) {
+            mPresenter.getSearchQueryInfo(mSearchQuery, 1);
         }
-        if (searchData.items == null && searchData.items.size() == 0) {
-            recycler.enableLoadMore(false);
+    }
+
+    @Override
+    public void setSearchData(NetImage searchData) {
+        mStatusManager.showSuccessLayout();
+        if (searchData == null || searchData.items.size() == 0) {
+            if (isRefresh) {
+                if (mSearchAdapter.list == null || mSearchAdapter.list.size() <= 0) {
+                    mStatusManager.showEmptyLayout();
+                }
+            } else {
+                if (page > 1) {
+                    mBinding.get().refreshLayout.finishLoadMoreWithNoMoreData();
+                }
+            }
         } else {
-            recycler.enableLoadMore(false);
+            if (isRefresh) {
+                mDataList.clear();
+            } else {
+                mBinding.get().refreshLayout.finishLoadMore(true);
+            }
             mDataList.addAll(searchData.items);
             mSearchAdapter.setList(mDataList);
             mSearchAdapter.notifyDataSetChanged();
         }
-        recycler.onRefreshCompleted();
     }
 
     @Override

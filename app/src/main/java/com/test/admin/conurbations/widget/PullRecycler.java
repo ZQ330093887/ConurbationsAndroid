@@ -99,12 +99,9 @@ public class PullRecycler extends FrameLayout implements SwipeRefreshLayout.OnRe
     }
 
     public void setRefreshing() {
-        mSwipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(true);
-                onRefresh();
-            }
+        mSwipeRefreshLayout.post(() -> {
+            mSwipeRefreshLayout.setRefreshing(true);
+            onRefresh();
         });
     }
 

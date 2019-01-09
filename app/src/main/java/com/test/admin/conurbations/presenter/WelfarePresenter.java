@@ -25,22 +25,23 @@ public class WelfarePresenter extends BasePresenter<IWelfareView> {
     public WelfarePresenter() {
     }
 
-    public void getWelfareData(final boolean isRefresh, final int pager) {
 
+    public void getCacheData() {
         final String key = "getGankItem" + "fuli";
         final ACache cache = ACache.get(AppUtils.getAppContext());
         Object obj = cache.getAsObject(key);
-        if (obj != null && !isRefresh) {
-            GankData model = (GankData) obj;
-            mvpView.setWelfareData(model);
-            return;
-        }
+        GankData model = (GankData) obj;
+        mvpView.setCacheData(model);
+    }
 
+    public void getWelfareData(int pager) {
         addSubscription(apiStores.getGank(GankType.WELFARE, getPageCount(), pager),
                 new ApiCallback<GankData>() {
                     @Override
                     public void onSuccess(GankData model) {
                         if (pager == 1) {
+                            final String key = "getGankItem" + "fuli";
+                            final ACache cache = ACache.get(AppUtils.getAppContext());
                             cache.put(key, model);
                         }
                         mvpView.setWelfareData(model);
@@ -48,10 +49,12 @@ public class WelfarePresenter extends BasePresenter<IWelfareView> {
 
                     @Override
                     public void onFailure(String msg) {
+                        mvpView.showError(msg);
                     }
 
                     @Override
                     public void onFinish() {
+                        mvpView.showFinishState();
                     }
 
                 });

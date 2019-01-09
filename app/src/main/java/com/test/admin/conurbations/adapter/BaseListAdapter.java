@@ -1,6 +1,7 @@
 package com.test.admin.conurbations.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -22,20 +23,28 @@ import java.util.List;
 public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
 
     protected static final int VIEW_TYPE_LOAD_MORE_FOOTER = 100;
+    protected static final int TYPE_HEADER = 1;
     protected boolean isLoadMoreFooterShown;
     public List<T> list;
     protected int mLastPosition = -1;
     private static final int DELAY = 138;
-
+    private View mHeaderView;
     public Object mContext;
+    public  int pos;
 
     public BaseListAdapter(Object context) {
         mContext = context;
     }
 
 
+    @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        if (mHeaderView != null && viewType == TYPE_HEADER) {
+            return onCreateHeaderViewHolder(parent);
+        }
+
         if (viewType == VIEW_TYPE_LOAD_MORE_FOOTER) {
             return onCreateLoadMoreFooterViewHolder(parent);
         }
@@ -49,13 +58,27 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
                 StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
                 params.setFullSpan(true);
             }
+            return;
+        }
+        if (mHeaderView != null && position == 0) {
+            return;
         }
         if (position < list.size()) {
-            T item = list.get(position);
+            T item = list.get(mHeaderView != null ? position - 1 : position);
+            this.pos = position;
             bindDataToItemView(holder, item);
         }
         //showItemAnim(holder.itemView,position);
         //startAnimator(holder.itemView,position);
+    }
+
+    public void setHeaderView(View headerView) {
+        mHeaderView = headerView;
+        notifyItemInserted(0);
+    }
+
+    public View getHeaderView() {
+        return mHeaderView;
     }
 
     protected abstract void bindDataToItemView(final BaseViewHolder vh, final T item);
@@ -78,15 +101,24 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     @Override
     public int getItemCount() {
-        if (list != null) {
-            return list.size() + (isLoadMoreFooterShown ? 1 : 0);
-        } else {
-            return (isLoadMoreFooterShown ? 1 : 0);
+        int count = (list == null ? 0 : list.size());
+
+        if (mHeaderView != null) {
+            count++;
         }
+
+        if (isLoadMoreFooterShown) {
+            count++;
+        }
+        return count;
     }
 
     @Override
     public int getItemViewType(int position) {
+        if (mHeaderView != null && position == 0) {
+            return TYPE_HEADER;
+        }
+
         if (isLoadMoreFooterShown && position == getItemCount() - 1) {
             return VIEW_TYPE_LOAD_MORE_FOOTER;
         }
@@ -108,6 +140,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         return new LoadMoreFooterViewHolder(view);
     }
 
+
     public void onLoadMoreStateChanged(boolean isShown) {
         this.isLoadMoreFooterShown = isShown;
         if (isShown) {
@@ -120,6 +153,17 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     private class LoadMoreFooterViewHolder extends BaseViewHolder {
         public LoadMoreFooterViewHolder(View view) {
             super(view);
+        }
+    }
+
+    protected BaseViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
+        return new HeaderViewHolder(getHeaderView());
+    }
+
+    private class HeaderViewHolder extends BaseViewHolder {
+
+        public HeaderViewHolder(View itemView) {
+            super(itemView);
         }
     }
 

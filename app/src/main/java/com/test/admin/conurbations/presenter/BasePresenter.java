@@ -1,6 +1,9 @@
 package com.test.admin.conurbations.presenter;
 
+import com.test.admin.conurbations.config.Constants;
+import com.test.admin.conurbations.model.api.BaiduApiService;
 import com.test.admin.conurbations.model.api.GankService;
+import com.test.admin.conurbations.retrofit.ApiManager;
 import com.test.admin.conurbations.retrofit.AppClient;
 
 import io.reactivex.Observable;
@@ -15,12 +18,14 @@ public class BasePresenter<V> implements Presenter<V> {
 
     public V mvpView;
     protected GankService apiStores;
+    protected BaiduApiService baiduApiService;
     private CompositeDisposable compositeDisposable;
 
     @Override
     public void attachView(V mvpView) {
         this.mvpView = mvpView;
         apiStores = AppClient.retrofit().create(GankService.class);
+        baiduApiService = ApiManager.getInstance().create(BaiduApiService.class, Constants.BASE_PLAYER_URL);
     }
 
     @Override

@@ -19,8 +19,9 @@
                 android:background="?attr/colorPrimary"
                 android:minHeight="@dimen/dimens_48_dp"
                 app:layout_scrollFlags="enterAlways|scroll"
-                app:tabIndicatorColor="@color/colorToolbarDark"
-                app:tabMode="scrollable"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/theme_primary"
+                app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/black"
                 app:tabTextColor="@color/white" />
 
@@ -31,6 +32,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
     </android.support.design.widget.CoordinatorLayout>
 </layout>

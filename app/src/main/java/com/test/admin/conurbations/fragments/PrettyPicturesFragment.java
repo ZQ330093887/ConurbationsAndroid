@@ -12,22 +12,19 @@ import com.test.admin.conurbations.model.response.NetImage360;
 import com.test.admin.conurbations.presenter.PrettyPicturesPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
-import com.test.admin.conurbations.widget.PullRecycler;
 
 import javax.inject.Inject;
 
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class PrettyPicturesFragment extends BaseListFragment<TSZImageBean, PrettyPicturesPresenter> implements IPrettyPictureListView {
+public class PrettyPicturesFragment extends BaseListFragment<TSZImageBean, PrettyPicturesPresenter>
+        implements IPrettyPictureListView {
+
     public static final String CLASS_ID = "c_id";
     public static final String CLASS_TITLE = "title";
 
     private String classId;
-
-    public PullRecycler getRecyclerView() {
-        return recycler;
-    }
 
     @Inject
     PrettyPicturesAdapter mPrettyPicturesAdapter;
@@ -41,19 +38,40 @@ public class PrettyPicturesFragment extends BaseListFragment<TSZImageBean, Prett
     }
 
     @Override
-    public void setPrettyPictureData(NetImage360 pictureMoreData) {
-        if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
-            mDataList.clear();
+    protected void loadingData() {
+        mBinding.get().refreshLayout.setEnableLoadMore(false);
+        if (mPresenter != null) {
+            mPresenter.getPrettyPictureLisData(classId);
         }
-        if (pictureMoreData.data == null && pictureMoreData.data.size() == 0) {
-            recycler.enableLoadMore(false);
+    }
+
+    @Override
+    public void setCacheData(NetImage360 image360) {
+    }
+
+    @Override
+    public void setPrettyPictureData(NetImage360 netImage) {
+        mStatusManager.showSuccessLayout();
+        if (netImage == null || netImage.data.size() == 0) {
+            if (isRefresh) {
+                if (mPrettyPicturesAdapter.list == null || mPrettyPicturesAdapter.list.size() <= 0) {
+                    mStatusManager.showEmptyLayout();
+                }
+            } else {
+                if (page > 1) {
+                    mBinding.get().refreshLayout.finishLoadMoreWithNoMoreData();
+                }
+            }
         } else {
-            recycler.enableLoadMore(false);
-            mDataList.addAll(pictureMoreData.data);
+            if (isRefresh) {
+                mDataList.clear();
+            } else {
+                mBinding.get().refreshLayout.finishLoadMore(true);
+            }
+            mDataList.addAll(netImage.data);
             mPrettyPicturesAdapter.setList(mDataList);
             mPrettyPicturesAdapter.notifyDataSetChanged();
         }
-        recycler.onRefreshCompleted();
     }
 
     @Override
@@ -64,7 +82,7 @@ public class PrettyPicturesFragment extends BaseListFragment<TSZImageBean, Prett
     @Override
     protected void refreshList(int page) {
         if (mPresenter != null) {
-            mPresenter.getPrettyPictureLisData(classId, page);
+            mPresenter.getPrettyPictureLisData(classId);
         }
     }
 

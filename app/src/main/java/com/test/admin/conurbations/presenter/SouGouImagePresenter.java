@@ -19,16 +19,18 @@ public class SouGouImagePresenter extends BasePresenter<ISouGouImageView> {
     public SouGouImagePresenter() {
     }
 
-    public void getSouGouImageData(String imgType, final int pages, boolean isRefresh) {
-
+    public void getCacheData(String imgType) {
         final String key = "getSouGouImageData" + imgType;
         final ACache cache = ACache.get(AppUtils.getAppContext());
         Object obj = cache.getAsObject(key);
-        if (obj != null && !isRefresh) {
-            NetImage model = (NetImage) obj;
-            mvpView.setSouGouImageData(model);
-            return;
-        }
+        NetImage model = (NetImage) obj;
+        mvpView.setCacheData(model);
+    }
+
+    public void getSouGouImageData(String imgType, int pages) {
+
+        final String key = "getSouGouImageData" + imgType;
+        final ACache cache = ACache.get(AppUtils.getAppContext());
         addSubscription(apiStores.getImageList("ajax", "result", imgType, pages * 24),
                 new ApiCallback<NetImage>() {
 
@@ -42,10 +44,12 @@ public class SouGouImagePresenter extends BasePresenter<ISouGouImageView> {
 
                     @Override
                     public void onFailure(String msg) {
+                        mvpView.showError(msg);
                     }
 
                     @Override
                     public void onFinish() {
+                        mvpView.showFinishState();
                     }
                 });
 

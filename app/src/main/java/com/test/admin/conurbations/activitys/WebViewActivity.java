@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.databinding.ActivityWebViewBinding;
-import com.test.admin.conurbations.utils.FileUtil;
+import com.test.admin.conurbations.utils.FileUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 
 /**
@@ -74,10 +74,6 @@ public class WebViewActivity extends BaseActivity<ActivityWebViewBinding> {
     }
 
     @Override
-    protected void initPresenter() {
-    }
-
-    @Override
     protected void onPause() {
         if (mBinding.blWebViewContent.getWebView() != null) {
             mBinding.blWebViewContent.getWebView().onPause();
@@ -102,7 +98,7 @@ public class WebViewActivity extends BaseActivity<ActivityWebViewBinding> {
                 }
                 break;
             case R.id.action_share:
-                FileUtil.sharePage(mBinding.blWebViewContent.getWebView(), getContext());
+                FileUtils.sharePage(mBinding.blWebViewContent.getWebView(), getContext());
                 return true;
             case R.id.action_open_in_browser:
                 openInBrowser();

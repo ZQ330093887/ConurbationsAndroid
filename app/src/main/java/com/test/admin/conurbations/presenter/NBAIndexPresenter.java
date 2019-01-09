@@ -4,7 +4,7 @@ package com.test.admin.conurbations.presenter;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.test.admin.conurbations.activitys.INBAinfoView;
+import com.test.admin.conurbations.activitys.INBAInfoView;
 import com.test.admin.conurbations.model.api.ACache;
 import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.entity.NewsIndex;
@@ -12,6 +12,7 @@ import com.test.admin.conurbations.model.entity.NewsItem;
 import com.test.admin.conurbations.retrofit.ApiCallback;
 import com.test.admin.conurbations.utils.AppUtils;
 import com.test.admin.conurbations.utils.JsonParserUtil;
+import com.test.admin.conurbations.utils.LogUtil;
 import com.test.admin.conurbations.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -24,12 +25,10 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-import static com.test.admin.conurbations.retrofit.AppClient.retrofit;
-
 /**
  * Created by zhouqiong on 2016/11/18.
  */
-public class NBAIndexPresenter extends BasePresenter<INBAinfoView> {
+public class NBAIndexPresenter extends BasePresenter<INBAInfoView> {
 
     private List<String> indexs = new ArrayList<>();
     private int num = 10;
@@ -40,17 +39,17 @@ public class NBAIndexPresenter extends BasePresenter<INBAinfoView> {
     public NBAIndexPresenter() {
     }
 
-    public void getNBAData(final int pager, final String type, boolean isRefresh) {
-
+    public void getCacheData(final String type) {
         key = "getNBAItem" + type;
         cache = ACache.get(AppUtils.getAppContext());
         Object obj = cache.getAsObject(key);
-        if (obj != null && !isRefresh) {
-            NewsItem model = (NewsItem) obj;
-            mvpView.setNBAInfoData(model);
-            return;
-        }
+        NewsItem model = (NewsItem) obj;
+        mvpView.setCacheData(model);
+    }
 
+    public void getNBAData(final int pager, final String type) {
+
+        LogUtil.e(pager);
         addSubscription(apiStores.getNewsIndex(type),
                 new ApiCallback<NewsIndex>() {
                     @Override
@@ -65,11 +64,12 @@ public class NBAIndexPresenter extends BasePresenter<INBAinfoView> {
 
                     @Override
                     public void onFailure(String msg) {
-                        Log.d("msd", msg);
+                        mvpView.showError(msg);
                     }
 
                     @Override
                     public void onFinish() {
+                        mvpView.showFinishState();
                     }
                 });
 
@@ -106,13 +106,13 @@ public class NBAIndexPresenter extends BasePresenter<INBAinfoView> {
 
     private String parseIds(int pager) {
         int size = indexs.size();
-        String articleIds = "";
+        StringBuilder articleIds = new StringBuilder();
         for (int i = pager, j = 0; i < size && j < num; i++, j++, pager++) {
-            articleIds += indexs.get(i) + ",";
+            articleIds.append(indexs.get(i)).append(",");
         }
-        if (!TextUtils.isEmpty(articleIds))
-            articleIds = articleIds.substring(0, articleIds.length() - 1);
-        Log.d("articleIds = ", articleIds);
-        return articleIds;
+        if (!TextUtils.isEmpty(articleIds.toString()))
+            articleIds = new StringBuilder(articleIds.substring(0, articleIds.length() - 1));
+        Log.d("articleIds = ", articleIds.toString());
+        return articleIds.toString();
     }
 }

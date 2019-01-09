@@ -41,11 +41,6 @@ public class PrettyPicturesActivity extends BaseActivity<ActivityPrettyPicturesB
         mBinding.fabPrettyPicturesFab.setOnClickListener(v -> clickFab());
     }
 
-    @Override
-    protected void initPresenter() {
-
-    }
-
     public void initAppBarSetting() {
         mBinding.ablPrettyPicturesHead.addOnOffsetChangedListener((appBarLayout, i) -> {
             if (i == 0) {
@@ -57,7 +52,7 @@ public class PrettyPicturesActivity extends BaseActivity<ActivityPrettyPicturesB
     }
 
     public void clickFab() {
-        mPrettyPicturesItemFragment.getRecyclerView().setSelection(0);
+        mPrettyPicturesItemFragment.getRecyclerView().scrollToPosition(0);
     }
 
     private int[] bgImgs = {

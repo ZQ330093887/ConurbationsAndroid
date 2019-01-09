@@ -9,7 +9,10 @@ import com.test.admin.conurbations.model.response.GankNormalItem;
 import com.test.admin.conurbations.model.response.GankType;
 import com.test.admin.conurbations.model.response.TodayData;
 import com.test.admin.conurbations.retrofit.ApiCallback;
+import com.test.admin.conurbations.retrofit.ApiManager;
+import com.test.admin.conurbations.retrofit.RequestCallBack;
 import com.test.admin.conurbations.utils.AppUtils;
+import com.test.admin.conurbations.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,23 +24,22 @@ import javax.inject.Inject;
  */
 
 public class GankDayPresenter extends BasePresenter<IGankDayView> {
+    private String key = "getGankDayData" + "zuixin";
+    private ACache cache = ACache.get(AppUtils.getAppContext());
 
     @Inject
     public GankDayPresenter() {
     }
 
-    public void getGankDayData(int Year, int Month, int Day, boolean isRefresh) {
 
-        final String key = "getGankDayData" + "zuixin";
-        final ACache cache = ACache.get(AppUtils.getAppContext());
+    public void getCacheData() {
         Object obj = cache.getAsObject(key);
-        if (obj != null && !isRefresh) {
-            TodayData model = (TodayData) obj;
-            mvpView.setGankDayData(getGankList(model));
-            return;
-        }
+        TodayData model = (TodayData) obj;
+        mvpView.setCacheData(getGankList(model));
+    }
 
-        addSubscription(apiStores.getDayGank(Year, Month, Day),
+    public void getDayData() {
+        addSubscription(apiStores.getDayGank(),
                 new ApiCallback<TodayData>() {
                     @Override
                     public void onSuccess(TodayData model) {
@@ -47,10 +49,13 @@ public class GankDayPresenter extends BasePresenter<IGankDayView> {
 
                     @Override
                     public void onFailure(String msg) {
+                        ToastUtils.getInstance().showToast(msg);
+                        mvpView.showError(msg);
                     }
 
                     @Override
                     public void onFinish() {
+                        mvpView.showFinishState();
                     }
 
                 });

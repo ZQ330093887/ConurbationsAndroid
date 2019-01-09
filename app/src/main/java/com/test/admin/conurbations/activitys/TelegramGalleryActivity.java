@@ -72,11 +72,6 @@ public class TelegramGalleryActivity extends BaseActivity<ActivityTelegramGaller
         mBinding.btnTelegramGalleryMultipleChoice.setOnClickListener(v -> onClickCheckBoxButton());
     }
 
-    @Override
-    protected void initPresenter() {
-
-    }
-
     @SuppressWarnings("all")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

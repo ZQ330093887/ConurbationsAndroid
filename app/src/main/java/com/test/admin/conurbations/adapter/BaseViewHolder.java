@@ -1,6 +1,7 @@
 package com.test.admin.conurbations.adapter;
 
 import android.graphics.Typeface;
+import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
@@ -40,6 +41,12 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
+    public BaseViewHolder setText(@IdRes int viewId, CharSequence value) {
+        TextView view = getView(viewId);
+        view.setText(value);
+        return this;
+    }
+
     public BaseViewHolder setTypeface(int id, Typeface tf) {
         TextView textView = getView(id);
         textView.setTypeface(tf);
@@ -59,6 +66,12 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
     public BaseViewHolder setImageSource(int id, int resId) {
         ImageView imageView = getView(id);
         imageView.setImageResource(resId);
+        return this;
+    }
+
+    public BaseViewHolder setColorFilter(int id, int color) {
+        ImageView imageView = getView(id);
+        imageView.setColorFilter(color);
         return this;
     }
 

@@ -101,6 +101,24 @@ public class DateUtils {
         return new SimpleDateFormat("yyyy-MM-dd").format(time);
     }
 
+    /**
+     * 格式化时间
+     *
+     * @param time 时间值 (00:00 -23:59:59)
+     * @return 时间
+     */
+    public static String formatTime(long time) {
+        long temp = time;
+        if (temp == 0L) {
+            return "00:00";
+        }
+        temp /= 1000;
+        long s = (temp % 60); // s秒
+        long m = (temp / 60 % 60);//m分
+        long h = (temp / 60 / 60 % 24);//h小时s
+        return h > 0L ? (h > (long) 9 ? String.valueOf(h) : "" + '0' + h) + ':' + (m > (long) 9 ? String.valueOf(m) : "" + '0' + m) + ':' + (s > (long) 9 ? String.valueOf(s) : "" + '0' + s) : (m > (long) 9 ? String.valueOf(m) : "" + '0' + m) + ':' + (s > (long) 9 ? String.valueOf(s) : "" + '0' + s);
+    }
+
 
     /**
      * 以友好的方式显示时间

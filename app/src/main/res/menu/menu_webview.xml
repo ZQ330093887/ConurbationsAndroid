@@ -27,7 +27,7 @@
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_open_in_browser"
-        android:icon="@drawable/ic_ab_search"
+        android:icon="@drawable/ic_menu_manage"
         android:title="@string/open_in_browser"
         android:orderInCategory="200"
         app:showAsAction="never"/>

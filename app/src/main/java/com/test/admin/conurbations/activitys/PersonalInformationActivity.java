@@ -51,10 +51,6 @@ public class PersonalInformationActivity extends BaseActivity<ActivityPersonalIn
         mBinding.ablPersonalInformationHead.addOnOffsetChangedListener(mStateChangeListener);
     }
 
-    @Override
-    protected void initPresenter() {
-    }
-
     AppBarStateChangeListener mStateChangeListener = new AppBarStateChangeListener() {
         @Override
         public void onStateChanged(AppBarLayout appBarLayout, State state) {

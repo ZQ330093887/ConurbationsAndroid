@@ -44,11 +44,6 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding> {
         mBinding.fabSearchView.setOnClickListener(v -> clickFab());
     }
 
-    @Override
-    protected void initPresenter() {
-
-    }
-
     public void initAppBarSetting() {
         mBinding.ablSearchHand.addOnOffsetChangedListener((appBarLayout, i) -> {
             if (i == 0) {
@@ -60,7 +55,7 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding> {
     }
 
     public void clickFab() {
-        mSearchFragment.getRecyclerView().setSelection(0);
+        mSearchFragment.getRecyclerView().scrollToPosition(0);
     }
 
     private int[] bgImages = {

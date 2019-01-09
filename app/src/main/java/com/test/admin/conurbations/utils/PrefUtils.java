@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 /**
- * Created by _SOLID
+ * Created by ZQiong
  * Date:2016/5/5
  * Time:9:32
  * <p>
@@ -19,6 +19,7 @@ import android.preference.PreferenceManager;
 
 public final class PrefUtils {
     private static final String PRE_NIGHT = "night";
+
     private PrefUtils() {
     }
 
@@ -67,11 +68,12 @@ public final class PrefUtils {
         prefs.edit().remove(key).apply();
     }
 
-    public static void setNight(Context context){
+    public static void setNight(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         prefs.edit().putBoolean(PRE_NIGHT, true).commit();
     }
-    public static boolean isNight(Context context){
+
+    public static boolean isNight(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getBoolean(PRE_NIGHT, false);
     }

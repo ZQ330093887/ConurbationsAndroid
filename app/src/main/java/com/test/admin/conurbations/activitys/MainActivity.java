@@ -28,24 +28,25 @@ import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.databinding.ActivityMainBinding;
 import com.test.admin.conurbations.fragments.BaseFragment;
 import com.test.admin.conurbations.fragments.IndexFragment;
+import com.test.admin.conurbations.fragments.MusicMainFragment;
 import com.test.admin.conurbations.fragments.NBAFragment;
-import com.test.admin.conurbations.fragments.NewsInformationFragment;
 import com.test.admin.conurbations.fragments.PictureFragment;
 import com.test.admin.conurbations.fragments.SearchFragment;
+import com.test.admin.conurbations.model.entity.CityWeather;
 import com.test.admin.conurbations.rxbus.Event;
 import com.test.admin.conurbations.rxbus.RxBus;
 import com.test.admin.conurbations.utils.PhotoCameralUtil;
 import com.test.admin.conurbations.utils.StatusBarUtils;
-import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
 import com.test.admin.conurbations.views.CircleImageView;
 import com.test.admin.conurbations.views.MaterialSearchView;
-import com.test.admin.conurbations.widget.SolidApplication;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import io.reactivex.disposables.Disposable;
 
 
 public class MainActivity extends BaseActivity<ActivityMainBinding>
@@ -61,11 +62,21 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
 
     @Override
     protected void initData(Bundle bundle) {
-        RxBus.getDefault().toObservable(Event.class).subscribe(event -> {
-            int barColor = (int) event.body;
-            StatusBarUtils.setWindowStatusBarColor(getBaseActivity(), barColor);
-
+        Disposable subscribe = RxBus.getDefault().toObservable(Event.class).subscribe(event -> {
+            if (event.eventType.equals(Constants.STATUE_BAR_COLOR)) {
+                int barColor = (int) event.body;
+                StatusBarUtils.setWindowStatusBarColor(getBaseActivity(), barColor);
+            } else if (event.eventType.equals(Constants.WEATHER)) {
+                CityWeather cityWeather = (CityWeather) event.body;
+                if (cityWeather != null && cityWeather.error == 0) {
+                    CityWeather.ResultsBean resultsBean = cityWeather.results.get(0);
+                    CityWeather.ResultsBean.WeatherDataBean weatherDataBean = resultsBean.weather_data.get(0);
+                    initToolbar(mBinding.toolbarMainToolbar, resultsBean.currentCity,
+                            weatherDataBean.weather + "  " + weatherDataBean.temperature);
+                }
+            }
         });
+
         initToolbar(mBinding.toolbarMainToolbar, getResources().getString(R.string.app_name), getResources().getString(R.string.guard_msg));
         //初始化底部导航
         initMainBottomTab();
@@ -73,11 +84,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
         initAddFragment();
         //初始化左边侧滑栏
         initLeftDrawerToggleMenu();
-//        ToastUtils.getInstance().showToast("2.0.2");
-    }
-
-    @Override
-    protected void initPresenter() {
     }
 
     @Override
@@ -86,6 +92,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
             mBinding.dlMainLayout.closeDrawer(GravityCompat.START);
         } else if (mBinding.viewMainSearchMaterialSearch.isOpen()) {
             mBinding.viewMainSearchMaterialSearch.closeSearch();
+        } else if (isNavigatingMain()) {
+            Intent home = new Intent(Intent.ACTION_MAIN);
+            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            home.addCategory(Intent.CATEGORY_HOME);
+            startActivity(home);
         } else {
             super.onBackPressed();
         }
@@ -95,7 +106,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
         mFragments = new ArrayList<>();
         mFragments.add(createFragment(new IndexFragment(), Constants.testColors[0]));
         mFragments.add(createFragment(new PictureFragment(), Constants.testColors[1]));
-        mFragments.add(createFragment(new NewsInformationFragment(), Constants.testColors[2]));
+        mFragments.add(createFragment(new MusicMainFragment(), Constants.testColors[2]));
         mFragments.add(createFragment(new NBAFragment(), Constants.testColors[3]));
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fl_main_content, mFragments.get(0))
@@ -131,7 +142,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
         mBinding.bnbMainView
                 .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_send, "干货").setActiveColor(Constants.toolBarColors[0]))
                 .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_compass, "美图").setActiveColor(Constants.toolBarColors[1]))
-                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_crop, "新闻").setActiveColor(Constants.toolBarColors[2]))
+                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_crop, "音乐").setActiveColor(Constants.toolBarColors[2]))
                 .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_month, "体育").setActiveColor(Constants.toolBarColors[3]))
                 .setFirstSelectedPosition(0)
                 .setMode(BottomNavigationBar.MODE_SHIFTING)
@@ -164,7 +175,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
         } else if (id == R.id.action_Image) {
             startActivity(TelegramGalleryActivity.class);
         } else if (id == R.id.action_search) {
-            mBinding.viewMainSearchMaterialSearch.openSearch();
+            int sp = mBinding.bnbMainView.getCurrentSelectedPosition();
+            if (sp == 2) {
+                Intent intent = new Intent(this, SearchMusicActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("is_playlist", true);
+                startActivity(intent);
+            } else {
+                mBinding.viewMainSearchMaterialSearch.openSearch();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -222,8 +241,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
     MaterialSearchView.OnQueryTextListener queryTextListener = new MaterialSearchView.OnQueryTextListener() {
         @Override
         public boolean onQueryTextSubmit(String query) {
-            Intent intent = new Intent(SolidApplication.getInstance().getApplicationContext()
-                    , SearchActivity.class);
+            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
             intent.putExtra(SearchFragment.CLASS_SEARCH, query);
             startActivity(intent);
             return false;
@@ -242,6 +260,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
         map.put("pageTitle", "用户反馈");
         map.put("toAvatar", "http://www.iyi8.com/uploadfile/2015/1024/20151024114500805.jpg");
         FeedbackAPI.setUICustomInfo(map);
+    }
+
+    private boolean isNavigatingMain() {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fl_main_content);
+        return (currentFragment instanceof MusicMainFragment || currentFragment instanceof IndexFragment
+                || currentFragment instanceof PictureFragment || currentFragment instanceof NBAFragment);
     }
 
     //点击侧滑菜单选择图片

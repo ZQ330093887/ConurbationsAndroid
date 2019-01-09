@@ -12,14 +12,13 @@ import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.presenter.WelfarePresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
-import com.test.admin.conurbations.widget.PullRecycler;
 
 import javax.inject.Inject;
 
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class WelfareFragment extends BaseLazyListFragment<GanHuoDataBean, WelfarePresenter> implements IWelfareView {
+public class WelfareFragment extends BaseSubFragment<GanHuoDataBean, WelfarePresenter> implements IWelfareView {
     private Moment.Range range;
 
     public void setRange(Moment.Range range) {
@@ -35,32 +34,60 @@ public class WelfareFragment extends BaseLazyListFragment<GanHuoDataBean, Welfar
     }
 
     @Override
-    public void setWelfareData(GankData welfareData) {
-        if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
+    protected void loadingData() {
+        mPresenter.getCacheData();
+    }
+
+    @Override
+    public void setCacheData(GankData welfareData) {
+        //从缓存中获取数据
+        mStatusManager.showSuccessLayout();
+        if (welfareData != null && welfareData.results.size() > 0) {
             mDataList.clear();
-        }
-        if (welfareData.results == null || welfareData.results.size() == 0) {
-            recycler.enableLoadMore(false);
+            mDataList.addAll(welfareData.results);
+            mWelfareListAdapter.setList(mDataList);
+            mWelfareListAdapter.notifyDataSetChanged();
         } else {
-            recycler.enableLoadMore(true);
+            mStatusManager.showLoadingLayout();
+            refreshList(1);
+        }
+    }
+
+    @Override
+    public void setWelfareData(GankData welfareData) {
+        mStatusManager.showSuccessLayout();
+        if (welfareData.results == null || welfareData.results.size() == 0) {
+            if (isRefresh) {
+                if (mWelfareListAdapter.list == null || mWelfareListAdapter.list.size() <= 0) {
+                    mStatusManager.showEmptyLayout();
+                }
+            } else {
+                if (page > 1) {
+                    mBinding.get().refreshLayout.finishLoadMoreWithNoMoreData();
+                }
+            }
+        } else {
+            if (isRefresh) {
+                mDataList.clear();
+            } else {
+                mBinding.get().refreshLayout.finishLoadMore(true);
+            }
             mDataList.addAll(welfareData.results);
             mWelfareListAdapter.setList(mDataList);
             mWelfareListAdapter.notifyDataSetChanged();
         }
-        recycler.onRefreshCompleted();
-    }
-
-    @Override
-    protected BaseListAdapter setUpAdapter() {
-        return mWelfareListAdapter;
     }
 
     @Override
     protected void refreshList(int page) {
         if (mPresenter != null) {
-            mPresenter.getWelfareData(isRefresh, page);
-            isRefresh = true;
+            mPresenter.getWelfareData(page);
         }
+    }
+
+    @Override
+    protected BaseListAdapter setUpAdapter() {
+        return mWelfareListAdapter;
     }
 
     @Override

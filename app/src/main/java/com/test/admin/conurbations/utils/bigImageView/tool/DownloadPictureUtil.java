@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
-import com.test.admin.conurbations.utils.FileUtil;
+import com.test.admin.conurbations.utils.FileUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.utils.bigImageView.glide.engine.SimpleFileTarget;
 
@@ -28,7 +28,7 @@ public class DownloadPictureUtil {
 
             @Override
             public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
-                boolean result = FileUtil.copyFile(resource, path, name);
+                boolean result = FileUtils.copyFile(resource, path, name);
                 if (result) {
                     ToastUtils.getInstance().showToast("成功保存到 ".concat(path).concat(name));
                     new SingleMediaScanner(context, path, new SingleMediaScanner.ScanListener() {

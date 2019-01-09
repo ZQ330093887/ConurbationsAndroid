@@ -31,9 +31,4 @@ public class NewsInfoListDetailActivity extends BaseActivity<ActivityNewsInfoLis
                     .commit();
         }
     }
-
-    @Override
-    protected void initPresenter() {
-
-    }
 }

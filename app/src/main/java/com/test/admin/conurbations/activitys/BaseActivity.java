@@ -3,13 +3,16 @@ package com.test.admin.conurbations.activitys;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,8 +20,10 @@ import android.text.TextUtils;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
+import com.test.admin.conurbations.IMusicService;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.annotations.SetLayout;
+import com.test.admin.conurbations.player.PlayManager;
 import com.test.admin.conurbations.utils.CommonUtil;
 import com.test.admin.conurbations.utils.DialogUtils;
 import com.test.admin.conurbations.utils.SaveBitmapUtils;
@@ -40,8 +45,9 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by zhouqiong on 2017/2/27.
  */
-@SetLayout
-public abstract class BaseActivity<VB extends ViewDataBinding> extends AppCompatActivity implements IBaseView {
+
+public abstract class BaseActivity<VB extends ViewDataBinding> extends
+        AppCompatActivity implements ServiceConnection, IBaseView {
 
     private static final String TAG = "BaseActivity";
     protected VB mBinding;
@@ -53,12 +59,11 @@ public abstract class BaseActivity<VB extends ViewDataBinding> extends AppCompat
     public static final String EXTRA_TITLE = "TITLE";
     public static final String BUNDLE_KEY_SHOW_BOTTOM_BAR = "BUNDLE_KEY_SHOW_BOTTOM_BAR";
     public static final String BUNDLE_OVERRIDE = "BUNDLE_OVERRIDE";
+    private PlayManager.ServiceToken mToken;
 
     protected abstract int getLayoutId();
 
     protected abstract void initData(Bundle bundle);
-
-    protected abstract void initPresenter();
 
     @Override
     public BaseActivity getBaseActivity() {
@@ -85,6 +90,7 @@ public abstract class BaseActivity<VB extends ViewDataBinding> extends AppCompat
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mToken = PlayManager.bindToService(this, this);
         if (!isTaskRoot()) {
             Intent mainIntent = getIntent();
             String action = mainIntent.getAction();
@@ -94,7 +100,6 @@ public abstract class BaseActivity<VB extends ViewDataBinding> extends AppCompat
             }
         }
         this.mBinding = DataBindingUtil.setContentView(this, this.getLayoutId());
-        initPresenter();
         initData(savedInstanceState);
     }
 
@@ -113,6 +118,10 @@ public abstract class BaseActivity<VB extends ViewDataBinding> extends AppCompat
     protected void onDestroy() {
         super.onDestroy();
         detachView();
+        if (mToken != null) {
+            PlayManager.unbindFromService(mToken);
+            mToken = null;
+        }
     }
 
     @Override
@@ -318,6 +327,17 @@ public abstract class BaseActivity<VB extends ViewDataBinding> extends AppCompat
 
 
     }
+
+    @Override
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        PlayManager.mService = IMusicService.Stub.asInterface(iBinder);
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName componentName) {
+        PlayManager.mService = null;
+    }
+
 
     @Override
     public void detachView() {

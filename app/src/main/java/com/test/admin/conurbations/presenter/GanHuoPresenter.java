@@ -18,15 +18,17 @@ public class GanHuoPresenter extends BasePresenter<IWelfareView> {
     public GanHuoPresenter() {
     }
 
-    public void getWelfareData(final String type, final int pager, boolean isRefresh) {
+    public void getCacheData(final String type) {
         final String key = "getGankItem" + type;
         final ACache cache = ACache.get(AppUtils.getAppContext());
         Object obj = cache.getAsObject(key);
-        if (obj != null && !isRefresh) {
-            GankData gankData = (GankData) obj;
-            mvpView.setWelfareData(gankData);
-            return;
-        }
+        GankData gankData = (GankData) obj;
+        mvpView.setCacheData(gankData);
+    }
+
+    public void getWelfareData(final String type, final int pager) {
+        final String key = "getGankItem" + type;
+        final ACache cache = ACache.get(AppUtils.getAppContext());
         addSubscription(apiStores.getGanHuo(type, pager),
                 new ApiCallback<GankData>() {
                     @Override
@@ -39,10 +41,12 @@ public class GanHuoPresenter extends BasePresenter<IWelfareView> {
 
                     @Override
                     public void onFailure(String msg) {
+                        mvpView.showError(msg);
                     }
 
                     @Override
                     public void onFinish() {
+                        mvpView.showFinishState();
                     }
                 });
 

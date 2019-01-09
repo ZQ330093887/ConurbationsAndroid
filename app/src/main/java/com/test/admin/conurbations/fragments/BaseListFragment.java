@@ -2,18 +2,25 @@ package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.activitys.BaseViewImpl;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
-import com.test.admin.conurbations.databinding.FragmentBaseListBinding;
+import com.test.admin.conurbations.databinding.FragmentSubListBinding;
 import com.test.admin.conurbations.di.component.DaggerFragmentComponent;
 import com.test.admin.conurbations.di.component.FragmentComponent;
 import com.test.admin.conurbations.di.module.FragmentModule;
 import com.test.admin.conurbations.presenter.BasePresenter;
+import com.test.admin.conurbations.utils.RecyclerUtils;
+import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.widget.ILayoutManager;
-import com.test.admin.conurbations.widget.PullRecycler;
 import com.test.admin.conurbations.widget.SolidApplication;
+import com.test.admin.conurbations.widget.statuslayoutmanage.OnStatusChildClickListener;
+import com.test.admin.conurbations.widget.statuslayoutmanage.StatusLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +33,19 @@ import javax.inject.Inject;
  * 处理懒加载，不需要懒加载这个功能则依然使用或者类
  */
 
-public abstract class BaseListFragment<T, P extends BasePresenter> extends BaseFragment<FragmentBaseListBinding> implements PullRecycler.OnRecyclerRefreshListener {
+public abstract class BaseListFragment<T, P extends BasePresenter>
+        extends BaseFragment<FragmentSubListBinding> implements BaseViewImpl {
 
-    public PullRecycler recycler;
-    private int page = 1;
+    /**
+     * 初始化数据
+     */
+    public int page = 1;
     protected List<T> mDataList;
-    public int action;
+    public boolean isRefresh = false;//不是刷新就是加载更多
+    public StatusLayoutManager mStatusManager;
 
     @Inject
     protected P mPresenter;
-
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -50,7 +60,7 @@ public abstract class BaseListFragment<T, P extends BasePresenter> extends BaseF
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_base_list;
+        return R.layout.fragment_sub_list;
     }
 
     @Override
@@ -60,31 +70,69 @@ public abstract class BaseListFragment<T, P extends BasePresenter> extends BaseF
     }
 
     private void initView() {
-        if (mBinding != null) {
-            recycler = mBinding.get().listView;
-            recycler.setRefreshing();
-            recycler.setOnRefreshListener(this);
-            recycler.setLayoutManager(getLayoutManager());
-            recycler.setAdapter(setUpAdapter());
-        }
+        mStatusManager = new StatusLayoutManager.Builder(mBinding.get().refreshLayout)
+                .setOnStatusChildClickListener(new OnStatusChildClickListener() {
+                    @Override
+                    public void onEmptyChildClick(View view) {
+                    }
+
+                    @Override
+                    public void onErrorChildClick(View view) {
+                        mStatusManager.showLoadingLayout();
+                        isRefresh = true;
+                        page = 0;
+                        refreshList(page);
+                    }
+
+                    @Override
+                    public void onCustomerChildClick(View view) {
+                    }
+                }).build();
+        mStatusManager.showLoadingLayout();
+
+        setupRecyclerView();
+        initRefreshLayout();
+
+        loadingData();
     }
 
-    @Override
-    public void onRefresh(int action) {
-        this.action = action;
+    private void initRefreshLayout() {
+        mBinding.get().refreshLayout.setRefreshHeader(new ClassicsHeader(getBaseActivity()));
+        mBinding.get().refreshLayout.setRefreshFooter(new ClassicsFooter(getBaseActivity()));
+
+        mBinding.get().refreshLayout.setEnableLoadMore(true);
+        mBinding.get().refreshLayout.setOnRefreshListener(refreshLayout -> {
+            page = 1;
+            isRefresh = true;
+            refreshList(page);
+        });
+
+        mBinding.get().refreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            page++;
+            isRefresh = false;
+            refreshList(page);
+        });
+    }
+
+    private void setupRecyclerView() {
         if (mDataList == null) {
             mDataList = new ArrayList<>();
         }
-
-        if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
-            page = 1;
+        if (mBinding != null) {
+            RecyclerUtils.initLinearLayoutVertical(mBinding.get().listView);
+            if (getLayoutManager() != null) {
+                mBinding.get().listView.setLayoutManager(getLayoutManager().getLayoutManager());
+            }
+            mBinding.get().listView.setAdapter(setUpAdapter());
         }
-        refreshList(page++);
     }
 
-    public PullRecycler getRecyclerView() {
-        return recycler;
+
+    public RecyclerView getRecyclerView() {
+        return mBinding.get().listView;
     }
+
+    protected abstract void loadingData();
 
     protected abstract ILayoutManager getLayoutManager();
 
@@ -110,6 +158,27 @@ public abstract class BaseListFragment<T, P extends BasePresenter> extends BaseF
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+    }
+
+    public void finishRefreshAndLoadMore() {
+        mBinding.get().refreshLayout.finishRefresh();
+        mBinding.get().refreshLayout.finishLoadMore();
+    }
+
+    @Override
+    public void showError(String message) {
+
+        if (mDataList != null && mDataList.size() > 0) {
+            ToastUtils.getInstance().showToast(message);
+        } else {
+            mStatusManager.showErrorLayout();
+        }
+    }
+
+    @Override
+    public void showFinishState() {
+        //请求完毕，不管成功失败
+        finishRefreshAndLoadMore();
     }
 
     @Override

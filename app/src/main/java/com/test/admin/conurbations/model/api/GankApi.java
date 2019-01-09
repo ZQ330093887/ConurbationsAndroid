@@ -15,7 +15,7 @@ package com.test.admin.conurbations.model.api;
  * limitations under the License.
  */
 
-import com.test.admin.conurbations.utils.FileUtil;
+import com.test.admin.conurbations.utils.FileUtils;
 
 /**
  * @author zhouqiong
@@ -24,7 +24,7 @@ import com.test.admin.conurbations.utils.FileUtil;
 public interface GankApi {
     String BASE_URL = "https://gank.io/api/";
 
-    String imgPath = FileUtil.getSDPath() + "/MyPictures";
+    String imgPath = FileUtils.getSDPath() + "/MyPictures";
 
     class status {
         public static final int success = 200;

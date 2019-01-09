@@ -6,9 +6,9 @@ package com.test.admin.conurbations.rxbus;
 
 public class Event {
     public Object body;
-    public EventType eventType;
+    public String eventType;
 
-    public Event(Object body, EventType eventType) {
+    public Event(Object body, String eventType) {
         this.body = body;
         this.eventType = eventType;
     }

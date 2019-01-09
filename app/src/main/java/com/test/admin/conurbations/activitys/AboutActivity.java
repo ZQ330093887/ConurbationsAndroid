@@ -20,12 +20,6 @@ public class AboutActivity extends BaseActivity<ActivityAboutBinding> {
         mBinding.ctlAboutHead.setTitle(getString(R.string.set_about));
         mBinding.tvAboutVersionName.setText(getVersion());
     }
-
-    @Override
-    protected void initPresenter() {
-
-    }
-
     private String getVersion() {
         try {
             PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);

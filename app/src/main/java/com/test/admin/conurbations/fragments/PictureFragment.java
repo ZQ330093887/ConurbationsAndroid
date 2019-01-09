@@ -5,10 +5,10 @@ import android.support.v4.app.Fragment;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.FragmentAdapter;
+import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.databinding.FragmentPictureBinding;
 import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.rxbus.Event;
-import com.test.admin.conurbations.rxbus.EventType;
 import com.test.admin.conurbations.rxbus.RxBus;
 
 /**
@@ -44,7 +44,7 @@ public class PictureFragment extends BaseFragment<FragmentPictureBinding> {
     }
 
     public void initAppBarSetting() {
-        RxBus.getDefault().post(new Event(R.color.colorTealPrimaryDark, EventType.STATUE_BAR_COLOR));
+        RxBus.getDefault().post(new Event(R.color.colorTealPrimaryDark, Constants.STATUE_BAR_COLOR));
         mBinding.get().ablPictureHead.addOnOffsetChangedListener((appBarLayout, i) -> {
             if (i != 0) {
                 mBinding.get().fabPictureView.hide();
@@ -57,7 +57,7 @@ public class PictureFragment extends BaseFragment<FragmentPictureBinding> {
     }
 
     public void clickFab() {
-        ((BaseLazyListFragment) fragmentPrettyFragmentPagerAdapter.getFragment(mBinding.get().vpPictureContent.getCurrentItem())).getRecyclerView().setSelection(0);
+        ((BaseSubFragment) fragmentPrettyFragmentPagerAdapter.getFragment(mBinding.get().vpPictureContent.getCurrentItem())).getRecyclerView().scrollToPosition(0);
     }
 
     @Override

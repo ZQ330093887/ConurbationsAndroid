@@ -25,11 +25,6 @@ public class OtherActivity extends BaseActivity<ActivityOtherBinding> implements
     }
 
     @Override
-    protected void initPresenter() {
-
-    }
-
-    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.rl_other_clean_cache) {

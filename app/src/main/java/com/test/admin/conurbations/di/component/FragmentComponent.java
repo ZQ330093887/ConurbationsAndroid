@@ -4,11 +4,13 @@ import android.app.Activity;
 
 import com.test.admin.conurbations.di.annotation.FragmentScope;
 import com.test.admin.conurbations.di.module.FragmentModule;
+import com.test.admin.conurbations.fragments.DownloadManagerFragment;
+import com.test.admin.conurbations.fragments.DownloadedFragment;
 import com.test.admin.conurbations.fragments.GanHuoFragment;
 import com.test.admin.conurbations.fragments.GankDayFragment;
+import com.test.admin.conurbations.fragments.MusicIndexFragment;
 import com.test.admin.conurbations.fragments.NbaIndexFragment;
-import com.test.admin.conurbations.fragments.NewsInfoIndexFragment;
-import com.test.admin.conurbations.fragments.NewsInfoListFragment;
+import com.test.admin.conurbations.fragments.NetPlayListFragment;
 import com.test.admin.conurbations.fragments.PrettyPicturesFragment;
 import com.test.admin.conurbations.fragments.PrettyPicturesListFragmentList;
 import com.test.admin.conurbations.fragments.SearchFragment;
@@ -30,11 +32,15 @@ public interface FragmentComponent {
 
     void inject(GanHuoFragment fragment);
 
+    void inject(DownloadedFragment fragment);
+
+    void inject(DownloadManagerFragment fragment);
+
     void inject(NbaIndexFragment fragment);
 
-    void inject(NewsInfoIndexFragment fragment);
+    void inject(MusicIndexFragment fragment);
 
-    void inject(NewsInfoListFragment fragment);
+    void inject(NetPlayListFragment fragment);
 
     void inject(PrettyPicturesListFragmentList fragment);
 
@@ -45,5 +51,4 @@ public interface FragmentComponent {
     void inject(SearchFragment fragment);
 
     void inject(PrettyPicturesFragment fragment);
-
 }

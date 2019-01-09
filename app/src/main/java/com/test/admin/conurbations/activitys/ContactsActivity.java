@@ -30,10 +30,6 @@ public class ContactsActivity extends BaseActivity<ActivityContactsBinding> {
         mContactsList.addAll(Contact.getNumber(this));
     }
 
-    @Override
-    protected void initPresenter() {
-    }
-
     private void initView() {
         FragmentContactsAdapter mContactsAdapter = new FragmentContactsAdapter(mContactsList, R.layout.item_contacts);
 

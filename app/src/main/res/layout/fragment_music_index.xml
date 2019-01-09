@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimens_4_dp"
+                app:cardCornerRadius="@dimen/dimens_2_dp"
+                app:cardElevation="@dimen/dimens_2_dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.test.admin.conurbations.views.LocalItemView
+                        android:id="@+id/localView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimens_56_dp"
+                        android:gravity="center_vertical"
+                        app:iv_icon="@drawable/item_music"
+                        app:iv_icon_color="@color/colorPrimary"
+                        app:tv_desc="@string/default_num"
+                        app:tv_name="@string/item_local" />
+
+
+                    <com.test.admin.conurbations.views.LocalItemView
+                        android:id="@+id/historyView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimens_56_dp"
+                        android:gravity="center_vertical"
+                        app:iv_icon="@drawable/ic_history_black"
+                        app:iv_icon_color="@color/amber"
+                        app:tv_desc="@string/default_num"
+                        app:tv_name="@string/item_history" />
+
+
+                    <com.test.admin.conurbations.views.LocalItemView
+                        android:id="@+id/favoriteView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimens_56_dp"
+                        android:gravity="center_vertical"
+                        app:iv_icon="@drawable/item_favorite"
+                        app:iv_icon_color="@color/colorIndigoAccent"
+                        app:tv_desc="@string/default_num"
+                        app:tv_name="@string/item_favorite" />
+
+
+                    <com.test.admin.conurbations.views.LocalItemView
+                        android:id="@+id/downloadView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimens_56_dp"
+                        android:gravity="center_vertical"
+                        app:iv_icon="@drawable/item_download"
+                        app:tv_desc="@string/default_num"
+                        app:tv_name="@string/item_download" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dimens_4_dp"
+                android:orientation="vertical"
+                app:cardCornerRadius="@dimen/dimens_2_dp"
+                app:cardElevation="@dimen/dimens_2_dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimens_16_dp"
+                            android:layout_marginLeft="@dimen/dimens_16_dp"
+                            android:layout_weight="1"
+                            android:text="@string/playlist_online"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimens_16_sp" />
+
+                        <ImageView
+                            android:id="@+id/playlistAddIv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_playlist_add" />
+
+                        <ImageView
+                            android:id="@+id/playlistManagerIv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/dimens_16_dp"
+                            android:src="@drawable/ic_more" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimens_1_dp"
+                        android:background="@color/divider_line" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/playlistRcv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:clipToPadding="false"
+                            android:minHeight="@dimen/dimens_200_dp"
+                            android:paddingTop="@dimen/dimens_8_dp" />
+
+                        <ProgressBar
+                            android:id="@+id/loading_progress_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:indeterminate="true"
+                            android:visibility="gone"
+                            tools:visibility="visible" />
+
+                        <!--ERROR PANEL-->
+                        <include
+                            android:id="@+id/error_panel"
+                            layout="@layout/error_retry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:visibility="gone"
+                            tools:visibility="visible" />
+
+                        <include
+                            android:id="@+id/empty_state_view"
+                            layout="@layout/view_song_empty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="@dimen/dimens_50_dp"
+                            tools:visibility="visible" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</layout>

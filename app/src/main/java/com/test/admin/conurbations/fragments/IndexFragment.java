@@ -5,10 +5,10 @@ import android.support.v4.app.Fragment;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.FragmentAdapter;
+import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.databinding.FragmentIndexBinding;
 import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.rxbus.Event;
-import com.test.admin.conurbations.rxbus.EventType;
 import com.test.admin.conurbations.rxbus.RxBus;
 
 /**
@@ -23,7 +23,7 @@ public class IndexFragment extends BaseFragment<FragmentIndexBinding> {
 
     @Override
     protected void initData(Bundle bundle) {
-        RxBus.getDefault().post(new Event(R.color.theme_primary, EventType.STATUE_BAR_COLOR));
+        RxBus.getDefault().post(new Event(R.color.theme_primary, Constants.STATUE_BAR_COLOR));
 
         String[] mTitles = getActivity().getResources().getStringArray(R.array.index_tab);
         Fragment[] mFragments = new Fragment[mTitles.length];

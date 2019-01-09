@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="musiclake1" />
+    <version value="4" />
+    <list>
+        <mapping class="com.test.admin.conurbations.model.Music" />
+        <mapping class="com.test.admin.conurbations.model.entity.NewsList" />
+        <mapping class="com.test.admin.conurbations.model.db.MusicToPlaylist" />
+        <mapping class="com.test.admin.conurbations.model.entity.Album" />
+        <mapping class="com.test.admin.conurbations.model.entity.Artist" />
+        <mapping class="com.test.admin.conurbations.model.entity.SearchHistoryBean" />
+        <mapping class="com.test.admin.conurbations.utils.download.TasksManagerModel" />
+    </list>
+</litepal>

@@ -28,10 +28,8 @@ public class AppClient {
             }
             OkHttpClient okHttpClient;
             try {
-                SSLContext sslcontext = SSLContext.getInstance("TLSv1.2");
-                sslcontext.init(null, null, null);
-                SSLSocketFactory sslSocketFactory = new NoSSLv3SocketFactory(sslcontext.getSocketFactory());
-                builder.sslSocketFactory(sslSocketFactory);
+                NoSSLv3SocketFactoryextends factory = new NoSSLv3SocketFactoryextends();
+                builder.sslSocketFactory(factory);
                 okHttpClient = builder.build();
             } catch (Exception e) {
                 throw new RuntimeException(e);

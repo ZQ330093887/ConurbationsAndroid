@@ -10,11 +10,10 @@ import com.test.admin.conurbations.adapter.GankDayAdapter;
 import com.test.admin.conurbations.model.response.GankItem;
 import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.presenter.GankDayPresenter;
+import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
-import com.test.admin.conurbations.widget.PullRecycler;
 
-import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,18 +21,13 @@ import javax.inject.Inject;
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class GankDayFragment extends BaseLazyListFragment<List<GankItem>, GankDayPresenter> implements IGankDayView {
+public class GankDayFragment extends BaseSubFragment<List<GankItem>, GankDayPresenter> implements IGankDayView {
 
     private Moment.Range range;
 
     public void setRange(Moment.Range range) {
         this.range = range;
     }
-
-    Calendar calendar = Calendar.getInstance();
-    int Year = calendar.get(Calendar.YEAR);
-    int Month = calendar.get(Calendar.MONTH) + 1;
-    int Day = calendar.get(Calendar.DAY_OF_MONTH);
 
     @Inject
     GankDayAdapter mGankDayAdapter;
@@ -43,22 +37,41 @@ public class GankDayFragment extends BaseLazyListFragment<List<GankItem>, GankDa
         getFragmentComponent().inject(this);
     }
 
+
+    @Override
+    protected void loadingData() {
+        mPresenter.getCacheData();
+    }
+
+    @Override
+    public void setCacheData(List<GankItem> todayData) {
+        mStatusManager.showSuccessLayout();
+        if (todayData != null && todayData.size() > 0) {
+            mDataList.clear();
+            mDataList.add(todayData);
+            mGankDayAdapter.setList(mDataList);
+            mGankDayAdapter.notifyDataSetChanged();
+        } else {
+            mStatusManager.showLoadingLayout();
+            refreshList(1);
+        }
+    }
+
     @Override
     public void setGankDayData(List<GankItem> items) {
-        if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
-            mDataList.clear();
-        }
+        mStatusManager.showSuccessLayout();
+        mBinding.get().refreshLayout.setEnableLoadMore(false);
+
         if (items.size() == 0) {
-            mPresenter.getGankDayData(Year, Month, Day--, true);
-            recycler.enableLoadMore(false);
+            mStatusManager.showEmptyLayout();
         } else {
-            recycler.enableLoadMore(false);
+            mDataList.clear();
             mDataList.add(items);
             mGankDayAdapter.setList(mDataList);
             mGankDayAdapter.notifyDataSetChanged();
         }
-        recycler.onRefreshCompleted();
     }
+
 
     @Override
     protected BaseListAdapter setUpAdapter() {
@@ -66,15 +79,14 @@ public class GankDayFragment extends BaseLazyListFragment<List<GankItem>, GankDa
     }
 
     @Override
-    protected void refreshList(int page) {
-        if (mPresenter != null) {
-            mPresenter.getGankDayData(Year, Month, Day, isRefresh);
-            isRefresh = true;
-        }
+    protected ILayoutManager getLayoutManager() {
+        return new MyStaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
     }
 
     @Override
-    protected ILayoutManager getLayoutManager() {
-        return new MyStaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+    protected void refreshList(int page) {
+        if (mPresenter != null) {
+            mPresenter.getDayData();
+        }
     }
 }

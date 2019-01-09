@@ -5,6 +5,7 @@
     <data></data>
 
     <RelativeLayout
+        android:id="@+id/wel_container"
         style="@style/FitSystemWindows"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

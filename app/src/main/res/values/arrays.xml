@@ -51,13 +51,27 @@
     </string-array>
 
     <string-array name="news_info_tab">
-        <item>知乎</item>
-        <item>心理学</item>
+        <!--<item>我的</item>-->
+        <!--<item>发现</item>-->
+        <item>排行榜</item>
     </string-array>
 
-    <string-array name="news_info_tab_id">
-        <item>5YyX5Lqs</item>
-        <item>13</item>
+
+    <string-array name="music_mv">
+        <item>百度音乐榜单</item>
+        <item>QQ音乐榜单</item>
+        <item>网易云音乐榜单</item>
+    </string-array>
+
+    <string-array name="my_mv">
+        <item>排行榜</item>
+        <item>最近更新</item>
+    </string-array>
+
+    <string-array name="my_download">
+        <item>已缓存的歌</item>
+        <item>已下载的歌</item>
+        <item>下载中</item>
     </string-array>
 
     <array name="url">
