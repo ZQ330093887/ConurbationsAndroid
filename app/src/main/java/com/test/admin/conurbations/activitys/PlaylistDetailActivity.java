@@ -166,7 +166,7 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
             }
             SaveBitmapUtils.loadImageView(this, coverUrl, mBinding.albumArt);
         }
-        if (musicList.size() == 0) {
+        if (mAdapter.list ==null || mAdapter.list.size() == 0) {
             //显示空状态
             statusLayoutManager.showEmptyLayout();
         }
@@ -176,7 +176,7 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
     public void removeMusic(int position) {
         musicList.remove(position);
         mAdapter.notifyItemRemoved(position);
-        if (musicList.size() == 0) {
+        if (mAdapter.list ==null || mAdapter.list.size() == 0) {
             //显示空状态
             statusLayoutManager.showEmptyLayout();
         }
@@ -220,7 +220,9 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
                     musicList.clear();
                     PlayHistoryLoader.clearPlayHistory();
                     mAdapter.notifyDataSetChanged();
-                    statusLayoutManager.showEmptyLayout();
+                    if (mAdapter.list == null || mAdapter.list.size() <= 0) {
+                        statusLayoutManager.showEmptyLayout();
+                    }
                     RxBus.getDefault().post(new Event(mPlaylist, Constants.PLAYLIST_HISTORY_ID));
 
                 } else if (mPresenter != null) {
@@ -261,7 +263,7 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
     //初始化空View
     private void initEmptyView() {
         if (statusLayoutManager == null) {
-            statusLayoutManager = new StatusLayoutManager.Builder(mBinding.recyclerView)
+            statusLayoutManager = new StatusLayoutManager.Builder(mBinding.mainContent)
                     .setDefaultEmptyClickViewVisible(false)
                     .setOnStatusChildClickListener(new OnStatusChildClickListener() {
                         @Override
