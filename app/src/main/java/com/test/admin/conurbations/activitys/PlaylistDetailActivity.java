@@ -26,10 +26,11 @@ import com.test.admin.conurbations.utils.LogUtil;
 import com.test.admin.conurbations.utils.NavigationHelper;
 import com.test.admin.conurbations.utils.SaveBitmapUtils;
 import com.test.admin.conurbations.utils.StatusBarUtil;
-import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.utils.rom.OnlinePlaylistUtils;
 import com.test.admin.conurbations.utils.rom.UIUtils;
 import com.test.admin.conurbations.views.AlertDialog;
+import com.test.admin.conurbations.widget.statuslayoutmanage.OnStatusChildClickListener;
+import com.test.admin.conurbations.widget.statuslayoutmanage.StatusLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,7 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
     private SongAdapter mAdapter;
     private ArrayList<Music> musicList;
     private PlayListDetailPresenter mPresenter;
+    private StatusLayoutManager statusLayoutManager;
 
     @Override
     protected int getLayoutId() {
@@ -55,6 +57,7 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
         StatusBarUtil.immersive(this);
         StatusBarUtil.setPaddingSmart(this, mBinding.toolbar);
         StatusBarUtil.darkMode(this, false);
+        initEmptyView();
         setToolbarTitle();
         initView();
         loadingData();
@@ -142,6 +145,7 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
 
     @Override
     public void showPlaylistSongs(List<Music> songList) {
+        statusLayoutManager.showSuccessLayout();
         if (songList != null) {
             musicList.addAll(songList);
             mAdapter.setList(musicList);
@@ -164,9 +168,7 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
         }
         if (musicList.size() == 0) {
             //显示空状态
-//            showEmptyState();
-
-            ToastUtils.getInstance().showToast("这里应该显示空状态");
+            statusLayoutManager.showEmptyLayout();
         }
     }
 
@@ -176,8 +178,7 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
         mAdapter.notifyItemRemoved(position);
         if (musicList.size() == 0) {
             //显示空状态
-//            showEmptyState();
-            ToastUtils.getInstance().showToast("这里应该显示空状态");
+            statusLayoutManager.showEmptyLayout();
         }
 
         mAdapter.notifyDataSetChanged();
@@ -219,8 +220,7 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
                     musicList.clear();
                     PlayHistoryLoader.clearPlayHistory();
                     mAdapter.notifyDataSetChanged();
-                    // TODO: 2018/12/11 这里需要设置空状态
-//                    showEmptyState()
+                    statusLayoutManager.showEmptyLayout();
                     RxBus.getDefault().post(new Event(mPlaylist, Constants.PLAYLIST_HISTORY_ID));
 
                 } else if (mPresenter != null) {
@@ -258,6 +258,30 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
         return super.onOptionsItemSelected(item);
     }
 
+    //初始化空View
+    private void initEmptyView() {
+        if (statusLayoutManager == null) {
+            statusLayoutManager = new StatusLayoutManager.Builder(mBinding.recyclerView)
+                    .setDefaultEmptyClickViewVisible(false)
+                    .setOnStatusChildClickListener(new OnStatusChildClickListener() {
+                        @Override
+                        public void onEmptyChildClick(View view) {
+                        }
+
+                        @Override
+                        public void onErrorChildClick(View view) {
+                            statusLayoutManager.showLoadingLayout();
+                            loadingData();
+                        }
+
+                        @Override
+                        public void onCustomerChildClick(View view) {
+                        }
+                    }).build();
+        }
+        statusLayoutManager.showLoadingLayout();
+    }
+
     @Override
     public void success(int type) {
         onBackPress();
@@ -265,12 +289,5 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
 
     private void onBackPress() {
         this.onBackPressed();
-    }
-
-    /**
-     * 点击重试按钮响应事件
-     */
-    private void retryLoading() {
-        loadingData();
     }
 }
