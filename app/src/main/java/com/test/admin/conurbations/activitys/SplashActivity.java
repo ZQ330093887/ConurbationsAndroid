@@ -31,6 +31,8 @@ import com.test.admin.conurbations.retrofit.RequestCallBack;
 import com.test.admin.conurbations.rxbus.Event;
 import com.test.admin.conurbations.rxbus.RxBus;
 import com.test.admin.conurbations.utils.MusicUtils;
+import com.test.admin.conurbations.utils.PrefUtils;
+import com.test.admin.conurbations.utils.SPUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.views.AlertDialog;
 import com.umeng.analytics.MobclickAgent;
@@ -49,6 +51,7 @@ import io.reactivex.disposables.Disposable;
 public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
     public AMapLocationClient mLocationClient = null;
     private AMapLocationClientOption mLocationOption = null;
+    private Disposable subscribe;
 
     private static final int REQUEST_PERMISSION_SEETING = 1000;
     private static final int ANIMATION_DURATION = 2000;
@@ -88,7 +91,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
     }
 
     private void applyPermissions() {
-        Disposable subscribe = new RxPermissions(this).request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        subscribe = new RxPermissions(this).request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.READ_PHONE_STATE)
                 .subscribe(granted -> {
@@ -146,20 +149,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
                 mLocationClient.onDestroy();//销毁定位客户端，同时销毁本地定位服务。
             }
 
-            GankService gankService = ApiManager.getInstance().create(GankService.class, Constants.BASE_PLAYER_URL);
-            ApiManager.request(gankService.getCityWeather(city),
-                    new RequestCallBack<CityWeather>() {
-                        @Override
-                        public void success(CityWeather result) {
-                            RxBus.getDefault().post(new Event(result, Constants.WEATHER));
-                        }
-
-                        @Override
-                        public void error(String msg) {
-                            RxBus.getDefault().post(new Event(new CityWeather(), Constants.WEATHER));
-                        }
-                    });
-
+            PrefUtils.putString(this, city, city);
         }
     };
 
@@ -181,6 +171,16 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (subscribe != null && !subscribe.isDisposed()) {
+            subscribe.dispose();
+            subscribe = null;
+        }
     }
 
     @Override

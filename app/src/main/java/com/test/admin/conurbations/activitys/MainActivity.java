@@ -32,10 +32,14 @@ import com.test.admin.conurbations.fragments.MusicMainFragment;
 import com.test.admin.conurbations.fragments.NBAFragment;
 import com.test.admin.conurbations.fragments.PictureFragment;
 import com.test.admin.conurbations.fragments.SearchFragment;
+import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.entity.CityWeather;
+import com.test.admin.conurbations.retrofit.ApiManager;
+import com.test.admin.conurbations.retrofit.RequestCallBack;
 import com.test.admin.conurbations.rxbus.Event;
 import com.test.admin.conurbations.rxbus.RxBus;
 import com.test.admin.conurbations.utils.PhotoCameralUtil;
+import com.test.admin.conurbations.utils.PrefUtils;
 import com.test.admin.conurbations.utils.StatusBarUtils;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
 import com.test.admin.conurbations.views.CircleImageView;
@@ -67,17 +71,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
             if (event.eventType.equals(Constants.STATUE_BAR_COLOR)) {
                 int barColor = (int) event.body;
                 StatusBarUtils.setWindowStatusBarColor(getBaseActivity(), barColor);
-            } else if (event.eventType.equals(Constants.WEATHER)) {
-                CityWeather cityWeather = (CityWeather) event.body;
-                if (cityWeather != null && cityWeather.error == 0) {
-                    CityWeather.ResultsBean resultsBean = cityWeather.results.get(0);
-                    CityWeather.ResultsBean.WeatherDataBean weatherDataBean = resultsBean.weather_data.get(0);
-                    initToolbar(mBinding.toolbarMainToolbar, resultsBean.currentCity,
-                            weatherDataBean.weather + "  " + weatherDataBean.temperature);
-                }
             }
         });
         initToolbar(mBinding.toolbarMainToolbar, getResources().getString(R.string.app_name), getResources().getString(R.string.guard_msg));
+        //根据定位获取天气信息
+        getWeather();
         //初始化底部导航
         initMainBottomTab();
         //初始化主Activity(底部导航对应的Fragment)
@@ -266,6 +264,27 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fl_main_content);
         return (currentFragment instanceof MusicMainFragment || currentFragment instanceof IndexFragment
                 || currentFragment instanceof PictureFragment || currentFragment instanceof NBAFragment);
+    }
+
+    private void getWeather() {
+        String city = PrefUtils.getString(this, "city", "北京");
+        GankService gankService = ApiManager.getInstance().create(GankService.class, Constants.BASE_PLAYER_URL);
+        ApiManager.request(gankService.getCityWeather(city),
+                new RequestCallBack<CityWeather>() {
+                    @Override
+                    public void success(CityWeather result) {
+                        if (result != null && result.error == 0) {
+                            CityWeather.ResultsBean resultsBean = result.results.get(0);
+                            CityWeather.ResultsBean.WeatherDataBean weatherDataBean = resultsBean.weather_data.get(0);
+                            initToolbar(mBinding.toolbarMainToolbar, resultsBean.currentCity,
+                                    weatherDataBean.weather + "  " + weatherDataBean.temperature);
+                        }
+                    }
+
+                    @Override
+                    public void error(String msg) {
+                    }
+                });
     }
 
     //点击侧滑菜单选择图片
