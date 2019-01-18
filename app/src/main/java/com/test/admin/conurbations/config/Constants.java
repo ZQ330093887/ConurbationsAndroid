@@ -58,6 +58,7 @@ public class Constants {
 
     //歌曲类型
     public static final String LOCAL = "local";
+    public static final String CUSTOM = "custom";//自定义
     public static final String QQ = "qq";
     public static final String XIAMI = "xiami";
     public static final String BAIDU = "baidu";
@@ -66,14 +67,18 @@ public class Constants {
     public static final String PARAM_METHOD = "method";
     public static final String PARAM_TYPE = "type";
     public static final String PARAM_SIZE = "size";
-    public static final String PARAM_PAGE_SIZE = "page_size";
-    public static final String PARAM_PAGE_NO = "page_no";
+    public static final String MV_TITLE = "mv_title";
+    public static final String MV_ID = "mv_id";
     public static final String PARAM_OFFSET = "offset";
     public static final String PARAM_LIMIT = "limit";
     public static final String WEATHER = "weather";
     public static final String PARAM_TING_UID = "tinguid";
     public static final String PARAM_ALBUM_ID = "album_id";
     public static final String PARAM_QUERY = "query";
+
+    //百度电台列表
+    public static final String BAIDU_RADIO_LIST = "baidu_radio_list";
+    public static final String NETEASE_ARITIST_LIST = "netease_artist_list";
 
     public static final String SP_KEY_SONG_QUALITY = "song_quality";
     public static final String META_CHANGED_EVENT = "meta_changed_event";//播放状态改版
@@ -107,9 +112,7 @@ public class Constants {
 
     public static final String BASE_PLAYER_URL = "https://player.zzsun.cc";
     public static final String BASE_TEST_PLAYER_URL = "https://player-test.zzsun.cc/";
-    //    public static final String BASE_NETEASE_URL = "http://192.168.123.44:3000";
-    public static final String BASE_NETEASE_URL = "https://netease.api.zzsun.cc/";
-    //    public static final String BASE_NETEASE_URL = "http://musicapi.leanapp.cn/";
+    public static final String BASE_NETEASE_URL = "http://musicapi.leanapp.cn/";
     //bugly app_id
     public static final String BUG_APP_ID = "fd892b37ea";
 

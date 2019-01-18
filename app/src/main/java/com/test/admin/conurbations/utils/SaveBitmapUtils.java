@@ -142,7 +142,7 @@ public class SaveBitmapUtils {
                     @Override
                     public void onLoadFailed(Exception e, Drawable errorDrawable) {
                         // 下载失败回调
-                        ToastUtils.getInstance().showToast("下载失败回调");
+//                        ToastUtils.getInstance().showToast("下载失败回调");
                     }
 
                     @Override

@@ -59,12 +59,12 @@ public class PlayListPresenter extends BasePresenter<IBaiduPlayList> {
                         }
 
                         mvpView.showOnlineMusicList(musicList);
+                        mvpView.showFinishState();
                     }
 
                     @Override
                     public void error(String msg) {
-                        ToastUtils.getInstance().showToast(msg);
-                        System.out.println("***********" + msg);
+                        mvpView.showError(msg);
                     }
                 });
     }

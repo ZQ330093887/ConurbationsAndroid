@@ -16,8 +16,8 @@
 
 
     <color name="status_layout_background_color">#EBEBEB</color>
-    <color name="status_layout_tip_text_color">#a6172d</color>
-    <color name="status_layout_click_view_text_color">#a6172d</color>
+    <color name="status_layout_tip_text_color">#9E9E9E</color>
+    <color name="status_layout_click_view_text_color">#212121</color>
 
     <!--basic color-->
     <color name="white">#ffffff</color>

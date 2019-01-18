@@ -5,6 +5,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="transition_album">AlbumTransition</string>
+    <string name="transition_cover">CoverTransition</string>
     <string name="activity_home">首页</string>
 
     <string name="contacts">通讯录</string>
@@ -44,7 +46,7 @@
     <string name="permission_hint">软件必须获取相关权限</string>
 
     <string name="status_layout_manager_loading">加载中...</string>
-    <string name="status_layout_manager_empty">还没有内容</string>
+    <string name="status_layout_manager_empty">暂无信息</string>
     <string name="status_layout_manager_error">似乎出了点问题</string>
     <string name="status_layout_manager_retry">重新加载</string>
 
@@ -234,4 +236,21 @@
 
     <string name="setting_key_mobile_wifi">mobile_wifi</string>
     <string name="setting_key_sound_effect">sound_effect</string>
+
+
+    <!-- 在线音乐-->
+    <string name="playlist_num">%1$s("%2$d")</string>
+    <string name="charts_baidu">百度排行榜</string>
+    <string name="charts_netease">网友精选碟</string>
+    <string name="cate_huayu">华语</string>
+    <string name="cate_gufeng">古风</string>
+    <string name="cate_select">选择分类</string>
+    <string name="cate_all">全部</string>
+    <string name="cate_liuxing">流行</string>
+    <string name="see_all">查看全部</string>
+    <string name="radio">电台列表</string>
+    <string name="hot_artist">热门歌手</string>
+    <string name="all_artist">歌手列表</string>
+    <string name="genes">流派</string>
+    <string name="radio_list">电台</string>
 </resources>

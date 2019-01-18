@@ -21,7 +21,8 @@
             android:paddingTop="@dimen/dimens_16_dp"
             android:transitionName="translate_view"
             app:border_color="@color/colorLimePrimaryCenter"
-            app:border_width="@dimen/dimens_2_dp" />
+            app:border_width="@dimen/dimens_2_dp"
+            app:type="circle" />
 
         <TextView
             android:layout_width="match_parent"

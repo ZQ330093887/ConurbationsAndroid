@@ -2,7 +2,6 @@ package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.View;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.FragmentAdapter;
@@ -34,18 +33,18 @@ public class NewsInformationFragment extends BaseFragment<FragmentNewsInformatio
     protected void initData(Bundle bundle) {
         RxBus.getDefault().post(new Event(R.color.colorBluePrimary, Constants.STATUE_BAR_COLOR));
         String[] mTitles = getActivity().getResources().getStringArray(R.array.news_info_tab);
-//
         Fragment[] mFragments = new Fragment[mTitles.length];
-//        mFragments[0] = MusicIndexFragment.newInstance();//我的
-//
-//        mFragments[1] = ChartsFragment.newInstance();//排行榜
 
-        mFragments[0] = new NetPlayListFragment();
-        ((NetPlayListFragment) mFragments[0]).setTable("排行榜", Constants.BAIDU);
-        mBinding.get().tlNewsInformationHead.setVisibility(View.GONE);
+        mFragments[0] = MusicIndexFragment.newInstance();//我的
+
+        mFragments[1] = DiscoverFragment.newInstance();//发现
+
+        mFragments[2] = ChartsFragment.newInstance();//排行榜
+
+        mFragments[3] = MVFragment.newInstance();//MV
         FragmentAdapter mInformationFragmentPagerAdapter = new FragmentAdapter(getChildFragmentManager(), mTitles, mFragments);
         mBinding.get().vpNewsInformationContent.setAdapter(mInformationFragmentPagerAdapter);
-//        mBinding.get().vpNewsInformationContent.setOffscreenPageLimit(3);
+        mBinding.get().vpNewsInformationContent.setOffscreenPageLimit(3);
         mBinding.get().tlNewsInformationHead.setupWithViewPager(mBinding.get().vpNewsInformationContent);
         mBinding.get().tlNewsInformationHead.setBackgroundColor(getArguments().getInt("content"));
     }

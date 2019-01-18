@@ -1,7 +1,9 @@
 package com.test.admin.conurbations.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.widget.TextView;
 
@@ -258,6 +260,16 @@ public class MusicUtils {
 
         if (music.type.equals(Constants.BAIDU)) music.isCp = false;
         return new MusicInfo(music.mid, music.mid, music.title, artistsBeans, album, music.type, music.isCp, music.isDl, new MusicInfo.QualityBean(music.hq, music.sq, music.high));
+    }
+
+
+    /**
+     * 分享链接
+     */
+    public static void openBrowser(Context context, String url) {
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        context.startActivity(intent);
     }
 
 

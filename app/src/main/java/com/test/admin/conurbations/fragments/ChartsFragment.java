@@ -2,6 +2,7 @@ package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.FragmentAdapter;
@@ -35,16 +36,22 @@ public class ChartsFragment extends BaseFragment<FragmentMusicMvBinding> {
     @Override
     protected void initData(Bundle bundle) {
         String[] mTitles = getActivity().getResources().getStringArray(R.array.music_mv);
-        String[] mTitleType = new String[]{Constants.BAIDU, Constants.QQ, Constants.NETEASE};
-        Fragment[] mFragments = new Fragment[mTitles.length];
 
-        for (int i = 0; i < mTitles.length; i++) {
+        String[] mTitleType = new String[]{Constants.BAIDU}; //, Constants.QQ, Constants.NETEASE
+        Fragment[] mFragments = new Fragment[mTitleType.length];
+
+        for (int i = 0; i < mTitleType.length; i++) {
             mFragments[i] = new NetPlayListFragment();
             ((NetPlayListFragment) mFragments[i]).setTable(mTitles[i], mTitleType[i]);
         }
+
         FragmentAdapter mInformationFragmentPagerAdapter = new FragmentAdapter(getChildFragmentManager(), mTitles, mFragments);
         mBinding.get().vpNewsInformationContent.setAdapter(mInformationFragmentPagerAdapter);
-        mBinding.get().vpNewsInformationContent.setOffscreenPageLimit(3);
+
+        mBinding.get().tlNewsInformationHead.setVisibility(View.GONE);
+
+//        mBinding.get().vpNewsInformationContent.setOffscreenPageLimit(3);
+
         mBinding.get().tlNewsInformationHead.setupWithViewPager(mBinding.get().vpNewsInformationContent);
     }
 

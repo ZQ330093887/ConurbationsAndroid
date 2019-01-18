@@ -2,6 +2,7 @@ package com.test.admin.conurbations.di.component;
 
 import android.app.Activity;
 
+import com.test.admin.conurbations.activitys.AllListActivity;
 import com.test.admin.conurbations.activitys.BaiduMusicListActivity;
 import com.test.admin.conurbations.activitys.MainActivity;
 import com.test.admin.conurbations.activitys.NeteasePlayListActivity;
@@ -22,6 +23,8 @@ public interface ActivityComponent {
     void inject(MainActivity activity);
 
     void inject(BaiduMusicListActivity activity);
+
+    void inject(AllListActivity activity);
 
     void inject(NeteasePlayListActivity activity);
 

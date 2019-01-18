@@ -65,7 +65,8 @@
                         android:layout_margin="@dimen/dimens_10_dp"
                         android:src="@mipmap/my_bg"
                         app:border_color="@color/colorLimePrimaryCenter"
-                        app:border_width="@dimen/dimens_2_dp" />
+                        app:border_width="@dimen/dimens_2_dp"
+                        app:type="circle"/>
 
                     <LinearLayout
                         style="@style/Widget.AppCompat.ActionButton"

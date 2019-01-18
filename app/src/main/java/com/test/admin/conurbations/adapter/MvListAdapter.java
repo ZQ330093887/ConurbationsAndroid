@@ -1,11 +1,14 @@
 package com.test.admin.conurbations.adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.activitys.MvDetailActivity;
+import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.model.entity.MvInfo;
 import com.test.admin.conurbations.utils.CommonUtil;
 
@@ -34,6 +37,9 @@ public class MvListAdapter extends BaseListAdapter<MvInfo.MvInfoDetail> {
         } else {
             vh.setTextColor(R.id.tv_num, Color.RED);
         }
+
+        vh.setTag(R.id.frameLayout, detail);
+        vh.setOnClickListener(R.id.frameLayout, this::onClickListener);
     }
 
     @Override
@@ -41,9 +47,18 @@ public class MvListAdapter extends BaseListAdapter<MvInfo.MvInfoDetail> {
         return new SearchHolder(inflateItemView(parent, R.layout.item_mv_list));
     }
 
-    class SearchHolder extends BaseViewHolder {
-        public SearchHolder(View itemView) {
+    private class SearchHolder extends BaseViewHolder {
+        private SearchHolder(View itemView) {
             super(itemView);
         }
+    }
+
+
+    private void onClickListener(View view) {
+        MvInfo.MvInfoDetail detail = (MvInfo.MvInfoDetail) view.getTag();
+        Intent intent = new Intent(view.getContext(), MvDetailActivity.class);
+        intent.putExtra(Constants.MV_TITLE, detail.name);
+        intent.putExtra(Constants.MV_ID, String.valueOf(detail.id));
+        view.getContext().startActivity(intent);
     }
 }

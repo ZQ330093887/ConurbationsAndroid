@@ -16,6 +16,7 @@ import android.text.TextUtils;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.test.admin.conurbations.R;
@@ -47,6 +48,8 @@ import io.reactivex.disposables.Disposable;
 
 public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
     public AMapLocationClient mLocationClient = null;
+    private AMapLocationClientOption mLocationOption = null;
+
     private static final int REQUEST_PERMISSION_SEETING = 1000;
     private static final int ANIMATION_DURATION = 2000;
     private static final float SCALE_END = 1.13F;
@@ -69,12 +72,18 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
     protected void initData(Bundle bundle) {
         Random r = new Random(SystemClock.elapsedRealtime());
         mBinding.ivSplashLogo.setImageResource(SPLASH_ARRAY[r.nextInt(SPLASH_ARRAY.length)]);
+
         //初始化定位
         mLocationClient = new AMapLocationClient(getApplicationContext());
+        //初始化定位参数
+        mLocationOption = new AMapLocationClientOption();
+        //设置是否只定位一次,默认为false
+        mLocationOption.setOnceLocation(true);
         //设置定位回调监听
         mLocationClient.setLocationListener(mAMapLocationListener);
         //启动定位
         mLocationClient.startLocation();
+        mLocationClient.setLocationOption(mLocationOption);
         applyPermissions();
     }
 
@@ -133,6 +142,8 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
         if (amapLocation != null) {
             if (amapLocation.getErrorCode() == 0) {
                 city = amapLocation.getCity();
+                mLocationClient.stopLocation();//停止定位后，本地定位服务并不会被销毁
+                mLocationClient.onDestroy();//销毁定位客户端，同时销毁本地定位服务。
             }
 
             GankService gankService = ApiManager.getInstance().create(GankService.class, Constants.BASE_PLAYER_URL);

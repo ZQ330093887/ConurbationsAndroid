@@ -9,6 +9,6 @@ import java.util.List;
  * Created by zhouqiong on 2016/12/5.
  */
 
-public interface IBaiduPlayList {
+public interface IBaiduPlayList extends BaseViewImpl{
     void showOnlineMusicList(List<Music> musicList);
 }

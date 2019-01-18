@@ -50,6 +50,8 @@ public class NetPlayListFragment extends BaseSubFragment<NewsList, NewsInfoListP
 
     @Override
     protected void loadingData() {
+        mBinding.get().refreshLayout.setEnableLoadMoreWhenContentNotFull(false);
+        mBinding.get().refreshLayout.setEnableHeaderTranslationContent(false);
         mBinding.get().refreshLayout.setEnableLoadMore(false);
         mBinding.get().refreshLayout.setEnableRefresh(false);
         getPlayList();

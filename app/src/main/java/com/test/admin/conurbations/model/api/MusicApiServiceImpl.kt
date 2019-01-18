@@ -1,5 +1,6 @@
 package com.test.admin.conurbations.model.api
 
+import com.cyl.musicapi.netease.CatListBean
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.test.admin.conurbations.R
@@ -16,12 +17,14 @@ import com.test.admin.conurbations.utils.download.SongLoader
 import com.test.admin.conurbations.widget.SolidApplication
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
+import java.util.*
 
 /**
  * Created by ZQiong on 2018/12/9.
  */
 object MusicApiServiceImpl {
     private val apiService by lazy { ApiManager.getInstance().create(BaiduApiService::class.java, Constants.BASE_URL_BAIDU_MUSIC) }
+    private val apiNetService by lazy { ApiManager.getInstance().create(BaiduApiService::class.java, Constants.BASE_NETEASE_URL) }
     val token: String?
         get() = UserStatus.getUserInfo()?.token
 
@@ -31,20 +34,20 @@ object MusicApiServiceImpl {
      */
     fun getAlbumSongs(vendor: String, id: String): Observable<MutableList<Music>> {
         return Observable.create { result ->
-//            BaseApiImpl
-//                    .getAlbumDetail(vendor, id, {
-//                        if (it.status) {
-//                            val musicList = arrayListOf<Music>()
-//                            it.data.songs.forEach {
-//                                it.vendor = vendor
-//                                musicList.add(MusicUtils.getMusic(it))
-//                            }
-//                            result.onNext(musicList)
-//                            result.onComplete()
-//                        } else {
-//                            result.onError(Throwable(""))
-//                        }
-//                    }, {})
+            BaseApiImpl
+                    .getAlbumDetail(vendor, id, {
+                        if (it.status) {
+                            val musicList = arrayListOf<Music>()
+                            it.data.songs.forEach {
+                                it.vendor = vendor
+                                musicList.add(MusicUtils.getMusic(it))
+                            }
+                            result.onNext(musicList)
+                            result.onComplete()
+                        } else {
+                            result.onError(Throwable(""))
+                        }
+                    }, {})
         }
     }
 
@@ -54,28 +57,28 @@ object MusicApiServiceImpl {
      */
     fun getArtistSongs(vendor: String, id: String, offset: Int = 0, limit: Int = 20): Observable<Artist> {
         return Observable.create { result ->
-//            BaseApiImpl
-//                    .getArtistSongs(vendor, id, offset, limit, {
-//                        if (it.status) {
-//                            val musicList = arrayListOf<Music>()
-//                            it.data.songs.forEach {
-//                                if (!it.cp) {
-//                                    it.vendor = vendor
-//                                    musicList.add(MusicUtils.getMusic(it))
-//                                }
-//                            }
-//                            val artist = Artist()
-//                            artist.songs = musicList
-//                            artist.name = it.data.detail.name
-//                            artist.picUrl = it.data.detail.cover
-//                            artist.desc = it.data.detail.desc
-//                            artist.artistId = it.data.detail.id
-//                            result.onNext(artist)
-//                            result.onComplete()
-//                        } else {
-//                            result.onError(Throwable(""))
-//                        }
-//                    }, {})
+            BaseApiImpl
+                    .getArtistSongs(vendor, id, offset, limit, {
+                        if (it.status) {
+                            val musicList = arrayListOf<Music>()
+                            it.data.songs.forEach {
+                                if (!it.cp) {
+                                    it.vendor = vendor
+                                    musicList.add(MusicUtils.getMusic(it))
+                                }
+                            }
+                            val artist = Artist()
+                            artist.songs = musicList
+                            artist.name = it.data.detail.name
+                            artist.picUrl = it.data.detail.cover
+                            artist.desc = it.data.detail.desc
+                            artist.artistId = it.data.detail.id
+                            result.onNext(artist)
+                            result.onComplete()
+                        } else {
+                            result.onError(Throwable(""))
+                        }
+                    }, {})
         }
     }
 
@@ -87,19 +90,19 @@ object MusicApiServiceImpl {
     fun getMusicUrl(vendor: String, mid: String, br: Int = 128000): Observable<String> {
         LogUtil.d("getMusicUrl $vendor $mid $br")
         return Observable.create { result ->
-//            BaseApiImpl.getSongUrl(vendor, mid, br, {
-//                if (it.status) {
-//                    val url =
-//                            if (vendor == Constants.XIAMI) {
-//                                if (it.data.url.startsWith("http")) it.data.url
-//                                else "http:${it.data.url}"
-//                            } else it.data.url
-//                    result.onNext(url)
-//                    result.onComplete()
-//                } else {
-//                    result.onError(Throwable(it.msg))
-//                }
-//            }, {})
+            BaseApiImpl.getSongUrl(vendor, mid, br, {
+                if (it.status) {
+                    val url =
+                            if (vendor == Constants.XIAMI) {
+                                if (it.data.url.startsWith("http")) it.data.url
+                                else "http:${it.data.url}"
+                            } else it.data.url
+                    result.onNext(url)
+                    result.onComplete()
+                } else {
+                    result.onError(Throwable(it.msg))
+                }
+            }, {})
         }
     }
 
@@ -155,28 +158,28 @@ object MusicApiServiceImpl {
             return if (FileUtils.exists(mLyricPath)) {
                 MusicApi.getLocalLyricInfo(mLyricPath)
             } else Observable.create { result ->
-//                BaseApiImpl.getLyricInfo(vendor, mid) {
-//                    if (it.status) {
-//                        val lyricInfo = it.data.lyric
-//                        val lyric = StringBuilder()
-//                        lyricInfo.forEach {
-//                            lyric.append(it)
-//                            lyric.append("\n")
-//                        }
-//                        it.data.translate.forEach {
-//                            lyric.append(it)
-//                            lyric.append("\n")
-//                        }
-//                        //保存文件
-//                        val save = FileUtils.writeText(mLyricPath, lyric.toString())
-//                        LogUtil.e("保存网络歌词：$save")
-//                        Observable.fromArray(lyric)
-//                        result.onNext(lyric.toString())
-//                        result.onComplete()
-//                    } else {
-//                        result.onError(Throwable(""))
-//                    }
-//                }
+                BaseApiImpl.getLyricInfo(vendor, mid) {
+                    if (it.status) {
+                        val lyricInfo = it.data.lyric
+                        val lyric = StringBuilder()
+                        lyricInfo.forEach {
+                            lyric.append(it)
+                            lyric.append("\n")
+                        }
+                        it.data.translate.forEach {
+                            lyric.append(it)
+                            lyric.append("\n")
+                        }
+                        //保存文件
+                        val save = FileUtils.writeText(mLyricPath, lyric.toString())
+                        LogUtil.e("保存网络歌词：$save")
+                        Observable.fromArray(lyric)
+                        result.onNext(lyric.toString())
+                        result.onComplete()
+                    } else {
+                        result.onError(Throwable(""))
+                    }
+                }
             }
         } catch (e: Throwable) {
             e.printStackTrace()
@@ -221,83 +224,83 @@ object MusicApiServiceImpl {
      *
      */
     fun getMusicComment(vendor: String, mid: String): Observable<MutableList<SongComment>>? {
-//        return when (vendor) {
-//            Constants.NETEASE -> Observable.create { result ->
-//                BaseApiImpl.getComment(vendor, mid, {
-//                    it as SongCommentData<NeteaseComment>
-//                    if (it.status) {
-//                        val comments = mutableListOf<SongComment>()
-//                        it.data?.comments?.forEach {
-//                            val songComment = SongComment().apply {
-//                                avatarUrl = it.user.avatarUrl
-//                                nick = it.user.nickname
-//                                commentId = it.commentId.toString()
-//                                time = it.time
-//                                userId = it.user.userId
-//                                content = it.content
-//                                type = Constants.NETEASE
-//                            }
-//                            comments.add(songComment)
-//                        }
-//                        result.onNext(comments)
-//                        result.onComplete()
-//                    } else {
-//                        result.onError(Throwable(""))
-//                    }
-//                }, {})
-//            }
-//            Constants.QQ -> Observable.create { result ->
-//                BaseApiImpl
-//                        .getComment(vendor, mid, {
-//                            it as SongCommentData<QQComment>
-//                            if (it.status) {
-//                                val comments = mutableListOf<SongComment>()
-//                                it.data?.comments?.forEach {
-//                                    val songComment = SongComment().apply {
-//                                        avatarUrl = it.avatarurl
-//                                        nick = it.nick
-//                                        commentId = it.rootcommentid
-//                                        time = it.time * 1000
-//                                        userId = it.uin
-//                                        content = it.rootcommentcontent
-//                                        type = Constants.QQ
-//                                    }
-//                                    comments.add(songComment)
-//                                }
-//                                result.onNext(comments)
-//                                result.onComplete()
-//                            } else {
-//                                result.onError(Throwable(""))
-//                            }
-//                        }, {})
-//            }
-//            Constants.XIAMI -> Observable.create { result ->
-//                BaseApiImpl
-//                        .getComment(vendor, mid, {
-//                            it as SongCommentData<XiamiComment>
-//                            if (it.status) {
-//                                val comments = mutableListOf<SongComment>()
-//                                it.data?.comments?.forEach {
-//                                    val songComment = SongComment().apply {
-//                                        avatarUrl = it.avatar
-//                                        nick = it.nickName
-//                                        commentId = it.commentId.toString()
-//                                        time = it.gmtCreate
-//                                        userId = it.userId.toString()
-//                                        content = it.message
-//                                        type = Constants.XIAMI
-//                                    }
-//                                    comments.add(songComment)
-//                                }
-//                                result.onNext(comments)
-//                                result.onComplete()
-//                            } else {
-//                                result.onError(Throwable(""))
-//                            }
-//                        }, {})
-//            }
-//            else -> null
-//        }
+        return when (vendor) {
+            Constants.NETEASE -> Observable.create { result ->
+                BaseApiImpl.getComment(vendor, mid, {
+                    it as SongCommentData<NeteaseComment>
+                    if (it.status) {
+                        val comments = mutableListOf<SongComment>()
+                        it.data?.comments?.forEach {
+                            val songComment = SongComment().apply {
+                                avatarUrl = it.user.avatarUrl
+                                nick = it.user.nickname
+                                commentId = it.commentId.toString()
+                                time = it.time
+                                userId = it.user.userId
+                                content = it.content
+                                type = Constants.NETEASE
+                            }
+                            comments.add(songComment)
+                        }
+                        result.onNext(comments)
+                        result.onComplete()
+                    } else {
+                        result.onError(Throwable(""))
+                    }
+                }, {})
+            }
+            Constants.QQ -> Observable.create { result ->
+                BaseApiImpl
+                        .getComment(vendor, mid, {
+                            it as SongCommentData<QQComment>
+                            if (it.status) {
+                                val comments = mutableListOf<SongComment>()
+                                it.data?.comments?.forEach {
+                                    val songComment = SongComment().apply {
+                                        avatarUrl = it.avatarurl
+                                        nick = it.nick
+                                        commentId = it.rootcommentid
+                                        time = it.time * 1000
+                                        userId = it.uin
+                                        content = it.rootcommentcontent
+                                        type = Constants.QQ
+                                    }
+                                    comments.add(songComment)
+                                }
+                                result.onNext(comments)
+                                result.onComplete()
+                            } else {
+                                result.onError(Throwable(""))
+                            }
+                        }, {})
+            }
+            Constants.XIAMI -> Observable.create { result ->
+                BaseApiImpl
+                        .getComment(vendor, mid, {
+                            it as SongCommentData<XiamiComment>
+                            if (it.status) {
+                                val comments = mutableListOf<SongComment>()
+                                it.data?.comments?.forEach {
+                                    val songComment = SongComment().apply {
+                                        avatarUrl = it.avatar
+                                        nick = it.nickName
+                                        commentId = it.commentId.toString()
+                                        time = it.gmtCreate
+                                        userId = it.userId.toString()
+                                        content = it.message
+                                        type = Constants.XIAMI
+                                    }
+                                    comments.add(songComment)
+                                }
+                                result.onNext(comments)
+                                result.onComplete()
+                            } else {
+                                result.onError(Throwable(""))
+                            }
+                        }, {})
+            }
+            else -> null
+        }
         return null
     }
 
@@ -372,6 +375,48 @@ object MusicApiServiceImpl {
     }
 
     /**
+     * 获取专辑信息
+     */
+    fun getAlbumSongList(albumId: String): Observable<Album> {
+        return apiService.getAlbumSongList(albumId)
+                .flatMap {
+                    val album = Album()
+                    val songs = mutableListOf<Music>()
+                    it.songlist?.forEach {
+                        val music = Music()
+                        music.type = Constants.BAIDU
+                        music.title = it.title
+                        music.artist = it.artistName
+                        music.artistId = it.tingUid
+                        music.album = it.albumTitle
+                        music.albumId = it.albumId
+                        music.isOnline = true
+                        music.mid = it.songId
+                        music.hasMv = it.hasMv
+                        music.coverUri = MusicUtils.getAlbumPic(it.picSmall, Constants.BAIDU, 150)
+                        music.coverSmall = MusicUtils.getAlbumPic(it.picSmall, Constants.BAIDU, 90)
+                        music.coverBig = MusicUtils.getAlbumPic(it.picSmall, Constants.BAIDU, 500)
+                        songs.add(music)
+                    }
+                    album.count = it.songlist?.size ?: 0
+                    album.albumId = it.albumInfo.albumId
+                    album.name = it.albumInfo.title
+                    album.artistId = it.albumInfo.artistTingUid
+                    album.artistName = it.albumInfo.author
+                    album.info = it.albumInfo.info
+                    album.songs = songs
+                    Observable.create(ObservableOnSubscribe<Album> { e ->
+                        try {
+                            e.onNext(album)
+                            e.onComplete()
+                        } catch (error: Exception) {
+                            e.onError(Throwable(error.message))
+                        }
+                    })
+                }
+    }
+
+    /**
      * 删除歌单
      * 调用接口成功返回{}
      * 调用接口失败返回{"msg":""}
@@ -431,6 +476,46 @@ object MusicApiServiceImpl {
                             it.onComplete()
                         } else {
                             it.onError(Throwable(errorInfo.msg))
+                        }
+                    })
+                }
+    }
+
+
+    /**
+     * 获取歌手列表
+     */
+    fun getArtistSongList(params: HashMap<String, Any>): Observable<Artist> {
+        return apiService.getArtistSongList(params)
+                .flatMap {
+                    val artist = Artist()
+                    val songs = mutableListOf<Music>()
+                    if (it.errorCode == 22000) {
+                        it.songList?.forEach {
+                            val music = Music()
+                            music.type = Constants.BAIDU
+                            music.title = it.title
+                            music.artist = it.artistName
+                            music.artistId = it.tingUid
+                            music.album = it.albumTitle
+                            music.albumId = it.albumId
+                            music.isOnline = true
+                            music.mid = it.songId
+                            music.hasMv = it.hasMv
+                            music.coverUri = MusicUtils.getAlbumPic(it.picSmall, Constants.BAIDU, 150)
+                            music.coverSmall = MusicUtils.getAlbumPic(it.picSmall, Constants.BAIDU, 90)
+                            music.coverBig = MusicUtils.getAlbumPic(it.picSmall, Constants.BAIDU, 500)
+                            songs.add(music)
+                        }
+                        artist.count = it.songNums
+                        artist.songs = songs
+                    }
+                    Observable.create(ObservableOnSubscribe<Artist> { e ->
+                        try {
+                            e.onNext(artist)
+                            e.onComplete()
+                        } catch (error: Exception) {
+                            e.onError(Throwable(error.message))
                         }
                     })
                 }
@@ -539,7 +624,7 @@ object MusicApiServiceImpl {
     fun searchMusic(key: String, type: SearchEngine.Filter, limit: Int, page: Int): Observable<MutableList<Music>> {
         return Observable.create { result ->
             if (type == SearchEngine.Filter.ANY) {
-                BaseApiImpl.searchSong(key, type.toString(), limit, page, success = {
+                BaseApiImpl.searchSong(key, limit, page, success = {
                     val musicList = mutableListOf<Music>()
                     if (it.status) {
                         try {
@@ -604,13 +689,6 @@ object MusicApiServiceImpl {
                     }
                     result.onNext(musicList)
                     result.onComplete()
-                }, fail = {
-                    LogUtil.e("search", it ?: "-0-")
-//                    ToastUtils.show(it.toString())
-//                    result.onNext(mutableListOf())
-//                    result.onComplete()
-//                    result.onError(Throwable(it
-//                            ?: MusicApp.getAppContext().getString(R.string.error_connection)))
                 })
             }
         }
@@ -620,7 +698,7 @@ object MusicApiServiceImpl {
      * 获取热搜
      */
     fun getHotSearchInfo(): Observable<MutableList<HotSearchBean>> {
-        return apiService.getHotSearchInfo()
+        return apiNetService.getHotSearchInfo()
                 .flatMap { it ->
                     Observable.create(ObservableOnSubscribe<MutableList<HotSearchBean>> { e ->
                         try {
@@ -640,4 +718,206 @@ object MusicApiServiceImpl {
                     })
                 }
     }
+
+
+    /**
+     * 获取歌单歌曲数据
+     */
+    fun getTopPlaylists(cat: String, limit: Int): Observable<MutableList<NewsList>> {
+        return apiNetService.getTopPlaylist(cat, limit)
+                .flatMap { it ->
+                    Observable.create(ObservableOnSubscribe<MutableList<NewsList>> { e ->
+                        try {
+                            if (it.code == 200) {
+                                val list = mutableListOf<NewsList>()
+                                it.playlists?.forEach {
+                                    val playlist = NewsList()
+                                    playlist.pid = it.id.toString()
+                                    playlist.name = it.name
+                                    playlist.coverUrl = it.coverImgUrl
+                                    playlist.des = it.description
+                                    playlist.date = it.createTime
+                                    playlist.updateDate = it.updateTime
+                                    playlist.playCount = it.playCount.toLong()
+                                    playlist.type = Constants.PLAYLIST_WY_ID
+                                    list.add(playlist)
+                                }
+                                e.onNext(list)
+                                e.onComplete()
+                            } else {
+                                e.onError(Throwable("网络异常"))
+                            }
+                        } catch (ep: Exception) {
+                            e.onError(ep)
+                        }
+                    })
+                }
+    }
+
+
+    /**
+     * 获取精品歌单歌曲数据
+     */
+    fun getPlaylistDetail(id: String): Observable<NewsList> {
+        return apiNetService.getPlaylistDetail(id)
+                .flatMap { it ->
+                    Observable.create(ObservableOnSubscribe<NewsList> { e ->
+                        try {
+                            if (it.code == 200) {
+                                it.playlist?.let {
+                                    val playlist = NewsList()
+                                    playlist.pid = it.id.toString()
+                                    playlist.name = it.name
+                                    playlist.coverUrl = it.coverImgUrl
+                                    playlist.des = it.description
+                                    playlist.date = it.createTime
+                                    playlist.updateDate = it.updateTime
+                                    playlist.playCount = it.playCount.toLong()
+                                    playlist.type = Constants.PLAYLIST_WY_ID
+                                    playlist.musicList = MusicUtils.getNeteaseMusicList(it.tracks)
+                                    e.onNext(playlist)
+                                }
+                                e.onComplete()
+                            } else {
+                                e.onError(Throwable("网络异常"))
+                            }
+                        } catch (ep: Exception) {
+                            e.onError(ep)
+                        }
+                    })
+                }
+    }
+
+    /**
+     * 获取歌单歌曲
+     */
+    fun getTopArtists(limit: Int, offset: Int): Observable<MutableList<Artist>> {
+        return apiNetService.getTopArtists(offset, limit)
+                .flatMap { it ->
+                    Observable.create(ObservableOnSubscribe<MutableList<Artist>> { e ->
+                        try {
+                            if (it.code == 200) {
+                                val list = mutableListOf<Artist>()
+                                it.list.artists?.forEach {
+                                    val playlist = Artist()
+                                    playlist.artistId = it.id.toString()
+                                    playlist.name = it.name
+                                    playlist.picUrl = it.picUrl
+                                    playlist.score = it.score
+                                    playlist.musicSize = it.musicSize
+                                    playlist.albumSize = it.albumSize
+                                    playlist.type = Constants.NETEASE
+                                    list.add(playlist)
+                                }
+                                e.onNext(list)
+                                e.onComplete()
+                            } else {
+                                e.onError(Throwable("网络异常"))
+                            }
+                        } catch (ep: Exception) {
+                            e.onError(ep)
+                        }
+                    })
+                }
+    }
+
+    /**
+     * 电台歌单列表
+     */
+    fun getRadioChannelInfo(playlist: NewsList): Observable<NewsList> {
+        return apiService.getRadioChannelSongs(playlist.pid!!)
+                .flatMap {
+                    val songs = mutableListOf<Music>()
+                    if (it.errorCode == 22000) {
+                        it.result.songlist?.forEach {
+                            if (it.songid != null) {
+                                val music = Music()
+                                music.type = Constants.BAIDU
+                                music.title = it.title
+                                music.artist = it.artist
+                                music.artistId = it.artistId
+                                music.mid = it.songid
+                                music.coverUri = it.thumb
+                                music.coverSmall = it.thumb
+                                music.coverBig = it.thumb
+                                songs.add(music)
+                            }
+                        }
+                        playlist.musicList = songs
+                    }
+                    Observable.create(ObservableOnSubscribe<NewsList> { e ->
+                        try {
+                            e.onNext(playlist)
+                            e.onComplete()
+                        } catch (error: Exception) {
+                            e.onError(Throwable(error.message))
+                        }
+                    })
+                }
+    }
+
+    /**
+     * 获取电台列表
+     */
+    /**
+     * 搜索建议
+     */
+    fun getRadioChannel(): Observable<MutableList<NewsList>> {
+        return apiService.getRadioChannels()
+                .flatMap {
+                    Observable.create(ObservableOnSubscribe<MutableList<NewsList>> { e ->
+                        try {
+                            val result = mutableListOf<NewsList>()
+                            if (it.errorCode == 22000) {
+                                it.result?.get(0)?.channellist?.let {
+                                    it.forEach {
+                                        val playlist = NewsList()
+                                        playlist.name = it.name
+                                        playlist.pid = it.chName
+                                        playlist.coverUrl = it.thumb
+                                        playlist.des = it.cateSname
+                                        playlist.type = Constants.PLAYLIST_BD_ID
+                                        result.add(playlist)
+                                    }
+                                }
+                            }
+                            e.onNext(result)
+                            e.onComplete()
+                        } catch (error: Exception) {
+                            e.onError(Throwable(error.message))
+                        }
+                    })
+                }
+    }
+
+
+    /**
+     * 获取mv信息
+     */
+    fun getMvDetailInfo(mvid: String): Observable<MvInfo.MvDetailInfo> {
+        return apiNetService.getMvDetailInfo(mvid)
+    }
+
+
+    /**
+     * 获取相似mv
+     */
+    fun getSimilarMv(mvid: String): Observable<MvInfo.SimilarMvInfo> {
+        return apiNetService.getSimilarMv(mvid)
+    }
+
+    /**
+     * 获取banner
+     */
+    fun getBanners(): Observable<BannerResult> {
+        return apiNetService.getBanner()
+    }
+
+    /**
+     * 获取风格
+     */
+    fun getCatList(): Observable<CatListBean> {
+        return apiNetService.getCatList()
+    }
+
 }

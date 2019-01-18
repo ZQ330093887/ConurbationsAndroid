@@ -144,6 +144,7 @@ public class PlaylistDetailActivity extends BaseActivity<FragPlaylistDetailBindi
     public void showPlaylistSongs(List<Music> songList) {
         if (songList != null) {
             musicList.addAll(songList);
+            mAdapter.setList(musicList);
         }
 
         mAdapter.notifyDataSetChanged();

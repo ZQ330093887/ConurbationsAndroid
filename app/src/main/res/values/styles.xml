@@ -171,6 +171,11 @@
         <item name="colorControlHighlight">#48ffffff</item>
     </style>
 
+    <style name="dialogAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/fragment_slide_up</item>
+        <item name="android:windowExitAnimation">@anim/fragment_slide_down</item>
+    </style>
+
     <style name="AlertDialogStyle" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>

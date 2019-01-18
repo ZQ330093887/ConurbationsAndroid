@@ -19,13 +19,15 @@ public class BasePresenter<V> implements Presenter<V> {
     public V mvpView;
     protected GankService apiStores;
     protected BaiduApiService baiduApiService;
+    protected BaiduApiService baiduNetService;
     private CompositeDisposable compositeDisposable;
 
     @Override
     public void attachView(V mvpView) {
         this.mvpView = mvpView;
         apiStores = AppClient.retrofit().create(GankService.class);
-        baiduApiService = ApiManager.getInstance().create(BaiduApiService.class, Constants.BASE_PLAYER_URL);
+        baiduApiService = ApiManager.getInstance().create(BaiduApiService.class, Constants.BASE_URL_BAIDU_MUSIC);
+        baiduNetService = ApiManager.getInstance().create(BaiduApiService.class, Constants.BASE_NETEASE_URL);
     }
 
     @Override

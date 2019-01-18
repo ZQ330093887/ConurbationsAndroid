@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.databinding.ActivityBaseSubBinding;
@@ -14,10 +16,13 @@ import com.test.admin.conurbations.di.component.DaggerActivityComponent;
 import com.test.admin.conurbations.di.module.ActivityModule;
 import com.test.admin.conurbations.model.entity.NewsList;
 import com.test.admin.conurbations.presenter.BasePresenter;
+import com.test.admin.conurbations.utils.RecyclerUtils;
 import com.test.admin.conurbations.utils.SaveBitmapUtils;
+import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.widget.ILayoutManager;
-import com.test.admin.conurbations.widget.PullRecycler;
 import com.test.admin.conurbations.widget.SolidApplication;
+import com.test.admin.conurbations.widget.statuslayoutmanage.OnStatusChildClickListener;
+import com.test.admin.conurbations.widget.statuslayoutmanage.StatusLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,21 +34,16 @@ import javax.inject.Inject;
  */
 
 public abstract class BaseSubActivity<T, P extends BasePresenter> extends BaseActivity<ActivityBaseSubBinding>
-        implements PullRecycler.OnRecyclerRefreshListener {
+        implements BaseViewImpl {
     /**
      * 初始化数据
      */
-    public int action;
     private int page = 1;
     protected List<T> mDataList;
     private View mHeaderView;
 
-    public int limit = 10;
-    /**
-     * isRefresh这个属性是添加缓存功能的时候用到的，我的缓存思路是：第一次进入界面走缓存，缓存为空的情况下
-     * 网络请求数据，然后缓存起来，这个时候我需要一个属性判断是否需要刷新，之前在做刷新逻辑的时候没有将是否
-     * 需要刷新暴露出来，让开发者自己选，这是一个小小的失误，（这里用isRefresh默认不刷新，除非用户调用了刷新一行才会刷新）
-     */
+    public StatusLayoutManager mStatusManager;
+
     public boolean isRefresh = false;
 
     @Inject
@@ -56,29 +56,69 @@ public abstract class BaseSubActivity<T, P extends BasePresenter> extends BaseAc
 
     @Override
     protected void initData(Bundle bundle) {
+
         initView();
         initRecycler();
         mPresenter.attachView(this);
+        loadingData();
     }
 
     private void initRecycler() {
-        mBinding.listView.setRefreshing();
-        mBinding.listView.setOnRefreshListener(this);
-        mBinding.listView.setLayoutManager(getLayoutManager());
-        mBinding.listView.setAdapter(setUpAdapter());
+        mStatusManager = new StatusLayoutManager.Builder(mBinding.refreshLayout)
+                .setDefaultEmptyClickViewVisible(false)
+                .setOnStatusChildClickListener(new OnStatusChildClickListener() {
+                    @Override
+                    public void onEmptyChildClick(View view) {
+                    }
+
+                    @Override
+                    public void onErrorChildClick(View view) {
+                        mStatusManager.showLoadingLayout();
+                        isRefresh = true;
+                        page = 0;
+                        refreshList(page);
+                    }
+
+                    @Override
+                    public void onCustomerChildClick(View view) {
+                    }
+                }).build();
+        mStatusManager.showLoadingLayout();
+        setupRecyclerView();
+        initRefreshLayout();
     }
 
-    @Override
-    public void onRefresh(int action) {
-        this.action = action;
+    private void setupRecyclerView() {
         if (mDataList == null) {
             mDataList = new ArrayList<>();
         }
-
-        if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
-            page = 1;
+        if (mBinding != null) {
+            RecyclerUtils.initLinearLayoutVertical(mBinding.listView);
+            if (getLayoutManager() != null) {
+                mBinding.listView.setLayoutManager(getLayoutManager().getLayoutManager());
+            }
+            if (setUpAdapter() != null) {
+                mBinding.listView.setAdapter(setUpAdapter());
+            }
         }
-        refreshList(page++);
+    }
+
+    private void initRefreshLayout() {
+        mBinding.refreshLayout.setRefreshHeader(new ClassicsHeader(getBaseActivity()));
+        mBinding.refreshLayout.setRefreshFooter(new ClassicsFooter(getBaseActivity()));
+
+        mBinding.refreshLayout.setEnableLoadMore(true);
+        mBinding.refreshLayout.setOnRefreshListener(refreshLayout -> {
+            page = 1;
+            isRefresh = true;
+            refreshList(page);
+        });
+
+        mBinding.refreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            page++;
+            isRefresh = false;
+            refreshList(page);
+        });
     }
 
     protected abstract ILayoutManager getLayoutManager();
@@ -86,6 +126,8 @@ public abstract class BaseSubActivity<T, P extends BasePresenter> extends BaseAc
     protected abstract void refreshList(int page);
 
     protected abstract void initView();
+
+    protected abstract void loadingData();
 
     protected abstract BaseListAdapter setUpAdapter();
 
@@ -110,8 +152,52 @@ public abstract class BaseSubActivity<T, P extends BasePresenter> extends BaseAc
     }
 
     @Override
-    public void detachView() {
+    public void showError(String message) {
 
+        if (mDataList != null && mDataList.size() > 0) {
+            ToastUtils.getInstance().showToast(message);
+        } else {
+            mStatusManager.showErrorLayout();
+        }
+    }
+
+    @Override
+    public void showFinishState() {
+        //请求完毕，不管成功失败
+        finishRefreshAndLoadMore();
+    }
+
+    public void finishRefreshAndLoadMore() {
+        mBinding.refreshLayout.finishRefresh();
+        mBinding.refreshLayout.finishLoadMore();
+    }
+
+    public void setRefreshLayoutEnableIsFalse() {
+        mBinding.refreshLayout.setEnableLoadMoreWhenContentNotFull(false);
+        mBinding.refreshLayout.setEnableHeaderTranslationContent(false);
+        mBinding.refreshLayout.setEnableFooterTranslationContent(false);
+
+        mBinding.refreshLayout.setEnableLoadMore(false);
+        mBinding.refreshLayout.setEnableRefresh(false);
+    }
+
+    public void setRefreshLayoutEnableRefresh(Boolean isRefresh) {
+
+        mBinding.refreshLayout.setEnableHeaderTranslationContent(isRefresh);
+        mBinding.refreshLayout.setEnableRefresh(isRefresh);
+    }
+
+    public void setRefreshLayoutEnableLoadMore(Boolean isRefresh) {
+        mBinding.refreshLayout.setEnableLoadMoreWhenContentNotFull(isRefresh);
+        mBinding.refreshLayout.setEnableLoadMore(isRefresh);
+
+    }
+
+    @Override
+    public void detachView() {
+        if (mPresenter != null) {
+            mPresenter.detachView();
+        }
     }
 
     /*******************recycleView设置header默认的写了一个放这里，可自定义********************/

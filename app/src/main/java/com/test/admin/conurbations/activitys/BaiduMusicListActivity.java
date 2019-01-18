@@ -16,7 +16,6 @@ import com.test.admin.conurbations.utils.NavigationHelper;
 import com.test.admin.conurbations.utils.StatusBarUtils;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
-import com.test.admin.conurbations.widget.PullRecycler;
 
 import java.util.List;
 
@@ -36,23 +35,29 @@ public class BaiduMusicListActivity extends BaseSubActivity<Music, PlayListPrese
         StatusBarUtils.setWindowStatusBarColor(getBaseActivity(), R.color.theme_primary);
         getActivityComponent().inject(this);
         initIntent();
+        setRefreshLayoutEnableRefresh(false);
+    }
 
+    @Override
+    protected void loadingData() {
+        refreshList(1);
     }
 
     @Override
     public void showOnlineMusicList(List<Music> musicList) {
-        if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
-            mDataList.clear();
-        }
+        mStatusManager.showSuccessLayout();
         if (musicList != null && musicList.size() > 0) {
-            mBinding.listView.enableLoadMore(true);
+            mBinding.refreshLayout.finishLoadMore(true);
             mDataList.addAll(musicList);
             mSongAdapter.setList(mDataList);
             mSongAdapter.notifyDataSetChanged();
         } else {
-            mBinding.listView.enableLoadMore(false);
+            if (mSongAdapter.list == null || mSongAdapter.list.size() <= 0) {
+                mStatusManager.showEmptyLayout();
+            } else {
+                mBinding.refreshLayout.finishLoadMoreWithNoMoreData();
+            }
         }
-        mBinding.listView.onRefreshCompleted();
     }
 
     @Override
@@ -62,8 +67,7 @@ public class BaiduMusicListActivity extends BaseSubActivity<Music, PlayListPrese
 
     @Override
     protected void refreshList(int page) {
-        mBinding.listView.enablePullToRefresh(false);
-        mPresenter.loadOnlineMusicList(newsList.pid, limit, (page - 1) * limit);
+        mPresenter.loadOnlineMusicList(newsList.pid, 10, (page - 1) * 10);
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.test.admin.conurbations.fragments.DownloadedFragment;
 import com.test.admin.conurbations.fragments.GanHuoFragment;
 import com.test.admin.conurbations.fragments.GankDayFragment;
 import com.test.admin.conurbations.fragments.MusicIndexFragment;
+import com.test.admin.conurbations.fragments.MvListFragment;
 import com.test.admin.conurbations.fragments.NbaIndexFragment;
 import com.test.admin.conurbations.fragments.NetPlayListFragment;
 import com.test.admin.conurbations.fragments.PrettyPicturesFragment;
@@ -51,4 +52,6 @@ public interface FragmentComponent {
     void inject(SearchFragment fragment);
 
     void inject(PrettyPicturesFragment fragment);
+
+    void inject(MvListFragment fragment);
 }

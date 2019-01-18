@@ -6,8 +6,11 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import com.test.admin.conurbations.activitys.IDownLoadView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.TaskItemAdapter;
+import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.model.Music;
 import com.test.admin.conurbations.presenter.DownLoadPresenter;
+import com.test.admin.conurbations.rxbus.Event;
+import com.test.admin.conurbations.rxbus.RxBus;
 import com.test.admin.conurbations.utils.download.TasksManager;
 import com.test.admin.conurbations.utils.download.TasksManagerModel;
 import com.test.admin.conurbations.widget.ILayoutManager;
@@ -16,13 +19,15 @@ import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
 public class DownloadManagerFragment extends BaseSubFragment<TasksManagerModel, DownLoadPresenter>
         implements IDownLoadView {
     private TaskItemAdapter mAdapter;
-    private DownLoadPresenter mPresenter;
+    private Disposable subscribe;
 
     public static DownloadManagerFragment newInstance() {
         Bundle args = new Bundle();
@@ -64,11 +69,13 @@ public class DownloadManagerFragment extends BaseSubFragment<TasksManagerModel, 
 
 
     private void loadData() {
-        if (mPresenter == null) {
-            mPresenter = new DownLoadPresenter();
-            mPresenter.attachView(this);
-        }
         mPresenter.loadDownloading(getBaseActivity());
+        subscribe = RxBus.getDefault().toObservable(Event.class).subscribe(event -> {
+            if (event.eventType.equals(Constants.DOWNLOAD_EVENT)) {
+                mPresenter.loadDownloadMusic(false, getBaseActivity());
+                mPresenter.loadDownloading(getBaseActivity());
+            }
+        });
     }
 
     @Override
@@ -77,8 +84,10 @@ public class DownloadManagerFragment extends BaseSubFragment<TasksManagerModel, 
 
     @Override
     public void showDownloadList(List<TasksManagerModel> modelList) {
+        mStatusManager.showSuccessLayout();
         mDataList.clear();
         mDataList.addAll(modelList);
+        mAdapter.setModels(modelList);
         mAdapter.notifyDataSetChanged();
 
         if (mDataList == null || mDataList.size() <= 0) {
@@ -98,5 +107,14 @@ public class DownloadManagerFragment extends BaseSubFragment<TasksManagerModel, 
     @Override
     public void detachView() {
         mPresenter.detachView();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (subscribe != null && !subscribe.isDisposed()) {
+            subscribe.dispose();
+            subscribe = null;
+        }
     }
 }

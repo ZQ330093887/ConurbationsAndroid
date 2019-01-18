@@ -32,28 +32,6 @@ public class SearchMusicPresenter {
         this.mView = iSearchMusicView;
     }
 
-//    public void searchByType(String key, int offset, int type) {
-//
-//        ApiManager.request(, new RequestCallBack<SearchInfo>() {
-//            @Override
-//            public void success(SearchInfo result) {
-//                switch (type) {
-//                    case 1004:
-//                        break;
-//                    case 100:
-//                        break;
-//                    case 1000:
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void error(String msg) {
-//
-//            }
-//        });
-//    }
-
     public void searchLocal(String key, Activity context) {
         new Thread(() -> {
             List<Music> result = DaoLitepal.searchLocalMusic(key);

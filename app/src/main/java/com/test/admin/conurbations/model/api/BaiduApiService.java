@@ -1,5 +1,8 @@
 package com.test.admin.conurbations.model.api;
 
+import com.cyl.musicapi.baidu.RadioData;
+import com.cyl.musicapi.netease.ArtistsInfo;
+import com.cyl.musicapi.netease.CatListBean;
 import com.test.admin.conurbations.model.MusicInfo;
 import com.test.admin.conurbations.model.entity.AlbumSongList;
 import com.test.admin.conurbations.model.entity.ArtistMusicList;
@@ -7,9 +10,11 @@ import com.test.admin.conurbations.model.entity.BaiduList;
 import com.test.admin.conurbations.model.entity.BaiduMusicList;
 import com.test.admin.conurbations.model.entity.BaiduSearchMergeInfo;
 import com.test.admin.conurbations.model.entity.BaiduSongInfo;
+import com.test.admin.conurbations.model.entity.BannerResult;
 import com.test.admin.conurbations.model.entity.Candidates;
 import com.test.admin.conurbations.model.entity.DoubanMusic;
 import com.test.admin.conurbations.model.entity.MvInfo;
+import com.test.admin.conurbations.model.entity.NeteasePlaylist;
 import com.test.admin.conurbations.model.entity.NeteasePlaylistDetail;
 import com.test.admin.conurbations.model.entity.PlaylistInfo;
 import com.test.admin.conurbations.model.entity.RadioChannelData;
@@ -57,7 +62,6 @@ public interface BaiduApiService {
      */
     @GET("music/qq/rank")
     Observable<List<PlaylistInfo>> getQQRank(@Query("limit") Integer limit, @Query("ids[]") int[] ids);
-
 
 
     /**
@@ -187,7 +191,7 @@ public interface BaiduApiService {
     /**
      * 搜索
      */
-    @GET("$V1_TING?method=$QUERY_MERGE")
+    @GET("v1/restserver/ting?method=baidu.ting.search.merge")
     Observable<BaiduSearchMergeInfo> queryMerge(@Query("query") String query,
                                                 @Query("page_no") int pageNo,
                                                 @Query("page_size") int pageSize);
@@ -195,4 +199,31 @@ public interface BaiduApiService {
     @GET("search/hot")
     Observable<SearchInfo> getHotSearchInfo();
 
+
+    @GET("/mv/detail")
+    Observable<MvInfo.MvDetailInfo> getMvDetailInfo(@Query("mvid") String mvid);
+
+
+    @GET("simi/mv")
+    Observable<MvInfo.SimilarMvInfo> getSimilarMv(@Query("mvid") String mvid);
+
+    @GET("banner")
+    Observable<BannerResult> getBanner();
+
+    @GET("top/playlist")
+    Observable<NeteasePlaylist> getTopPlaylist(@Query("cat") String cat, @Query("limit") int limit);
+
+
+    @GET("playlist/catlist")
+    Observable<CatListBean> getCatList();
+
+    @GET("/toplist/artist")
+    Observable<ArtistsInfo> getTopArtists(@Query("offset") int offset, @Query("limit") int limit);
+
+
+    /**
+     * 获取电台列表
+     */
+    @GET("v1/restserver/ting?version=5.6.5.0&method=baidu.ting.radio.getCategoryList")
+    Observable<RadioData> getRadioChannels();
 }

@@ -54,6 +54,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
     private List<Fragment> mFragments;
     private CircleImageView mCircleImageView;
     private Bitmap mHeadPhotoBitmap;
+    private Disposable subscribe;
 
     @Override
     protected int getLayoutId() {
@@ -62,7 +63,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
 
     @Override
     protected void initData(Bundle bundle) {
-        Disposable subscribe = RxBus.getDefault().toObservable(Event.class).subscribe(event -> {
+        subscribe = RxBus.getDefault().toObservable(Event.class).subscribe(event -> {
             if (event.eventType.equals(Constants.STATUE_BAR_COLOR)) {
                 int barColor = (int) event.body;
                 StatusBarUtils.setWindowStatusBarColor(getBaseActivity(), barColor);
@@ -76,7 +77,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
                 }
             }
         });
-
         initToolbar(mBinding.toolbarMainToolbar, getResources().getString(R.string.app_name), getResources().getString(R.string.guard_msg));
         //初始化底部导航
         initMainBottomTab();
@@ -316,6 +316,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
             } else {
                 PhotoCameralUtil.showHendPhotoDialog(MainActivity.this, Constants.pathFileName);
             }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (subscribe != null && !subscribe.isDisposed()) {
+            subscribe.dispose();
+            subscribe = null;
         }
     }
 }

@@ -15,6 +15,7 @@ import android.util.Pair;
 import android.view.View;
 
 import com.test.admin.conurbations.R;
+import com.test.admin.conurbations.activitys.AllListActivity;
 import com.test.admin.conurbations.activitys.DownloadActivity;
 import com.test.admin.conurbations.activitys.MainActivity;
 import com.test.admin.conurbations.activitys.PlayerActivity;
@@ -27,6 +28,7 @@ import com.test.admin.conurbations.player.MusicPlayerService;
 import com.test.admin.conurbations.player.PlayManager;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by ZQiong on 2018/12/7.
@@ -129,6 +131,30 @@ public class NavigationHelper {
         if (transitionView != null) {
             ActivityOptionsCompat compat = ActivityOptionsCompat.makeScaleUpAnimation(transitionView,
                     transitionView.getWidth() / 2, transitionView.getHeight() / 2, 0, 0);
+            ActivityCompat.startActivity(context, intent, compat.toBundle());
+        } else {
+            context.startActivity(intent);
+        }
+    }
+
+
+    public static void navigateFragment(Activity context, Fragment fragment) {
+        FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+        Fragment it = ((AppCompatActivity) context).getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        transaction.hide(it);
+        transaction.add(R.id.fragment_container, fragment);
+        transaction.addToBackStack(fragment.getTag()).commit();
+    }
+
+
+    public static void navigateToAllList(Activity context, String playlistType, ArrayList<Artist> artistList, ArrayList<NewsList> musicList, Pair<View, String> transitionViews) {
+        Intent intent = new Intent(context, AllListActivity.class);
+        intent.putExtra(AllListActivity.PLAY_LIST_TYPE, playlistType);
+        intent.putParcelableArrayListExtra("Artist", artistList);
+        intent.putParcelableArrayListExtra("NewsList", musicList);
+        if (transitionViews != null) {
+            ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(context,
+                    transitionViews.first, transitionViews.second);
             ActivityCompat.startActivity(context, intent, compat.toBundle());
         } else {
             context.startActivity(intent);

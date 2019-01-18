@@ -13,11 +13,8 @@ import com.test.admin.conurbations.model.api.MusicApiServiceImpl;
 import com.test.admin.conurbations.model.entity.Album;
 import com.test.admin.conurbations.model.entity.AlbumSongList;
 import com.test.admin.conurbations.model.entity.Artist;
-import com.test.admin.conurbations.model.entity.ArtistMusicList;
 import com.test.admin.conurbations.model.entity.BaiduMusicList;
-import com.test.admin.conurbations.model.entity.NeteasePlaylistDetail;
 import com.test.admin.conurbations.model.entity.NewsList;
-import com.test.admin.conurbations.model.entity.RadioChannelData;
 import com.test.admin.conurbations.model.user.UserStatus;
 import com.test.admin.conurbations.retrofit.ApiManager;
 import com.test.admin.conurbations.retrofit.RequestCallBack;
@@ -42,8 +39,7 @@ import okhttp3.ResponseBody;
  */
 
 public class PlayListDetailPresenter {
-    private BaiduApiService baiduApiService = ApiManager.getInstance().create(BaiduApiService.class, Constants.BASE_URL_BAIDU_MUSIC);
-
+    BaiduApiService baiduApiService  = ApiManager.getInstance().create(BaiduApiService.class, Constants.BASE_PLAYER_URL);
     private String token;
     private IPlayListDetailView mvpView;
 
@@ -67,32 +63,11 @@ public class PlayListDetailPresenter {
                 }
                 break;
             case Constants.PLAYLIST_BD_ID:
-                ApiManager.request(baiduApiService.getRadioChannelSongs(playlist.pid),
-                        new RequestCallBack<RadioChannelData>() {
+                ApiManager.request(MusicApiServiceImpl.INSTANCE.getRadioChannelInfo(playlist),
+                        new RequestCallBack<NewsList>() {
                             @Override
-                            public void success(RadioChannelData result) {
-                                List<Music> songs = new ArrayList<>();
-                                if (result.errorCode == 22000) {
-                                    if (result.result.songlist != null) {
-                                        for (RadioChannelData.CHSongInfo it : result.result.songlist) {
-
-                                            if (it.songid != null) {
-                                                Music music = new Music();
-                                                music.type = Constants.BAIDU;
-                                                music.title = it.title;
-                                                music.artist = it.artist;
-                                                music.artistId = it.artistId;
-                                                music.mid = it.songid;
-                                                music.coverUri = MusicUtils.getAlbumPic(it.thumb.split("@")[0], Constants.BAIDU, 150);
-                                                music.coverSmall = MusicUtils.getAlbumPic(it.thumb.split("@")[0], Constants.BAIDU, 90);
-                                                music.coverBig = MusicUtils.getAlbumPic(it.thumb.split("@")[0], Constants.BAIDU, 500);
-                                                songs.add(music);
-                                            }
-                                        }
-                                    }
-                                    playlist.musicList.addAll(songs);
-                                }
-                                mvpView.showPlaylistSongs(playlist.musicList);
+                            public void success(NewsList result) {
+                                mvpView.showPlaylistSongs(result.musicList);
                             }
 
                             @Override
@@ -103,23 +78,11 @@ public class PlayListDetailPresenter {
                         });
                 break;
             case Constants.PLAYLIST_WY_ID:
-                ApiManager.request(baiduApiService.getPlaylistDetail(playlist.pid),
-                        new RequestCallBack<NeteasePlaylistDetail>() {
+                ApiManager.request(MusicApiServiceImpl.INSTANCE.getPlaylistDetail(playlist.pid),
+                        new RequestCallBack<NewsList>() {
                             @Override
-                            public void success(NeteasePlaylistDetail result) {
-                                if (result.code == 200) {
-                                    NewsList playlist = new NewsList();
-                                    playlist.pid = String.valueOf(result.playlist.id);
-                                    playlist.name = result.playlist.name;
-                                    playlist.coverUrl = result.playlist.coverImgUrl;
-                                    playlist.des = result.playlist.description;
-                                    playlist.date = result.playlist.createTime;
-                                    playlist.updateDate = result.playlist.updateTime;
-                                    playlist.playCount = result.playlist.playCount;
-                                    playlist.type = Constants.PLAYLIST_WY_ID;
-                                    playlist.musicList = MusicUtils.getNeteaseMusicList(result.playlist.tracks);
-                                    mvpView.showPlaylistSongs(playlist.musicList);
-                                }
+                            public void success(NewsList result) {
+                                mvpView.showPlaylistSongs(result.musicList);
                             }
 
                             @Override
@@ -184,33 +147,11 @@ public class PlayListDetailPresenter {
             params.put(Constants.PARAM_OFFSET, 0);
             params.put(Constants.PARAM_LIMIT, 20);
 
-            ApiManager.request(baiduApiService.getArtistSongList(params),
-                    new RequestCallBack<ArtistMusicList>() {
+            ApiManager.request(MusicApiServiceImpl.INSTANCE.getArtistSongList(params),
+                    new RequestCallBack<Artist>() {
                         @Override
-                        public void success(ArtistMusicList result) {
-                            Artist artist = new Artist();
-                            List<Music> songs = new ArrayList<>();
-                            if (result.errorCode == 22000) {
-                                for (BaiduMusicList.SongListItem it : result.songList) {
-                                    Music music = new Music();
-                                    music.type = Constants.BAIDU;
-                                    music.title = it.title;
-                                    music.artist = it.artistName;
-                                    music.artistId = it.tingUid;
-                                    music.album = it.albumTitle;
-                                    music.albumId = it.albumId;
-                                    music.isOnline = true;
-                                    music.mid = it.songId;
-                                    music.coverUri = MusicUtils.getAlbumPic(it.picSmall.split("@")[0], Constants.BAIDU, 150);
-                                    music.coverSmall = MusicUtils.getAlbumPic(it.picSmall.split("@")[0], Constants.BAIDU, 90);
-                                    music.coverBig = MusicUtils.getAlbumPic(it.picSmall.split("@")[0], Constants.BAIDU, 500);
-                                    songs.add(music);
-                                }
-                            }
-
-                            artist.count = result.songNums;
-                            artist.songs = songs;
-                            mvpView.showPlaylistSongs(artist.songs);
+                        public void success(Artist result) {
+                            mvpView.showPlaylistSongs(result.songs);
                         }
 
                         @Override
@@ -257,37 +198,10 @@ public class PlayListDetailPresenter {
             mvpView.showPlaylistSongs(null);
             return;
         } else if (album.type.equals(Constants.BAIDU)) {
-            ApiManager.request(baiduApiService.getAlbumSongList(album.albumId),
-                    new RequestCallBack<AlbumSongList>() {
+            ApiManager.request(MusicApiServiceImpl.INSTANCE.getAlbumSongList(album.albumId),
+                    new RequestCallBack<Album>() {
                         @Override
-                        public void success(AlbumSongList result) {
-                            Album album = new Album();
-                            List<Music> songs = new ArrayList<>();
-                            for (BaiduMusicList.SongListItem it : result.songlist) {
-                                Music music = new Music();
-                                music.type = Constants.BAIDU;
-                                music.title = it.title;
-                                music.artist = it.artistName;
-                                music.artistId = it.tingUid;
-                                music.album = it.albumTitle;
-                                music.albumId = it.albumId;
-                                music.isOnline = true;
-                                music.mid = it.songId;
-                                music.hasMv = it.hasMv;
-                                music.coverUri = MusicUtils.getAlbumPic(it.picSmall.split("@")[0], Constants.BAIDU, 150);
-                                music.coverSmall = MusicUtils.getAlbumPic(it.picSmall.split("@")[0], Constants.BAIDU, 90);
-                                music.coverBig = MusicUtils.getAlbumPic(it.picSmall.split("@")[0], Constants.BAIDU, 500);
-                                songs.add(music);
-                            }
-
-                            album.count = result.songlist.size();
-                            album.albumId = result.albumInfo.albumId;
-                            album.name = result.albumInfo.title;
-                            album.artistId = result.albumInfo.artistTingUid;
-                            album.artistName = result.albumInfo.author;
-                            album.info = result.albumInfo.info;
-                            album.songs = songs;
-
+                        public void success(Album result) {
                             mvpView.showPlaylistSongs(album.songs);
                         }
 

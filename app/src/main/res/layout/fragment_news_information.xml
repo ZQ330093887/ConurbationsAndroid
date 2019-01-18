@@ -20,7 +20,7 @@
                 android:minHeight="@dimen/dimens_48_dp"
                 app:layout_scrollFlags="enterAlways|scroll"
                 app:tabGravity="fill"
-                app:tabIndicatorColor="@color/theme_primary"
+                app:tabIndicatorColor="@color/white"
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/black"
                 app:tabTextColor="@color/white" />

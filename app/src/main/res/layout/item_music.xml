@@ -36,7 +36,7 @@
         android:layout_marginBottom="8dp"
         android:elevation="1dp"
         android:scaleType="centerCrop"
-        android:transitionName="@string/random_play"
+        android:transitionName="@string/transition_cover"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_title"
         app:layout_constraintStart_toStartOf="parent"

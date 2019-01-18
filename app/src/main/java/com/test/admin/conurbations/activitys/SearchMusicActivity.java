@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.EditorInfo;
 
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.test.admin.conurbations.R;
@@ -125,10 +128,10 @@ public class SearchMusicActivity extends BaseActivity<ActivityMusicSearchBinding
         //获取搜索历史
         mPresenter.getSearchHistory(this);
 
-        if (!getIntent().getBooleanExtra("is_playlist", false)) {
+//        if (!getIntent().getBooleanExtra("is_playlist", false)) {
             //获取热搜
             mPresenter.getHotSearchInfo();
-        }
+//        }
     }
 
     /**
@@ -273,8 +276,10 @@ public class SearchMusicActivity extends BaseActivity<ActivityMusicSearchBinding
             hotSearchAdapter = new HotSearchAdapter(this);
             hotSearchAdapter.setList(result);
 
-
-            mBinding.hotSearchRcv.setLayoutManager(new LinearLayoutManager(this));
+            FlexboxLayoutManager flm = new FlexboxLayoutManager(this);
+            flm.setFlexDirection(FlexDirection.ROW);
+            flm.setJustifyContent(JustifyContent.FLEX_START);
+            mBinding.hotSearchRcv.setLayoutManager(flm);
             mBinding.hotSearchRcv.setAdapter(hotSearchAdapter);
             hotSearchAdapter.notifyDataSetChanged();
 

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/mzBannerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_120_dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimens_8_dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimens_16_dp">
+
+                    <TextView
+                        android:id="@+id/hotSingerTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/ic_hot"
+                        android:gravity="center"
+                        android:text="@string/hot_artist" />
+
+                    <TextView
+                        android:id="@+id/radioTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/ic_radio"
+                        android:gravity="center"
+                        android:text="@string/radio_list" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/playlistView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimens_8_dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:text="@string/charts_netease"
+                            android:textColor="@color/black" />
+
+
+                        <TextView
+                            android:id="@+id/catTag1Tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="@string/cate_huayu"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/dimens_12_sp" />
+
+                        <View
+                            android:layout_width="@dimen/dimens_1_dp"
+                            android:layout_height="@dimen/dimens_20_dp"
+                            android:background="@color/divider_line" />
+
+                        <TextView
+                            android:id="@+id/catTag2Tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="@string/cate_liuxing"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/dimens_12_sp" />
+
+                        <View
+                            android:layout_width="@dimen/dimens_1_dp"
+                            android:layout_height="@dimen/dimens_20_dp"
+                            android:background="@color/divider_line" />
+
+                        <TextView
+                            android:id="@+id/catTag3Tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="@string/cate_gufeng"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/dimens_12_sp" />
+
+
+                        <TextView
+                            android:id="@+id/cateTagTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimens_8_dp"
+                            android:layout_marginEnd="@dimen/dimens_8_dp"
+                            android:background="@drawable/btn_more_bg"
+                            android:drawableEnd="@drawable/ic_navigate_next"
+                            android:gravity="center"
+                            android:paddingStart="@dimen/dimens_8_dp"
+                            android:paddingTop="@dimen/dimens_2_dp"
+                            android:paddingEnd="@dimen/dimens_8_dp"
+                            android:paddingBottom="@dimen/dimens_2_dp"
+                            android:text="@string/cate_all"
+                            android:textColor="@color/colorAccent" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimens_1_dp"
+                        android:background="@color/divider_line" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/wangChartsRv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimens_8_dp"
+                        android:clipToPadding="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:paddingStart="@dimen/dimens_8_dp"
+                        android:paddingEnd="@dimen/dimens_8_dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </FrameLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</layout>

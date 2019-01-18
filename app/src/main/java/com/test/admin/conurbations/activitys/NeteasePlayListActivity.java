@@ -42,13 +42,16 @@ public class NeteasePlayListActivity extends BaseSubActivity<Music, NeteasePlayL
     }
 
     @Override
+    protected void loadingData() {
+        setRefreshLayoutEnableIsFalse();
+        refreshList(1);
+    }
+
+    @Override
     public void setNewInfoData(List<NewsList> result) {
-        mBinding.listView.enablePullToRefresh(false);
-        mBinding.listView.enableLoadMore(false);
         mDataList.addAll(result.get(0).musicList);
         mSongAdapter.setList(mDataList);
         mSongAdapter.notifyDataSetChanged();
-        mBinding.listView.onRefreshCompleted();
     }
 
     @Override
@@ -112,15 +115,5 @@ public class NeteasePlayListActivity extends BaseSubActivity<Music, NeteasePlayL
             title = newsList.name;
         }
         initToolbar(mBinding.toolbarBaseToolbar, title, "");
-    }
-
-    @Override
-    public void showError(String message) {
-
-    }
-
-    @Override
-    public void showFinishState() {
-
     }
 }

@@ -12,6 +12,8 @@ import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.model.Music;
 import com.test.admin.conurbations.player.PlayManager;
 import com.test.admin.conurbations.presenter.DownLoadPresenter;
+import com.test.admin.conurbations.rxbus.Event;
+import com.test.admin.conurbations.rxbus.RxBus;
 import com.test.admin.conurbations.utils.download.TasksManagerModel;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
@@ -20,12 +22,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by zhouqiong on 2016/9/23.
  */
 public class DownloadedFragment extends BaseSubFragment<Music, DownLoadPresenter> implements IDownLoadView {
 
     private Boolean isCache;
+
+    private Disposable subscribe;
 
     public static DownloadedFragment newInstance(Boolean isCache) {
         Bundle args = new Bundle();
@@ -48,6 +54,13 @@ public class DownloadedFragment extends BaseSubFragment<Music, DownLoadPresenter
         mBinding.get().refreshLayout.setEnableLoadMore(false);
         mBinding.get().refreshLayout.setEnableRefresh(false);
         getDownloadMusic();
+
+        subscribe = RxBus.getDefault().toObservable(Event.class).subscribe(event -> {
+            if (event.eventType.equals(Constants.DOWNLOAD_EVENT)) {
+                mPresenter.loadDownloadMusic(isCache, getBaseActivity());
+                mPresenter.loadDownloading(getBaseActivity());
+            }
+        });
     }
 
     @Override
@@ -78,12 +91,13 @@ public class DownloadedFragment extends BaseSubFragment<Music, DownLoadPresenter
             isCache = getArguments().getBoolean("is_cache");
         }
         if (mPresenter != null) {
-            mPresenter.loadDownloadMusic(isCache, getActivity());
+            mPresenter.loadDownloadMusic(isCache, getBaseActivity());
         }
     }
 
     @Override
     public void showSongs(List<Music> musicList) {
+        mStatusManager.showSuccessLayout();
         mDataList.clear();
         mDataList.addAll(musicList);
         mAdapter.setList(musicList);
@@ -98,5 +112,14 @@ public class DownloadedFragment extends BaseSubFragment<Music, DownLoadPresenter
     @Override
     public void showDownloadList(List<TasksManagerModel> modelList) {
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (subscribe != null && !subscribe.isDisposed()) {
+            subscribe.dispose();
+            subscribe = null;
+        }
     }
 }

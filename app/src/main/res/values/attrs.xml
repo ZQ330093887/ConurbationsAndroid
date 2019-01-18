@@ -3,21 +3,36 @@
     <declare-styleable name="CircleImageView">
         <attr name="border_width" format="dimension" />
         <attr name="border_color" format="color" />
+        <!--圆角大小-->
+        <attr name="corner_radius" format="dimension"/>
+        <!--左上圆角大小-->
+        <attr name="leftTop_corner_radius" format="dimension"/>
+        <!--右上圆角大小-->
+        <attr name="rightTop_corner_radius" format="dimension"/>
+        <!--左下圆角大小-->
+        <attr name="leftBottom_corner_radius" format="dimension"/>
+        <!--右下圆角大小-->
+        <attr name="rightBottom_corner_radius" format="dimension"/>
+        <!--图片类型：圆角或者圆形-->
+        <attr name="type" format="enum">
+            <enum name="oval" value="2"/>
+            <enum name="round" value="1"/>
+            <enum name="circle" value="0"/>
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="WaveSideBar">
-        <attr name="sidebar_lazy_respond" format="boolean"/>
-        <attr name="sidebar_text_color" format="color"/>
+        <attr name="sidebar_lazy_respond" format="boolean" />
+        <attr name="sidebar_text_color" format="color" />
         <attr name="sidebar_max_offset" format="dimension" />
         <attr name="sidebar_position" format="enum">
-            <enum name="right" value="0"/>
-            <enum name="left" value="1"/>
+            <enum name="right" value="0" />
+            <enum name="left" value="1" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="MultiSwipeRefreshLayout">
-        <attr name="foreground"
-            format="reference"/>
+        <attr name="foreground" format="reference" />
     </declare-styleable>
 
 
@@ -27,42 +42,42 @@
         <attr name="searchCloseIcon" format="integer" />
         <attr name="searchBackIcon" format="integer" />
         <attr name="searchSuggestionBackground" format="integer" />
-        <attr name="searchBarHeight" format="dimension"  />
+        <attr name="searchBarHeight" format="dimension" />
         <attr name="voiceHintPrompt" format="string" />
-        <attr name="android:fitsSystemWindows"/>
+        <attr name="android:fitsSystemWindows" />
         <attr name="android:hint" />
         <attr name="android:textColor" />
         <attr name="android:textColorHint" />
-        <attr name="android:inputType"/>
+        <attr name="android:inputType" />
     </declare-styleable>
 
 
     <declare-styleable name="LabelView">
         <!-- 设置文字内容 -->
-        <attr name="lv_text" format="string"/>
+        <attr name="lv_text" format="string" />
         <!-- 设置文字颜色,默认#ffffff -->
-        <attr name="lv_text_color" format="color"/>
+        <attr name="lv_text_color" format="color" />
         <!-- 设置文字大小,默认11sp -->
-        <attr name="lv_text_size" format="dimension"/>
+        <attr name="lv_text_size" format="dimension" />
         <!-- 设置文字是否支持加粗,默认true -->
-        <attr name="lv_text_bold" format="boolean"/>
+        <attr name="lv_text_bold" format="boolean" />
         <!-- 设置文字是否支持全部大写,默认true-->
-        <attr name="lv_text_all_caps" format="boolean"/>
+        <attr name="lv_text_all_caps" format="boolean" />
         <!-- 设置背景颜色,默认"#FF4081"-->
-        <attr name="lv_background_color" format="color"/>
+        <attr name="lv_background_color" format="color" />
         <!-- 设置LabelView所在矩形最小宽高,默认mFillTriangle?35dp:50dp-->
-        <attr name="lv_min_size" format="dimension"/>
+        <attr name="lv_min_size" format="dimension" />
         <!-- 设置文字上下padding,默认3.5dp,mFillTriangle为true时无效-->
-        <attr name="lv_padding" format="dimension"/>
+        <attr name="lv_padding" format="dimension" />
         <!-- 设置LabelView方向 -->
         <attr name="lv_gravity" format="enum">
-            <enum name="TOP_LEFT" value="51"/>
-            <enum name="TOP_RIGHT" value="53"/>
-            <enum name="BOTTOM_LEFT" value="83"/>
-            <enum name="BOTTOM_RIGHT" value="85"/>
+            <enum name="TOP_LEFT" value="51" />
+            <enum name="TOP_RIGHT" value="53" />
+            <enum name="BOTTOM_LEFT" value="83" />
+            <enum name="BOTTOM_RIGHT" value="85" />
         </attr>
         <!-- 设置是否填充三角区域,默认false -->
-        <attr name="lv_fill_triangle" format="boolean"/>
+        <attr name="lv_fill_triangle" format="boolean" />
 
     </declare-styleable>
 

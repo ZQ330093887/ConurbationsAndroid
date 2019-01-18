@@ -3,6 +3,8 @@ package com.test.admin.conurbations.model.api
 import android.content.Context
 import android.util.Log
 import android.webkit.JavascriptInterface
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.test.admin.conurbations.model.MusicInfo
@@ -26,8 +28,14 @@ object BaseApiImpl {
     var mWebView: DWebView? = null
 
     fun initWebView(context: Context) {
+        initAssets()
         try {
             mWebView = DWebView(context)
+            mWebView?.webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(p0: WebView?, p1: String?): Boolean {
+                    return false
+                }
+            }
             DWebView.setWebContentsDebuggingEnabled(true)
             mWebView?.addJavascriptObject(object : Any() {
                 @JavascriptInterface
@@ -43,12 +51,18 @@ object BaseApiImpl {
     }
 
     /**
+     * 初始化js文件
+     */
+    private fun initAssets() {
+    }
+
+    /**
      * 搜索
      *
      * @param query
      */
-    fun searchSong(query: String, type: String, limit: Int, offset: Int, success: (result: SearchData) -> Unit, fail: ((String?) -> Unit)? = null) {
-        mWebView?.callHandler("api.searchSong", arrayOf(query, limit, offset)) { retValue: JSONObject ->
+    fun searchSong(query: String, limit: Int, offset: Int, success: (result: SearchData) -> Unit, fail: ((String?) -> Unit)? = null) {
+        mWebView?.callHandler("S", arrayOf(query, limit, offset)) { retValue: JSONObject ->
             try {
                 val result = gson.fromJson<SearchData>(retValue.toString(), SearchData::class.java)
                 success.invoke(result)
@@ -63,7 +77,7 @@ object BaseApiImpl {
     /**
      * 独立请求
      */
-    fun searchSongSingle(query: String, type: String, limit: Int, offset: Int, success: (result: SearchData.SearchSingleData) -> Unit, fail: ((String?) -> Unit)? = null) {
+    fun searchSongSingle(query: String, type: String, limit: Int, offset: Int, success: (result: SearchData.SearchSingleData) -> Unit) {
         val params = mapOf("keyword" to query, "limit" to limit, "offset" to offset)
         Log.e("searchSongSingle", params.toString())
         when (type) {

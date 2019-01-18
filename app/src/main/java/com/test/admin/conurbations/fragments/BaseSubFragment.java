@@ -96,6 +96,7 @@ public abstract class BaseSubFragment<T, P extends BasePresenter>
     private void initView() {
 
         mStatusManager = new StatusLayoutManager.Builder(mBinding.get().refreshLayout)
+                .setDefaultEmptyClickViewVisible(false)
                 .setOnStatusChildClickListener(new OnStatusChildClickListener() {
                     @Override
                     public void onEmptyChildClick(View view) {
