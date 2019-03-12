@@ -33,8 +33,8 @@ public class QualityAdapter extends BaseListAdapter<QualitySelectDialog.QualityI
         return new QualityDialogHolder(inflateItemView(parent, R.layout.item_quality_select));
     }
 
-    class QualityDialogHolder extends BaseViewHolder {
-        public QualityDialogHolder(View itemView) {
+    private class QualityDialogHolder extends BaseViewHolder {
+        private QualityDialogHolder(View itemView) {
             super(itemView);
         }
     }
@@ -46,7 +46,7 @@ public class QualityAdapter extends BaseListAdapter<QualitySelectDialog.QualityI
 
 
     public interface OnItemClickListener {
-        public void onItemClick(QualitySelectDialog.QualityItem item);
+        void onItemClick(QualitySelectDialog.QualityItem item);
     }
 
     private OnItemClickListener mListener;

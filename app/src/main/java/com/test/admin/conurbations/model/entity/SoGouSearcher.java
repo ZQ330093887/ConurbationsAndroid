@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * Created by zhouqiong on 2017/1/23.
  */
-public class SosoSearcher implements Serializable {
+public class SoGouSearcher implements Serializable {
     private String thumbUrl;
     private String pic_url;
 

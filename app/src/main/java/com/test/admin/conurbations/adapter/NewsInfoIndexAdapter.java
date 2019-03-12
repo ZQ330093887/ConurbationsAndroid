@@ -60,22 +60,19 @@ public class NewsInfoIndexAdapter extends BaseListAdapter<News> {
 
     @NonNull
     private View.OnClickListener getListener(final BaseViewHolder holder, final News news) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!news.isRead()) {
-                    news.setRead(true);
-                    holder.setTextColor(R.id.tv_item_news_info_index_title,
-                            ContextCompat.getColor(((Fragment) mContext).getActivity(), R.color.color_read));
-                }
-                Context context = v.getContext();
-                Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
-                intent.putExtra(NewsInfoListDetailFragment.KEY_NEWS, news.getId());
-                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context
-                        , new Pair<>(holder.getView(R.id.iv_item_news_info_index), BaseActivity.TRANSLATE_WEB_VIEW_BG_IMG)
-                        , new Pair<>(holder.getView(R.id.tv_item_news_info_index_title), BaseActivity.TRANSLATE_WEB_VIEW_TITLE));
-                ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
+        return v -> {
+            if (!news.isRead()) {
+                news.setRead(true);
+                holder.setTextColor(R.id.tv_item_news_info_index_title,
+                        ContextCompat.getColor(((Fragment) mContext).getActivity(), R.color.color_read));
             }
+            Context context = v.getContext();
+            Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
+            intent.putExtra(NewsInfoListDetailFragment.KEY_NEWS, news.getId());
+            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context
+                    , new Pair<>(holder.getView(R.id.iv_item_news_info_index), BaseActivity.TRANSLATE_WEB_VIEW_BG_IMG)
+                    , new Pair<>(holder.getView(R.id.tv_item_news_info_index_title), BaseActivity.TRANSLATE_WEB_VIEW_TITLE));
+            ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
         };
     }
 

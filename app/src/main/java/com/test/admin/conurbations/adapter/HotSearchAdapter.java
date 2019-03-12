@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.model.entity.HotSearchBean;
-import com.test.admin.conurbations.model.entity.SearchHistoryBean;
 
 
 /**

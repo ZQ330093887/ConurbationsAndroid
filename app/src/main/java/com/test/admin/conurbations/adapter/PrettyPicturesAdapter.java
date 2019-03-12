@@ -13,6 +13,7 @@ import javax.inject.Inject;
  * Created by ZQiong on 2016/2/7 0007.
  */
 public class PrettyPicturesAdapter extends BaseListAdapter<TSZImageBean> {
+
     @Inject
     public PrettyPicturesAdapter(Fragment context) {
         super(context);

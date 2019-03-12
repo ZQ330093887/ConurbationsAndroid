@@ -25,10 +25,10 @@
                     android:background="?attr/colorPrimary"
                     android:minHeight="@dimen/dimens_48_dp"
                     app:layout_scrollFlags="enterAlways|scroll"
-                    app:tabIndicatorColor="@color/colorToolbarDark"
+                    app:tabIndicatorColor="@color/white"
                     app:tabMode="scrollable"
-                    app:tabSelectedTextColor="@color/black"
-                    app:tabTextColor="@color/white" />
+                    app:tabSelectedTextColor="@color/white"
+                    app:tabTextColor="@color/black" />
 
             </android.support.design.widget.AppBarLayout>
 

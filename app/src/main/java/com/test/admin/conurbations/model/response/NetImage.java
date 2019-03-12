@@ -1,7 +1,7 @@
 package com.test.admin.conurbations.model.response;
 
 import com.test.admin.conurbations.model.entity.Base;
-import com.test.admin.conurbations.model.entity.SosoSearcher;
+import com.test.admin.conurbations.model.entity.SoGouSearcher;
 
 import java.util.List;
 
@@ -9,5 +9,5 @@ import java.util.List;
  * Created by wenhuaijun on 2015/11/2 0002.
  */
 public class NetImage extends Base {
-    public List<SosoSearcher> items;
+    public List<SoGouSearcher> items;
 }

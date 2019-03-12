@@ -11,9 +11,7 @@ import com.test.admin.conurbations.model.MusicInfo;
 import com.test.admin.conurbations.model.api.BaiduApiService;
 import com.test.admin.conurbations.model.api.MusicApiServiceImpl;
 import com.test.admin.conurbations.model.entity.Album;
-import com.test.admin.conurbations.model.entity.AlbumSongList;
 import com.test.admin.conurbations.model.entity.Artist;
-import com.test.admin.conurbations.model.entity.BaiduMusicList;
 import com.test.admin.conurbations.model.entity.NewsList;
 import com.test.admin.conurbations.model.user.UserStatus;
 import com.test.admin.conurbations.retrofit.ApiManager;
@@ -39,16 +37,10 @@ import okhttp3.ResponseBody;
  */
 
 public class PlayListDetailPresenter {
-    BaiduApiService baiduApiService  = ApiManager.getInstance().create(BaiduApiService.class, Constants.BASE_PLAYER_URL);
-    private String token;
     private IPlayListDetailView mvpView;
 
     public PlayListDetailPresenter(IPlayListDetailView iPlayListDetailView) {
         this.mvpView = iPlayListDetailView;
-        if (UserStatus.getUserInfo() != null) {
-            token = UserStatus.getUserInfo().token;
-        }
-
     }
 
     public void loadPlaylistSongs(NewsList playlist) {
@@ -93,7 +85,8 @@ public class PlayListDetailPresenter {
                         });
                 break;
             default:
-                ApiManager.request(baiduApiService.getMusicList(TextUtils.isEmpty(token) ? "" : token, playlist.pid),
+                BaiduApiService baiduApiService = ApiManager.getInstance().create(BaiduApiService.class, Constants.BASE_PLAYER_URL);
+                ApiManager.request(baiduApiService.getMusicList("", playlist.pid),
                         new RequestCallBack<ResponseBody>() {
                             @Override
                             public void success(ResponseBody result) {

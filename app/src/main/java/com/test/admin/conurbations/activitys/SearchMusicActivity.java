@@ -70,7 +70,6 @@ public class SearchMusicActivity extends BaseActivity<ActivityMusicSearchBinding
     /**
      * 分页偏移量
      */
-    private int mCurrentCounter = 10;
     private int limit = 10;
     private int mOffset = 0;
     private boolean isSearchOnline = false;
@@ -129,8 +128,8 @@ public class SearchMusicActivity extends BaseActivity<ActivityMusicSearchBinding
         mPresenter.getSearchHistory(this);
 
 //        if (!getIntent().getBooleanExtra("is_playlist", false)) {
-            //获取热搜
-            mPresenter.getHotSearchInfo();
+        //获取热搜
+        mPresenter.getHotSearchInfo();
 //        }
     }
 
@@ -260,7 +259,6 @@ public class SearchMusicActivity extends BaseActivity<ActivityMusicSearchBinding
             statusLayoutManager.showEmptyLayout();
         }
         mAdapter.notifyDataSetChanged();
-        LogUtil.e("search", mCurrentCounter + "--" + mCurrentCounter + "--" + mOffset);
     }
 
     @Override

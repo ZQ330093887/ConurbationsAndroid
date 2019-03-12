@@ -7,7 +7,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import com.test.admin.conurbations.activitys.ISouGouImageView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.SouGouImageAdapter;
-import com.test.admin.conurbations.model.entity.SosoSearcher;
+import com.test.admin.conurbations.model.entity.SoGouSearcher;
 import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.presenter.SouGouImagePresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
@@ -18,7 +18,7 @@ import javax.inject.Inject;
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class SouGouImageFragment extends BaseSubFragment<SosoSearcher, SouGouImagePresenter>
+public class SouGouImageFragment extends BaseSubFragment<SoGouSearcher, SouGouImagePresenter>
         implements ISouGouImageView {
 
     private String range;

@@ -7,7 +7,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import com.test.admin.conurbations.activitys.ISearchView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 import com.test.admin.conurbations.adapter.SearchAdapter;
-import com.test.admin.conurbations.model.entity.SosoSearcher;
+import com.test.admin.conurbations.model.entity.SoGouSearcher;
 import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.presenter.SearchPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
@@ -18,7 +18,7 @@ import javax.inject.Inject;
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class SearchFragment extends BaseListFragment<SosoSearcher, SearchPresenter> implements ISearchView {
+public class SearchFragment extends BaseListFragment<SoGouSearcher, SearchPresenter> implements ISearchView {
     public static final String CLASS_SEARCH = "search_query";
     private String mSearchQuery;
 

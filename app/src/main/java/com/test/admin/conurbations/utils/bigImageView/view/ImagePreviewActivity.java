@@ -22,6 +22,7 @@ import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.BaseActivity;
 import com.test.admin.conurbations.databinding.ActivityImagePreviewBinding;
 import com.test.admin.conurbations.utils.DialogUtils;
+import com.test.admin.conurbations.utils.StatusBarUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.utils.bigImageView.ImagePreview;
 import com.test.admin.conurbations.utils.bigImageView.bean.ImageInfo;
@@ -63,6 +64,7 @@ public class ImagePreviewActivity extends BaseActivity<ActivityImagePreviewBindi
 
     @Override
     protected void initData(Bundle bundle) {
+        StatusBarUtils.setWindowStatusBarColor(getBaseActivity(), R.color.theme_primary);
         initToolbar(mBinding.toolbarImagePreviewToolbar, "美图", "");
         initMenuFragment();
         handlerHolder = new HandlerUtils.HandlerHolder(this);

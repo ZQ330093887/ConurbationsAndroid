@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.model.entity.SosoSearcher;
+import com.test.admin.conurbations.model.entity.SoGouSearcher;
 
 import javax.inject.Inject;
 
@@ -12,7 +12,7 @@ import javax.inject.Inject;
  * Created by zhouqiong on 2017/1/5.
  */
 
-public class SouGouImageAdapter extends BaseListAdapter<SosoSearcher> {
+public class SouGouImageAdapter extends BaseListAdapter<SoGouSearcher> {
 
     @Inject
     public SouGouImageAdapter(Fragment context) {
@@ -20,7 +20,7 @@ public class SouGouImageAdapter extends BaseListAdapter<SosoSearcher> {
     }
 
     @Override
-    protected void bindDataToItemView(final BaseViewHolder holder, final SosoSearcher item) {
+    protected void bindDataToItemView(final BaseViewHolder holder, final SoGouSearcher item) {
         holder.setImageUrlUserGlide(R.id.rv_item_sougou_photo, item.getPic_url(), 0.618f, R.color.white)
                 .setOnClickListener(R.id.rv_item_sougou_photo, v ->
                         startShowImageActivity(v, getStringToList(item.getPic_url()))
