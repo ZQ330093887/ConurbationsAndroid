@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.test.admin.conurbations.activitys.IPlayListDetailView;
+import com.test.admin.conurbations.activitys.IWelfareView;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.model.Music;
 import com.test.admin.conurbations.model.MusicInfo;
@@ -36,11 +37,10 @@ import okhttp3.ResponseBody;
  * Created by zhouqiong on 2016/12/12.
  */
 
-public class PlayListDetailPresenter {
-    private IPlayListDetailView mvpView;
+public class PlayListDetailPresenter extends BasePresenter<IPlayListDetailView> {
 
     public PlayListDetailPresenter(IPlayListDetailView iPlayListDetailView) {
-        this.mvpView = iPlayListDetailView;
+        attachView(iPlayListDetailView);
     }
 
     public void loadPlaylistSongs(NewsList playlist) {

@@ -12,7 +12,6 @@ import com.test.admin.conurbations.model.entity.SearchEngine;
 import com.test.admin.conurbations.model.entity.SearchHistoryBean;
 import com.test.admin.conurbations.retrofit.ApiManager;
 import com.test.admin.conurbations.retrofit.RequestCallBack;
-import com.test.admin.conurbations.utils.DialogUtils;
 import com.test.admin.conurbations.utils.LogUtil;
 import com.test.admin.conurbations.widget.SolidApplication;
 
@@ -24,18 +23,16 @@ import io.reactivex.Observable;
 /**
  * Created by zhouqiong on 2017/1/18.
  */
-public class SearchMusicPresenter {
-
-    private ISearchMusicView mView;
+public class SearchMusicPresenter extends BasePresenter<ISearchMusicView> {
 
     public SearchMusicPresenter(ISearchMusicView iSearchMusicView) {
-        this.mView = iSearchMusicView;
+        attachView(iSearchMusicView);
     }
 
     public void searchLocal(String key, Activity context) {
         new Thread(() -> {
             List<Music> result = DaoLitepal.searchLocalMusic(key);
-            context.runOnUiThread(() -> mView.showSearchResult(result));
+            context.runOnUiThread(() -> mvpView.showSearchResult(result));
         }).start();
     }
 
@@ -52,27 +49,27 @@ public class SearchMusicPresenter {
             @Override
             public void success(List<Music> result) {
                 LogUtil.e("searchSuccess", result.toString());
-                mView.showSearchResult(result);
+                mvpView.showSearchResult(result);
             }
 
             @Override
             public void error(String msg) {
                 LogUtil.e("searchFail", msg);
-                mView.showSearchResult(new ArrayList<>());
+                mvpView.showSearchResult(new ArrayList<>());
             }
         });
     }
 
     public void getHotSearchInfo() {
         if (SolidApplication.hotSearchList != null) {
-            mView.showHotSearchInfo(SolidApplication.hotSearchList);
+            mvpView.showHotSearchInfo(SolidApplication.hotSearchList);
         } else {
             ApiManager.request(MusicApiServiceImpl.INSTANCE.getHotSearchInfo(), new RequestCallBack<List<HotSearchBean>>() {
                 @Override
                 public void success(List<HotSearchBean> result) {
                     LogUtil.e("searchSuccess", result.toString());
                     SolidApplication.hotSearchList = result;
-                    mView.showHotSearchInfo(result);
+                    mvpView.showHotSearchInfo(result);
                 }
 
                 @Override
@@ -86,7 +83,7 @@ public class SearchMusicPresenter {
     public void getSearchHistory(Activity activity) {
         new Thread(() -> {
             List<SearchHistoryBean> data = DaoLitepal.getAllSearchInfo(null);
-            activity.runOnUiThread(() -> mView.showSearchHistory(data));
+            activity.runOnUiThread(() -> mvpView.showSearchHistory(data));
         }).start();
     }
 

@@ -70,7 +70,9 @@ public abstract class BaseSubFragment<T, P extends BasePresenter>
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter.attachView(this);
+        if (mPresenter != null) {
+            mPresenter.attachView(this);
+        }
     }
 
     @Override
@@ -228,6 +230,8 @@ public abstract class BaseSubFragment<T, P extends BasePresenter>
 
     @Override
     public void detachView() {
-
+        if (mPresenter != null) {
+            mPresenter.detachView();
+        }
     }
 }

@@ -10,11 +10,10 @@ import java.util.List;
  * Created by zhouqiong on 2016/12/12.
  */
 
-public class PlayQueuePresenter {
-    private IPlayQueueContract mvpView;
+public class PlayQueuePresenter extends BasePresenter<IPlayQueueContract> {
 
     public PlayQueuePresenter(IPlayQueueContract mvpView) {
-        this.mvpView = mvpView;
+        attachView(mvpView);
     }
 
     public void loadSongs() {

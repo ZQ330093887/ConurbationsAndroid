@@ -28,7 +28,7 @@ public class AppClient {
             }
             OkHttpClient okHttpClient;
             try {
-                NoSSLv3SocketFactoryextends factory = new NoSSLv3SocketFactoryextends();
+                NoSSLv3SocketFactory factory = new NoSSLv3SocketFactory();
                 builder.sslSocketFactory(factory);
                 okHttpClient = builder.build();
             } catch (Exception e) {

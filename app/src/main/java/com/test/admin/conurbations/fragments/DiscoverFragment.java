@@ -7,29 +7,21 @@ import android.view.View;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.IDiscoverView;
-import com.test.admin.conurbations.activitys.MvDetailActivity;
 import com.test.admin.conurbations.adapter.TopPlaylistAdapter;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.databinding.FragmentDiscoverBinding;
-import com.test.admin.conurbations.model.api.MusicApi;
 import com.test.admin.conurbations.model.entity.Artist;
 import com.test.admin.conurbations.model.entity.BannerBean;
 import com.test.admin.conurbations.model.entity.NewsList;
-import com.test.admin.conurbations.player.PlayManager;
 import com.test.admin.conurbations.presenter.DiscoverPresenter;
-import com.test.admin.conurbations.utils.MusicUtils;
 import com.test.admin.conurbations.utils.NavigationHelper;
 import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.widget.GlideImageLoader;
 import com.youth.banner.BannerConfig;
-import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.transformer.TabletTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 
 /**
  * 发现

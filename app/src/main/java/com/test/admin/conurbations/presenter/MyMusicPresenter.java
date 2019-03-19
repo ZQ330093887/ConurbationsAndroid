@@ -18,13 +18,12 @@ import java.util.List;
  * Created by zhouqiong on 2016/12/12.
  */
 
-public class MyMusicPresenter {
+public class MyMusicPresenter extends BasePresenter<IMuMusicContractView> {
 
-    private IMuMusicContractView mView;
     private Activity context;
 
     public MyMusicPresenter(IMuMusicContractView iMuMusicContractView, Activity context) {
-        this.mView = iMuMusicContractView;
+        attachView(iMuMusicContractView);
         this.context = context;
     }
 
@@ -34,7 +33,7 @@ public class MyMusicPresenter {
     public void updateHistory() {
         new Thread(() -> {
             List<Music> data = PlayHistoryLoader.getPlayHistory();
-            context.runOnUiThread(() -> mView.showHistory(data));
+            context.runOnUiThread(() -> mvpView.showHistory(data));
         }).start();
     }
 
@@ -44,7 +43,7 @@ public class MyMusicPresenter {
     public void updateLocal() {
         new Thread(() -> {
             List<Music> data = SongLoader.getLocalMusic(context, false);
-            context.runOnUiThread(() -> mView.showSongs(data));
+            context.runOnUiThread(() -> mvpView.showSongs(data));
         }).start();
     }
 
@@ -54,7 +53,7 @@ public class MyMusicPresenter {
     public void updateFavorite() {
         new Thread(() -> {
             List<Music> data = SongLoader.getFavoriteSong();
-            context.runOnUiThread(() -> mView.showLoveList(data));
+            context.runOnUiThread(() -> mvpView.showLoveList(data));
         }).start();
     }
 
@@ -65,7 +64,7 @@ public class MyMusicPresenter {
     public void updateDownload() {
         new Thread(() -> {
             List<Music> data = DownloadLoader.getDownloadList();
-            context.runOnUiThread(() -> mView.showDownloadList(data));
+            context.runOnUiThread(() -> mvpView.showDownloadList(data));
         }).start();
     }
 
@@ -81,19 +80,19 @@ public class MyMusicPresenter {
         boolean mIsLogin = UserStatus.getLoginStatus();
         if (mIsLogin) {
             OnlinePlaylistUtils.INSTANCE.getOnlinePlaylist(newsLists -> {
-                mView.showPlaylist(newsLists);
+                mvpView.showPlaylist(newsLists);
                 return null;
             }, s -> {
                 ToastUtils.getInstance().showToast(s);
 
                 if (OnlinePlaylistUtils.INSTANCE.getPlaylists().size() == 0) {
-                    mView.showError(s, true);
+                    mvpView.showError(s, true);
                 }
                 return null;
             });
         } else {
             OnlinePlaylistUtils.INSTANCE.getPlaylists().clear();
-            mView.showPlaylist(OnlinePlaylistUtils.INSTANCE.getPlaylists());
+            mvpView.showPlaylist(OnlinePlaylistUtils.INSTANCE.getPlaylists());
         }
     }
 }

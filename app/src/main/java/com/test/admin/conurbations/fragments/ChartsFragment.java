@@ -12,9 +12,7 @@ import com.test.admin.conurbations.databinding.FragmentMusicMvBinding;
 
 /**
  * 功能：在线排行榜
- * 作者：yonglong on 2016/8/11 18:14
- * 邮箱：643872807@qq.com
- * 版本：2.5
+ * Created by zhouqiong on 2016/9/23.
  */
 public class ChartsFragment extends BaseFragment<FragmentMusicMvBinding> {
 

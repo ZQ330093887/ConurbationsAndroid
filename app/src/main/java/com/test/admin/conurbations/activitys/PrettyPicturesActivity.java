@@ -6,7 +6,6 @@ import com.squareup.picasso.Picasso;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.databinding.ActivityPrettyPicturesBinding;
 import com.test.admin.conurbations.fragments.PrettyPicturesFragment;
-import com.test.admin.conurbations.utils.StatusBarUtil;
 
 import java.util.Random;
 
@@ -25,9 +24,7 @@ public class PrettyPicturesActivity extends BaseActivity<ActivityPrettyPicturesB
 
     @Override
     protected void initData(Bundle bundle) {
-        StatusBarUtil.immersive(this);
-        StatusBarUtil.setPaddingSmart(this, mBinding.toolbarPrettyPicturesToolbar);
-        StatusBarUtil.darkMode(this, false);
+        initToolbar(mBinding.toolbarPrettyPicturesToolbar, "", "");
         initAppBarSetting();
 
         mBinding.ctlPrettyPicturesHead.setTitle(getIntent().getStringExtra(PrettyPicturesFragment.CLASS_TITLE));

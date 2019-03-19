@@ -1,16 +1,12 @@
 package com.test.admin.conurbations.adapter;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.activitys.BaseActivity;
-import com.test.admin.conurbations.activitys.MvDetailActivity;
 import com.test.admin.conurbations.config.Constants;
-import com.test.admin.conurbations.model.entity.MvInfo;
 import com.test.admin.conurbations.model.entity.NewsList;
 import com.test.admin.conurbations.utils.MusicUtils;
 import com.test.admin.conurbations.utils.NavigationHelper;

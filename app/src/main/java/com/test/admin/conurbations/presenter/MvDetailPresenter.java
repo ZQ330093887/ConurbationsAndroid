@@ -13,12 +13,10 @@ import com.test.admin.conurbations.utils.LogUtil;
 
 public class MvDetailPresenter extends BasePresenter<IMvDetail> {
 
-    private IMvDetail mView;
 
     public MvDetailPresenter(IMvDetail mvDetail) {
-        this.mView = mvDetail;
+        attachView(mvDetail);
     }
-
 
     public void loadMvDetail(String mvid) {
 
@@ -26,8 +24,8 @@ public class MvDetailPresenter extends BasePresenter<IMvDetail> {
                 new RequestCallBack<MvInfo.MvDetailInfo>() {
                     @Override
                     public void success(MvInfo.MvDetailInfo result) {
-                        mView.showMvDetailInfo(result.data);
-                        mView.showFinishState();
+                        mvpView.showMvDetailInfo(result.data);
+                        mvpView.showFinishState();
                     }
 
                     @Override
@@ -42,8 +40,8 @@ public class MvDetailPresenter extends BasePresenter<IMvDetail> {
                 new RequestCallBack<MvInfo.SimilarMvInfo>() {
                     @Override
                     public void success(MvInfo.SimilarMvInfo result) {
-                        mView.showMvList(result.data);
-                        mView.showFinishState();
+                        mvpView.showMvList(result.data);
+                        mvpView.showFinishState();
                     }
 
                     @Override

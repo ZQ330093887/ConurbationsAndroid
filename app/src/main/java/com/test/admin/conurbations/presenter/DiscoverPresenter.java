@@ -17,12 +17,11 @@ import java.util.List;
  * Created by zhouqiong on 2016/12/12.
  */
 
-public class DiscoverPresenter {
+public class DiscoverPresenter extends BasePresenter<IDiscoverView> {
 
-    private IDiscoverView mView;
 
     public DiscoverPresenter(IDiscoverView iDiscoverView) {
-        this.mView = iDiscoverView;
+        attachView(iDiscoverView);
     }
 
     public void loadBannerView() {
@@ -30,13 +29,13 @@ public class DiscoverPresenter {
             @Override
             public void success(BannerResult result) {
                 if (result.getCode() == 200) {
-                    mView.showBannerView(result.getBanners());
+                    mvpView.showBannerView(result.getBanners());
                 }
             }
 
             @Override
             public void error(String msg) {
-                mView.showEmptyView(msg);
+                mvpView.showEmptyView(msg);
             }
         });
     }
@@ -46,12 +45,12 @@ public class DiscoverPresenter {
         ApiManager.request(MusicApiServiceImpl.INSTANCE.getTopPlaylists(tag, 30), new RequestCallBack<List<NewsList>>() {
             @Override
             public void success(List<NewsList> result) {
-                mView.showNeteaseCharts(result);
+                mvpView.showNeteaseCharts(result);
             }
 
             @Override
             public void error(String msg) {
-                mView.showEmptyView(msg);
+                mvpView.showEmptyView(msg);
             }
         });
     }
@@ -62,7 +61,7 @@ public class DiscoverPresenter {
                     @Override
                     public void success(List<NewsList> result) {
 
-                        mView.showRadioChannels((ArrayList<NewsList>) result);
+                        mvpView.showRadioChannels((ArrayList<NewsList>) result);
                     }
 
                     @Override
@@ -78,7 +77,7 @@ public class DiscoverPresenter {
                 new RequestCallBack<List<Artist>>() {
                     @Override
                     public void success(List<Artist> result) {
-                        mView.showArtistCharts((ArrayList<Artist>) result);
+                        mvpView.showArtistCharts((ArrayList<Artist>) result);
                     }
 
                     @Override

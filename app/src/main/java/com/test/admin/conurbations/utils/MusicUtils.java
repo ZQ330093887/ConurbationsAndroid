@@ -5,13 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.widget.TextView;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.model.Music;
 import com.test.admin.conurbations.model.MusicInfo;
-import com.test.admin.conurbations.model.entity.Album;
 import com.test.admin.conurbations.model.entity.Artist;
 import com.test.admin.conurbations.model.entity.NeteasePlaylistDetail;
 

@@ -22,12 +22,12 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
 
-class NoSSLv3SocketFactoryextends extends SSLSocketFactory {
+class NoSSLv3SocketFactory extends SSLSocketFactory {
     private static final String[] TLS_V12_ONLY = {"TLSv1.2"};
 
     private final SSLSocketFactory delegate;
 
-    public NoSSLv3SocketFactoryextends() throws KeyManagementException, NoSuchAlgorithmException {
+    public NoSSLv3SocketFactory() throws KeyManagementException, NoSuchAlgorithmException {
         SSLContext sc = SSLContext.getInstance("TLS");
         sc.init(null, null, null);
         delegate = sc.getSocketFactory();

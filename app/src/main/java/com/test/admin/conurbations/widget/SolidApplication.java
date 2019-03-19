@@ -79,7 +79,6 @@ public class SolidApplication extends Application {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
-
         FeedbackAPI.initAnnoy(this, "23601404");
 
         setBugly();
@@ -107,6 +106,7 @@ public class SolidApplication extends Application {
         FileDownloadLog.NEED_LOG = true;
         FileDownloader.setup(this);
     }
+
     public static SolidApplication getInstance() {
         return mInstance;
     }
