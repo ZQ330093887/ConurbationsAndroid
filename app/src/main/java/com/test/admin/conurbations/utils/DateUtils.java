@@ -1,10 +1,15 @@
 package com.test.admin.conurbations.utils;
 
+import android.annotation.SuppressLint;
+
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by _SOLID
@@ -118,6 +123,34 @@ public class DateUtils {
         long h = (temp / 60 / 60 % 24);//h小时s
         return h > 0L ? (h > (long) 9 ? String.valueOf(h) : "" + '0' + h) + ':' + (m > (long) 9 ? String.valueOf(m) : "" + '0' + m) + ':' + (s > (long) 9 ? String.valueOf(s) : "" + '0' + s) : (m > (long) 9 ? String.valueOf(m) : "" + '0' + m) + ':' + (s > (long) 9 ? String.valueOf(s) : "" + '0' + s);
     }
+
+    @SuppressLint("SimpleDateFormat")
+    public static String formatTimeStr(long time) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+        String dateString = formatter.format(time);
+        return dateString;
+    }
+
+
+    public static String filterStrBlank(String str) {
+        String dest = "";
+        if (str != null) {
+            Pattern p = Pattern.compile("\\s*|\t|\r|\n");
+            Matcher m = p.matcher(str);
+            dest = m.replaceAll("");
+        }
+        return dest;
+    }
+
+    public static String formatNumber(long val) {
+        if (val < 10000) {
+            return val + "";
+        }
+        DecimalFormat df = new DecimalFormat("######0.0");
+        double d = val / 10000.0;
+        return df.format(d) + "万";
+    }
+
 
 
     /**

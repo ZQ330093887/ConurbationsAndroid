@@ -29,11 +29,13 @@
 
 package com.test.admin.conurbations.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.DisplayMetrics;
 
 public class AppUtils {
 
@@ -77,5 +79,42 @@ public class AppUtils {
         } else {
             sHandler.removeCallbacks(r);
         }
+    }
+
+
+    @SuppressWarnings("deprecation")
+    public static String getOSSDK() {
+        return android.os.Build.VERSION.SDK;
+    }
+
+    public static String getOSRelease() {
+        return android.os.Build.VERSION.RELEASE;
+    }
+
+    public static String getDeviceName() {
+        return android.os.Build.MODEL;
+    }
+
+    public static String getDeviceFactory() {
+        return android.os.Build.BRAND;
+    }
+
+    public static int getDeviceWidth(Activity act) {
+        DisplayMetrics metric = new DisplayMetrics();
+        act.getWindowManager().getDefaultDisplay().getMetrics(metric);
+        return metric.widthPixels;
+    }
+
+    public static int getDeviceHeight(Activity act) {
+        DisplayMetrics metric = new DisplayMetrics();
+        act.getWindowManager().getDefaultDisplay().getMetrics(metric);
+        return metric.heightPixels;
+    }
+
+
+    public static int getDeviceDpi(Activity act) {
+        DisplayMetrics metric = new DisplayMetrics();
+        act.getWindowManager().getDefaultDisplay().getMetrics(metric);
+        return metric.densityDpi;
     }
 }

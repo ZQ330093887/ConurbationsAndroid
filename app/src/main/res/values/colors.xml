@@ -23,6 +23,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#040404</color>
     <color name="colorLoadingBg">#666666</color>
+    <color name="color_eeeeee">#eeeeee</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondText">#727272</color>
     <color name="colorHint">#999999</color>
@@ -108,4 +109,5 @@
 
     <color name="black_translucent">#66000000</color>
     <color name="white_translucent">#c8ffffff</color>
+    <color name="color_512DA8">#512DA8</color>
 </resources>

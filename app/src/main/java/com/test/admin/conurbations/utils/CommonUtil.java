@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.widget.SolidApplication;
 
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,6 +38,16 @@ public class CommonUtil {
         } else {
             return count / 10000 + "." + count / 1000 % 10 + "万";
         }
+    }
+
+
+    public static String formatNumber(long val) {
+        if (val < 10000) {
+            return val + "";
+        }
+        DecimalFormat df = new DecimalFormat("######0.0");
+        double d = val / 10000.0;
+        return df.format(d) + "万";
     }
 
 

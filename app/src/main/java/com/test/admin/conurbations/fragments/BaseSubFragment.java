@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
-import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.BaseViewImpl;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
@@ -18,6 +16,8 @@ import com.test.admin.conurbations.di.module.FragmentModule;
 import com.test.admin.conurbations.presenter.BasePresenter;
 import com.test.admin.conurbations.utils.RecyclerUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
+import com.test.admin.conurbations.views.smartrefresh.SmartRefreshFooter;
+import com.test.admin.conurbations.views.smartrefresh.SmartRefreshHeader;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.SolidApplication;
 import com.test.admin.conurbations.widget.statuslayoutmanage.OnStatusChildClickListener;
@@ -125,8 +125,8 @@ public abstract class BaseSubFragment<T, P extends BasePresenter>
     }
 
     private void initRefreshLayout() {
-        mBinding.get().refreshLayout.setRefreshHeader(new ClassicsHeader(getBaseActivity()));
-        mBinding.get().refreshLayout.setRefreshFooter(new ClassicsFooter(getBaseActivity()));
+        mBinding.get().refreshLayout.setRefreshHeader(new SmartRefreshHeader(getBaseActivity()));
+        mBinding.get().refreshLayout.setRefreshFooter(new SmartRefreshFooter(getBaseActivity()));
 
         mBinding.get().refreshLayout.setEnableLoadMore(true);
         mBinding.get().refreshLayout.setOnRefreshListener(refreshLayout -> {

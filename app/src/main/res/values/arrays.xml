@@ -42,6 +42,10 @@
         <item>赛场花絮</item>
     </string-array>
 
+    <string-array name="video_tab">
+        <item>抖音</item>
+    </string-array>
+
     <string-array name="nba_tab_id">
         <item>banner</item>
         <item>news</item>

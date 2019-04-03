@@ -16,6 +16,7 @@ import com.test.admin.conurbations.fragments.PrettyPicturesFragment;
 import com.test.admin.conurbations.fragments.PrettyPicturesListFragmentList;
 import com.test.admin.conurbations.fragments.SearchFragment;
 import com.test.admin.conurbations.fragments.SouGouImageFragment;
+import com.test.admin.conurbations.fragments.VideoIndexFragment;
 import com.test.admin.conurbations.fragments.WelfareFragment;
 
 import dagger.Component;
@@ -54,4 +55,6 @@ public interface FragmentComponent {
     void inject(PrettyPicturesFragment fragment);
 
     void inject(MvListFragment fragment);
+
+    void inject(VideoIndexFragment fragment);
 }

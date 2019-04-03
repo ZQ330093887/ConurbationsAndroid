@@ -32,6 +32,7 @@ import com.test.admin.conurbations.fragments.MusicMainFragment;
 import com.test.admin.conurbations.fragments.NBAFragment;
 import com.test.admin.conurbations.fragments.PictureFragment;
 import com.test.admin.conurbations.fragments.SearchFragment;
+import com.test.admin.conurbations.fragments.VideoFragment;
 import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.model.entity.CityWeather;
 import com.test.admin.conurbations.retrofit.ApiManager;
@@ -106,6 +107,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
         mFragments.add(createFragment(new PictureFragment(), Constants.testColors[1]));
         mFragments.add(createFragment(new MusicMainFragment(), Constants.testColors[2]));
         mFragments.add(createFragment(new NBAFragment(), Constants.testColors[3]));
+        mFragments.add(createFragment(new VideoFragment(), Constants.testColors[4]));
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fl_main_content, mFragments.get(0))
                 .commit();
@@ -142,6 +144,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
                 .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_compass, "美图").setActiveColor(Constants.toolBarColors[1]))
                 .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_crop, "音乐").setActiveColor(Constants.toolBarColors[2]))
                 .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_month, "体育").setActiveColor(Constants.toolBarColors[3]))
+                .addItem(new BottomNavigationItem(android.R.drawable.ic_menu_rotate, "视频").setActiveColor(Constants.toolBarColors[4]))
                 .setFirstSelectedPosition(0)
                 .setMode(BottomNavigationBar.MODE_SHIFTING)
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE)
@@ -263,7 +266,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
     private boolean isNavigatingMain() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fl_main_content);
         return (currentFragment instanceof MusicMainFragment || currentFragment instanceof IndexFragment
-                || currentFragment instanceof PictureFragment || currentFragment instanceof NBAFragment);
+                || currentFragment instanceof PictureFragment || currentFragment instanceof NBAFragment
+                || currentFragment instanceof VideoFragment);
     }
 
     private void getWeather() {

@@ -11,8 +11,11 @@ import android.support.multidex.MultiDex;
 import android.view.WindowManager;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.util.FileDownloadLog;
+import com.ss.android.common.applog.GlobalContext;
+import com.ss.android.common.applog.UserInfo;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.test.admin.conurbations.R;
@@ -30,6 +33,7 @@ import com.test.admin.conurbations.utils.LogUtil;
 import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.utils.download.PlaylistLoader;
 import com.test.admin.conurbations.utils.download.TasksManager;
+import com.test.admin.conurbations.utils.hookpms.ServiceManagerWraper;
 
 import org.litepal.LitePal;
 
@@ -62,7 +66,7 @@ public class SolidApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-
+        ServiceManagerWraper.hookPMS(this.getApplicationContext());
         ToastUtils.init(this);
         AppUtils.init(mInstance);
         LitePal.initialize(this);
@@ -91,6 +95,18 @@ public class SolidApplication extends Application {
         titles = new ArrayList(list1);
 
         songTi = Typeface.createFromAsset(getAssets(), "SongTi.TTF");
+
+        Fresco.initialize(this);
+        GlobalContext.setContext(getApplicationContext()); //Hook 抖音
+        try {
+            System.loadLibrary("userinfo");//抖音&火山
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        UserInfo.setAppId(2);
+        UserInfo.initUser("a3668f0afac72ca3f6c1697d29e0e1bb1fef4ab0285319b95ac39fa42c38d05f");
+
     }
 
     private void initDB() {

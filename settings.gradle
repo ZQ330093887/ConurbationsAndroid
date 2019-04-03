@@ -1,1 +1,1 @@
-include ':app', ':TapTargetView', ':telegramgallery', ':feedbacksdk'
+include ':app', ':TapTargetView', ':telegramgallery', ':feedbacksdk', ':VideoPlayer'

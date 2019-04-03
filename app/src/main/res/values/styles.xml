@@ -185,4 +185,18 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
+
+    <style name="TabLayout">
+        <item name="tabMode">scrollable</item>
+    </style>
+
+    <style name="IndexSearchBar">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:drawableLeft">@drawable/ic_search_white_18dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
 </resources>

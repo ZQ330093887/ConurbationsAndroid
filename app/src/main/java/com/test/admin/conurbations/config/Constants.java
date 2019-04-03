@@ -2,6 +2,7 @@ package com.test.admin.conurbations.config;
 
 import android.os.Environment;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -28,9 +29,9 @@ public class Constants {
 
     public static final int PHOTO_REQUEST_CUT = 3;// 结果
 
-    public static final int[] testColors = {0xFFc72e45, 0xFF009688, 0xFF607D8B, 0xFF5A9367};
+    public static final int[] testColors = {0xFFc72e45, 0xFF009688, 0xFF607D8B, 0xFF5A9367, 0xFF673Ab7};
 
-    public static final int[] toolBarColors = {0xFFa6172d, 0xFF00796B, 0xFF455A64, 0xFF44633F};
+    public static final int[] toolBarColors = {0xFFa6172d, 0xFF00796B, 0xFF455A64, 0xFF44633F, 0xFF512DA8};
     //百度歌单
     public static final String PLAYLIST_BD_ID = "playlist_bd";
     //网易云歌单
@@ -142,6 +143,36 @@ public class Constants {
     public static final String NICK = "nick";
     public static final String PHONE = "phone";
     public static final String SECRET = "secret";
+
+
+    //抖音
+    public static final String USER_SOFT_CHECK_UPDATE = "user_soft_check_update";// 存储下次是否检查更新
+
+    public static final String BASE_NAME = "honglou";
+
+    public static final String REAL_IP = "REALIP";
+
+    public static final String USER_NAME = "USER_NAME";
+
+
+    public static final String HISTORY_VIDEO = "history_video";
+
+    /**
+     * TODO　根据自己的账号去修改（只需要修改这几个即可）
+     */
+    public static final String IID = "26636470443"; //安装ID
+    public static final String UUID = "864394010744615";
+    public static final String OPEN_UDID = "7446a0820f251016";
+    public static final String DEVICE_ID = "43826946118";
+
+    /**
+     * 固定不变
+     */
+    public static final String APP_NAME = "aweme";
+    public static final String CHANNEL = "xiaomi";
+    public static final String V_CODE = "159";
+    public static final String V_NAME = "1.5.9";
+    public static final String AID = "1128";
 
     /**
      * 悬浮窗权限requestCode

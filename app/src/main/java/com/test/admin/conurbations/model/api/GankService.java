@@ -3,13 +3,10 @@ package com.test.admin.conurbations.model.api;
 import com.test.admin.conurbations.model.entity.CityWeather;
 import com.test.admin.conurbations.model.entity.NewsDetail;
 import com.test.admin.conurbations.model.entity.NewsIndex;
-import com.test.admin.conurbations.model.entity.PlaylistInfo;
 import com.test.admin.conurbations.model.response.GankData;
 import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.model.response.NetImage360;
 import com.test.admin.conurbations.model.response.TodayData;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.Call;

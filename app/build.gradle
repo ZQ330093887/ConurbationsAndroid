@@ -30,6 +30,9 @@ android {
 
         // 开启multidex
         multiDexEnabled true
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
     }
     signingConfigs {//签名的配置
         release {
@@ -86,6 +89,12 @@ android {
     dexOptions {
         keepRuntimeAnnotatedClasses false
         javaMaxHeapSize "4096M"
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
 
     compileOptions {
@@ -152,7 +161,7 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     implementation 'net.steamcrafted:materialiconlib:1.1.5'
     implementation 'com.github.rtugeek:ColorSeekBar:1.6.2'
-    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-15'
     api 'com.google.android:flexbox:1.0.0'
     compile 'com.android.support:multidex:1.0.1'
     // 多dex配置
@@ -167,9 +176,14 @@ dependencies {
     compile 'com.meituan.android.walle:library:1.1.3'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation files('libs/AMap_Location_V4.4.0_20181122.jar')
-//    implementation project(path: ':dsbridge')
+    compile project(':VideoPlayer')
 
     compile 'com.github.wendux:DSBridge-Android:3.0-SNAPSHOT'
+    compile 'com.facebook.fresco:fresco:1.7.1'
+    compile 'com.facebook.fresco:animated-webp:1.7.1'
+    compile 'com.facebook.fresco:webpsupport:1.7.1'
+
+    compile 'com.facebook.soloader:soloader:0.3.0' //webp需要引用这个库
 }
 
 static def releaseTime() {
