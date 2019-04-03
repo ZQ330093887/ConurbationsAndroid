@@ -18,7 +18,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.internal.ArrowDrawable;
-import com.scwang.smartrefresh.layout.internal.ProgressDrawable;
 import com.scwang.smartrefresh.layout.util.DensityUtil;
 import com.test.admin.conurbations.R;
 
@@ -26,7 +25,6 @@ public class SmartRefreshHeader extends LinearLayout implements RefreshHeader {
     private TextView mHeaderText;//标题文本
     private ImageView mArrowView;//下拉箭头
     private ProgressBar mProgressView;//刷新动画视图
-    private ProgressDrawable mProgressDrawable;//刷新动画
 
     private Space mSpace;
 
@@ -43,8 +41,6 @@ public class SmartRefreshHeader extends LinearLayout implements RefreshHeader {
 
 
         mArrowView = new ImageView(context);
-        /*mProgressView = new ImageView(context);
-        mProgressView.setImageDrawable(mProgressDrawable);*/
         mSpace = new Space(context);
         mArrowView.setImageDrawable(new ArrowDrawable());
         addView(mProgressView, DensityUtil.dp2px(20), DensityUtil.dp2px(20));

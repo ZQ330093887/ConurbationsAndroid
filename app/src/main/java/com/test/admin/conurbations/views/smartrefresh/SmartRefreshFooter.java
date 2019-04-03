@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -17,7 +16,6 @@ import com.scwang.smartrefresh.layout.api.RefreshKernel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.scwang.smartrefresh.layout.internal.ProgressDrawable;
 import com.scwang.smartrefresh.layout.util.DensityUtil;
 import com.test.admin.conurbations.R;
 
@@ -25,13 +23,8 @@ import com.test.admin.conurbations.R;
  * 经典上拉底部组件
  */
 
-
 public class SmartRefreshFooter extends LinearLayout implements RefreshFooter {
-
-    private ProgressDrawable mProgressDrawable;//刷新动画
-    private ImageView mProgressView;//刷新动画视图
     private ProgressBar progressBar;
-
 
     public SmartRefreshFooter(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
