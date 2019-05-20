@@ -10,6 +10,8 @@ import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.databinding.ActivityVideoDetailBinding;
 import com.test.admin.conurbations.model.entity.LeVideoData;
 import com.test.admin.conurbations.utils.DateUtils;
+import com.test.admin.conurbations.utils.DialogUtils;
+import com.test.admin.conurbations.utils.bigImageView.view.ImagePreviewActivity;
 
 /**
  * Created by zhouqiong on 2019/4/3
@@ -33,7 +35,7 @@ public class VideoDetailActivity extends BaseActivity<ActivityVideoDetailBinding
     private void initView() {
         LeVideoData item = getIntent().getParcelableExtra(VIDEO_DATA);
         //传递数据之前已经判断了item是否为空，这里不在做判断
-        PlayerConfig config = new PlayerConfig.Builder().setLooping().build();
+        PlayerConfig config = new PlayerConfig.Builder().setLooping().enableCache().build();
         mBinding.videoView.setPlayerConfig(config);
         mBinding.videoView.setUrl(item.videoPlayUrl);
         mBinding.videoView.setScreenScale(IjkVideoView.SCREEN_SCALE_DEFAULT);
