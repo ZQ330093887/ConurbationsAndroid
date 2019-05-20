@@ -57,7 +57,7 @@ public class VideoIndexAdapter extends BaseListAdapter<LeVideoData> {
 
                             @Override
                             public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
-                                mNearbyImg.setTag(R.id.nearby_img, uri);
+                                mNearbyImg.setTag(R.id.nearby_img, data.dynamicCover);
                             }
 
                         })
@@ -82,6 +82,11 @@ public class VideoIndexAdapter extends BaseListAdapter<LeVideoData> {
             intent.putExtra(VideoDetailActivity.VIDEO_DATA, leVideoData);
             context.startActivity(intent);
         };
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     /**

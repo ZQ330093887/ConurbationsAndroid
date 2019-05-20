@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.views.CircleImageView;
 
 /**
  * Created by zhouqiong on 2016/11/29.
@@ -60,9 +59,9 @@ public class PersonalInformationAdapter extends RecyclerView.Adapter<PersonalInf
 
         public MyViewHolder(View view) {
             super(view);
-            tv = (TextView) view.findViewById(R.id.info_text_one);
-            mTopLayout = (RelativeLayout) view.findViewById(R.id.top_info_lly);
-            mTopComtentLayout = (LinearLayout) view.findViewById(R.id.top_content_lly);
+            tv = view.findViewById(R.id.info_text_one);
+            mTopLayout = view.findViewById(R.id.top_info_lly);
+            mTopComtentLayout = view.findViewById(R.id.top_content_lly);
         }
     }
 }

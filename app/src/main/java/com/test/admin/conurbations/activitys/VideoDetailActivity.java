@@ -11,6 +11,7 @@ import com.test.admin.conurbations.databinding.ActivityVideoDetailBinding;
 import com.test.admin.conurbations.model.entity.LeVideoData;
 import com.test.admin.conurbations.utils.DateUtils;
 import com.test.admin.conurbations.utils.DialogUtils;
+import com.test.admin.conurbations.utils.StatusBarUtil;
 import com.test.admin.conurbations.utils.bigImageView.view.ImagePreviewActivity;
 
 /**
@@ -33,6 +34,8 @@ public class VideoDetailActivity extends BaseActivity<ActivityVideoDetailBinding
 
     @SuppressLint("SetTextI18n")
     private void initView() {
+        StatusBarUtil.immersive(this);
+        StatusBarUtil.darkMode(this, false);
         LeVideoData item = getIntent().getParcelableExtra(VIDEO_DATA);
         //传递数据之前已经判断了item是否为空，这里不在做判断
         PlayerConfig config = new PlayerConfig.Builder().setLooping().enableCache().build();

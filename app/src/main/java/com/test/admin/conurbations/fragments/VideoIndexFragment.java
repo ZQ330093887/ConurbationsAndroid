@@ -72,6 +72,12 @@ public class VideoIndexFragment extends BaseSubFragment<LeVideoData, VideoIndexP
 
     @Override
     protected BaseListAdapter setUpAdapter() {
+        /*
+         * 解决界面闪屏问题，设置setHasStableIds =true
+         * 在adapter中重写 getItemId 直接返回position
+         * 不能直接用super.getItemId(position)
+         */
+        videoIndexAdapter.setHasStableIds(true);
         return videoIndexAdapter;
     }
 
