@@ -3,13 +3,6 @@ import com.test.admin.conurbations.model.entity.Gank;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * description
- *
- * @author Johnny Shieh
- * @version 1.0
- */
 public class GankNormalItem extends Gank implements GankItem {
 
     public int page = -1;

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.test.admin.conurbations.utils.RatioImageView
-        android:id="@+id/rv_item_gank_day_image"
+    <com.zhouwei.mzbanner.MZBannerView
+        android:id="@+id/mzb_banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimens_100_dp"
-        android:transitionName="transition_morph_view"/>
+        android:layout_height="180dp"
+        android:layout_marginTop="10dp"
+        app:canLoop="true"
+        app:indicatorAlign="right"
+        app:indicatorPaddingLeft="10dp"
+        app:middle_page_cover="false"
+        app:open_mz_mode="true" />
 </FrameLayout>

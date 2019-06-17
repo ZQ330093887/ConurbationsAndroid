@@ -143,9 +143,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.tangxiaolv.telegramgallery.GalleryActivity" />
         <activity android:name=".activitys.ContactsActivity" />
-        <activity android:name=".activitys.TelegramGalleryActivity" />
         <activity
             android:name=".activitys.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

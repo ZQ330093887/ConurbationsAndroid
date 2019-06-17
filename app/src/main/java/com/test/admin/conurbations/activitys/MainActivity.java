@@ -174,7 +174,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
             startActivity(ContactsActivity.class);
             return true;
         } else if (id == R.id.action_Image) {
-            startActivity(TelegramGalleryActivity.class);
+
         } else if (id == R.id.action_search) {
             int sp = mBinding.bnbMainView.getCurrentSelectedPosition();
             if (sp == 2) {

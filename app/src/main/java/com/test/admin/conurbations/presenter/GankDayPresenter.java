@@ -4,13 +4,12 @@ import com.test.admin.conurbations.activitys.IGankDayView;
 import com.test.admin.conurbations.model.api.ACache;
 import com.test.admin.conurbations.model.response.GankGirlImageItem;
 import com.test.admin.conurbations.model.response.GankHeaderItem;
+import com.test.admin.conurbations.model.response.GankImageData;
 import com.test.admin.conurbations.model.response.GankItem;
 import com.test.admin.conurbations.model.response.GankNormalItem;
 import com.test.admin.conurbations.model.response.GankType;
 import com.test.admin.conurbations.model.response.TodayData;
 import com.test.admin.conurbations.retrofit.ApiCallback;
-import com.test.admin.conurbations.retrofit.ApiManager;
-import com.test.admin.conurbations.retrofit.RequestCallBack;
 import com.test.admin.conurbations.utils.AppUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
 
@@ -67,7 +66,7 @@ public class GankDayPresenter extends BasePresenter<IGankDayView> {
         }
         List<GankItem> gankList = new ArrayList<>(10);
         if (null != dayData.results.welfareList && dayData.results.welfareList.size() > 0) {
-            gankList.add(GankGirlImageItem.newImageItem(dayData.results.welfareList.get(0)));
+            gankList.add(GankImageData.newImageList(GankGirlImageItem.newImageList(dayData.results.welfareList)));
         }
         if (null != dayData.results.androidList && dayData.results.androidList.size() > 0) {
             gankList.add(new GankHeaderItem(GankType.ANDROID));

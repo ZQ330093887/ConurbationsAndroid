@@ -2,27 +2,34 @@ package com.test.admin.conurbations.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.TextAppearanceSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.WebViewActivity;
 import com.test.admin.conurbations.model.response.GankGirlImageItem;
 import com.test.admin.conurbations.model.response.GankHeaderItem;
+import com.test.admin.conurbations.model.response.GankImageData;
 import com.test.admin.conurbations.model.response.GankItem;
 import com.test.admin.conurbations.model.response.GankNormalItem;
-import com.test.admin.conurbations.utils.RatioImageView;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 import com.test.admin.conurbations.widget.SolidApplication;
+import com.zhouwei.mzbanner.MZBannerView;
+import com.zhouwei.mzbanner.holder.MZHolderCreator;
+import com.zhouwei.mzbanner.holder.MZViewHolder;
 
 import java.util.List;
 
@@ -107,14 +114,14 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
             }
             if (holder instanceof GirlImageViewHolder) {
                 final GirlImageViewHolder girlHolder = (GirlImageViewHolder) holder;
-                final GankGirlImageItem girlItem = (GankGirlImageItem) mItems.get(position);
-                Glide.with(context)
-                        .load(girlItem.imgUrl)
-                        .placeholder(R.color.white)
-                        .centerCrop()
-                        .into(girlHolder.mImageView);
-                girlHolder.itemView.setOnClickListener(v -> {
-                    startShowImageActivity(v, getStringToList(girlItem.imgUrl));
+                final GankImageData normalItem = (GankImageData) mItems.get(position);
+                girlHolder.mzBannerView.setPages(normalItem.imageItem, (MZHolderCreator<BannerViewHolder>) BannerViewHolder::new);
+                girlHolder.mzBannerView.setIndicatorVisible(false);
+                girlHolder.mzBannerView.start();
+
+                // TODO: 2019/6/11 点击事件无效，正在找原因
+                girlHolder.mzBannerView.setBannerPageClickListener((view, position1) -> {
+                    //banner 点击事件
                 });
             }
         }
@@ -142,7 +149,7 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
             if (gankItem instanceof GankHeaderItem) {
                 return VIEW_TYPE_HEADER;
             }
-            if (gankItem instanceof GankGirlImageItem) {
+            if (gankItem instanceof GankImageData) {
                 return VIEW_TYPE_GIRL_IMAGE;
             }
             return VIEW_TYPE_NORMAL;
@@ -168,12 +175,37 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
 
         public class GirlImageViewHolder extends RecyclerView.ViewHolder {
 
-            RatioImageView mImageView;
+            MZBannerView mzBannerView;
 
             public GirlImageViewHolder(ViewGroup parent) {
                 super(parent);
-                mImageView = parent.findViewById(R.id.rv_item_gank_day_image);
-                mImageView.setRatio(1.618f);
+                mzBannerView = parent.findViewById(R.id.mzb_banner);
+            }
+        }
+
+        public class BannerViewHolder implements MZViewHolder<GankGirlImageItem> {
+            private ImageView mImageView;
+
+            @Override
+            public View createView(Context context) {
+                // 返回页面布局文件
+                View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
+                mImageView = view.findViewById(R.id.banner_image);
+                return view;
+            }
+
+            @Override
+            public void onBind(Context context, int position, GankGirlImageItem girlItem) {
+                // 数据绑定
+//                mImageView.setImageResource(data);
+                Glide.with(context)
+                        .load(girlItem.imgUrl)
+                        .placeholder(R.color.white)
+                        .centerCrop()
+                        .into(mImageView);
+                mImageView.setOnClickListener(v -> {
+                    startShowImageActivity(v, getStringToList(girlItem.imgUrl));//
+                });
             }
         }
     }
