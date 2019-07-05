@@ -253,4 +253,8 @@
     <string name="all_artist">歌手列表</string>
     <string name="genes">流派</string>
     <string name="radio_list">电台</string>
+
+    <string name="video_play_count">%s次播放</string>
+    <string name="video_parse_busy">视频解析繁忙，请更换网络或稍后再试</string>
+    <string name="video_parse_error">解析视频失败，请重试</string>
 </resources>

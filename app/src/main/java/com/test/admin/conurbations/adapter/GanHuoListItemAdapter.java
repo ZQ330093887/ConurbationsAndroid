@@ -53,7 +53,7 @@ public class GanHuoListItemAdapter extends PagerAdapter {
                     .setImageInfoList(imageInfoList)
                     .setShowDownButton(true)
                     .setShowOriginButton(true)
-                    .setFolderName("BigImageViewDownload")
+                    .setFolderName("肉肉")
                     .setScaleLevel(1, 3, 8)
                     .setZoomTransitionDuration(500)
                     .start();

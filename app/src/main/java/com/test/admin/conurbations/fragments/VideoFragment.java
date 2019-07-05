@@ -24,14 +24,20 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> {
     protected void initData(Bundle bundle) {
         RxBus.getDefault().post(new Event(R.color.color_512DA8, Constants.STATUE_BAR_COLOR));
         String[] mTitles = getActivity().getResources().getStringArray(R.array.video_tab);
+        String[] mChannelCodes = getActivity().getResources().getStringArray(R.array.channel_code_video);
         Fragment[] mFragments = new Fragment[mTitles.length];
-        for (int i = 0; i < mTitles.length; i++) {
-            mFragments[i] = new VideoIndexFragment();
+
+        mFragments[0] = new VideoIndexFragment();//抖音
+
+        for (int i = 1; i < mTitles.length; i++) {
+            mFragments[i] = new VideoListFragment();//头条视频
+            ((VideoListFragment) mFragments[i]).setRange(mChannelCodes[i]);
         }
 
         FragmentAdapter videoFragmentPagerAdapter = new FragmentAdapter(getChildFragmentManager(), mTitles, mFragments);
         mBinding.get().vpNbView.setAdapter(videoFragmentPagerAdapter);
         mBinding.get().tlNbView.setupWithViewPager(mBinding.get().vpNbView);
+        mBinding.get().vpNbView.setOffscreenPageLimit(10);
         mBinding.get().tlNbView.setBackgroundColor(getArguments().getInt("content"));
     }
 

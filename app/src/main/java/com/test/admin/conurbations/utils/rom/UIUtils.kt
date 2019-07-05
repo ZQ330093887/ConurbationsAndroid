@@ -5,6 +5,7 @@ import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Bitmap
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
 import com.liulishuo.filedownloader.FileDownloader
@@ -252,6 +253,40 @@ object UIUtils {
 
     interface RequestBack {
         fun onSuccess()
+    }
+
+    /**
+     * 安全的执行一个任务
+     *
+     * @param task
+     */
+    fun postTaskSafely(task: Runnable) {
+        val curThreadId = android.os.Process.myTid()
+        // 如果当前线程是主线程
+        if (curThreadId.toLong() == getMainThreadId()) {
+            task.run()
+        } else {
+            // 如果当前线程不是主线程
+            getMainThreadHandler().post(task)
+        }
+    }
+
+    /**
+     * 得到主线程Handler
+     *
+     * @return
+     */
+    fun getMainThreadHandler(): Handler {
+        return SolidApplication.getMainHandler()
+    }
+
+    /**
+     * 得到主线程id
+     *
+     * @return
+     */
+    fun getMainThreadId(): Long {
+        return SolidApplication.getMainThreadId()
     }
 
 }

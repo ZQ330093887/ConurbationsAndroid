@@ -259,6 +259,23 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        /**
+         * 场景
+         *
+         * 最近做一个保存应用的图片并插入到系统图库同时通知相册刷新的功能，做完后发现在部分华为和三星的手机上出现虽然图片保存成功了，但是相册却找不到图片的问题，很困惑，查找文件夹图片也已经存在，可就是在相册里刷新不出来。最后百般尝试找到了解决办法：
+         *
+         * 保存的方法添加写入的动态权限
+         * 创建文件路径可选择Environment.getExternalStorageDirectory()，也就是(/storage/emulated/0/com.xx.xxx.xxx/)，之前有问题的版本使用的是context.getExternalFilesDir(null)也就是(/storage/sdcard/Android/data/com.xxx.xxx/)，部分手机相册无法找到此路径或者没有权限，具体我也没细研究
+         * 使用MediaStore插入到系统相册
+         * 使用广播Intent.ACTION_MEDIA_SCANNER_SCAN_FILE通知相册刷新
+         */
+        try {
+            MediaStore.Images.Media.insertImage(SolidApplication.getInstance().getContentResolver(),
+                    targetFile.getAbsolutePath(), fileName, null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         return result;
     }
 

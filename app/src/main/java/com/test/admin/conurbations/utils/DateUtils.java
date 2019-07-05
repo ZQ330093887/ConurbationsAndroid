@@ -11,11 +11,6 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by _SOLID
- * Date:2016/5/10
- * Time:9:58
- */
 public class DateUtils {
     public static SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     public static SimpleDateFormat formatDay = new SimpleDateFormat("d", Locale.getDefault());
@@ -152,7 +147,6 @@ public class DateUtils {
     }
 
 
-
     /**
      * 以友好的方式显示时间
      *
@@ -212,5 +206,45 @@ public class DateUtils {
             e.printStackTrace();
         }
         return dateFormat;
+    }
+
+    /**
+     * 将秒数转换成00:00的字符串，如 118秒 -> 01:58
+     *
+     * @param time
+     * @return
+     */
+    public static String secToTime(int time) {
+        String timeStr = null;
+        int hour = 0;
+        int minute = 0;
+        int second = 0;
+        if (time <= 0)
+            return "00:00";
+        else {
+            minute = time / 60;
+            if (minute < 60) {
+                second = time % 60;
+                timeStr = unitFormat(minute) + ":" + unitFormat(second);
+            } else {
+                hour = minute / 60;
+                if (hour > 99)
+                    return "99:59:59";
+                minute = minute % 60;
+                second = time - hour * 3600 - minute * 60;
+                timeStr = unitFormat(hour) + ":" + unitFormat(minute) + ":"
+                        + unitFormat(second);
+            }
+        }
+        return timeStr;
+    }
+
+    public static String unitFormat(int i) {
+        String retStr = null;
+        if (i >= 0 && i < 10)
+            retStr = "0" + i;
+        else
+            retStr = "" + i;
+        return retStr;
     }
 }

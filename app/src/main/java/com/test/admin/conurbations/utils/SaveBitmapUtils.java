@@ -15,7 +15,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.model.Music;
 import com.test.admin.conurbations.model.api.GankApi;
-import com.test.admin.conurbations.utils.bigImageView.tool.SingleMediaScanner;
 import com.test.admin.conurbations.utils.imageUtils.ImageUtil;
 
 import java.io.File;
@@ -97,11 +96,9 @@ public class SaveBitmapUtils {
         return s -> {
             if (s) {
                 DialogUtils.hideProgressDialog();
-                ToastUtils.getInstance().showToast("下载图片成功，已下载到SdCard的MyPictures目录里");
+                ToastUtils.getInstance().showToast("下载成功，已到肉肉目录下");
                 //发送广播更新相册（目的：相册中能看到下载的图片）
-                new SingleMediaScanner(context, path, () -> {
-                    // scanning...
-                });
+                NavigationHelper.scanFileAsync(context, path);
             } else {
                 ToastUtils.getInstance().showToast("未知错误");
                 DialogUtils.hideProgressDialog();

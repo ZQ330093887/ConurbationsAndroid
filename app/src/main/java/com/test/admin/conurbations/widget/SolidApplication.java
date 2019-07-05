@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.multidex.MultiDex;
 import android.view.WindowManager;
 
@@ -48,6 +50,10 @@ public class SolidApplication extends Application {
     public static List<String> titles = new ArrayList<>();
     public static Typeface songTi; // 宋体
     private AppComponent appComponent;
+    private static Thread mMainThread;//主线程
+    private static long mMainThreadId;//主线程id
+    private static Looper mMainLooper;//循环队列
+    private static Handler mHandler;//主线程Handler
     public static int count = 0;
     public Point screenSize = new Point();
     public static List<HotSearchBean> hotSearchList;
@@ -56,6 +62,8 @@ public class SolidApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        mMainThread = Thread.currentThread();
+        mMainThreadId = android.os.Process.myTid();
         ServiceManagerWraper.hookPMS(this.getApplicationContext());
         ToastUtils.init(this);
         AppUtils.init(mInstance);
@@ -157,5 +165,13 @@ public class SolidApplication extends Application {
 
         /***** 统一初始化Bugly产品，包含Beta *****/
         Bugly.init(this, "df40649721", true);
+    }
+
+    public static long getMainThreadId() {
+        return mMainThreadId;
+    }
+
+    public static Handler getMainHandler() {
+        return mHandler;
     }
 }

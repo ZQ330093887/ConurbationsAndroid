@@ -195,7 +195,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_camera) {
-
+            startActivity(NudePhotosActivity.class);
         } else if (id == R.id.nav_fiction) {
 
         } else if (id == R.id.nav_slideshow) {//NBA直播

@@ -110,4 +110,5 @@
     <color name="black_translucent">#66000000</color>
     <color name="white_translucent">#c8ffffff</color>
     <color name="color_512DA8">#512DA8</color>
+    <color name="color_FFC1C1">#FFC1C1</color>
 </resources>

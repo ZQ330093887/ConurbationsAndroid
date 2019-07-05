@@ -44,6 +44,26 @@
 
     <string-array name="video_tab">
         <item>抖音</item>
+        <item>音乐</item>
+        <item>搞笑</item>
+        <item>社会</item>
+        <item>小品</item>
+        <item>娱乐</item>
+        <item>呆萌</item>
+        <item>游戏</item>
+
+    </string-array>
+
+    <string-array name="channel_code_video">
+        <item>video</item>
+        <item>subv_voice</item>
+        <item>subv_funny</item>
+        <item>subv_society</item>
+        <item>subv_comedy</item>
+        <item>subv_entertainment</item>
+        <item>subv_cute</item>
+        <item>subv_game</item>
+
     </string-array>
 
     <string-array name="nba_tab_id">

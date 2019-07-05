@@ -3,9 +3,12 @@ package com.test.admin.conurbations.model.api;
 import com.test.admin.conurbations.model.entity.CityWeather;
 import com.test.admin.conurbations.model.entity.NewsDetail;
 import com.test.admin.conurbations.model.entity.NewsIndex;
+import com.test.admin.conurbations.model.entity.NewsResponse;
+import com.test.admin.conurbations.model.entity.VideoModel;
 import com.test.admin.conurbations.model.response.GankData;
 import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.model.response.NetImage360;
+import com.test.admin.conurbations.model.response.ResultResponse;
 import com.test.admin.conurbations.model.response.TodayData;
 
 import io.reactivex.Observable;
@@ -14,6 +17,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface GankService {
 
@@ -95,4 +99,31 @@ public interface GankService {
     @GET("http://api.map.baidu.com/telematics/v3/weather?output=json&ak=vZlRYC39tTuniYzNcX2zrQmZzblZcXwp")
     Observable<CityWeather> getCityWeather(@Query("location") String location);
 
+
+
+    //今日头条
+    String GET_ARTICLE_LIST = "http://is.snssdk.com/api/news/feed/v62/?refer=1&count=20&loc_mode=4&device_id=34960436458&iid=13136511752";
+    /**
+     * 获取新闻列表
+     *Request{method=GET, url=http://is.snssdk.com/api/news/feed/v62/?refer=1&count=20&loc_mode=4&device_id=34960436458&iid=13136511752&category=subv_funny&min_behot_time=1561542331&last_refresh_sub_entrance_interval=1562227787, tag=null}
+     * @param category 频道
+     * @return
+     */
+    @GET(GET_ARTICLE_LIST)
+    Observable<NewsResponse> getNewsList(@Query("category") String category, @Query("min_behot_time") long lastTime, @Query("last_refresh_sub_entrance_interval") long currentTime);
+
+
+    /**
+     * 获取视频页的html代码
+     */
+    @GET
+    Observable<String> getVideoHtml(@Url String url);
+
+    /**
+     * 获取视频数据json
+     * @param url
+     * @return
+     */
+    @GET
+    Observable<ResultResponse<VideoModel>> getVideoData(@Url String url);
 }

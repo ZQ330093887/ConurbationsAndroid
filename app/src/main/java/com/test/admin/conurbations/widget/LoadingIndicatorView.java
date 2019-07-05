@@ -24,12 +24,6 @@ import android.view.View;
 
 import com.test.admin.conurbations.R;
 
-/**
- * The view show loading more animation.
- *
- * @author Johnny Shieh (JohnnyShieh17@gmail.com)
- * @version 1.0
- */
 public class LoadingIndicatorView extends View {
 
     private static final int DEFAULT_SIZE = 45;  // in DP

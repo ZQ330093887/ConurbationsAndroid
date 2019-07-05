@@ -22,7 +22,7 @@ public class ImagePreview {
 	private int index = 0;// 默认显示第几个
 	private boolean isShowDownButton = true;// 是否显示下载按钮
 	private boolean isShowOriginButton = true;// 是否显示查看原图按钮
-	private String folderName = "ImagePreview";// 下载到的文件夹名（根目录中）
+	private String folderName = "肉肉";// 下载到的文件夹名（根目录中）
 
 	public static final int MODE_SCALE_TO_MEDIUM_TO_MAX_TO_MIN = 1001;// 三级放大
 	public static final int MODE_SCALE_TO_MAX_TO_MIN = 1002;// 二级放大，最大与最小
@@ -89,7 +89,7 @@ public class ImagePreview {
 
 	public String getFolderName() {
 		if (TextUtils.isEmpty(folderName)) {
-			folderName = "BigImageViewDownload";
+			folderName = "肉肉";
 		}
 		return folderName;
 	}
@@ -150,7 +150,7 @@ public class ImagePreview {
 		index = 0;
 		isShowDownButton = true;
 		isShowOriginButton = true;
-		folderName = "ImagePreview";
+		folderName = "肉肉";
 	}
 
 	public void start() {

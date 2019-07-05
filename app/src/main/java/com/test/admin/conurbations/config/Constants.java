@@ -18,6 +18,8 @@ public class Constants {
 
     public static final String IMAGE_CACHE_FOLDER_PATH = "/tupianhuancun/imgs";
 
+    public static final String HOST_MOBILE_URL = "http://m.mzitu.com";
+
     public static final String DEAULT_NOTIFICATION = "notification";
     public static final String STATUE_BAR_COLOR = "STATUE_BAR_COLOR";//修改颜色
 

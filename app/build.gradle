@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply from: 'tinker-support.gradle'
+//apply from: 'tinker-support.gradle'
 // 多渠道使用walle示例（注：多渠道使用）
 apply from: 'multiple-channel.gradle'
 apply plugin: 'kotlin-android'
@@ -147,9 +147,7 @@ dependencies {
     compile rootProject.ext.dependencies["rxpermissions"]
     compile rootProject.ext.dependencies["navigation"]
 
-    compile project(rootProject.ext.dependencies["telellery"])
     compile project(rootProject.ext.dependencies["feedback"])
-    compile project(rootProject.ext.dependencies["targetview"])
     compile files(rootProject.ext.dependencies["pinyin4j"])
     testCompile rootProject.ext.dependencies["junit"]
     compile rootProject.ext.dependencies["litepal"]
@@ -184,6 +182,8 @@ dependencies {
     compile 'com.facebook.fresco:webpsupport:1.7.1'
 
     compile 'com.facebook.soloader:soloader:0.3.0' //webp需要引用这个库
+
+    compile 'com.github.pinguo-zhouwei:MZBannerView:v2.0.2'
 }
 
 static def releaseTime() {

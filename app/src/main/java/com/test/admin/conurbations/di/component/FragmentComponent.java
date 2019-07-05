@@ -12,11 +12,13 @@ import com.test.admin.conurbations.fragments.MusicIndexFragment;
 import com.test.admin.conurbations.fragments.MvListFragment;
 import com.test.admin.conurbations.fragments.NbaIndexFragment;
 import com.test.admin.conurbations.fragments.NetPlayListFragment;
+import com.test.admin.conurbations.fragments.NudePhotosFragment;
 import com.test.admin.conurbations.fragments.PrettyPicturesFragment;
 import com.test.admin.conurbations.fragments.PrettyPicturesListFragmentList;
 import com.test.admin.conurbations.fragments.SearchFragment;
 import com.test.admin.conurbations.fragments.SouGouImageFragment;
 import com.test.admin.conurbations.fragments.VideoIndexFragment;
+import com.test.admin.conurbations.fragments.VideoListFragment;
 import com.test.admin.conurbations.fragments.WelfareFragment;
 
 import dagger.Component;
@@ -57,4 +59,8 @@ public interface FragmentComponent {
     void inject(MvListFragment fragment);
 
     void inject(VideoIndexFragment fragment);
+
+    void inject(NudePhotosFragment fragment);
+
+    void inject(VideoListFragment fragment);
 }
