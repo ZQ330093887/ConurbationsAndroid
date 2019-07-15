@@ -2,20 +2,17 @@ package com.test.admin.conurbations.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.TextAppearanceSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.test.admin.conurbations.R;
@@ -34,6 +31,8 @@ import com.zhouwei.mzbanner.holder.MZViewHolder;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import cn.leo.click.SingleClick;
 
 
 /**
@@ -104,11 +103,14 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
                 NormalViewHolder normalHolder = (NormalViewHolder) holder;
                 final GankNormalItem normalItem = (GankNormalItem) mItems.get(position);
                 normalHolder.mTitleTextView.setText(getGankTitleStr(normalItem.desc, normalItem.who));
-                normalHolder.itemView.setOnClickListener(v -> {
-                    //
-                    WebViewActivity.openUrl(context, normalItem.url, normalItem.desc, false, false);
+                normalHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @SingleClick
+                    @Override
+                    public void onClick(View v) {
+                        //
+                        WebViewActivity.openUrl(context, normalItem.url, normalItem.desc, false, false);
+                    }
                 });
-
                 showItemAnim(normalHolder.mTitleTextView, position);
                 return;
             }

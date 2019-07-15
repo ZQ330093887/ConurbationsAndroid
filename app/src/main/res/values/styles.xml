@@ -199,4 +199,20 @@
         <item name="android:adjustViewBounds">true</item>
         <item name="android:layout_gravity">center</item>
     </style>
+
+
+    <declare-styleable name="DragRelativeLayout">
+        <!-- 动画时长  默认 400 -->
+        <attr name="drl_duration" format="integer" />
+        <!-- 恢复系数 [0~1] 默认0.1-->
+        <attr name="drl_resume_ratio" format="float" />
+        <!-- y方向开始平移系数 0~1.0 默认 0.5 -->
+        <attr name="drl_translationY_ratio" format="float" />
+        <!-- y方向平移速率 1~oo 默认 2 -->
+        <attr name="drl_translationY_rate" format="integer" />
+        <!-- 是否可以拖拽 默认true -->
+        <attr name="drl_drag_enable" format="boolean" />
+        <!--是否是头条样式 默认false-->
+        <attr name="drl_tt_style_enable" format="boolean" />
+    </declare-styleable>
 </resources>

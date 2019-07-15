@@ -23,6 +23,7 @@ import com.test.admin.conurbations.model.entity.VideoInfo;
 
 import javax.inject.Inject;
 
+import cn.leo.click.SingleClick;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -108,14 +109,18 @@ public class NBAIndexAdapter extends BaseListAdapter<NewsItemBean> {
 
     @NonNull
     private View.OnClickListener getListener(final NewsItemBean news, final View view, final String s) {
-        return v -> {
-            Context context = view.getContext();
-            Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
-            intent.putExtra(NewsInfoListDetailFragment.KEY_NBA_INDEX, news.index);
-            intent.putExtra(NewsInfoListDetailFragment.KEY_TITLE, news.title);
-            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation
-                    ((Activity) context, new Pair<>(view, s));
-            ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
+        return new View.OnClickListener() {
+            @SingleClick
+            @Override
+            public void onClick(View v) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, NewsInfoListDetailActivity.class);
+                intent.putExtra(NewsInfoListDetailFragment.KEY_NBA_INDEX, news.index);
+                intent.putExtra(NewsInfoListDetailFragment.KEY_TITLE, news.title);
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation
+                        ((Activity) context, new Pair<>(view, s));
+                ActivityCompat.startActivity(context, intent, activityOptionsCompat.toBundle());
+            }
         };
     }
 

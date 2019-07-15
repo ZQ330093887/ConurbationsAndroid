@@ -23,6 +23,8 @@ import com.test.admin.conurbations.utils.DisplayUtils;
 
 import javax.inject.Inject;
 
+import cn.leo.click.SingleClick;
+
 /**
  * VideoIndexAdapter
  * Created by zhouqiong on 2019/4/2.
@@ -76,11 +78,15 @@ public class VideoIndexAdapter extends BaseListAdapter<LeVideoData> {
 
     @NonNull
     private View.OnClickListener getListener(final LeVideoData leVideoData) {
-        return v -> {
-            if (leVideoData == null) return;
-            Intent intent = new Intent(context, VideoDetailActivity.class);
-            intent.putExtra(VideoDetailActivity.VIDEO_DATA, leVideoData);
-            context.startActivity(intent);
+        return new View.OnClickListener() {
+            @SingleClick
+            @Override
+            public void onClick(View v) {
+                if (leVideoData == null) return;
+                Intent intent = new Intent(context, VideoDetailActivity.class);
+                intent.putExtra(VideoDetailActivity.VIDEO_DATA, leVideoData);
+                context.startActivity(intent);
+            }
         };
     }
 

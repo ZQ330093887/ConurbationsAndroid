@@ -4,6 +4,7 @@ apply plugin: 'com.android.application'
 apply from: 'multiple-channel.gradle'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'cn.leo.plugin.magic'
 def appLocationId = "com.test.admin.conurbations"
 android {
     def packageConfig = appConfigs[appLocationId]
@@ -184,6 +185,10 @@ dependencies {
     compile 'com.facebook.soloader:soloader:0.3.0' //webp需要引用这个库
 
     compile 'com.github.pinguo-zhouwei:MZBannerView:v2.0.2'
+    
+    compile 'com.github.jarryleo:SingleClick:v1.8.3'
+
+
 }
 
 static def releaseTime() {

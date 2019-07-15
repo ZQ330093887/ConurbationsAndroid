@@ -1,39 +1,20 @@
 package com.test.admin.conurbations.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Animatable;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.TimeUtils;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.controller.BaseControllerListener;
-import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.image.ImageInfo;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.activitys.VideoDetailActivity;
-import com.test.admin.conurbations.model.entity.LeVideoData;
 import com.test.admin.conurbations.model.entity.TTNews;
-import com.test.admin.conurbations.utils.CommonUtil;
 import com.test.admin.conurbations.utils.DateUtils;
-import com.test.admin.conurbations.utils.DisplayUtils;
-import com.test.admin.conurbations.utils.SaveBitmapUtils;
 import com.test.admin.conurbations.utils.VideoPathDecoderUtils;
 import com.test.admin.conurbations.utils.rom.UIUtils;
-
-import org.jsoup.helper.DataUtil;
 
 import javax.inject.Inject;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
-import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 /**

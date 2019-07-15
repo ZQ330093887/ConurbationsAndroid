@@ -5,20 +5,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimens_180_dp"
-        android:background="@drawable/side_nav_bar"
+        android:background="@color/theme_primary"
         android:gravity="bottom"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/dimens_16_dp"
         android:paddingLeft="@dimen/dimens_16_dp"
-        android:paddingRight="@dimen/dimens_16_dp"
         android:paddingTop="@dimen/dimens_16_dp"
+        android:paddingRight="@dimen/dimens_16_dp"
+        android:paddingBottom="@dimen/dimens_16_dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
         <com.test.admin.conurbations.views.CircleImageView
             android:id="@+id/circle_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/dimens_16_dp"
+            android:layout_width="@dimen/dimens_80_dp"
+            android:layout_height="@dimen/dimens_80_dp"
+            android:layout_marginBottom="@dimen/dimens_10_dp"
             android:transitionName="translate_view"
             app:border_color="@color/colorLimePrimaryCenter"
             app:border_width="@dimen/dimens_2_dp"
@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="zhouqiong330093887@163.com" />
+            android:text="330093887@qq.com" />
 
     </LinearLayout>
 </layout>
