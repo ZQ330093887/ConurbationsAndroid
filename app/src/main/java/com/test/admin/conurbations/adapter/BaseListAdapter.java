@@ -30,7 +30,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     private static final int DELAY = 138;
     private View mHeaderView;
     public Object mContext;
-    public  int pos;
+    public int pos;
 
     public BaseListAdapter(Object context) {
         mContext = context;
@@ -224,4 +224,16 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<BaseViewHo
                 .setZoomTransitionDuration(500)
                 .start();
     }
+
+
+    public interface OnItemClickListener {
+        void onItemClick(Object o);
+    }
+
+    public OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
+        this.listener = mOnItemClickListener;
+    }
+
 }

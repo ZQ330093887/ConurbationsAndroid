@@ -9,84 +9,20 @@
         android:layout_height="match_parent"
         android:background="@color/black">
 
-        <com.dueeeke.videoplayer.player.IjkVideoView
-            android:id="@+id/video_view"
+        <com.test.admin.conurbations.widget.VerticalViewPager
+            android:id="@+id/verticalviewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <com.test.admin.conurbations.widget.ShadowView
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_alignBottom="@+id/video_view" />
-
-
-        <TextView
-            android:id="@+id/tv_video_title"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/video_view"
-            android:layout_marginLeft="@dimen/dimens_20_dp"
-            android:layout_marginRight="@dimen/dimens_20_dp"
-            android:layout_marginBottom="60dp"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            tools:text="全世界最好的费启鸣" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/dimens_20_dp">
-
-            <com.test.admin.conurbations.views.CircleImageView
-                android:id="@+id/iv_user_avatar"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="@dimen/dimens_20_dp" />
-
-
-            <TextView
-                android:id="@+id/tv_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimens_10_dp"
-                android:layout_toRightOf="@id/iv_user_avatar"
-                android:ellipsize="end"
-                android:maxEms="6"
-                android:singleLine="true"
-                android:text="情感的小天地"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_like_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:layout_toLeftOf="@+id/tv_play_count"
-                android:drawableLeft="@mipmap/video_icon_screen_like"
-                android:drawablePadding="5dp"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_play_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dimens_20_dp"
-                android:drawableLeft="@mipmap/video_icon_screen_play"
-                android:drawablePadding="5dp"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-
-        </RelativeLayout>
-
+            android:paddingLeft="15dp"
+            android:paddingTop="35dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp"
+            android:src="@mipmap/nav_icon_back_white" />
 
     </RelativeLayout>
 </layout>
