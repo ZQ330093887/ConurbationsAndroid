@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.model.entity.HotSearchBean;
 
+import cn.leo.click.SingleClick;
+
 
 /**
  * Created by ZQiong on 2018/11/30
@@ -39,17 +41,14 @@ public class HotSearchAdapter extends BaseListAdapter<HotSearchBean> {
 
     @NonNull
     private View.OnClickListener getListener(HotSearchBean item) {
-        return v -> mListener.onItemClick(item);
-    }
-
-
-    public interface OnItemClickListener {
-        public void onItemClick(HotSearchBean item);
-    }
-
-    private OnItemClickListener mListener;
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mListener = listener;
+        return new View.OnClickListener() {
+            @SingleClick
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onItemClick(item);
+                }
+            }
+        };
     }
 }

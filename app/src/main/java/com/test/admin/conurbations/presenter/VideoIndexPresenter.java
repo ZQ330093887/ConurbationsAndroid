@@ -23,7 +23,7 @@ public class VideoIndexPresenter extends BasePresenter<IVideoInfoView> {
     public VideoIndexPresenter() {
     }
 
-    public void getDouYinData(Activity activity, final int max_cursor) {
+    public void getDouYinData(Activity activity, final long max_cursor) {
         String url = DouYinUtils.getEncryptUrl(activity, 0, max_cursor);
         OkHttpClientManager.getAsyn(url, new OkHttpClientManager.StringCallback() {
             @Override

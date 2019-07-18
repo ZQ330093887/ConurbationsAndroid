@@ -3,16 +3,11 @@ package com.test.admin.conurbations.fragments;
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-import com.test.admin.conurbations.activitys.IVideoInfoView;
 import com.test.admin.conurbations.activitys.lNewsListView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
-import com.test.admin.conurbations.adapter.VideoIndexAdapter;
 import com.test.admin.conurbations.adapter.VideoListAdapter;
-import com.test.admin.conurbations.model.entity.DouyinVideoListData;
-import com.test.admin.conurbations.model.entity.LeVideoData;
 import com.test.admin.conurbations.model.entity.TTNews;
 import com.test.admin.conurbations.presenter.NewsListPresenter;
-import com.test.admin.conurbations.presenter.VideoIndexPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 

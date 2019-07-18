@@ -9,6 +9,8 @@ import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.fragments.QualitySelectDialog;
 import com.test.admin.conurbations.model.Music;
 
+import cn.leo.click.SingleClick;
+
 
 /**
  * Created by ZQiong on 2018/11/30
@@ -25,7 +27,15 @@ public class QualityAdapter extends BaseListAdapter<QualitySelectDialog.QualityI
     @Override
     protected void bindDataToItemView(BaseViewHolder vh, final QualitySelectDialog.QualityItem item) {
         vh.setText(R.id.tv_title, item.name).setVisibility(R.id.iv_check, (item.quality == music.quality ? View.VISIBLE : View.GONE));
-        vh.itemView.setOnClickListener(getListener(item));
+        vh.itemView.setOnClickListener(new View.OnClickListener() {
+            @SingleClick
+            @Override
+            public void onClick(View v) {
+                if (listener!= null){
+                    listener.onItemClick(item);
+                }
+            }
+        });
     }
 
     @Override
@@ -37,21 +47,5 @@ public class QualityAdapter extends BaseListAdapter<QualitySelectDialog.QualityI
         private QualityDialogHolder(View itemView) {
             super(itemView);
         }
-    }
-
-    @NonNull
-    private View.OnClickListener getListener(QualitySelectDialog.QualityItem item) {
-        return v -> mListener.onItemClick(item);
-    }
-
-
-    public interface OnItemClickListener {
-        void onItemClick(QualitySelectDialog.QualityItem item);
-    }
-
-    private OnItemClickListener mListener;
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mListener = listener;
     }
 }

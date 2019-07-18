@@ -1,10 +1,8 @@
 package com.test.admin.conurbations.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,7 +14,6 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.activitys.VideoDetailActivity;
 import com.test.admin.conurbations.model.entity.LeVideoData;
 import com.test.admin.conurbations.utils.CommonUtil;
 import com.test.admin.conurbations.utils.DisplayUtils;
@@ -73,21 +70,15 @@ public class VideoIndexAdapter extends BaseListAdapter<LeVideoData> {
                 .setText(R.id.tv_play_count, CommonUtil.formatNumber(data.playCount) + "分享")
                 .setText(R.id.tv_like_count, CommonUtil.formatNumber(data.likeCount) + "赞");
 
-        mNearbyImg.setOnClickListener(getListener(data));
-    }
-
-    @NonNull
-    private View.OnClickListener getListener(final LeVideoData leVideoData) {
-        return new View.OnClickListener() {
+        mNearbyImg.setOnClickListener(new View.OnClickListener() {
             @SingleClick
             @Override
             public void onClick(View v) {
-                if (leVideoData == null) return;
-                Intent intent = new Intent(context, VideoDetailActivity.class);
-                intent.putExtra(VideoDetailActivity.VIDEO_DATA, leVideoData);
-                context.startActivity(intent);
+                if (listener != null) {
+                    listener.onItemClick(data);
+                }
             }
-        };
+        });
     }
 
     @Override

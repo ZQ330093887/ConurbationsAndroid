@@ -100,10 +100,11 @@ public class QualitySelectDialog extends BottomSheetDialogFragment {
             UIUtils.INSTANCE.downloadMusic(mContext, music, true, mContext);
         });
         mAdapter.setOnItemClickListener(item -> {
-            music.quality = item.quality;
+            QualitySelectDialog.QualityItem quality = (QualityItem) item;
+            music.quality = quality.quality;
             mAdapter.notifyDataSetChanged();
             if (changeSuccessListener != null) {
-                changeSuccessListener.invoke(item.name);
+                changeSuccessListener.invoke(quality.name);
             }
             if (!isDownload) {
                 mBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);

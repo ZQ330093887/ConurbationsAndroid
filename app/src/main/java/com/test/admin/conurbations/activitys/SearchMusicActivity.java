@@ -32,7 +32,6 @@ import com.test.admin.conurbations.player.PlayManager;
 import com.test.admin.conurbations.presenter.SearchMusicPresenter;
 import com.test.admin.conurbations.utils.AnimationUtils;
 import com.test.admin.conurbations.utils.CommonUtil;
-import com.test.admin.conurbations.utils.LogUtil;
 import com.test.admin.conurbations.utils.NavigationHelper;
 import com.test.admin.conurbations.utils.StatusBarUtils;
 import com.test.admin.conurbations.widget.statuslayoutmanage.OnStatusChildClickListener;
@@ -282,10 +281,11 @@ public class SearchMusicActivity extends BaseActivity<ActivityMusicSearchBinding
             hotSearchAdapter.notifyDataSetChanged();
 
             hotSearchAdapter.setOnItemClickListener(item -> {
+                HotSearchBean hotSearchBean = (HotSearchBean) item;
                 isSearchOnline = true;
-                mBinding.searchToolbarContainer.searchEditText.setText(item.title);
-                mBinding.searchToolbarContainer.searchEditText.setSelection(item.title.length());
-                search(item.title);
+                mBinding.searchToolbarContainer.searchEditText.setText(hotSearchBean.title);
+                mBinding.searchToolbarContainer.searchEditText.setSelection(hotSearchBean.title.length());
+                search(hotSearchBean.title);
             });
 
         } else {
