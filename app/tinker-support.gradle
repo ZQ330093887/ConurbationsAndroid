@@ -4,26 +4,19 @@ def bakPath = file("${buildDir}/bakApk/")
 
 /**
  * ---------------------------------------------------------
- * 注释：单个渠道打热跟新包只需要修改一下4个参数
- * 仅仅是单渠道打包，单渠道！！！当然一个一个打完也是多渠道了，但是如果因为
- * 这种操作累死你概不负责！！！
- * 多渠道打包操作详情说明：channel文件）
+ * 注释：新包只需要修改一下3个参数
  */
 
 /**
- * 1，此处填写每次构建生成的基准包目录
+ * 1,此处填写每次构建生成的基准包目录
  */
-def baseApkDir = "app-1022-11-53-36"
+def baseApkDir = "app-0722-11-15-12"
 /**
- * 2，渠道
+ * 2,版本号
  */
-def channel = "baidu"
+def versionCode = "2.1.7"
 /**
- * 版本号
- */
-def versionCode = "2.1.2"
-/**
- * 正常编译false，打布丁是改为true
+ * 3,正常编译false，打布丁是改为true
  */
 def isEnable = false
 /**
@@ -45,13 +38,13 @@ tinkerSupport {
     // 编译补丁包时，必需指定基线版本的apk，默认值为空
     // 如果为空，则表示不是进行补丁包的编译
     // @{link tinkerPatch.oldApk }
-    baseApk = "${bakPath}/${baseApkDir}/${channel}/Gank_${versionCode}_${channel}.apk"
+    baseApk = "${bakPath}/${baseApkDir}/Gank_${versionCode}.apk"
 
-    // 对应tinker插件applyMapping
-    baseApkProguardMapping = "${bakPath}/${baseApkDir}/${channel}/Gank_${versionCode}_${channel}-mapping.txt"
+    // 对应tinker插件applyMapping   mapping.txt这个文件只有设置混淆才会产生
+    baseApkProguardMapping = "${bakPath}/${baseApkDir}/Gank_${versionCode}-mapping.txt"
 
     // 对应tinker插件applyResourceMapping
-    baseApkResourceMapping = "${bakPath}/${baseApkDir}/${channel}/Gank_${versionCode}_${channel}-R.txt"
+    baseApkResourceMapping = "${bakPath}/${baseApkDir}/Gank_${versionCode}-R.txt"
 
     // 构建基准包和补丁包都要指定不同的tinkerId，并且必须保证唯一性 "1.0.0-base" "1.0.0-patch"
     if (isEnable) {
@@ -131,7 +124,7 @@ tinkerPatch {
                 it.doLast {
                     copy {
                         hasFlavors = false
-                        def fileNamePrefix = "Gank_${variant.versionName}_${variant.flavorName}"
+                        def fileNamePrefix = "Gank_${variant.versionName}"
                         def newFileNamePrefix = !hasFlavors ? "${fileNamePrefix}" : "${fileNamePrefix}-${date}"
 
                         def destPath = !hasFlavors ? file("${bakPath}/${project.name}-${date}/${variant.flavorName}") : bakPath

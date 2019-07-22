@@ -9,36 +9,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.provider.Contacts;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
-import android.text.TextUtils;
 
-import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.databinding.ActivitySplashBinding;
-import com.test.admin.conurbations.model.api.GankService;
-import com.test.admin.conurbations.model.entity.CityWeather;
-import com.test.admin.conurbations.model.entity.NewsList;
-import com.test.admin.conurbations.model.entity.PlaylistInfo;
-import com.test.admin.conurbations.retrofit.ApiManager;
-import com.test.admin.conurbations.retrofit.RequestCallBack;
-import com.test.admin.conurbations.rxbus.Event;
-import com.test.admin.conurbations.rxbus.RxBus;
-import com.test.admin.conurbations.utils.MusicUtils;
 import com.test.admin.conurbations.utils.PrefUtils;
-import com.test.admin.conurbations.utils.SPUtils;
-import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.views.AlertDialog;
-import com.umeng.analytics.MobclickAgent;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import io.reactivex.disposables.Disposable;
@@ -162,17 +143,6 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
             applyPermissions();
         }
     }
-
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-    }
-
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-    }
-
 
     @Override
     protected void onDestroy() {
