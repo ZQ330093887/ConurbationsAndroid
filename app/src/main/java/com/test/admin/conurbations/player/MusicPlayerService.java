@@ -25,10 +25,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-
-import static android.support.v4.app.NotificationCompat.Builder;
-
-import android.support.v4.media.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.media.session.MediaButtonReceiver;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.telephony.PhoneStateListener;
@@ -70,6 +67,8 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
+import static android.support.v4.app.NotificationCompat.Builder;
 
 
 /**
@@ -1086,11 +1085,12 @@ public class MusicPlayerService extends Service {
             //线控
             isRunningForeground = true;
             mNotificationBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
-            NotificationCompat.MediaStyle style = new NotificationCompat.MediaStyle()
-                    .setMediaSession(mediaSessionManager.getMediaSession())
-                    .setShowActionsInCompactView(0, 1, 2, 3);
 
-            mNotificationBuilder.setStyle(style);
+
+//            NotificationCompat.MediaStyle style = new NotificationCompat.MediaStyle()
+//                    .setMediaSession(mediaSessionManager.getMediaSession())
+//                    .setShowActionsInCompactView(0, 1, 2, 3);
+//            mNotificationBuilder.setStyle(style);
         }
 
         if (mPlayingMusic != null) {
@@ -1207,11 +1207,13 @@ public class MusicPlayerService extends Service {
         mNotificationManager.notify(NOTIFICATION_ID, mNotification);
     }
 
+    @SuppressLint("RestrictedApi")
     private void updateNotificationStatus() {
-        if (isPlaying())
+        if (isPlaying()) {
             mNotificationBuilder.mActions.get(0).icon = R.drawable.ic_pause;
-        else
+        } else {
             mNotificationBuilder.mActions.get(0).icon = R.drawable.ic_play;
+        }
     }
 
     /**

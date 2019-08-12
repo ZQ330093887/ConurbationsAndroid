@@ -45,12 +45,6 @@ public class VideoListFragment extends BaseSubFragment<TTNews, NewsListPresenter
         }
     }
 
-
-    @Override
-    public void setCacheData(List<TTNews> newList) {
-        refreshList(0);
-    }
-
     @Override
     public void onGetNewsListSuccess(List<TTNews> newList) {
         mStatusManager.showSuccessLayout();

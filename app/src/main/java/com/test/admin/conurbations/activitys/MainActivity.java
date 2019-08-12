@@ -86,6 +86,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
     }
 
     @Override
+    protected boolean isWipeBackEnabled() {
+        return false;
+    }
+
+    @Override
     public void onBackPressed() {
         if (mBinding.dlMainLayout.isDrawerOpen(GravityCompat.START)) {
             mBinding.dlMainLayout.closeDrawer(GravityCompat.START);

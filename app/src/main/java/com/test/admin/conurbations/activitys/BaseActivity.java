@@ -14,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 
@@ -22,7 +21,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.test.admin.conurbations.IMusicService;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.annotations.SetLayout;
 import com.test.admin.conurbations.player.PlayManager;
 import com.test.admin.conurbations.utils.CommonUtil;
 import com.test.admin.conurbations.utils.DialogUtils;
@@ -39,7 +37,9 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 
 /**
@@ -47,7 +47,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public abstract class BaseActivity<VB extends ViewDataBinding> extends
-        AppCompatActivity implements ServiceConnection, IBaseView {
+        SwipeBackActivity implements ServiceConnection, IBaseView {
 
     private static final String TAG = "BaseActivity";
     protected VB mBinding;
@@ -60,6 +60,8 @@ public abstract class BaseActivity<VB extends ViewDataBinding> extends
     public static final String BUNDLE_KEY_SHOW_BOTTOM_BAR = "BUNDLE_KEY_SHOW_BOTTOM_BAR";
     public static final String BUNDLE_OVERRIDE = "BUNDLE_OVERRIDE";
     private PlayManager.ServiceToken mToken;
+    private Disposable subscribe;
+    private static Disposable saveImageSubscribe;
 
     protected abstract int getLayoutId();
 
@@ -90,11 +92,12 @@ public abstract class BaseActivity<VB extends ViewDataBinding> extends
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSwipeBackEnable(isWipeBackEnabled());
         mToken = PlayManager.bindToService(this, this);
         if (!isTaskRoot()) {
             Intent mainIntent = getIntent();
             String action = mainIntent.getAction();
-            if (mainIntent.hasCategory(Intent.CATEGORY_LAUNCHER) && action.equals(Intent.ACTION_MAIN)) {
+            if (mainIntent.hasCategory(Intent.CATEGORY_LAUNCHER) && (!TextUtils.isEmpty(action) && action.equals(Intent.ACTION_MAIN))) {
                 finishActivity();
                 return;
             }
@@ -121,6 +124,14 @@ public abstract class BaseActivity<VB extends ViewDataBinding> extends
         if (mToken != null) {
             PlayManager.unbindFromService(mToken);
             mToken = null;
+        }
+        if (subscribe != null && !subscribe.isDisposed()) {
+            subscribe.dispose();
+            subscribe = null;
+        }
+        if (saveImageSubscribe != null && !saveImageSubscribe.isDisposed()) {
+            saveImageSubscribe.dispose();
+            saveImageSubscribe = null;
         }
     }
 
@@ -189,7 +200,7 @@ public abstract class BaseActivity<VB extends ViewDataBinding> extends
     public void startActivityAndFinishWithOutObservable(final Class<?> cls) {
         final Intent intent = new Intent();
         intent.setClass(this, cls);
-        Observable.timer(1000, TimeUnit.MILLISECONDS)
+        subscribe = Observable.timer(1000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aLong -> {
@@ -305,16 +316,16 @@ public abstract class BaseActivity<VB extends ViewDataBinding> extends
             public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
                 if (state == 1) {
                     //保存图片
-                    SaveBitmapUtils.getSaveBitmapObservable(resource, path, name).subscribe(SaveBitmapUtils.getSaveSubscriber(context, path));
+                    saveImageSubscribe = SaveBitmapUtils.getSaveBitmapObservable(resource, path, name).subscribe(SaveBitmapUtils.getSaveSubscriber(context, path));
                 } else if (state == 2) {
                     //分享图片
-                    SaveBitmapUtils.getSaveBitmapObservable(resource, path, name).subscribe(SaveBitmapUtils.getShareSubscriber(context, path));
+                    saveImageSubscribe = SaveBitmapUtils.getSaveBitmapObservable(resource, path, name).subscribe(SaveBitmapUtils.getShareSubscriber(context, path));
                 } else if (state == 4) {
                     //设置桌面壁纸
-                    WrapperUtils.getSetWallWrapperObservable(resource, context).subscribe(WrapperUtils.callbackSubscriber);
+                    saveImageSubscribe = WrapperUtils.getSetWallWrapperObservable(resource, context).subscribe(WrapperUtils.callbackSubscriber);
                 } else if (state == 5) {
                     //设置锁屏壁纸
-                    WrapperUtils.getSetLockWrapperObservable(resource, context).subscribe(WrapperUtils.callbackSubscriber);
+                    saveImageSubscribe = WrapperUtils.getSetLockWrapperObservable(resource, context).subscribe(WrapperUtils.callbackSubscriber);
                 }
             }
 
@@ -341,6 +352,15 @@ public abstract class BaseActivity<VB extends ViewDataBinding> extends
 
     @Override
     public void detachView() {
+    }
 
+    /**
+     * 是否使用 左边缘右滑关闭页面
+     * Is immersion bar enabled boolean.
+     *
+     * @return the boolean
+     */
+    protected boolean isWipeBackEnabled() {
+        return true;
     }
 }

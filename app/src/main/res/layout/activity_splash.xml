@@ -56,6 +56,7 @@
             android:padding="@dimen/dimens_36_dp">
 
             <TextView
+                android:id="@+id/tv_about_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"

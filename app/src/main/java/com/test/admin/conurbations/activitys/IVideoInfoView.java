@@ -7,8 +7,5 @@ import com.test.admin.conurbations.model.entity.DouyinVideoListData;
  */
 
 public interface IVideoInfoView extends BaseViewImpl {
-
-    void setCacheData(DouyinVideoListData douYinData);
-
     void setVideoDouYinData(DouyinVideoListData douYinData);
 }

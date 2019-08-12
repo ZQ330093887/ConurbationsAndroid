@@ -7,7 +7,5 @@ import java.util.List;
 
 public interface lNewsListView extends BaseViewImpl {
 
-    void setCacheData(List<TTNews> newList);
-
     void onGetNewsListSuccess(List<TTNews> newList);
 }

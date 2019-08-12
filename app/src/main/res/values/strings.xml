@@ -24,7 +24,7 @@
 
 
     <string name="about_introduce">「干货集中营」- 给您最纯粹的开发体验。\n\n开源是必须的，软件采用RxJava + RxAndroid + Retrofit + OkHttp + MVP框架实现，喜欢的朋友请Star，欢迎一起学习讨论。\n\n你的支持将是我最大的动力与褒奖！</string>
-    <string name="splash_copyright">Copyright &#169; 2017 iDaily All Rights Reserved\nPowered by Eric Jin</string>
+    <string name="splash_copyright">Copyright &#169; 2019 iDaily All Rights Reserved\nPowered by Mo Jun</string>
     <string name="about_developers">关于我</string>
     <string name="about_open_source_lis">感谢开源</string>
     <string name="about_open_source_special">特别感谢</string>
@@ -39,7 +39,7 @@
     <string name="set_clear_cache">清除缓存</string>
     <string name="search_hint">Search&#8230;</string>
     <string name="indicator">%1$s/%2$s</string>
-    <string name="about_version">V 2.1.7</string>
+    <string name="about_version">V 2.1.8</string>
     <string name="cd_up_button">Up navigation button</string>
     <string name="cd_clear_button">Clear field</string>
     <string name="hint_prompt">Speak an item name or a number</string>

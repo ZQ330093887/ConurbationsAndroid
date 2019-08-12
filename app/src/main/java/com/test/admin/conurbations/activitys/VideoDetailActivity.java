@@ -110,6 +110,7 @@ public class VideoDetailActivity extends BaseActivity<ActivityVideoDetailBinding
                         videoDetailPresenter.getDouyinListData(VideoDetailActivity.this, max_cursor);
                     }
                 }
+                RxBus.getDefault().post(new RefreshEvent(mCurrentItem, max_cursor));
             }
 
             @Override
@@ -210,8 +211,8 @@ public class VideoDetailActivity extends BaseActivity<ActivityVideoDetailBinding
 
             videoDetailBinding.tvVideoTitle.setText(item.title);
             videoDetailBinding.tvUsername.setText(item.authorName);
-            videoDetailBinding.tvPlayCount.setText(DateUtils.formatNumber(item.playCount) + "播放");
-            videoDetailBinding.tvLikeCount.setText(DateUtils.formatNumber(item.likeCount) + "赞");
+            videoDetailBinding.tvPlayCount.setText(String.format(DateUtils.formatNumber(item.playCount) + "%s", "播放"));
+            videoDetailBinding.tvLikeCount.setText(String.format(DateUtils.formatNumber(item.likeCount) + "%s", "赞"));
 
             mViews.add(videoDetailBinding.getRoot());
         }

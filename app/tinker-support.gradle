@@ -10,15 +10,15 @@ def bakPath = file("${buildDir}/bakApk/")
 /**
  * 1,此处填写每次构建生成的基准包目录
  */
-def baseApkDir = "app-0722-11-15-12"
+def baseApkDir = "app-0722-15-05-18"
 /**
  * 2,版本号
  */
-def versionCode = "2.1.7"
+def versionCode = "2.1.8"
 /**
  * 3,正常编译false，打布丁是改为true
  */
-def isEnable = false
+def isEnable = true
 /**
  * ---------------------------------------------------------
  */
@@ -128,9 +128,9 @@ tinkerPatch {
                         def newFileNamePrefix = !hasFlavors ? "${fileNamePrefix}" : "${fileNamePrefix}-${date}"
 
                         def destPath = !hasFlavors ? file("${bakPath}/${project.name}-${date}/${variant.flavorName}") : bakPath
-// from variant.outputs.outputFile
+
                         from variant.outputs.first().outputFile
-//variant.outputs.all
+
                         into destPath
                         rename { String fileName ->
                             fileName.replace("${fileNamePrefix}.apk", "${newFileNamePrefix}.apk")

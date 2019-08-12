@@ -96,11 +96,7 @@
     public *;
 }
 
--keep class org.apache.http.** { *; }
 -keep class com.android.volley.** { *; }
--dontwarn org.apache.http.**
--keep class android.net.http.** { *; }
--dontwarn android.net.http.**
 -dontwarn com.amap.api.col.ar
 
 -keep class com.mango.push.processor.MiMessageReceiver {*;}
@@ -163,3 +159,67 @@
 #bugly
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
+#高徳地图混淆配置
+-dontwarn com.amap.api.**
+-dontwarn com.a.a.**
+-dontwarn com.autonavi.**
+-keep class com.amap.api.**  {*;}
+-keep class com.autonavi.**  {*;}
+-keep class com.a.a.**  {*;}
+
+#pinyin4j
+-dontwarn demo.**
+-keep class demo.**{*;}
+
+-dontwarn net.sourceforge.pinyin4j.**
+-keep class net.sourceforge.pinyin4j.**{*;}
+-keep class net.sourceforge.pinyin4j.format.**{*;}
+-keep class net.sourceforge.pinyin4j.format.exception.**{*;}
+
+#毕加索使用
+-keep public class com.squareup.okhttp.OkUrlFactory
+-keep public class com.squareup.okhttp.OkHttpClient
+
+-dontwarn com.squareup.**
+-keep class com.squareup.**{*;}
+
+# Facebook
+-dontwarn com.facebook.**
+-keep class com.facebook.**{*;}
+
+-dontwarn java.awt.**
+-keep class java.awt.**{*;}
+
+-dontwarn javax.imageio.**
+-dontwarn javax.swing.**
+-keep class javax.imageio.**{*;}
+-keep class javax.swing.**{*;}
+
+-dontwarn com.google.errorprone.**
+-keep class com.google.errorprone.**{*;}
+
+-dontwarn sun.security.action.**
+-keep class sun.security.action.**{*;}
+
+# Retrofit
+-dontnote retrofit2.Platform
+-dontnote retrofit2.Platform$IOS$MainThreadExecutor
+-dontwarn retrofit2.Platform$Java8
+-keepattributes Signature
+-keepattributes Exceptions
+
+# okhttp
+-dontwarn okio.**
+
+# Gson
+-keep class com.example.testing.retrofitdemo.bean.**{*;} # 自定义数据模型的bean目录
+
+
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+# tinker混淆规则
+-dontwarn com.tencent.tinker.**
+-keep class com.tencent.tinker.** { *; }
+-keep class android.support.**{*;}
+
+

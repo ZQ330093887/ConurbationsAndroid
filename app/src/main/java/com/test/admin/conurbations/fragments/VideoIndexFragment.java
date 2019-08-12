@@ -52,12 +52,6 @@ public class VideoIndexFragment extends BaseSubFragment<LeVideoData, VideoIndexP
         }
     }
 
-
-    @Override
-    public void setCacheData(DouyinVideoListData douYinData) {
-        refreshList(0);
-    }
-
     @Override
     public void setVideoDouYinData(DouyinVideoListData douYinData) {
         mStatusManager.showSuccessLayout();

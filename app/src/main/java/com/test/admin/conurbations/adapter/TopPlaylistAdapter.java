@@ -26,9 +26,9 @@ public class TopPlaylistAdapter extends BaseListAdapter<NewsList> {
     protected void bindDataToItemView(BaseViewHolder vh, final NewsList playlist) {
 
         String url = playlist.coverUrl;
-        if (playlist.type.equals(Constants.PLAYLIST_WY_ID)) {
-            url = MusicUtils.getAlbumPic(playlist.coverUrl, Constants.NETEASE, 90);
-        }
+//        if (playlist.type.equals(Constants.PLAYLIST_WY_ID)) {
+//            url = MusicUtils.getAlbumPic(playlist.coverUrl, Constants.NETEASE, 90);
+//        }
 
         vh.setText(R.id.tv_title, playlist.name)
                 .setText(R.id.tv_playCount, "播放次数：" + playlist.playCount)

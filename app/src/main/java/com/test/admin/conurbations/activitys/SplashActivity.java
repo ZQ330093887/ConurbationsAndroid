@@ -18,8 +18,10 @@ import com.amap.api.location.AMapLocationListener;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.databinding.ActivitySplashBinding;
+import com.test.admin.conurbations.utils.AppUtils;
 import com.test.admin.conurbations.utils.PrefUtils;
 import com.test.admin.conurbations.views.AlertDialog;
+
 import java.util.Random;
 
 import io.reactivex.disposables.Disposable;
@@ -31,7 +33,6 @@ import io.reactivex.disposables.Disposable;
 
 public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
     public AMapLocationClient mLocationClient = null;
-    private AMapLocationClientOption mLocationOption = null;
     private Disposable subscribe;
 
     private static final int REQUEST_PERMISSION_SEETING = 1000;
@@ -54,13 +55,15 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
 
     @Override
     protected void initData(Bundle bundle) {
+
         Random r = new Random(SystemClock.elapsedRealtime());
         mBinding.ivSplashLogo.setImageResource(SPLASH_ARRAY[r.nextInt(SPLASH_ARRAY.length)]);
+        mBinding.tvAboutVersion.setText(AppUtils.getVersion(this));
 
         //初始化定位
         mLocationClient = new AMapLocationClient(getApplicationContext());
         //初始化定位参数
-        mLocationOption = new AMapLocationClientOption();
+        AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
         //设置是否只定位一次,默认为false
         mLocationOption.setOnceLocation(true);
         //设置定位回调监听
@@ -69,6 +72,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
         mLocationClient.startLocation();
         mLocationClient.setLocationOption(mLocationOption);
         applyPermissions();
+
     }
 
     private void applyPermissions() {
@@ -155,6 +159,5 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
 
     @Override
     public void detachView() {
-
     }
 }

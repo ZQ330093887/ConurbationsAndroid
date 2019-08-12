@@ -31,11 +31,15 @@ package com.test.admin.conurbations.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
+
+import com.test.admin.conurbations.activitys.BaseActivity;
 
 public class AppUtils {
 
@@ -116,5 +120,15 @@ public class AppUtils {
         DisplayMetrics metric = new DisplayMetrics();
         act.getWindowManager().getDefaultDisplay().getMetrics(metric);
         return metric.densityDpi;
+    }
+
+    public static String getVersion(BaseActivity activity) {
+        try {
+            PackageInfo pi = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+            return pi.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return "v---";
+        }
     }
 }

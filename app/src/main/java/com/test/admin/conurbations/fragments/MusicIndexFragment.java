@@ -108,7 +108,7 @@ public class MusicIndexFragment extends BaseFragment<FragmentMusicIndexBinding> 
                         return;
                     }
                 }
-            } else if (event.eventType.equals(String.valueOf(Constants.DOWNLOAD_EVENT))) {
+            } else if (event.eventType.equals(Constants.DOWNLOAD_EVENT)) {
                 mPresenter.updateDownload();
             }
         });

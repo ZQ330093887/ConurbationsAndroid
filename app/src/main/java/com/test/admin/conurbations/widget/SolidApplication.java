@@ -162,9 +162,10 @@ public class SolidApplication extends Application {
          * 只允许在MainActivity上显示更新弹窗，其他activity上不显示弹窗; 不设置会默认所有activity都可以显示弹窗;
          */
         Beta.canShowUpgradeActs.add(MainActivity.class);
-
         /***** 统一初始化Bugly产品，包含Beta *****/
-        Bugly.init(this, "df40649721", true);
+        Bugly.init(this, "df40649721", false);
+        //autoCheckUpgrade设置成true，确保App启动时,自动检查更新
+        Beta.autoCheckUpgrade = true;
     }
 
     public static long getMainThreadId() {
