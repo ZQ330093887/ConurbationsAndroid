@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.activitys.FullScreenImageActivity;
 import com.test.admin.conurbations.model.entity.PageModel;
 
 import javax.inject.Inject;
@@ -50,8 +49,12 @@ public class NudeDetailAdapter extends BaseListAdapter<PageModel.ItemModel> {
         ImageView imageView = vh.getView(R.id.image);
 
         Glide.with(imageView.getContext()).load(glideUrl).asBitmap().into(imageView);
-        vh.itemView.setTag(url);
-        vh.itemView.setOnClickListener(this::onClickListener);
+
+        vh.itemView.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(v, detail);
+            }
+        });
     }
 
     @Override
@@ -65,8 +68,13 @@ public class NudeDetailAdapter extends BaseListAdapter<PageModel.ItemModel> {
         }
     }
 
-    private void onClickListener(View view) {
-        String url = (String) view.getTag();
-        view.getContext().startActivity(FullScreenImageActivity.Companion.newInstance(view.getContext(), url));
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemListener(OnItemClickListener selectImgListener) {
+        this.onItemClickListener = selectImgListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, PageModel.ItemModel o);
     }
 }

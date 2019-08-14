@@ -177,7 +177,7 @@ public class MusicUtils {
                 newUrl = url + "@1e_1c_100Q_" + width + "w_" + width + "h";
                 break;
             case Constants.NETEASE:
-                newUrl = url + "param=" + width + "y" + width;
+                newUrl = url + "?param=" + width + "y" + width;
                 break;
             case Constants.BAIDU:
                 newUrl = url + "@s_1,w_" + width + ",h_" + width;
