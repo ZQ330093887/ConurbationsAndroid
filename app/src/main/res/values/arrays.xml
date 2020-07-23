@@ -21,17 +21,27 @@
         <item>暴走漫画</item>
     </string-array>
 
+
     <string-array name="index_tab">
-        <item>最新</item>
-        <item>福利</item>
-        <item>all</item>
-        <item>App</item>
+        <item>最热</item>
+        <item>妹子</item>
+        <item>全部</item>
+        <item>APP</item>
         <item>Android</item>
         <item>iOS</item>
         <item>前端</item>
-        <item>瞎推荐</item>
-        <item>拓展资源</item>
-        <item>休息视频</item>
+        <item>Flutter</item>
+    </string-array>
+
+    <string-array name="index_tab_id">
+        <item>最新</item>
+        <item>Girl</item>
+        <item>All</item>
+        <item>app</item>
+        <item>Android</item>
+        <item>iOS</item>
+        <item>frontend</item>
+        <item>Flutter</item>
     </string-array>
 
     <string-array name="nba_tab">

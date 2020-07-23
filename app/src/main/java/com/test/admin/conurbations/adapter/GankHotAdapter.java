@@ -38,10 +38,10 @@ import cn.leo.click.SingleClick;
 /**
  * Created by zhouqiong on 2017/1/12.
  */
-public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
+public class GankHotAdapter extends BaseListAdapter<List<GankItem>> {
 
     @Inject
-    public GankDayAdapter(Fragment mContext) {
+    public GankHotAdapter(Fragment mContext) {
         super(mContext);
     }
 
@@ -55,7 +55,7 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
 
     @Override
     protected BaseViewHolder onCreateNormalViewHolder(ViewGroup parent, int viewType) {
-        return new GankDayAdapter.SampleViewHolder(inflateItemView(parent, R.layout.item_gank_day));
+        return new GankHotAdapter.SampleViewHolder(inflateItemView(parent, R.layout.item_gank_day));
     }
 
     class SampleViewHolder extends BaseViewHolder {
@@ -102,7 +102,7 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
             if (holder instanceof NormalViewHolder) {
                 NormalViewHolder normalHolder = (NormalViewHolder) holder;
                 final GankNormalItem normalItem = (GankNormalItem) mItems.get(position);
-                normalHolder.mTitleTextView.setText(getGankTitleStr(normalItem.desc, normalItem.who));
+                normalHolder.mTitleTextView.setText(getGankTitleStr(normalItem.desc, normalItem.author));
                 normalHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @SingleClick
                     @Override
@@ -117,7 +117,9 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
             if (holder instanceof GirlImageViewHolder) {
                 final GirlImageViewHolder girlHolder = (GirlImageViewHolder) holder;
                 final GankImageData normalItem = (GankImageData) mItems.get(position);
-                girlHolder.mzBannerView.setPages(normalItem.imageItem, (MZHolderCreator<BannerViewHolder>) BannerViewHolder::new);
+
+
+                girlHolder.mzBannerView.setPages(normalItem.data, (MZHolderCreator<BannerViewHolder>) BannerViewHolder::new);
                 girlHolder.mzBannerView.setIndicatorVisible(false);
                 girlHolder.mzBannerView.start();
 
@@ -199,14 +201,13 @@ public class GankDayAdapter extends BaseListAdapter<List<GankItem>> {
             @Override
             public void onBind(Context context, int position, GankGirlImageItem girlItem) {
                 // 数据绑定
-//                mImageView.setImageResource(data);
                 Glide.with(context)
-                        .load(girlItem.imgUrl)
+                        .load(girlItem.image)
                         .placeholder(R.color.white)
                         .centerCrop()
                         .into(mImageView);
                 mImageView.setOnClickListener(v -> {
-                    startShowImageActivity(v, getStringToList(girlItem.imgUrl));//
+                    WebViewActivity.openUrl(context, girlItem.url, girlItem.title, false, false);
                 });
             }
         }

@@ -10,10 +10,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.tencent.tinker.android.utils.SparseIntArray;
+
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.BottomDialogItemAdapter;
 import com.test.admin.conurbations.config.Constants;

@@ -6,6 +6,7 @@ import com.test.admin.conurbations.activitys.AllListActivity;
 import com.test.admin.conurbations.activitys.BaiduMusicListActivity;
 import com.test.admin.conurbations.activitys.MainActivity;
 import com.test.admin.conurbations.activitys.NeteasePlayListActivity;
+import com.test.admin.conurbations.activitys.NudeDetailListActivity;
 import com.test.admin.conurbations.di.annotation.ActivityScope;
 import com.test.admin.conurbations.di.module.ActivityModule;
 
@@ -25,6 +26,8 @@ public interface ActivityComponent {
     void inject(BaiduMusicListActivity activity);
 
     void inject(AllListActivity activity);
+
+    void inject(NudeDetailListActivity activity);
 
     void inject(NeteasePlayListActivity activity);
 

@@ -16,6 +16,7 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.databinding.ActivityShowImgBinding;
 import com.test.admin.conurbations.model.entity.MenuModel;
@@ -42,7 +43,7 @@ public class ShowGoodsImageActivity extends BaseActivity<ActivityShowImgBinding>
     public final static String IMAGE_URL = "IMAGE_URL";
     public final static String POSITION = "POSITION";
     public final static String PAGEDATA = "PAGEDATA";
-    private List<com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView> mImageViews;
+    private List<SubsamplingScaleImageView> mImageViews;
     private int mCurrentItem = 0;
     private PageModel pageModelData;
     private NudeDetailPresenter nudeDetailPresenter;
@@ -110,27 +111,11 @@ public class ShowGoodsImageActivity extends BaseActivity<ActivityShowImgBinding>
 
     private void AddView(List<String> imgUrls) {
         for (int i = 0; i < imgUrls.size(); i++) {
-            com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView imageView = new com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView(this);
+            SubsamplingScaleImageView imageView = new SubsamplingScaleImageView(this);
 
             String uri = imgUrls.get(i);
             if (!TextUtils.isEmpty(uri)) {
-                String host = "";
-                if (uri.startsWith("https://")) {
-                    host = uri.replace("https://", "");
-                } else if (uri.startsWith("http://")) {
-                    host = uri.replace("http://", "");
-                }
-                host = host.substring(0, host.indexOf("/"));
-                LazyHeaders.Builder builder = new LazyHeaders.Builder()
-                        .addHeader("User-Agent", "Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E)  Chrome/60.0.3112.90 Mobile Safari/537.36")
-                        .addHeader("Accept", "image/webp,image/apng,image/*,*/*;q=0.8")
-                        .addHeader("Accept-Encoding", "gzip, deflate")
-                        .addHeader("Accept-Language", "zh-CN,zh;q=0.8")
-                        .addHeader("Host", host)
-                        .addHeader("Proxy-Connection", "keep-alive")
-                        .addHeader("Referer", "http://m.mzitu.com/");
-                GlideUrl glideUrl = new GlideUrl(uri, builder.build());
-
+                GlideUrl glideUrl = new GlideUrl(uri, new LazyHeaders.Builder().addHeader("Referer", uri).build());
                 Glide.with(this).load(glideUrl).downloadOnly(new SimpleFileTarget() {
                     @Override
                     public void onLoadStarted(Drawable placeholder) {

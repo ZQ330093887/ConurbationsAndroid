@@ -1,8 +1,10 @@
 package com.test.admin.conurbations.model.response;
+
 import com.test.admin.conurbations.model.entity.Gank;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class GankNormalItem extends Gank implements GankItem {
 
     public int page = -1;
@@ -16,31 +18,18 @@ public class GankNormalItem extends Gank implements GankItem {
         gankBean.source = gank.source;
         gankBean.type = gank.type;
         gankBean.url = gank.url;
-        gankBean.who = gank.who;
-        gankBean.used = gank.used;
+        gankBean.author = gank.author;
+        gankBean.title = gank.title;
         return gankBean;
     }
 
     public static List<GankNormalItem> newGankList(List<Gank> gankList) {
-        if(null == gankList || gankList.size() == 0) {
+        if (null == gankList || gankList.size() == 0) {
             return null;
         }
         List<GankNormalItem> itemList = new ArrayList<>(gankList.size());
         for (Gank gank : gankList) {
             itemList.add(newGankBean(gank));
-        }
-        return itemList;
-    }
-
-    public static List<GankNormalItem> newGankList(List<Gank> gankList, int pageIndex) {
-        if(null == gankList || gankList.size() == 0) {
-            return null;
-        }
-        List<GankNormalItem> itemList = new ArrayList<>(gankList.size());
-        for (Gank gank : gankList) {
-            GankNormalItem item = newGankBean(gank);
-            item.page = pageIndex;
-            itemList.add(item);
         }
         return itemList;
     }

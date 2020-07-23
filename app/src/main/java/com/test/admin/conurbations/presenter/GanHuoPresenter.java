@@ -29,7 +29,8 @@ public class GanHuoPresenter extends BasePresenter<IWelfareView> {
     public void getWelfareData(final String type, final int pager) {
         final String key = "getGankItem" + type;
         final ACache cache = ACache.get(AppUtils.getAppContext());
-        addSubscription(apiStores.getGanHuo(type, pager),
+        String category = type.equals("All") ? "All" : "GanHuo";
+        addSubscription(apiStores.getGanHuo(category, type, pager),
                 new ApiCallback<GankData>() {
                     @Override
                     public void onSuccess(GankData model) {

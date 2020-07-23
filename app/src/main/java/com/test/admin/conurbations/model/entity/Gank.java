@@ -41,14 +41,14 @@ import java.util.Objects;
 public class Gank implements Serializable {
 
     public String _id;
-    public Date createdAt;
+    public String createdAt;
     public String desc;
-    public Date publishedAt;
+    public String publishedAt;
     public String source;
     public String type;
+    public String title;
     public String url;
-    public boolean used;
-    public String who;
+    public String author;
 
     @Override
     public boolean equals(Object o) {

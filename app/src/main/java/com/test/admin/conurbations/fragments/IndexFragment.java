@@ -26,14 +26,15 @@ public class IndexFragment extends BaseFragment<FragmentIndexBinding> {
         RxBus.getDefault().post(new Event(R.color.theme_primary, Constants.STATUE_BAR_COLOR));
 
         String[] mTitles = getActivity().getResources().getStringArray(R.array.index_tab);
+        String[] titleId = getActivity().getResources().getStringArray(R.array.index_tab_id);
         Fragment[] mFragments = new Fragment[mTitles.length];
-        mFragments[0] = new GankDayFragment();
-        ((GankDayFragment) mFragments[0]).setRange(Moment.Range.THREE);
+        mFragments[0] = new GankHotFragment();
+        ((GankHotFragment) mFragments[0]).setRange(Moment.Range.THREE);
         mFragments[1] = new WelfareFragment();
         ((WelfareFragment) mFragments[1]).setRange(Moment.Range.ONE);
         for (int i = 2; i < mTitles.length; i++) {
             mFragments[i] = new GanHuoFragment();
-            ((GanHuoFragment) mFragments[i]).setRange(mTitles[i]);
+            ((GanHuoFragment) mFragments[i]).setRange(titleId[i]);
         }
 
         mBinding.get().vpIndexContent.setAdapter(new FragmentAdapter(getChildFragmentManager(), mTitles, mFragments));

@@ -6,10 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.test.admin.conurbations.BuildConfig;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.gson.MyGsonConverterFactory;
-import com.test.admin.conurbations.model.api.GankService;
 import com.test.admin.conurbations.utils.NetworkUtils;
 import com.test.admin.conurbations.widget.SolidApplication;
 

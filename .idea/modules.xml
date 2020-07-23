@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/ConurbationsAndroid.iml" filepath="$PROJECT_DIR$/ConurbationsAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/VideoPlayer/VideoPlayer.iml" filepath="$PROJECT_DIR$/VideoPlayer/VideoPlayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/feedbacksdk/feedbacksdk.iml" filepath="$PROJECT_DIR$/feedbacksdk/feedbacksdk.iml" />
     </modules>
   </component>
 </project>

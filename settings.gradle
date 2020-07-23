@@ -1,1 +1,1 @@
-include ':app', ':feedbacksdk', ':VideoPlayer'
+include ':app', ':VideoPlayer'

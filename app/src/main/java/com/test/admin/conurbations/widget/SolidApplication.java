@@ -10,16 +10,12 @@ import android.os.Looper;
 import android.support.multidex.MultiDex;
 import android.view.WindowManager;
 
-import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.util.FileDownloadLog;
 import com.ss.android.common.applog.GlobalContext;
 import com.ss.android.common.applog.UserInfo;
-import com.tencent.bugly.Bugly;
-import com.tencent.bugly.beta.Beta;
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.activitys.MainActivity;
 import com.test.admin.conurbations.config.Constants;
 import com.test.admin.conurbations.di.component.AppComponent;
 import com.test.admin.conurbations.di.component.DaggerAppComponent;
@@ -78,9 +74,7 @@ public class SolidApplication extends Application {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
-        FeedbackAPI.initAnnoy(this, "23601404");
-
-        setBugly();
+//        setBugly();
 
         String[] urls = getResources().getStringArray(R.array.url);
         String[] tips = getResources().getStringArray(R.array.title);
@@ -136,7 +130,7 @@ public class SolidApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(base);
-        Beta.installTinker();
+//        Beta.installTinker();
     }
 
     public AppComponent getAppComponent() {
@@ -161,11 +155,11 @@ public class SolidApplication extends Application {
         /**
          * 只允许在MainActivity上显示更新弹窗，其他activity上不显示弹窗; 不设置会默认所有activity都可以显示弹窗;
          */
-        Beta.canShowUpgradeActs.add(MainActivity.class);
-        /***** 统一初始化Bugly产品，包含Beta *****/
-        Bugly.init(this, "df40649721", false);
-        //autoCheckUpgrade设置成true，确保App启动时,自动检查更新
-        Beta.autoCheckUpgrade = true;
+//        Beta.canShowUpgradeActs.add(MainActivity.class);
+//        /***** 统一初始化Bugly产品，包含Beta *****/
+//        Bugly.init(this, "df40649721", false);
+//        //autoCheckUpgrade设置成true，确保App启动时,自动检查更新
+//        Beta.autoCheckUpgrade = true;
     }
 
     public static long getMainThreadId() {

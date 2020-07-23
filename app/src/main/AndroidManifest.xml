@@ -14,10 +14,10 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <!-- Bugly升级SDK配置开始  -->
-        <activity
-            android:name="com.tencent.bugly.beta.ui.BetaActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|locale"
-            android:theme="@android:style/Theme.Translucent" />
+        <!--<activity-->
+            <!--android:name="com.tencent.bugly.beta.ui.BetaActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize|locale"-->
+            <!--android:theme="@android:style/Theme.Translucent" />-->
 
         <!-- Bugly升级SDK配置结束-->
         <activity
@@ -124,19 +124,23 @@
             android:name=".activitys.AllListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activitys.NudeDetailListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="51bbf7c49ac68c6fc84656367b688adf" />
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.tencent.bugly.hotfix.fileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
+        <!--<provider-->
+            <!--android:name="android.support.v4.content.FileProvider"-->
+            <!--android:authorities="com.tencent.bugly.hotfix.fileProvider"-->
+            <!--android:exported="false"-->
+            <!--android:grantUriPermissions="true">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+                <!--android:resource="@xml/provider_paths" />-->
+        <!--</provider>-->
 
         <receiver android:name=".player.MediaButtonIntentReceiver">
             <intent-filter android:priority="2147483647">

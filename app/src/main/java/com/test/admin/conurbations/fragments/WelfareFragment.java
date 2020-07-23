@@ -42,9 +42,9 @@ public class WelfareFragment extends BaseSubFragment<GanHuoDataBean, WelfarePres
     public void setCacheData(GankData welfareData) {
         //从缓存中获取数据
         mStatusManager.showSuccessLayout();
-        if (welfareData != null && welfareData.results.size() > 0) {
+        if (welfareData != null && welfareData.data.size() > 0) {
             mDataList.clear();
-            mDataList.addAll(welfareData.results);
+            mDataList.addAll(welfareData.data);
             mWelfareListAdapter.setList(mDataList);
             mWelfareListAdapter.notifyDataSetChanged();
         } else {
@@ -56,7 +56,7 @@ public class WelfareFragment extends BaseSubFragment<GanHuoDataBean, WelfarePres
     @Override
     public void setWelfareData(GankData welfareData) {
         mStatusManager.showSuccessLayout();
-        if (welfareData.results == null || welfareData.results.size() == 0) {
+        if (welfareData.data == null || welfareData.data.size() == 0) {
             if (isRefresh) {
                 if (mWelfareListAdapter.list == null || mWelfareListAdapter.list.size() <= 0) {
                     mStatusManager.showEmptyLayout();
@@ -72,7 +72,7 @@ public class WelfareFragment extends BaseSubFragment<GanHuoDataBean, WelfarePres
             } else {
                 mBinding.get().refreshLayout.finishLoadMore(true);
             }
-            mDataList.addAll(welfareData.results);
+            mDataList.addAll(welfareData.data);
             mWelfareListAdapter.setList(mDataList);
             mWelfareListAdapter.notifyDataSetChanged();
         }

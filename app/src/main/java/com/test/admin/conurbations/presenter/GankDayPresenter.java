@@ -2,13 +2,12 @@ package com.test.admin.conurbations.presenter;
 
 import com.test.admin.conurbations.activitys.IGankDayView;
 import com.test.admin.conurbations.model.api.ACache;
-import com.test.admin.conurbations.model.response.GankGirlImageItem;
 import com.test.admin.conurbations.model.response.GankHeaderItem;
+import com.test.admin.conurbations.model.response.GankHotData;
 import com.test.admin.conurbations.model.response.GankImageData;
 import com.test.admin.conurbations.model.response.GankItem;
 import com.test.admin.conurbations.model.response.GankNormalItem;
 import com.test.admin.conurbations.model.response.GankType;
-import com.test.admin.conurbations.model.response.TodayData;
 import com.test.admin.conurbations.retrofit.ApiCallback;
 import com.test.admin.conurbations.utils.AppUtils;
 import com.test.admin.conurbations.utils.ToastUtils;
@@ -33,17 +32,40 @@ public class GankDayPresenter extends BasePresenter<IGankDayView> {
 
     public void getCacheData() {
         Object obj = cache.getAsObject(key);
-        TodayData model = (TodayData) obj;
+        GankHotData model = (GankHotData) obj;
         mvpView.setCacheData(getGankList(model));
     }
 
     public void getDayData() {
-        addSubscription(apiStores.getDayGank(),
-                new ApiCallback<TodayData>() {
+
+        addSubscription(apiStores.getBanners(),
+                new ApiCallback<GankImageData>() {
                     @Override
-                    public void onSuccess(TodayData model) {
-                        cache.put(key, model);
-                        mvpView.setGankDayData(getGankList(model));
+                    public void onSuccess(GankImageData imageData) {
+                        addSubscription(apiStores.getDayGank(),
+                                new ApiCallback<GankHotData>() {
+                                    @Override
+                                    public void onSuccess(GankHotData model) {
+                                        if (imageData != null) {
+                                            model.imageData = imageData;
+                                        }
+                                        cache.put(key, model);
+                                        mvpView.setGankDayData(getGankList(model));
+                                    }
+
+                                    @Override
+                                    public void onFailure(String msg) {
+                                        ToastUtils.getInstance().showToast(msg);
+                                        mvpView.showError(msg);
+                                    }
+
+                                    @Override
+                                    public void onFinish() {
+                                        mvpView.showFinishState();
+                                    }
+
+                                });
+
                     }
 
                     @Override
@@ -54,49 +76,23 @@ public class GankDayPresenter extends BasePresenter<IGankDayView> {
 
                     @Override
                     public void onFinish() {
-                        mvpView.showFinishState();
                     }
-
                 });
     }
 
-    private List<GankItem> getGankList(TodayData dayData) {
-        if (null == dayData || null == dayData.results) {
+    private List<GankItem> getGankList(GankHotData dayData) {
+        if (null == dayData || null == dayData.data) {
             return null;
         }
-        List<GankItem> gankList = new ArrayList<>(10);
-        if (null != dayData.results.welfareList && dayData.results.welfareList.size() > 0) {
-            gankList.add(GankImageData.newImageList(GankGirlImageItem.newImageList(dayData.results.welfareList)));
+        List<GankItem> gankList = new ArrayList<>(13);
+        //banner数据
+        if (null != dayData.imageData) {
+            gankList.add(dayData.imageData);
         }
-        if (null != dayData.results.androidList && dayData.results.androidList.size() > 0) {
-            gankList.add(new GankHeaderItem(GankType.ANDROID));
-            gankList.addAll(GankNormalItem.newGankList(dayData.results.androidList));
+        if (null != dayData.data && dayData.data.size() > 0) {
+            gankList.add(new GankHeaderItem(GankType.HOT));
+            gankList.addAll(GankNormalItem.newGankList(dayData.data));
         }
-        if (null != dayData.results.iosList && dayData.results.iosList.size() > 0) {
-            gankList.add(new GankHeaderItem(GankType.IOS));
-            gankList.addAll(GankNormalItem.newGankList(dayData.results.iosList));
-        }
-        if (null != dayData.results.frontEndList && dayData.results.frontEndList.size() > 0) {
-            gankList.add(new GankHeaderItem(GankType.FRONTEND));
-            gankList.addAll(GankNormalItem.newGankList(dayData.results.frontEndList));
-        }
-        if (null != dayData.results.extraList && dayData.results.extraList.size() > 0) {
-            gankList.add(new GankHeaderItem(GankType.EXTRA));
-            gankList.addAll(GankNormalItem.newGankList(dayData.results.extraList));
-        }
-        if (null != dayData.results.casualList && dayData.results.casualList.size() > 0) {
-            gankList.add(new GankHeaderItem(GankType.CASUAL));
-            gankList.addAll(GankNormalItem.newGankList(dayData.results.casualList));
-        }
-        if (null != dayData.results.appList && dayData.results.appList.size() > 0) {
-            gankList.add(new GankHeaderItem(GankType.APP));
-            gankList.addAll(GankNormalItem.newGankList(dayData.results.appList));
-        }
-        if (null != dayData.results.videoList && dayData.results.videoList.size() > 0) {
-            gankList.add(new GankHeaderItem(GankType.VIDEO));
-            gankList.addAll(GankNormalItem.newGankList(dayData.results.videoList));
-        }
-
         return gankList;
     }
 }

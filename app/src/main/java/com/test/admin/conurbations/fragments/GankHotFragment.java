@@ -6,11 +6,10 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.test.admin.conurbations.activitys.IGankDayView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;
-import com.test.admin.conurbations.adapter.GankDayAdapter;
+import com.test.admin.conurbations.adapter.GankHotAdapter;
 import com.test.admin.conurbations.model.response.GankItem;
 import com.test.admin.conurbations.model.response.Moment;
 import com.test.admin.conurbations.presenter.GankDayPresenter;
-import com.test.admin.conurbations.utils.ToastUtils;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 
@@ -21,7 +20,7 @@ import javax.inject.Inject;
 /**
  * Created by zhouqiong on 2016/9/23.
  */
-public class GankDayFragment extends BaseSubFragment<List<GankItem>, GankDayPresenter> implements IGankDayView {
+public class GankHotFragment extends BaseSubFragment<List<GankItem>, GankDayPresenter> implements IGankDayView {
 
     private Moment.Range range;
 
@@ -30,7 +29,7 @@ public class GankDayFragment extends BaseSubFragment<List<GankItem>, GankDayPres
     }
 
     @Inject
-    GankDayAdapter mGankDayAdapter;
+    GankHotAdapter mGankHotAdapter;
 
     @Override
     protected void initData(Bundle bundle) {
@@ -40,6 +39,7 @@ public class GankDayFragment extends BaseSubFragment<List<GankItem>, GankDayPres
 
     @Override
     protected void loadingData() {
+        mBinding.get().refreshLayout.setEnableLoadMore(false);
         mPresenter.getCacheData();
     }
 
@@ -49,8 +49,8 @@ public class GankDayFragment extends BaseSubFragment<List<GankItem>, GankDayPres
         if (todayData != null && todayData.size() > 0) {
             mDataList.clear();
             mDataList.add(todayData);
-            mGankDayAdapter.setList(mDataList);
-            mGankDayAdapter.notifyDataSetChanged();
+            mGankHotAdapter.setList(mDataList);
+            mGankHotAdapter.notifyDataSetChanged();
         } else {
             mStatusManager.showLoadingLayout();
             refreshList(1);
@@ -60,22 +60,21 @@ public class GankDayFragment extends BaseSubFragment<List<GankItem>, GankDayPres
     @Override
     public void setGankDayData(List<GankItem> items) {
         mStatusManager.showSuccessLayout();
-        mBinding.get().refreshLayout.setEnableLoadMore(false);
 
         if (items.size() == 0) {
             mStatusManager.showEmptyLayout();
         } else {
             mDataList.clear();
             mDataList.add(items);
-            mGankDayAdapter.setList(mDataList);
-            mGankDayAdapter.notifyDataSetChanged();
+            mGankHotAdapter.setList(mDataList);
+            mGankHotAdapter.notifyDataSetChanged();
         }
     }
 
 
     @Override
     protected BaseListAdapter setUpAdapter() {
-        return mGankDayAdapter;
+        return mGankHotAdapter;
     }
 
     @Override

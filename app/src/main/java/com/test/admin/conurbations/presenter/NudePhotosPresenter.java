@@ -33,6 +33,7 @@ public class NudePhotosPresenter {
     public void getNodeTitle() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
+                .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36")
                 .url(Constants.HOST_MOBILE_URL)
                 .get()
                 .build();
@@ -54,7 +55,6 @@ public class NudePhotosPresenter {
                         }
                     }
                 }
-
                 iNudePhotosView.setNodePhotoData(localList);
             }
         });

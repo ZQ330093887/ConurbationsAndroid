@@ -95,6 +95,11 @@ public class NudePhotosActivity extends BaseActivity<ActivityNudePhotosBinding> 
 
     @Override
     public void showError(String message) {
-        mStatusManager.showErrorLayout();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mStatusManager.showErrorLayout();
+            }
+        });
     }
 }

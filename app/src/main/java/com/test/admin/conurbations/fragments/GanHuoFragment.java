@@ -41,9 +41,9 @@ public class GanHuoFragment extends BaseSubFragment<GanHuoDataBean, GanHuoPresen
     @Override
     public void setCacheData(GankData welfareData) {
         mStatusManager.showSuccessLayout();
-        if (welfareData != null && welfareData.results.size() > 0) {
+        if (welfareData != null && welfareData.data.size() > 0) {
             mDataList.clear();
-            mDataList.addAll(welfareData.results);
+            mDataList.addAll(welfareData.data);
             mGanHuoAdapter.setList(mDataList);
             mGanHuoAdapter.notifyDataSetChanged();
         } else {
@@ -55,7 +55,7 @@ public class GanHuoFragment extends BaseSubFragment<GanHuoDataBean, GanHuoPresen
     @Override
     public void setWelfareData(GankData welfareData) {
         mStatusManager.showSuccessLayout();
-        if (welfareData.results == null || welfareData.results.size() == 0) {
+        if (welfareData.data == null || welfareData.data.size() == 0) {
             if (isRefresh) {
                 if (mGanHuoAdapter.list == null || mGanHuoAdapter.list.size() <= 0) {
                     mStatusManager.showEmptyLayout();
@@ -71,7 +71,7 @@ public class GanHuoFragment extends BaseSubFragment<GanHuoDataBean, GanHuoPresen
             } else {
                 mBinding.get().refreshLayout.finishLoadMore(true);
             }
-            mDataList.addAll(welfareData.results);
+            mDataList.addAll(welfareData.data);
             mGanHuoAdapter.setList(mDataList);
             mGanHuoAdapter.notifyDataSetChanged();
         }

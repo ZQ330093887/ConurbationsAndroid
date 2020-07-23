@@ -4,10 +4,6 @@ import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.test.admin.conurbations.BuildConfig;
 import com.test.admin.conurbations.model.api.GankApi;
-import com.test.admin.conurbations.model.api.GankService;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -52,7 +48,9 @@ public class AppClient {
         return mRetrofit;
     }
 
-    /**增加头部信息的拦截器*/
+    /**
+     * 增加头部信息的拦截器
+     */
     private static Interceptor mHeaderInterceptor = chain -> {
         Request.Builder builder = chain.request().newBuilder();
         builder.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.108 Safari/537.36 2345Explorer/8.0.0.13547");

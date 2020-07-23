@@ -7,12 +7,7 @@ package com.test.admin.conurbations.model.response;
  */
 public class GankType {
 
-    public static final String WELFARE = "福利";
-    public static final String ANDROID = "Android";
-    public static final String IOS = "iOS";
-    public static final String VIDEO = "休息视频";
-    public static final String EXTRA = "拓展资源";
-    public static final String FRONTEND = "前端";
-    public static final String CASUAL = "瞎推荐";
-    public static final String APP = "App";
+
+    public static final String BANNER = "banner";
+    public static final String HOT = "本周最热干货";
 }

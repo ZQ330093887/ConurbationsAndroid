@@ -6,10 +6,11 @@ import com.test.admin.conurbations.model.entity.NewsIndex;
 import com.test.admin.conurbations.model.entity.NewsResponse;
 import com.test.admin.conurbations.model.entity.VideoModel;
 import com.test.admin.conurbations.model.response.GankData;
+import com.test.admin.conurbations.model.response.GankHotData;
+import com.test.admin.conurbations.model.response.GankImageData;
 import com.test.admin.conurbations.model.response.NetImage;
 import com.test.admin.conurbations.model.response.NetImage360;
 import com.test.admin.conurbations.model.response.ResultResponse;
-import com.test.admin.conurbations.model.response.TodayData;
 
 import io.reactivex.Observable;
 import retrofit2.Call;
@@ -20,22 +21,26 @@ import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface GankService {
-
-    @GET("data/{category}/{pageCount}/{page}")
-    Observable<GankData> getGank(@Path("category") String category, @Path("pageCount") int pageCount, @Path("page") int page);
+    /**
+     * 本周最热 API
+     */
+    @GET("hot/views/category/GanHuo/count/10")
+    Observable<GankHotData> getDayGank();
 
     /**
-     * https://gank.io/api/today
-     * 获取某天的干货
+     * 获取banner
+     * https://gank.io/api/v2/banners
      */
-    @GET("today")
-    Observable<TodayData> getDayGank();
+    @GET("banners")
+    Observable<GankImageData> getBanners();
 
     /***
      * 根据类别查询干货
+     * data/category/GanHuo/type/Android/page/1/count/10
+     * data/category/GanHuo/type/all/page/1/count/10
      */
-    @GET("data/{category}/20/{pageIndex}")
-    Observable<GankData> getGanHuo(@Path("category") String category
+    @GET("data/category/{category}/type/{type}/page/{pageIndex}/count/10")
+    Observable<GankData> getGanHuo(@Path("category") String category, @Path("type") String type
             , @Path("pageIndex") int pageIndex);
 
     /**
@@ -68,6 +73,7 @@ public interface GankService {
     @Headers("Cache-Control: public, max-age=" + 60 * 60 * 24 * 7)
     @GET("http://news-at.zhihu.com/api/4/story/{id}")
     Observable<NewsDetail> getNewsDetail(@Path("id") int id);
+
     /**
      * NBA
      */
@@ -100,12 +106,13 @@ public interface GankService {
     Observable<CityWeather> getCityWeather(@Query("location") String location);
 
 
-
     //今日头条
     String GET_ARTICLE_LIST = "http://is.snssdk.com/api/news/feed/v62/?refer=1&count=20&loc_mode=4&device_id=34960436458&iid=13136511752";
+
     /**
      * 获取新闻列表
-     *Request{method=GET, url=http://is.snssdk.com/api/news/feed/v62/?refer=1&count=20&loc_mode=4&device_id=34960436458&iid=13136511752&category=subv_funny&min_behot_time=1561542331&last_refresh_sub_entrance_interval=1562227787, tag=null}
+     * Request{method=GET, url=http://is.snssdk.com/api/news/feed/v62/?refer=1&count=20&loc_mode=4&device_id=34960436458&iid=13136511752&category=subv_funny&min_behot_time=1561542331&last_refresh_sub_entrance_interval=1562227787, tag=null}
+     *
      * @param category 频道
      * @return
      */
@@ -121,6 +128,7 @@ public interface GankService {
 
     /**
      * 获取视频数据json
+     *
      * @param url
      * @return
      */

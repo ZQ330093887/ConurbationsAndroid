@@ -12,7 +12,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.util.ArrayMap;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
@@ -20,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.test.admin.conurbations.R;
@@ -49,7 +47,6 @@ import com.test.admin.conurbations.views.MaterialSearchView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.disposables.Disposable;
 
@@ -210,8 +207,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
         } else if (id == R.id.nav_about) {//关于
             startActivity(AboutActivity.class);
         } else if (id == R.id.nav_feedback) {//意见反馈
-            customFeedbackStyle();
-            FeedbackAPI.openFeedbackActivity(this);
+
         } else if (id == R.id.nav_clear_cache) {//清除缓存
             startActivity(OtherActivity.class);
         }
@@ -258,15 +254,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>
             return false;
         }
     };
-
-    public void customFeedbackStyle() {
-        Map<String, String> map = new ArrayMap<>();
-        map.put("enableAudio", "0");
-        map.put("themeColor", "#D91D36");
-        map.put("pageTitle", "用户反馈");
-        map.put("toAvatar", "http://www.iyi8.com/uploadfile/2015/1024/20151024114500805.jpg");
-        FeedbackAPI.setUICustomInfo(map);
-    }
 
     private boolean isNavigatingMain() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fl_main_content);

@@ -108,7 +108,7 @@ public abstract class BaseSubFragment<T, P extends BasePresenter>
                     public void onErrorChildClick(View view) {
                         mStatusManager.showLoadingLayout();
                         isRefresh = true;
-                        page = 0;
+                        page = 1;
                         refreshList(page);
                     }
 

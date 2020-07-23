@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.test.admin.conurbations.utils.bigImageView.ImagePreview;
 import com.test.admin.conurbations.utils.bigImageView.bean.ImageInfo;
 
@@ -32,7 +33,12 @@ public class GanHuoListItemAdapter extends PagerAdapter {
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        Glide.with(mContext).load(mListImages.get(position)).into(imageView);
+        Glide.with(mContext)
+                .load(mListImages.get(position))
+                .centerCrop()
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imageView);
 
 
         ImageInfo imageInfo;
