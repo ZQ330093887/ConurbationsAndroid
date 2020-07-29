@@ -83,7 +83,7 @@ public class NudePhotosActivity extends BaseActivity<ActivityNudePhotosBinding> 
             MenuModel menuModel = modelList.get(i);
             mTitles[i] = menuModel.title;
             mFragments[i] = new NudePhotosFragment();
-            ((NudePhotosFragment) mFragments[i]).setRange(menuModel.url);
+            ((NudePhotosFragment) mFragments[i]).setRange(menuModel.url, menuModel.title);
         }
 
         FragmentAdapter fa = new FragmentAdapter(getSupportFragmentManager(), mTitles, mFragments);

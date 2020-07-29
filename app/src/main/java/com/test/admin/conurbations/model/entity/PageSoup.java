@@ -21,23 +21,35 @@ public class PageSoup extends MenuSoup {
 
 
         Element element = body.getElementById("pins");
-        if (element == null) return;
+        if (element != null) {
+            Elements li = element.getElementsByTag("li");
+            List<PageModel.ItemModel> value = new ArrayList<>();
+            PageModel pageModel = new PageModel(value);
+            for (Element litag : li) {
+                String fengmianUrl = litag.getElementsByTag("a").first().getElementsByTag("img").first().attr("data-original");
+                String title = litag.getElementsByTag("a").first().getElementsByTag("img").first().attr("alt");
+                String href = litag.getElementsByTag("a").first().attr("href");
+                String time = litag.getElementsByTag("span").get(1).text();
+                String viewerNum = litag.getElementsByTag("span").get(1).text();
 
-        Elements li = element.getElementsByTag("li");
-        List<PageModel.ItemModel> value = new ArrayList<>();
-        PageModel pageModel = new PageModel(value);
-        for (Element litag : li) {
-            String fengmianUrl = litag.getElementsByTag("a").first().getElementsByTag("img").first().attr("data-original");
-            String title = litag.getElementsByTag("a").first().getElementsByTag("img").first().attr("alt");
-            String href = litag.getElementsByTag("a").first().attr("href");
-            String time = litag.getElementsByTag("span").get(1).text();
-            String viewerNum = litag.getElementsByTag("span").get(1).text();
+                PageModel.ItemModel model = new PageModel.ItemModel(href, title, fengmianUrl);
+                value.add(model);
+            }
+            values.put(getClass().getSimpleName(), pageModel);
+        } else {
+            Elements li = body.getElementsByClass("comment-body");
+            List<PageModel.ItemModel> value = new ArrayList<>();
+            PageModel pageModel = new PageModel(value);
+            for (Element litag : li) {
+                String fengmianUrl = litag.getElementsByTag("img").first().attr("data-original");
+                String title = litag.getElementsByTag("a").first().text();
+                String href = litag.getElementsByTag("a").first().attr("href");
 
-            PageModel.ItemModel model = new PageModel.ItemModel(href, title, fengmianUrl);
-            value.add(model);
+                PageModel.ItemModel model = new PageModel.ItemModel(href, title, fengmianUrl);
+                value.add(model);
+            }
+            values.put(getClass().getSimpleName(), pageModel);
         }
-        values.put(getClass().getSimpleName(), pageModel);
-        return;
     }
 }
 

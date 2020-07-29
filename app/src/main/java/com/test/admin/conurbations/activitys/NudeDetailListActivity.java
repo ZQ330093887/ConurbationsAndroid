@@ -25,8 +25,10 @@ public class NudeDetailListActivity extends BaseSubActivity<String, NudeDetailLi
 
     public final static String TITLE = "title";
     public final static String URL = "url";
+    public final static String IMAGE = "image";
 
     private String url;
+    private List<String> imgList;
 
     @Inject
     NudeDetailListAdapter nudeDetailAdapter;
@@ -46,11 +48,11 @@ public class NudeDetailListActivity extends BaseSubActivity<String, NudeDetailLi
 
     private void initIntent() {
         url = getIntent().getStringExtra(URL);
+        imgList = getIntent().getStringArrayListExtra(IMAGE);
         String title = getIntent().getStringExtra(TITLE);
         title = TextUtils.isEmpty(title) ? "肉肉" : title;
         initToolbar(mBinding.toolbarBaseToolbar, title, "");
     }
-
 
     @Override
     protected ILayoutManager getLayoutManager() {
@@ -59,8 +61,12 @@ public class NudeDetailListActivity extends BaseSubActivity<String, NudeDetailLi
 
     @Override
     protected void refreshList(int page) {
-        if (mPresenter != null) {
-            mPresenter.getNudeDetail(url);
+        if (imgList != null && imgList.size() > 0) {
+            setNodeDetailData(imgList);
+        } else {
+            if (mPresenter != null) {
+                mPresenter.getNudeDetail(url);
+            }
         }
     }
 

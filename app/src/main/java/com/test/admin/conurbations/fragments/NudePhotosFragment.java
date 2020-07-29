@@ -15,6 +15,7 @@ import com.test.admin.conurbations.presenter.NudeDetailPresenter;
 import com.test.admin.conurbations.widget.ILayoutManager;
 import com.test.admin.conurbations.widget.MyStaggeredGridLayoutManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -26,8 +27,11 @@ public class NudePhotosFragment extends BaseSubFragment<PageModel.ItemModel, Nud
 
     private String url;
 
-    public void setRange(String url) {
+    private String title;
+
+    public void setRange(String url, String title) {
         this.url = url;
+        this.title = title;
     }
 
     @Inject
@@ -122,6 +126,13 @@ public class NudePhotosFragment extends BaseSubFragment<PageModel.ItemModel, Nud
         Intent intent = new Intent(view.getContext(), NudeDetailListActivity.class);
         intent.putExtra(NudeDetailListActivity.URL, itemModel.href);
         intent.putExtra(NudeDetailListActivity.TITLE, itemModel.description);
+        if (title.equals("妹子自拍")) {
+            ArrayList<String> arrayList = new ArrayList<>();
+            for (PageModel.ItemModel it : mDataList) {
+                arrayList.add(it.imgUrl);
+            }
+            intent.putExtra(NudeDetailListActivity.IMAGE, arrayList);
+        }
         view.getContext().startActivity(intent);
     };
 }
