@@ -18,8 +18,9 @@ package com.test.admin.conurbations.widget;
 import android.animation.Animator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.annotation.IntDef;
 import android.view.View;
+
+import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

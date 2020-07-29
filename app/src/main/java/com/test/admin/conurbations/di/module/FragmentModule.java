@@ -1,8 +1,9 @@
 package com.test.admin.conurbations.di.module;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 
+
+import androidx.fragment.app.Fragment;
 
 import com.test.admin.conurbations.di.annotation.FragmentScope;
 

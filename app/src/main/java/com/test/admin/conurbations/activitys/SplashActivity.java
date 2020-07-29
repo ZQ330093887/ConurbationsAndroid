@@ -10,11 +10,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.Settings;
-import android.support.design.widget.Snackbar;
 
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.databinding.ActivitySplashBinding;

@@ -7,8 +7,9 @@ import android.graphics.Typeface;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.multidex.MultiDex;
 import android.view.WindowManager;
+
+import androidx.multidex.MultiDex;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.liulishuo.filedownloader.FileDownloader;

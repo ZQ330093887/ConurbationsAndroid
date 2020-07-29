@@ -3,7 +3,8 @@ package com.test.admin.conurbations.utils;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.widget.SolidApplication;

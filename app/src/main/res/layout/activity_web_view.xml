@@ -6,17 +6,17 @@
 
     <data></data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:mContext=".activitys.WebViewActivity">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_web_view_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
                 android:minHeight="?attr/actionBarSize"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <com.test.admin.conurbations.widget.BrowserLayout
             android:id="@+id/bl_web_view_content"
@@ -33,5 +33,5 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

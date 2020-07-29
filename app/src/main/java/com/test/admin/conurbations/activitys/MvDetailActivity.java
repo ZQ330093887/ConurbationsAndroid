@@ -1,8 +1,9 @@
 package com.test.admin.conurbations.activitys;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.MvDetailAdapter;

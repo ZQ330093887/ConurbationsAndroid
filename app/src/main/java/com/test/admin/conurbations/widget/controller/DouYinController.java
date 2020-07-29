@@ -1,12 +1,14 @@
 package com.test.admin.conurbations.widget.controller;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.dueeeke.videoplayer.controller.BaseVideoController;
 import com.dueeeke.videoplayer.player.IjkVideoView;

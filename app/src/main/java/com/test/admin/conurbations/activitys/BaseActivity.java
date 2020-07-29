@@ -7,14 +7,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 
 import com.bumptech.glide.Glide;

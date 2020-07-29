@@ -17,7 +17,6 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.IntDef;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -29,6 +28,8 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
+
+import androidx.annotation.IntDef;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.model.response.LyricInfo;

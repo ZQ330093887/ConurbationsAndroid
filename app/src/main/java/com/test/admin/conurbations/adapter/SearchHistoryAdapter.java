@@ -1,13 +1,12 @@
 package com.test.admin.conurbations.adapter;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+
 import com.test.admin.conurbations.R;
-import com.test.admin.conurbations.fragments.QualitySelectDialog;
-import com.test.admin.conurbations.model.Music;
 import com.test.admin.conurbations.model.entity.SearchHistoryBean;
 
 

@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +40,7 @@ import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import java.io.File;
 import java.util.List;
 
-import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
+import static androidx.core.content.PermissionChecker.PERMISSION_GRANTED;
 
 public class ImagePreviewActivity extends BaseActivity<ActivityImagePreviewBinding> implements Handler.Callback,
         View.OnClickListener, OnMenuItemClickListener {

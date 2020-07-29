@@ -1,7 +1,8 @@
 package com.test.admin.conurbations.views;
 
-import android.support.v4.view.ViewPager;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by ZQiong on 2017/11/25.

@@ -2,13 +2,14 @@ package com.dueeeke.videoplayer.controller;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.support.annotation.AttrRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.dueeeke.videoplayer.listener.ControllerListener;
 import com.dueeeke.videoplayer.listener.MediaPlayerControl;

@@ -1,7 +1,6 @@
 package com.test.admin.conurbations.views.smartrefresh;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Space;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshKernel;

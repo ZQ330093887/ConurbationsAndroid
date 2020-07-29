@@ -2,9 +2,10 @@ package com.test.admin.conurbations.adapter;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.MvDetailActivity;

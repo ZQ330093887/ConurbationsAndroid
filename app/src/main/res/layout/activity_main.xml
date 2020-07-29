@@ -3,35 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v4.widget.DrawerLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/dl_main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             tools:mContext="com.test.admin.conurbations.activitys.MainActivity">
 
-            <android.support.design.widget.AppBarLayout
+            <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/abl_main_head"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/AppTheme.AppBarOverlay">
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar_main_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"
-                    app:titleTextAppearance="@style/Toolbar.TitleText"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"
                     app:subtitleTextAppearance="@style/ToolbarSubTitle"
-                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+                    app:titleTextAppearance="@style/Toolbar.TitleText" />
 
-            </android.support.design.widget.AppBarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                     app:elevation="@dimen/dimens_8_dp" />
             </LinearLayout>
 
-        </android.support.design.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <com.test.admin.conurbations.views.MaterialSearchView
             android:id="@+id/view_main_search_material_search"
@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:clickable="false" />
 
-        <android.support.design.widget.NavigationView
+        <com.google.android.material.navigation.NavigationView
             android:id="@+id/nv_main_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -73,6 +73,5 @@
             app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/activity_main_drawer" />
 
-
-    </android.support.v4.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:fitsSystemWindows="true">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -34,11 +34,11 @@
                         android:visibility="gone"
                         tools:visibility="visible" />
 
-                </android.support.v7.widget.Toolbar>
+                </androidx.appcompat.widget.Toolbar>
 
             </LinearLayout>
 
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayout"
@@ -47,7 +47,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:srlEnablePreviewInEditMode="false">
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/resultListRcv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/search_hot" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/hotSearchRcv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -111,12 +111,12 @@
             </LinearLayout>
 
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/historyRcv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical" />
         </LinearLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -5,12 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PagerSnapHelper;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.SeekBar;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.IPlayContract;

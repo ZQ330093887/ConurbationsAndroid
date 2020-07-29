@@ -23,14 +23,14 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.media.session.MediaButtonReceiver;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.media.session.MediaButtonReceiver;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.PlayerActivity;
@@ -68,7 +68,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static android.support.v4.app.NotificationCompat.Builder;
+import static androidx.core.app.NotificationCompat.Builder;
 
 
 /**

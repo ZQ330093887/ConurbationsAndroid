@@ -1,9 +1,10 @@
 package com.test.admin.conurbations.adapter;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.model.entity.TTNews;

@@ -1,11 +1,13 @@
 package com.test.admin.conurbations.widget;
 
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.BaseListAdapter;

@@ -2,7 +2,8 @@ package com.test.admin.conurbations.fragments;
 
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.test.admin.conurbations.activitys.IPrettyPictureListView;
 import com.test.admin.conurbations.adapter.BaseListAdapter;

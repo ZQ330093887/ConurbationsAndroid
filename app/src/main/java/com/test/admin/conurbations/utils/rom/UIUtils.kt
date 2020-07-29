@@ -4,16 +4,14 @@ package com.test.admin.conurbations.utils.rom
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import com.liulishuo.filedownloader.FileDownloader
 import com.test.admin.conurbations.R
 import com.test.admin.conurbations.adapter.TaskItemAdapter
 import com.test.admin.conurbations.config.Constants
 import com.test.admin.conurbations.model.Music
-import com.test.admin.conurbations.model.api.GankApi.status.success
 import com.test.admin.conurbations.model.api.MusicApi
 import com.test.admin.conurbations.model.db.DaoLitepal
 import com.test.admin.conurbations.model.entity.NewsList

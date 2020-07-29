@@ -1,6 +1,7 @@
 package com.test.admin.conurbations.widget;
 
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.admin.conurbations.adapter.BaseListAdapter;
 

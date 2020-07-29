@@ -6,19 +6,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|enterAlways">
 
-            <android.support.design.widget.AppBarLayout
+            <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/abl_picture_head"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="@dimen/dimens_4_dp"
                 android:orientation="vertical">
 
-                <android.support.design.widget.TabLayout
+                <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tl_picture_head"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimens_48_dp"
@@ -30,17 +30,17 @@
                     app:tabSelectedTextColor="@color/white"
                     app:tabTextColor="@color/black" />
 
-            </android.support.design.widget.AppBarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/vp_picture_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        </android.support.design.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_picture_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

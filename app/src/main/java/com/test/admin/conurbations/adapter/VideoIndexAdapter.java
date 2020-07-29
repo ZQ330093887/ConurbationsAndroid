@@ -3,10 +3,11 @@ package com.test.admin.conurbations.adapter;
 import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;

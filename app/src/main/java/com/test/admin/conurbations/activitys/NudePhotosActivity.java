@@ -1,7 +1,8 @@
 package com.test.admin.conurbations.activitys;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import androidx.fragment.app.Fragment;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.FragmentAdapter;

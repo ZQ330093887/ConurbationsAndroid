@@ -8,20 +8,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/main_content"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <android.support.design.widget.AppBarLayout
+            <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-                <android.support.design.widget.CollapsingToolbarLayout
+                <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:id="@+id/collapsing_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
@@ -45,7 +45,7 @@
                         android:background="#22000000"
                         android:fitsSystemWindows="true" />
 
-                    <android.support.v7.widget.Toolbar
+                    <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
@@ -53,11 +53,11 @@
                         app:layout_collapseMode="pin"
                         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-                </android.support.design.widget.CollapsingToolbarLayout>
-            </android.support.design.widget.AppBarLayout>
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
 
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
                 style="@style/FabStyle"
                 android:src="@drawable/ic_play"
@@ -65,7 +65,7 @@
                 app:layout_anchor="@id/app_bar"
                 app:layout_anchorGravity="bottom|right|end" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -73,7 +73,7 @@
                 android:paddingTop="@dimen/dimens_8_dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        </android.support.design.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <fragment
             android:id="@+id/bottomControlFg"

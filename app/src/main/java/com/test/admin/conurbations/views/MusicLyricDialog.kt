@@ -1,10 +1,7 @@
 package com.test.admin.conurbations.views
 
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +10,10 @@ import android.widget.CheckBox
 import android.widget.ProgressBar
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.rtugeek.android.colorseekbar.ColorSeekBar
 import com.test.admin.conurbations.R
 import com.test.admin.conurbations.model.api.MusicApiServiceImpl
@@ -71,7 +72,7 @@ class MusicLyricDialog : DialogFragment() {
      */
     private fun initLyricList(candidates: MutableList<Candidates>?) {
         lyricRecyclerView.adapter = candidates?.let { ItemAdapter(it) }
-        lyricRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        lyricRecyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         lyricResultView.visibility = View.VISIBLE
         loadingView.visibility = View.GONE
         controlsView.visibility = View.GONE

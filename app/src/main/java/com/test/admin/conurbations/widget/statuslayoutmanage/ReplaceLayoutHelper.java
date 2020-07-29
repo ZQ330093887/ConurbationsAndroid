@@ -1,8 +1,9 @@
 package com.test.admin.conurbations.widget.statuslayoutmanage;
 
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
 
 
 /**

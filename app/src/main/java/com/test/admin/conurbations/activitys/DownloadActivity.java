@@ -1,13 +1,10 @@
 package com.test.admin.conurbations.activitys;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.databinding.ActivityDownloadBinding;
 import com.test.admin.conurbations.fragments.DownloadFragment;
-import com.test.admin.conurbations.fragments.NewsInfoListDetailFragment;
 import com.test.admin.conurbations.utils.StatusBarUtils;
 
 

@@ -4,13 +4,13 @@
 
     <data></data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:ignore="MergeRootFrame">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/abl_personal_information_head"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_300_dp"
@@ -18,7 +18,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:transitionName="translate_view">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/ctl_personal_information_head"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -36,7 +36,7 @@
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.7" />
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar_personal_information_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
@@ -61,13 +61,13 @@
                         android:visibility="gone"
                         app:border_color="@color/colorLimePrimaryCenter"
                         app:border_width="@dimen/dimens_2_dp" />
-                </android.support.v7.widget.Toolbar>
+                </androidx.appcompat.widget.Toolbar>
 
-            </android.support.design.widget.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -77,7 +77,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_personal_information_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -85,9 +85,9 @@
                     android:scrollbars="vertical" />
             </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_personal_information_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,5 +117,5 @@
             app:layout_anchor="@id/abl_personal_information_head"
             app:layout_anchorGravity="bottom|right|end" />
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

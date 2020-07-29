@@ -11,10 +11,10 @@ import android.net.Uri
 import android.os.Binder
 import android.os.Build
 import android.provider.Settings
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.test.admin.conurbations.config.Constants
 import java.io.BufferedReader
 import java.io.IOException

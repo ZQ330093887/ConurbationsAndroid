@@ -1,7 +1,8 @@
 package com.test.admin.conurbations.fragments;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.activitys.IMuMusicContractView;

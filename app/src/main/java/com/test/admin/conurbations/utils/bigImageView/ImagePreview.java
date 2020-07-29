@@ -2,8 +2,9 @@ package com.test.admin.conurbations.utils.bigImageView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import com.test.admin.conurbations.utils.bigImageView.bean.ImageInfo;
 import com.test.admin.conurbations.utils.bigImageView.view.ImagePreviewActivity;

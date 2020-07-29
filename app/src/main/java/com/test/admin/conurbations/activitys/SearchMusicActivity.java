@@ -1,7 +1,6 @@
 package com.test.admin.conurbations.activitys;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -11,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.EditorInfo;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;

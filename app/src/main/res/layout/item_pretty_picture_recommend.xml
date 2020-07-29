@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="@dimen/dimens_0_dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimens_8_dp"
@@ -111,6 +111,6 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 </LinearLayout>

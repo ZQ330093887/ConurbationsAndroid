@@ -1,6 +1,6 @@
 package com.test.admin.conurbations.utils.rom
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.test.admin.conurbations.R
 import com.test.admin.conurbations.config.Constants
 import com.test.admin.conurbations.model.Music

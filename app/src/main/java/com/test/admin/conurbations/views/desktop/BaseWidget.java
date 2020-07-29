@@ -6,8 +6,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.widget.RemoteViews;
+
+import androidx.annotation.LayoutRes;
 
 import com.test.admin.conurbations.player.MusicPlayerService;
 import com.test.admin.conurbations.utils.LogUtil;

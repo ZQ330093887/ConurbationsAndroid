@@ -1,8 +1,9 @@
 package com.test.admin.conurbations.activitys;
 
 import android.content.Intent;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
+
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.BaseListAdapter;

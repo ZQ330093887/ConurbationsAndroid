@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/dimens_3_dp"
@@ -10,4 +10,4 @@
         android:id="@+id/rv_item_sougou_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

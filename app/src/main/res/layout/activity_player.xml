@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:background="#1f000000" />
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
             </LinearLayout>
 
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
 
         <LinearLayout
@@ -211,7 +211,7 @@
                         android:layout_weight="1"
                         android:gravity="center">
 
-                        <android.support.design.widget.FloatingActionButton
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"

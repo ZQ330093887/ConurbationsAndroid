@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.support.annotation.DrawableRes;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
 
 import com.test.admin.conurbations.R;
 

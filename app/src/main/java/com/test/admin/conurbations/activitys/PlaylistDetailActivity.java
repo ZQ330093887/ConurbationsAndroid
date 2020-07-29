@@ -2,11 +2,12 @@ package com.test.admin.conurbations.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.SongAdapter;

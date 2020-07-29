@@ -257,4 +257,11 @@
     <string name="video_play_count">%s次播放</string>
     <string name="video_parse_busy">视频解析繁忙，请更换网络或稍后再试</string>
     <string name="video_parse_error">解析视频失败，请重试</string>
+
+    <string name="fuli">福利</string>
+    <string name="setting">设置</string>
+    <string name="feedback">建议反馈</string>
+    <string name="collection">我的收藏</string>
+    <string name="download">我的下载</string>
+    <string name="about">关于我们</string>
 </resources>

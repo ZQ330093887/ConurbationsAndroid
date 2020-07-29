@@ -3,10 +3,12 @@ package com.test.admin.conurbations.activitys;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.v7.widget.LinearLayoutManager;
+
 import android.view.View;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.google.android.material.appbar.AppBarLayout;
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.PersonalInformationAdapter;
 import com.test.admin.conurbations.databinding.ActivityPersonalInformationBinding;

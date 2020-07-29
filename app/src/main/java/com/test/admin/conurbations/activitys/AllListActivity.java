@@ -1,6 +1,7 @@
 package com.test.admin.conurbations.activitys;
 
-import android.support.v7.widget.StaggeredGridLayoutManager;
+
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.test.admin.conurbations.R;
 import com.test.admin.conurbations.adapter.BaseListAdapter;

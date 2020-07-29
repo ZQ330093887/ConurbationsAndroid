@@ -5,11 +5,14 @@ package com.test.admin.conurbations.widget;
  */
 
 import android.content.Context;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;

@@ -7,10 +7,8 @@ import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ContextThemeWrapper;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.Display;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
@@ -18,6 +16,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Window工具类

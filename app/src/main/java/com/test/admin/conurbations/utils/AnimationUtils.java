@@ -6,10 +6,12 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.res.ColorStateList;
-import android.support.annotation.ColorInt;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
+
+import androidx.annotation.ColorInt;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorListener;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
